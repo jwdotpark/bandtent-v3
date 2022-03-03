@@ -100,13 +100,14 @@ const Header: React.FC = () => {
         {/* no login */}
         {!session && (
           <>
-            <Box p="2">
+            <Stack direction="row" p="2">
               <Link href="/api/auth/signin">
                 <Button size="sm" data-active={isActive('/signup')}>
                   {status === 'loading' ? 'Validating Session..' : 'Log In'}
                 </Button>
               </Link>
-            </Box>
+              <ColorButton />
+            </Stack>
           </>
         )}
         {/* yes login */}

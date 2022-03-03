@@ -1,33 +1,28 @@
-import React from "react";
-import Router from "next/router";
-import ReactMarkdown from "react-markdown";
+import React from 'react'
+import Router from 'next/router'
+import ReactMarkdown from 'react-markdown'
+import { Box, Text } from '@chakra-ui/react'
 
 export type PostProps = {
-  id: number;
-  title: string;
+  id: number
+  title: string
   author: {
-    name: string;
-    email: string;
-  } | null;
-  content: string;
-  published: boolean;
-};
+    name: string
+    email: string
+  } | null
+  content: string
+  published: boolean
+}
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
-  const authorName = post.author ? post.author.name : "Unknown author";
+  const authorName = post.author ? post.author.name : 'Unknown'
   return (
-    <div onClick={() => Router.push("/p/[id]", `/p/${post.id}`)}>
-      <h2>{post.title}</h2>
-      <small>By {authorName}</small>
-      <ReactMarkdown children={post.content} />
-      <style jsx>{`
-        div {
-          color: inherit;
-          padding: 2rem;
-        }
-      `}</style>
-    </div>
-  );
-};
+    <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
+      <Text fontSize="lg">{post.title}</Text>
+      <Text fontSize="md">By {authorName}</Text>
+      <Text fontSize="sm" children={post.content} />
+    </Box>
+  )
+}
 
-export default Post;
+export default Post

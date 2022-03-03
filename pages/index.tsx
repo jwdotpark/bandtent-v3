@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 import Post, { PostProps } from '../components/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
-import { Box } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -27,30 +27,16 @@ const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <div className="page">
-        <h1>Public Feed</h1>
+      <Box m="2">
+        <Text>Public Feed</Text>
         <main>
           {props.feed.map((post) => (
-            <div key={post.id} className="post">
+            <Box mt="4" key={post.id} className="post">
               <Post post={post} />
-            </div>
+            </Box>
           ))}
         </main>
-      </div>
-      <style jsx>{`
-        .post {
-          background: white;
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .post:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
-        }
-      `}</style>
+      </Box>
     </Layout>
   )
 }

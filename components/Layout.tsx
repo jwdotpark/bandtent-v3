@@ -1,15 +1,15 @@
-import React, { ReactNode } from "react";
-import Header from "./Header";
+import React, { ReactNode } from 'react'
+import Header from './Header'
 
 type Props = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 const Layout: React.FC<Props> = (props) => (
   <div>
     <Header />
     <div className="layout">{props.children}</div>
-    <style jsx global>{`
+    {/* <style jsx global>{`
       html {
         box-sizing: border-box;
       }
@@ -43,8 +43,8 @@ const Layout: React.FC<Props> = (props) => (
       .layout {
         padding: 0 2rem;
       }
-    `}</style>
+    `}</style> */}
   </div>
-);
+)
 
-export default Layout;
+export default Layout

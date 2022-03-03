@@ -3,6 +3,7 @@ import prisma from "../lib/prisma";
 import { GetServerSideProps } from "next";
 import Layout from "../components/Layout";
 import Post, { PostProps } from "../components/Post";
+import { Box } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({

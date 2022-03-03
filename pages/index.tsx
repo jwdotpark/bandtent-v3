@@ -1,8 +1,10 @@
-import React from "react";
-import prisma from "../lib/prisma";
-import { GetServerSideProps } from "next";
-import Layout from "../components/Layout";
-import Post, { PostProps } from "../components/Post";
+import React from 'react'
+import prisma from '../lib/prisma'
+import { GetServerSideProps } from 'next'
+import Layout from '../components/Layout'
+import Post, { PostProps } from '../components/Post'
+import { ColorModeScript } from '@chakra-ui/react'
+import theme from '../utils/theme'
 import { Box } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -13,17 +15,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
         select: { name: true },
       },
     },
-  });
-  return { props: { feed } };
-};
+  })
+  return { props: { feed } }
+}
 
 type Props = {
-  feed: PostProps[];
-};
+  feed: PostProps[]
+}
 
 const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <div className="page">
         <h1>Public Feed</h1>
         <main>
@@ -49,7 +52,7 @@ const Blog: React.FC<Props> = (props) => {
         }
       `}</style>
     </Layout>
-  );
-};
+  )
+}
 
-export default Blog;
+export default Blog

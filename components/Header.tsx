@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
+import ColorButton from '../components/misc/ColorButton'
+import { Stack, Flex, Spacer, Box, Text, Button } from '@chakra-ui/react'
 
 const Header: React.FC = () => {
   const router = useRouter()
@@ -11,67 +13,34 @@ const Header: React.FC = () => {
   const { data: session, status } = useSession()
 
   let left = (
-    <div className="left">
+    <Box>
       <Link href="/">
-        <a className="bold" data-active={isActive('/')}>
-          Feed
-        </a>
+        <Box className="bold" data-active={isActive('/')}>
+          <Button fontSize="2xl">Feed</Button>
+        </Box>
       </Link>
-    </div>
+    </Box>
   )
 
   let right = null
 
   if (status === 'loading') {
-    // left = (
-    //   <div className="left">
-    //     <Link href="/">
-    //       <a className="bold" data-active={isActive('/')}>
-    //         Feed
-    //       </a>
-    //     </Link>
-    //   </div>
-    // )
     right = (
-      <div className="right">
-        <p>Validating session ...</p>
-        <style jsx>{`
-          .right {
-            margin-left: auto;
-          }
-        `}</style>
-      </div>
+      <Box mr="auto">
+        <Text>Validating session ...</Text>
+      </Box>
     )
   }
 
   if (!session) {
     right = (
-      <div className="right">
+      <Box>
         <Link href="/api/auth/signin">
-          <a data-active={isActive('/signup')}>Log in</a>
+          <Button left="0" data-active={isActive('/signup')}>
+            Log in
+          </Button>
         </Link>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-
-          .right {
-            margin-left: auto;
-          }
-
-          .right a {
-            border: 1px solid var(--geist-foreground);
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-        `}</style>
-      </div>
+      </Box>
     )
   }
 
@@ -86,25 +55,6 @@ const Header: React.FC = () => {
         <Link href="/drafts">
           <a data-active={isActive('/drafts')}>My drafts</a>
         </Link>
-        <style jsx>{`
-          .bold {
-            font-weight: bold;
-          }
-
-          a {
-            text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
-          }
-
-          .left a[data-active='true'] {
-            color: gray;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-        `}</style>
       </div>
     )
     right = (
@@ -120,52 +70,65 @@ const Header: React.FC = () => {
         <button onClick={() => signOut()}>
           <a>Log out</a>
         </button>
-        <style jsx>{`
-          a {
-            text-decoration: none;
-            color: var(--geist-foreground);
-            display: inline-block;
-          }
-
-          p {
-            display: inline-block;
-            font-size: 13px;
-            padding-right: 1rem;
-          }
-
-          a + a {
-            margin-left: 1rem;
-          }
-
-          .right {
-            margin-left: auto;
-          }
-
-          .right a {
-            border: 1px solid var(--geist-foreground);
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-          }
-
-          button {
-            border: none;
-          }
-        `}</style>
       </div>
     )
   }
 
   return (
     <nav>
-      {left}
-      {right}
-      <style jsx>{`
-        nav {
-          display: flex;
-          padding: 2rem;
-          align-items: center;
-        }
-      `}</style>
+      {/* <Box
+        display="flex"
+        p="2rem"
+        alignItems="center"
+        border="3px solid yellow"
+      >
+        {left}
+        {right}
+      </Box> */}
+
+      <Flex>
+        {/* left */}
+        <Box p="2">
+          <Link href="/">
+            <Box className="bold" data-active={isActive('/')}>
+              <Button size="sm">Feed</Button>
+            </Box>
+          </Link>
+        </Box>
+        <Spacer />
+        {/* right */}
+        {/* no login */}
+        {!session && (
+          <>
+            <Box p="2">
+              <Link href="/api/auth/signin">
+                <Button size="sm" data-active={isActive('/signup')}>
+                  {status === 'loading' ? 'Validating Session..' : 'Log In'}
+                </Button>
+              </Link>
+            </Box>
+          </>
+        )}
+        {/* yes login */}
+        {session && (
+          <>
+            <Stack direction="row" p="2">
+              <Button size="sm">
+                {session.user.name} {/*({session.user.email}) */}
+              </Button>
+              <Link href="/create">
+                <Button size="sm">
+                  <Text>Add</Text>
+                </Button>
+              </Link>
+              <Button size="sm" onClick={() => signOut()}>
+                <Text>Log out</Text>
+              </Button>
+              <ColorButton />
+            </Stack>
+          </>
+        )}
+      </Flex>
     </nav>
   )
 }

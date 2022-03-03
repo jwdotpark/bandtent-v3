@@ -5,7 +5,7 @@ import { InferGetServerSidePropsType } from 'next'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { CtxOrReq } from 'next-auth/client/_utils'
-import { Button } from '@chakra-ui/react'
+import { Box, Center, Button, Stack } from '@chakra-ui/react'
 
 const SignIn = ({
   providers,
@@ -22,43 +22,26 @@ const SignIn = ({
   }, [session])
   return (
     <>
-      <section>
-        <h1>SignIn to Continue</h1>
-
-        <div>
-          {/* <form method="post" action="/api/auth/signin/email">
-            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-            <input type="email" id="email" name="email" placeholder="Email" />
-            <button type="submit">Sign in with Email</button>
-          </form>
-          <h1>OR</h1> */}
-
-          <div>
-            {providers
-              ? Object.values(providers).map((provider, i) => {
-                  if (provider.id !== 'email') {
-                    return (
-                      <div key={provider.name}>
-                        <div>
-                          <Button onClick={() => signIn(provider.id)}>
-                            Github
-                          </Button>
-                        </div>
-                      </div>
-                    )
-                  }
-                })
-              : ''}
-
-            {/* <div>
-              <span>twitter</span>
-            </div>
-            <div>
-              <span>google</span>
-            </div> */}
-          </div>
-        </div>
-      </section>
+      <Center border="1px solid red" h="100vh">
+        <Box>Sign In With</Box>
+        <Stack>
+          {providers
+            ? Object.values(providers).map((provider, i) => {
+                if (provider.id !== 'email') {
+                  return (
+                    <Box key={provider.name}>
+                      <Box>
+                        <Button onClick={() => signIn(provider.id)}>
+                          {provider.name}
+                        </Button>
+                      </Box>
+                    </Box>
+                  )
+                }
+              })
+            : ''}
+        </Stack>
+      </Center>
     </>
   )
 }

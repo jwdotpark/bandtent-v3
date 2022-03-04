@@ -3,7 +3,24 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
 import ColorButton from '../components/misc/ColorButton'
-import { Stack, Flex, Spacer, Box, Text, Button } from '@chakra-ui/react'
+import {
+  Stack,
+  Flex,
+  Spacer,
+  Box,
+  Text,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuDivider,
+} from '@chakra-ui/react'
+import { Media } from '../utils/media'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 
 const Header: React.FC = () => {
   const router = useRouter()
@@ -35,11 +52,9 @@ const Header: React.FC = () => {
   if (!session) {
     right = (
       <Box>
-        <Link href="/api/auth/signin">
-          <Button left="0" data-active={isActive('/signup')}>
-            Log in
-          </Button>
-        </Link>
+        <Button left="0" data-active={isActive('/signup')}>
+          <Link href="/api/auth/signin">Log in </Link>
+        </Button>
       </Box>
     )
   }
@@ -76,60 +91,149 @@ const Header: React.FC = () => {
 
   return (
     <nav>
-      {/* <Box
-        display="flex"
-        p="2rem"
-        alignItems="center"
-        border="3px solid yellow"
-      >
-        {left}
-        {right}
-      </Box> */}
-
-      <Flex>
-        {/* left */}
-        <Box p="2">
-          <Link href="/">
-            <Box className="bold" data-active={isActive('/')}>
-              <Button size="sm">Feed</Button>
-            </Box>
-          </Link>
-        </Box>
-        <Spacer />
-        {/* right */}
-        {/* no login */}
-        {!session && (
-          <>
-            <Stack direction="row" p="2">
-              <Link href="/api/auth/signin">
-                <Button size="sm" data-active={isActive('/signup')}>
-                  {status === 'loading' ? 'Validating Session..' : 'Log In'}
-                </Button>
-              </Link>
-              <ColorButton />
-            </Stack>
-          </>
-        )}
-        {/* yes login */}
-        {session && (
-          <>
-            <Stack direction="row" p="2">
-              <Button size="sm">
-                {session.user.name} {/*({session.user.email}) */}
-              </Button>
-              <Link href="/create">
+      {/* desktop */}
+      <Media greaterThanOrEqual="md">
+        <Flex border="1px solid green">
+          {/* left */}
+          <Box p="2">
+            <Link href="/">
+              <Box className="bold" data-active={isActive('/')}>
+                <Button size="sm">Feed</Button>
+              </Box>
+            </Link>
+          </Box>
+          <Spacer />
+          {/* right */}
+          {/* no login */}
+          {!session && (
+            <>
+              <Stack direction="row" p="2">
+                <Link href="/api/auth/signin">
+                  <Button size="sm">
+                    {status === 'loading' ? 'Validating Session..' : 'Log In'}
+                  </Button>
+                </Link>
+                <ColorButton />
+              </Stack>
+            </>
+          )}
+          {/* yes login */}
+          {session && (
+            <>
+              <Stack direction="row" p="2">
                 <Button size="sm">
-                  <Text>Add</Text>
+                  {session.user.name} {/*({session.user.email}) */}
                 </Button>
-              </Link>
-              <Button size="sm" onClick={() => signOut()}>
-                <Text>Log out</Text>
-              </Button>
-              <ColorButton />
-            </Stack>
-          </>
-        )}
-      </Flex>
+
+                {/* <Button size="sm" data-active={isActive('/drafts')}> */}
+                <Button size="sm">
+                  <Link href="/drafts">My Posts</Link>
+                </Button>
+
+                <Link href="/create">
+                  <Button size="sm">
+                    <Text>Add</Text>
+                  </Button>
+                </Link>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    signOut()
+                    router.push('/')
+                  }}
+                >
+                  <Text>Log out</Text>
+                </Button>
+                <ColorButton />
+              </Stack>
+            </>
+          )}
+        </Flex>
+      </Media>
+
+      {/* mobile */}
+      <Media lessThan="md">
+        <Flex border="1px solid green">
+          {/* left */}
+          <Box p="2">
+            <Link href="/">
+              <Box className="bold" data-active={isActive('/')}>
+                <Button size="sm">Feed</Button>
+              </Box>
+            </Link>
+          </Box>
+          <Spacer />
+          {/* right */}
+
+          {/* no login */}
+          {!session && (
+            <>
+              <Stack direction="row" p="2">
+                <Link href="/api/auth/signin">
+                  <Button size="sm">
+                    {status === 'loading' ? 'Validating Session..' : 'Log In'}
+                  </Button>
+                </Link>
+                <ColorButton />
+              </Stack>
+            </>
+          )}
+          {/* yes login */}
+          {session && (
+            <>
+              <Box m="2">
+                <Menu>
+                  <MenuButton
+                    as={Button}
+                    size="sm"
+                    rightIcon={<ChevronDownIcon />}
+                  >
+                    <Text>
+                      {session.user.name} {/*({session.user.email}) */}
+                    </Text>
+                  </MenuButton>
+                  <MenuList>
+                    <Link href="/drafts">
+                      <MenuItem>My Posts</MenuItem>
+                    </Link>
+                    <Link href="/create">
+                      <MenuItem>
+                        <Text>Add</Text>
+                      </MenuItem>
+                    </Link>
+                    <MenuItem>Some Menu</MenuItem>
+                    <MenuItem>Some Other Menu</MenuItem>
+                    <MenuItem>Some Another Menu</MenuItem>
+                  </MenuList>
+                </Menu>
+              </Box>
+
+              <Stack direction="row" p="2">
+                {/* <Button size="sm" data-active={isActive('/drafts')}> */}
+                {/* <Button size="sm">
+                  <Link href="/drafts">My Posts</Link>
+                </Button>
+
+                <Link href="/create">
+                  <Button size="sm">
+                    <Text>Add</Text>
+                  </Button>
+                </Link> */}
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    signOut()
+                    router.push('/')
+                  }}
+                >
+                  <Text>Log out</Text>
+                </Button>
+                <ColorButton />
+              </Stack>
+            </>
+          )}
+        </Flex>
+      </Media>
     </nav>
   )
 }

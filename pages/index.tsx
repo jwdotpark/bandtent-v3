@@ -5,7 +5,8 @@ import Layout from '../components/Layout'
 import Post, { PostProps } from '../components/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
-import { Box, Text, Stack } from '@chakra-ui/react'
+import { Divider, Box, Text, Stack } from '@chakra-ui/react'
+import ReactMarkdown from 'react-markdown'
 import { Media } from '../utils/media'
 import Router from 'next/router'
 
@@ -41,7 +42,7 @@ const Blog: React.FC<Props> = (props) => {
             {/* left column */}
             <Box w="40vw" border="1px solid gray" borderRadius="md">
               <section>
-                {props.feed.reverse().map((post, index) => (
+                {props.feed.reverse().map((post) => (
                   <Box
                     borderRadius="md"
                     border="1px solid gray"
@@ -54,11 +55,14 @@ const Blog: React.FC<Props> = (props) => {
                     <Box
                       onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     >
-                      <Text fontSize="3xl">
-                        {index + 1}. {post.title}
+                      <Text fontSize="3xl" noOfLines={3}>
+                        {post.title}
                       </Text>
+                      <Divider my="2" />
                       <Text fontSize="sm">By {post.author.name}</Text>
-                      <Text fontSize="lg" children={post.content} />
+                      <Text fontSize="lg" noOfLines={3}>
+                        <ReactMarkdown>{post.content}</ReactMarkdown>
+                      </Text>
                     </Box>
                   </Box>
                 ))}
@@ -83,7 +87,7 @@ const Blog: React.FC<Props> = (props) => {
           </Box>
           <Box w="100%">
             <section>
-              {props.feed.map((post, index) => (
+              {props.feed.reverse().map((post) => (
                 <Box
                   p="2"
                   borderRadius="md"
@@ -94,11 +98,14 @@ const Blog: React.FC<Props> = (props) => {
                 >
                   {/* <Post post={post} /> */}
                   <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-                    <Text fontSize="3xl">
-                      {index + 1}. {post.title}
+                    <Text fontSize="2xl">{post.title}</Text>
+                    <Text mb="2" fontSize="sm">
+                      By {post.author.name}
                     </Text>
-                    <Text fontSize="sm">By {post.author.name}</Text>
-                    <Text fontSize="lg" children={post.content} />
+                    <Divider my="2" />
+                    <Text fontSize="md" noOfLines={3}>
+                      <ReactMarkdown>{post.content}</ReactMarkdown>
+                    </Text>
                   </Box>
                 </Box>
               ))}

@@ -4,8 +4,10 @@ import { useSession, getSession } from 'next-auth/react'
 import Layout from '../components/Layout'
 import Post, { PostProps } from '../components/Post'
 import prisma from '../lib/prisma'
+import ReactMarkdown from 'react-markdown'
 // import { Media } from '../utils/media'
-import { Box, Button, Text } from '@chakra-ui/react'
+import { Box, Button, Text, Divider } from '@chakra-ui/react'
+import Router from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })
@@ -64,26 +66,22 @@ const Drafts: React.FC<Props> = (props) => {
               key={post.id}
               className="post"
             >
-              {post}
-              <Post post={post} />
+              {/* <Post post={post} /> */}
+              <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
+                <Text fontSize="3xl" noOfLines={3}>
+                  {post.title}
+                </Text>
+                <Text fontSize="sm">By {post.author.name}</Text>
+                <Divider my="2"/>
+                <Text fontSize="lg" noOfLines={3}>
+                  <ReactMarkdown>{post.content}</ReactMarkdown>
+                </Text>
+                <Divider my="2"/>
+              </Box>
             </Box>
           ))}
         </Box>
       </Box>
-      <style jsx>{`
-        .post {
-          background: var(--geist-background);
-          transition: box-shadow 0.1s ease-in;
-        }
-
-        .post:hover {
-          box-shadow: 1px 1px 3px #aaa;
-        }
-
-        .post + .post {
-          margin-top: 2rem;
-        }
-      `}</style>
     </Layout>
   )
 }

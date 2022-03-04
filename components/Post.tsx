@@ -21,7 +21,9 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
     <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
       <Text fontSize="3xl">{post.title}</Text>
       <Text fontSize="sm">By {authorName}</Text>
-      <Text fontSize="lg" children={post.content} />
+      <Text fontSize="lg">
+        <ReactMarkdown>{post.content}</ReactMarkdown>
+      </Text>
     </Box>
   )
 }

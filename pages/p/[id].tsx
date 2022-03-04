@@ -8,7 +8,7 @@ import Layout from '../../components/Layout'
 import { PostProps } from '../../components/Post'
 import { useSession } from 'next-auth/react'
 import prisma from '../../lib/prisma'
-import { Box, Button, Text, HStack } from '@chakra-ui/react'
+import { Box, Button, Text, HStack, Divider } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -54,20 +54,36 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     <Layout>
-      <Box p="2" m="2" border="1px solid gray" borderRadius="md">
+      <Box p="4" m="2" mx="2" border="1px solid gray" borderRadius="md">
         <Text my="2" fontSize="3xl">
           {title}
         </Text>
         <Text my="2" fontSize="sm">
           By {props?.author?.name || 'Unknown author'}
         </Text>
-        <Text my="4" fontSize="lg" children={props.content} />
+        <Divider my="2" />
+        <Text
+          my="4"
+          fontSize="lg"
+          children={
+            <Text>
+              <ReactMarkdown>{props.content}</ReactMarkdown>
+            </Text>
+          }
+        />
+        <Divider my="2" />
+
+        {/* button */}
         <HStack spacing={2}>
           {!props.published && userHasValidSession && postBelongsToUser && (
-            <Button onClick={() => publishPost(props.id)}>Publish</Button>
+            <Button size="sm" onClick={() => publishPost(props.id)}>
+              Publish
+            </Button>
           )}
           {userHasValidSession && postBelongsToUser && (
-            <Button onClick={() => deletePost(props.id)}>Delete</Button>
+            <Button size="sm" onClick={() => deletePost(props.id)}>
+              Delete
+            </Button>
           )}
         </HStack>
       </Box>

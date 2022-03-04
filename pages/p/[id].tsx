@@ -59,7 +59,7 @@ const Post: React.FC<PostProps> = (props) => {
           {title}
         </Text>
         <Text my="2" fontSize="sm">
-          By {props?.author?.name || 'Unknown author'}
+          {props?.author?.name || 'Unknown author'}
         </Text>
         <Divider my="2" />
         <Text

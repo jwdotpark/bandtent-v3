@@ -58,8 +58,8 @@ const Blog: React.FC<Props> = (props) => {
                       <Text fontSize="3xl" noOfLines={3}>
                         {post.title}
                       </Text>
+                      <Text fontSize="sm">{post.author.name}</Text>
                       <Divider my="2" />
-                      <Text fontSize="sm">By {post.author.name}</Text>
                       <Text fontSize="lg" noOfLines={3}>
                         <ReactMarkdown>{post.content}</ReactMarkdown>
                       </Text>
@@ -100,7 +100,7 @@ const Blog: React.FC<Props> = (props) => {
                   <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
                     <Text fontSize="2xl">{post.title}</Text>
                     <Text mb="2" fontSize="sm">
-                      By {post.author.name}
+                      {post.author.name}
                     </Text>
                     <Divider my="2" />
                     <Text fontSize="md" noOfLines={3}>

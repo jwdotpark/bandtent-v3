@@ -5,7 +5,8 @@ import Layout from '../components/Layout'
 import Post, { PostProps } from '../components/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Text, Stack } from '@chakra-ui/react'
+import { Media } from '../utils/media'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -27,16 +28,68 @@ const Blog: React.FC<Props> = (props) => {
   return (
     <Layout>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <Box m="2">
-        <Text>Public Feed</Text>
-        <main>
-          {props.feed.map((post) => (
-            <Box mt="4" key={post.id} className="post">
-              <Post post={post} />
+
+      {/* desktop */}
+
+      <Media greaterThanOrEqual="md">
+        <Box m="2">
+          <Text ml="2" fontSize="3xl">
+            Desktop
+          </Text>
+          <Stack direction={['column', 'row']} w="100%">
+            {/* left column */}
+            <Box w="40vw" border="1px solid gray" borderRadius="md">
+              <section>
+                {props.feed.map((post) => (
+                  <Box
+                    borderRadius="md"
+                    border="1px solid gray"
+                    p="2"
+                    m="2"
+                    key={post.id}
+                    className="post"
+                  >
+                    <Post post={post} />
+                  </Box>
+                ))}
+              </section>
             </Box>
-          ))}
-        </main>
-      </Box>
+
+            {/* right column */}
+            <Box w="60vw" m="2" borderRadius="md" border="1px solid gray">
+              <Box m="2">some other content</Box>
+            </Box>
+          </Stack>
+        </Box>
+      </Media>
+
+      {/* mobile */}
+      {/* left column */}
+      <Media lessThan="md">
+        <Stack mx="2">
+          <Text fontSize="xl">Mobile</Text>
+          <Box w="100%">
+            <section>
+              {props.feed.map((post) => (
+                <Box
+                  p="2"
+                  borderRadius="md"
+                  border="1px solid gray"
+                  mt="4"
+                  key={post.id}
+                  className="post"
+                >
+                  <Post post={post} />
+                </Box>
+              ))}
+            </section>
+          </Box>
+          {/* right column */}
+          <Box borderRadius="md" border="1px solid gray" m="2">
+            <Box m="2">some other content</Box>
+          </Box>
+        </Stack>
+      </Media>
     </Layout>
   )
 }

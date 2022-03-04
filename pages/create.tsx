@@ -17,7 +17,7 @@ const Draft: React.FC = () => {
       });
       await Router.push("/drafts");
     } catch (error) {
-      console.error(error);
+      console.error(error); 
     }
   };
 

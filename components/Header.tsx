@@ -182,18 +182,19 @@ const Header: React.FC = () => {
           {/* yes login */}
           {session && (
             <>
-              <Box m="2">
+              <Box m="2" mx="auto">
                 <Menu>
                   <MenuButton
                     as={Button}
                     size="sm"
                     rightIcon={<ChevronDownIcon />}
                   >
-                    <Text>
-                      {session.user.name} {/*({session.user.email}) */}
-                    </Text>
+                    <Text>{session.user.name}</Text>
                   </MenuButton>
                   <MenuList>
+                    <Link href="/auth/me">
+                      <MenuItem>Me</MenuItem>
+                    </Link>
                     <Link href="/drafts">
                       <MenuItem>My Drafts</MenuItem>
                     </Link>
@@ -202,24 +203,11 @@ const Header: React.FC = () => {
                         <Text>Add</Text>
                       </MenuItem>
                     </Link>
-                    <MenuItem>Some Menu</MenuItem>
-                    <MenuItem>Some Other Menu</MenuItem>
-                    <MenuItem>Some Another Menu</MenuItem>
                   </MenuList>
                 </Menu>
               </Box>
 
               <Stack direction="row" p="2">
-                {/* <Button size="sm" data-active={isActive('/drafts')}> */}
-                {/* <Button size="sm">
-                  <Link href="/drafts">My Posts</Link>
-                </Button>
-
-                <Link href="/create">
-                  <Button size="sm">
-                    <Text>Add</Text>
-                  </Button>
-                </Link> */}
                 <Button
                   size="sm"
                   onClick={() => {

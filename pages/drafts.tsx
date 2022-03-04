@@ -73,10 +73,9 @@ const Drafts: React.FC<Props> = (props) => {
                 </Text>
                 <Text fontSize="sm">{post.author.name}</Text>
                 <Divider my="2" />
-                <Text fontSize="lg" noOfLines={10}>
+                <Text mb="2" fontSize="lg" noOfLines={5}>
                   <ReactMarkdown>{post.content}</ReactMarkdown>
                 </Text>
-                <Divider my="2" />
               </Box>
             </Box>
           ))}

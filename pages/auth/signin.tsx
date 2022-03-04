@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
 import { CtxOrReq } from 'next-auth/client/_utils'
-import { Box, Center, Button, Stack, VStack, Text } from '@chakra-ui/react'
+import { Box, Button, VStack, Text } from '@chakra-ui/react'
 
 const SignIn = ({
   providers,

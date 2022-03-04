@@ -8,6 +8,7 @@ import Layout from '../../components/Layout'
 import { PostProps } from '../../components/Post'
 import { useSession } from 'next-auth/react'
 import prisma from '../../lib/prisma'
+import { Box, Button, Text } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -53,39 +54,22 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     <Layout>
-      <div>
-        <h2>{title}</h2>
-        <p>By {props?.author?.name || 'Unknown author'}</p>
-        <ReactMarkdown children={props.content} />
+      <Box p="2" m="2" border="1px solid gray" borderRadius="md">
+        <Text my="2" fontSize="2xl">
+          {title}
+        </Text>
+        <Text my="2" fontSize="sm">
+          By {props?.author?.name || 'Unknown author'}
+        </Text>
+        <Text my="4" fontSize="lg" children={props.content} />
 
         {!props.published && userHasValidSession && postBelongsToUser && (
-          <button onClick={() => publishPost(props.id)}>Publish</button>
+          <Button onClick={() => publishPost(props.id)}>Publish</Button>
         )}
         {userHasValidSession && postBelongsToUser && (
-          <button onClick={() => deletePost(props.id)}>Delete</button>
+          <Button onClick={() => deletePost(props.id)}>Delete</Button>
         )}
-      </div>
-      <style jsx>{`
-        .page {
-          background: var(--geist-background);
-          padding: 2rem;
-        }
-
-        .actions {
-          margin-top: 2rem;
-        }
-
-        button {
-          background: #ececec;
-          border: 0;
-          border-radius: 0.125rem;
-          padding: 1rem 2rem;
-        }
-
-        button + button {
-          margin-left: 1rem;
-        }
-      `}</style>
+      </Box>
     </Layout>
   )
 }

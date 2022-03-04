@@ -10,6 +10,7 @@ import {
   Box,
   Text,
   Button,
+  Image,
   Menu,
   MenuButton,
   MenuList,
@@ -121,9 +122,9 @@ const Header: React.FC = () => {
           {session && (
             <>
               <Stack direction="row" p="2">
-                <Button size="sm">
-                  {session.user.name} {/*({session.user.email}) */}
-                </Button>
+                <Link href="/auth/me">
+                  <Button size="sm">{session.user.name}</Button>
+                </Link>
 
                 {/* <Button size="sm" data-active={isActive('/drafts')}> */}
                 <Button size="sm">

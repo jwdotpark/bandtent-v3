@@ -35,7 +35,7 @@ const Blog: React.FC<Props> = (props) => {
 
       <Media greaterThanOrEqual="md">
         <Box m="2">
-          <Text ml="2" fontSize="3xl">
+          <Text ml="2" my="2" fontSize="3xl">
             Desktop
           </Text>
           <Stack direction={['column', 'row']} w="100%">

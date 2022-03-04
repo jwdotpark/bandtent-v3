@@ -93,7 +93,7 @@ const Header: React.FC = () => {
     <nav>
       {/* desktop */}
       <Media greaterThanOrEqual="md">
-        <Flex border="1px solid green">
+        <Flex borderBottom="1px solid gray" mx="2">
           {/* left */}
           <Box p="2">
             <Link href="/">
@@ -127,7 +127,7 @@ const Header: React.FC = () => {
 
                 {/* <Button size="sm" data-active={isActive('/drafts')}> */}
                 <Button size="sm">
-                  <Link href="/drafts">My Posts</Link>
+                  <Link href="/drafts">My Drafts</Link>
                 </Button>
 
                 <Link href="/create">
@@ -153,7 +153,7 @@ const Header: React.FC = () => {
 
       {/* mobile */}
       <Media lessThan="md">
-        <Flex border="1px solid green">
+        <Flex borderBottom="1px solid gray" mx="2">
           {/* left */}
           <Box p="2">
             <Link href="/">
@@ -194,7 +194,7 @@ const Header: React.FC = () => {
                   </MenuButton>
                   <MenuList>
                     <Link href="/drafts">
-                      <MenuItem>My Posts</MenuItem>
+                      <MenuItem>My Drafts</MenuItem>
                     </Link>
                     <Link href="/create">
                       <MenuItem>

@@ -40,7 +40,7 @@ const Blog: React.FC<Props> = (props) => {
             {/* left column */}
             <Box w="40vw" border="1px solid gray" borderRadius="md">
               <section>
-                {props.feed.map((post) => (
+                {props.feed.reverse().map((post) => (
                   <Box
                     borderRadius="md"
                     border="1px solid gray"
@@ -68,14 +68,17 @@ const Blog: React.FC<Props> = (props) => {
       <Media lessThan="md">
         <Stack mx="2">
           <Text fontSize="xl">Mobile</Text>
+          <Box borderRadius="md" border="1px solid gray" m="2">
+            <Box m="2">some other content</Box>
+          </Box>
           <Box w="100%">
             <section>
-              {props.feed.map((post) => (
+              {props.feed.reverse().map((post) => (
                 <Box
                   p="2"
                   borderRadius="md"
                   border="1px solid gray"
-                  mt="4"
+                  mb="2"
                   key={post.id}
                   className="post"
                 >
@@ -85,9 +88,6 @@ const Blog: React.FC<Props> = (props) => {
             </section>
           </Box>
           {/* right column */}
-          <Box borderRadius="md" border="1px solid gray" m="2">
-            <Box m="2">some other content</Box>
-          </Box>
         </Stack>
       </Media>
     </Layout>

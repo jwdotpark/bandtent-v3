@@ -1,15 +1,17 @@
-import React from "react";
-import { GetServerSideProps } from "next";
-import { useSession, getSession } from "next-auth/react";
-import Layout from "../components/Layout";
-import Post, { PostProps } from "../components/Post";
-import prisma from "../lib/prisma";
+import React from 'react'
+import { GetServerSideProps } from 'next'
+import { useSession, getSession } from 'next-auth/react'
+import Layout from '../components/Layout'
+import Post, { PostProps } from '../components/Post'
+import prisma from '../lib/prisma'
+import { Box, Text, Stack } from '@chakra-ui/react'
+import { Media } from '../utils/media'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await getSession({ req });
+  const session = await getSession({ req })
   if (!session) {
-    res.statusCode = 403;
-    return { props: { drafts: [] } };
+    res.statusCode = 403
+    return { props: { drafts: [] } }
   }
 
   const drafts = await prisma.post.findMany({
@@ -22,18 +24,18 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
         select: { name: true },
       },
     },
-  });
+  })
   return {
     props: { drafts },
-  };
-};
+  }
+}
 
 type Props = {
-  drafts: PostProps[];
-};
+  drafts: PostProps[]
+}
 
 const Drafts: React.FC<Props> = (props) => {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   if (!session) {
     return (
@@ -41,7 +43,7 @@ const Drafts: React.FC<Props> = (props) => {
         <h1>My Drafts</h1>
         <div>You need to be authenticated to view this page.</div>
       </Layout>
-    );
+    )
   }
 
   return (
@@ -71,7 +73,7 @@ const Drafts: React.FC<Props> = (props) => {
         }
       `}</style>
     </Layout>
-  );
-};
+  )
+}
 
-export default Drafts;
+export default Drafts

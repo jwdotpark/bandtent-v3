@@ -1,6 +1,7 @@
 import React from 'react'
 import Router from 'next/router'
 import ReactMarkdown from 'react-markdown'
+// import remarkGfm from 'remark-gfm'
 import { Box, Text } from '@chakra-ui/react'
 
 export type PostProps = {

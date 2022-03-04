@@ -29,6 +29,7 @@ const Draft: React.FC = () => {
           <Text>New Draft</Text>
           <Box my="4">
             <Input
+              variant="filled"
               autoFocus
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Title"
@@ -38,6 +39,7 @@ const Draft: React.FC = () => {
           </Box>
           <Box my="4">
             <Textarea
+              variant="filled"
               cols={50}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Content"

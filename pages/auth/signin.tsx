@@ -4,8 +4,9 @@ import { InferGetServerSidePropsType } from 'next'
 // import { FaGithub, FaTwitter, FaGoogle } from 'react-icons/fa'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Layout from '../../components/Layout'
 import { CtxOrReq } from 'next-auth/client/_utils'
-import { Box, Center, Button, Stack } from '@chakra-ui/react'
+import { Box, Center, Button, Stack, VStack, Text } from '@chakra-ui/react'
 
 const SignIn = ({
   providers,
@@ -22,26 +23,33 @@ const SignIn = ({
   }, [session])
   return (
     <>
-      <Center border="1px solid red" h="100vh">
-        <Box>Sign In With</Box>
-        <Stack>
-          {providers
-            ? Object.values(providers).map((provider, i) => {
-                if (provider.id !== 'email') {
-                  return (
-                    <Box key={provider.name}>
-                      <Box>
-                        <Button onClick={() => signIn(provider.id)}>
-                          {provider.name}
-                        </Button>
-                      </Box>
-                    </Box>
-                  )
-                }
-              })
-            : ''}
-        </Stack>
-      </Center>
+      <Layout>
+        <VStack h="calc(100vh - 50px)">
+          <Box mt="40vh">Sign In With..</Box>
+          <Box>
+            <VStack spacing={2}>
+              {providers
+                ? Object.values(providers).map((provider, i) => {
+                    if (provider.id !== 'email') {
+                      return (
+                        <Box key={provider.name}>
+                          <Box>
+                            <Button
+                              size="lg"
+                              onClick={() => signIn(provider.id)}
+                            >
+                              <Text fontSize="3xl">{provider.name}</Text>
+                            </Button>
+                          </Box>
+                        </Box>
+                      )
+                    }
+                  })
+                : ''}
+            </VStack>
+          </Box>
+        </VStack>
+      </Layout>
     </>
   )
 }

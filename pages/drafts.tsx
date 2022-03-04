@@ -4,8 +4,8 @@ import { useSession, getSession } from 'next-auth/react'
 import Layout from '../components/Layout'
 import Post, { PostProps } from '../components/Post'
 import prisma from '../lib/prisma'
-import { Box, Text, Stack } from '@chakra-ui/react'
-import { Media } from '../utils/media'
+// import { Media } from '../utils/media'
+import { Box, Button, Text } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })
@@ -40,24 +40,36 @@ const Drafts: React.FC<Props> = (props) => {
   if (!session) {
     return (
       <Layout>
-        <h1>My Drafts</h1>
-        <div>You need to be authenticated to view this page.</div>
+        <Text fontSize="3xl">My Drafts</Text>
+        <Text fontSize="lg">
+          You need to be authenticated to view this page.
+        </Text>
       </Layout>
     )
   }
 
   return (
     <Layout>
-      <div className="page">
-        <h1>My Drafts</h1>
-        <main>
+      <Box m="2">
+        <Box fontSize="3xl">
+          <Text>My Drafts</Text>
+        </Box>
+        <Box>
           {props.drafts.map((post) => (
-            <div key={post.id} className="post">
+            <Box
+              p="2"
+              my="2"
+              border="1px solid gray"
+              borderRadius="md"
+              key={post.id}
+              className="post"
+            >
+              {post}
               <Post post={post} />
-            </div>
+            </Box>
           ))}
-        </main>
-      </div>
+        </Box>
+      </Box>
       <style jsx>{`
         .post {
           background: var(--geist-background);

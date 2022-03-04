@@ -16,11 +16,12 @@ export type PostProps = {
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : 'Unknown'
+  // console.log(post)
   return (
     <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-      <Text fontSize="xl">{post.title}</Text>
-      <Text fontSize="lg">By {authorName}</Text>
-      <Text fontSize="md" children={post.content} />
+      <Text fontSize="3xl">{post.title}</Text>
+      <Text fontSize="sm">By {authorName}</Text>
+      <Text fontSize="lg" children={post.content} />
     </Box>
   )
 }

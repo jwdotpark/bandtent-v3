@@ -7,6 +7,7 @@ import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
 import { Box, Text, Stack } from '@chakra-ui/react'
 import { Media } from '../utils/media'
+import Router from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -40,7 +41,7 @@ const Blog: React.FC<Props> = (props) => {
             {/* left column */}
             <Box w="40vw" border="1px solid gray" borderRadius="md">
               <section>
-                {props.feed.reverse().map((post) => (
+                {props.feed.reverse().map((post, index) => (
                   <Box
                     borderRadius="md"
                     border="1px solid gray"
@@ -49,7 +50,16 @@ const Blog: React.FC<Props> = (props) => {
                     key={post.id}
                     className="post"
                   >
-                    <Post post={post} />
+                    {/* <Post post={post} /> */}
+                    <Box
+                      onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                    >
+                      <Text fontSize="3xl">
+                        {index + 1}. {post.title}
+                      </Text>
+                      <Text fontSize="sm">By {post.author.name}</Text>
+                      <Text fontSize="lg" children={post.content} />
+                    </Box>
                   </Box>
                 ))}
               </section>
@@ -73,7 +83,7 @@ const Blog: React.FC<Props> = (props) => {
           </Box>
           <Box w="100%">
             <section>
-              {props.feed.reverse().map((post) => (
+              {props.feed.map((post, index) => (
                 <Box
                   p="2"
                   borderRadius="md"
@@ -82,7 +92,14 @@ const Blog: React.FC<Props> = (props) => {
                   key={post.id}
                   className="post"
                 >
-                  <Post post={post} />
+                  {/* <Post post={post} /> */}
+                  <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
+                    <Text fontSize="3xl">
+                      {index + 1}. {post.title}
+                    </Text>
+                    <Text fontSize="sm">By {post.author.name}</Text>
+                    <Text fontSize="lg" children={post.content} />
+                  </Box>
                 </Box>
               ))}
             </section>

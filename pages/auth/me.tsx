@@ -1,7 +1,7 @@
 import Layout from '../../components/Layout'
 import { useSession } from 'next-auth/react'
 import { Media } from '../../utils/media'
-
+import MyPost from '../../components/MyPost'
 import { Box, Text, Image, Stack, HStack } from '@chakra-ui/react'
 
 const Me: React.FC = () => {
@@ -45,7 +45,7 @@ const Me: React.FC = () => {
               </Box>
               {/* right */}
               <Box p="2" border="1px solid gray" w="60vw" borderRadius="md">
-                my post
+                <MyPost />
               </Box>
             </Stack>
           </Media>
@@ -75,7 +75,7 @@ const Me: React.FC = () => {
               </Box>
               {/* right */}
               <Box p="2" border="1px solid gray" borderRadius="md">
-                my post
+                <MyPost />
               </Box>
             </Stack>
           </Media>

@@ -18,6 +18,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         select: { name: true },
       },
     },
+    orderBy: { id: 'asc' },
   })
   return { props: { feed } }
 }
@@ -42,7 +43,7 @@ const Blog: React.FC<Props> = (props) => {
             {/* left column */}
             <Box w="40vw" border="1px solid gray" borderRadius="md">
               <section>
-                {props.feed.reverse().map((post) => (
+                {props.feed.map((post) => (
                   <Box
                     borderRadius="md"
                     border="1px solid gray"
@@ -87,7 +88,7 @@ const Blog: React.FC<Props> = (props) => {
           </Box>
           <Box w="100%">
             <section>
-              {props.feed.reverse().map((post) => (
+              {props.feed.map((post) => (
                 <Box
                   p="2"
                   borderRadius="md"

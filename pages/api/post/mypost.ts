@@ -1,19 +1,25 @@
 import { getSession } from 'next-auth/react'
+import { getToken } from 'next-auth/jwt'
 import prisma from '../../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async function handle(req, res) {
-  // const { title, content } = req.body
-  // const session = await getSession({ req })
+// GET /api/post/mypost/:uid
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const session = await getSession({ req })
+  // @ts-ignore id type not exist on next-auth session
+  const uid: number = session.user.id
+
   try {
     const result = await prisma.user.findUnique({
       where: {
-        id: 1,
+        id: Number(uid),
       },
       include: {
         posts: true,
       },
-      // orderBy: { id: 'asc' },
     })
     res.status(200)
     res.json(result)

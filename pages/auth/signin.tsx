@@ -1,12 +1,30 @@
 import { getProviders, signIn, getCsrfToken, useSession } from 'next-auth/react'
-// import styles from '../../styles/Auth.module.scss'
 import { InferGetServerSidePropsType } from 'next'
-// import { FaGithub, FaTwitter, FaGoogle } from 'react-icons/fa'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
 import { CtxOrReq } from 'next-auth/client/_utils'
-import { Box, Button, VStack, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  VStack,
+  Text,
+  FormLabel,
+  Input,
+  useDisclosure,
+  Fade,
+  Center,
+  Collapse,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+} from '@chakra-ui/react'
 
 const SignIn = ({
   providers,
@@ -20,6 +38,9 @@ const SignIn = ({
       router.push('/')
     }
   }, [session])
+
+  const { isOpen, onToggle } = useDisclosure()
+
   return (
     <>
       <Layout>
@@ -27,24 +48,68 @@ const SignIn = ({
           <Box mt="40vh">Sign In With..</Box>
           <Box>
             <VStack spacing={2}>
+              <Box>
+                <Popover>
+                  <PopoverTrigger>
+                    <Center>
+                      <Button size="lg" onClick={onToggle} w="150px">
+                        <Text fontSize="3xl">Email</Text>
+                      </Button>
+                    </Center>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverCloseButton />
+                    <PopoverHeader>
+                      We will send you a magic link!
+                    </PopoverHeader>
+                    <PopoverBody>
+                      <Box>
+                        <form method="post" action="/api/auth/signin/email">
+                          <Input
+                            name="csrfToken"
+                            type="hidden"
+                            defaultValue={csrfToken}
+                          />
+                          <Box mb="2">
+                            <Input
+                              type="email"
+                              id="email"
+                              name="email"
+                              placeholder="email@address.com"
+                            />
+                          </Box>
+                          <Button width="100%" type="submit">
+                            Send
+                          </Button>
+                        </form>
+                      </Box>
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
+              </Box>
+              {/* social providers */}
               {providers
                 ? Object.values(providers).map((provider, i) => {
                     if (provider.id !== 'email') {
                       return (
-                        <Box key={provider.name}>
-                          <Box>
-                            <Button
-                              size="lg"
-                              onClick={() => signIn(provider.id)}
-                            >
-                              <Text fontSize="3xl">{provider.name}</Text>
-                            </Button>
+                        <>
+                          <Box key={provider.name}>
+                            <Box>
+                              <Button
+                                w="150px"
+                                size="lg"
+                                onClick={() => signIn(provider.id)}
+                              >
+                                <Text fontSize="3xl">{provider.name}</Text>
+                              </Button>
+                            </Box>
                           </Box>
-                        </Box>
+                        </>
                       )
                     }
                   })
-                : ''}
+                : 'No Providers deteced'}
             </VStack>
           </Box>
         </VStack>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
 import ColorButton from '../components/misc/ColorButton'
 import {
@@ -83,7 +83,12 @@ const Header: React.FC = () => {
             <a>New post</a>
           </button>
         </Link>
-        <button onClick={() => signOut()}>
+        <button
+          onClick={() => {
+            signOut()
+            router.push('/')
+          }}
+        >
           <a>Log out</a>
         </button>
       </div>
@@ -123,7 +128,9 @@ const Header: React.FC = () => {
             <>
               <Stack direction="row" p="2">
                 <Link href="/auth/me">
-                  <Button size="sm">{session.user.name}</Button>
+                  <Button size="sm">
+                    {session.user.name ? session.user.name : session.user.email}
+                  </Button>
                 </Link>
 
                 {/* <Button size="sm" data-active={isActive('/drafts')}> */}

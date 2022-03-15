@@ -128,7 +128,9 @@ const Header: React.FC = () => {
             <>
               <Stack direction="row" p="2">
                 <Link href="/auth/me">
-                  <Button size="sm">{session.user.name}</Button>
+                  <Button size="sm">
+                    {session.user.name ? session.user.name : session.user.email}
+                  </Button>
                 </Link>
 
                 {/* <Button size="sm" data-active={isActive('/drafts')}> */}

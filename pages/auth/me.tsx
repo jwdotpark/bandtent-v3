@@ -30,7 +30,7 @@ const Me: React.FC = () => {
                     <Box mx="2">
                       <Image
                         borderRadius="full"
-                        boxSize="128px"
+                        boxSize="64px"
                         alt={data.user.name}
                         src={data.user.image}
                       />

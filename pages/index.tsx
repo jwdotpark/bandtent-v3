@@ -9,6 +9,7 @@ import { Divider, Box, Text, Stack } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import { Media } from '../utils/media'
 import Router from 'next/router'
+import Feature from '../components/Feature'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -71,7 +72,9 @@ const Blog: React.FC<Props> = (props) => {
 
             {/* right column */}
             <Box w="60vw" m="2" borderRadius="md" border="1px solid gray">
-              <Box m="2">some other content</Box>
+              <Box m="4" p="2">
+                <Feature props={props} />
+              </Box>
             </Box>
           </Stack>
         </Box>
@@ -82,7 +85,9 @@ const Blog: React.FC<Props> = (props) => {
       <Media lessThan="md">
         <Stack mx="2">
           <Box borderRadius="md" border="1px solid gray" p="2" m="1" my="4">
-            <Box m="2">some other content</Box>
+            <Box m="2">
+              <Feature props={props} />
+            </Box>
           </Box>
           <Box w="100%">
             <section>

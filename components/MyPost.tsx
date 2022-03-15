@@ -8,14 +8,13 @@ import ReactMarkdown from 'react-markdown'
 const MyPost = () => {
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
   const { data, error } = useSWR('/api/post/mypost', fetcher)
-  console.log(data)
   return (
     <>
       <Box maxW="57vw">
         <Text fontSize="3xl" my="4">
           My Post
         </Text>
-        {data?.posts.map((post) => {
+        {data?.posts?.map((post) => {
           return (
             <Box
               borderRadius="md"

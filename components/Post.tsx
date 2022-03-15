@@ -17,7 +17,6 @@ export type PostProps = {
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : 'Unknown'
-  // console.log(post)
   return (
     <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
       <Text fontSize="3xl">{post.title}</Text>

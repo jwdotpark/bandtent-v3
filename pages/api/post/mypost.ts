@@ -20,7 +20,6 @@ export default async function handle(req, res) {
   } catch (e) {
     res.status(500)
     res.json({ error: 'Unable to fetch user' })
-    console.log('Error')
   } finally {
     await prisma.$disconnect()
   }

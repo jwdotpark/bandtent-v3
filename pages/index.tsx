@@ -36,9 +36,6 @@ const Blog: React.FC<Props> = (props) => {
 
       <Media greaterThanOrEqual="md">
         <Box m="2">
-          <Text ml="2" my="2" fontSize="3xl">
-            Desktop
-          </Text>
           <Stack direction={['column', 'row']} w="100%">
             {/* left column */}
             <Box w="40vw" border="1px solid gray" borderRadius="md">
@@ -47,8 +44,8 @@ const Blog: React.FC<Props> = (props) => {
                   <Box
                     borderRadius="md"
                     border="1px solid gray"
-                    p="2"
-                    m="2"
+                    p="4"
+                    m="4"
                     key={post.id}
                     className="post"
                   >
@@ -56,10 +53,12 @@ const Blog: React.FC<Props> = (props) => {
                     <Box
                       onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     >
-                      <Text fontSize="3xl" noOfLines={3}>
-                        {post.title}
+                      <Text fontSize="3xl" noOfLines={1}>
+                        <b>{post.title}</b>
                       </Text>
-                      <Text fontSize="sm">{post.author.name}</Text>
+                      <Text fontSize="sm">
+                        <i>{post.author.name}</i>
+                      </Text>
                       <Divider my="2" />
                       <Text fontSize="lg" noOfLines={3}>
                         <ReactMarkdown>{post.content}</ReactMarkdown>
@@ -82,8 +81,7 @@ const Blog: React.FC<Props> = (props) => {
       {/* left column */}
       <Media lessThan="md">
         <Stack mx="2">
-          <Text fontSize="xl">Mobile</Text>
-          <Box borderRadius="md" border="1px solid gray" m="2">
+          <Box borderRadius="md" border="1px solid gray" p="2" m="1" my="4">
             <Box m="2">some other content</Box>
           </Box>
           <Box w="100%">
@@ -91,6 +89,7 @@ const Blog: React.FC<Props> = (props) => {
               {props.feed.map((post) => (
                 <Box
                   p="2"
+                  m="1"
                   borderRadius="md"
                   border="1px solid gray"
                   mb="2"
@@ -99,9 +98,11 @@ const Blog: React.FC<Props> = (props) => {
                 >
                   {/* <Post post={post} /> */}
                   <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-                    <Text fontSize="2xl">{post.title}</Text>
+                    <Text fontSize="xl" noOfLines={1}>
+                      <b>{post.title}</b>
+                    </Text>
                     <Text mb="2" fontSize="sm">
-                      {post.author.name}
+                      <i>{post.author.name}</i>
                     </Text>
                     <Divider my="2" />
                     <Text fontSize="md" noOfLines={3}>

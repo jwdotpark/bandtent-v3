@@ -18,7 +18,7 @@ const Me: React.FC = () => {
           <Media greaterThanOrEqual="md">
             <Stack direction={['column', 'row']} m="2">
               {/* left */}
-              <Box>
+              <Box w="40vw">
                 <Box
                   p="2"
                   border="1px solid gray"

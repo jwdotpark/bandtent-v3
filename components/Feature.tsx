@@ -23,7 +23,7 @@ const Feature = (props) => {
           },
           index: number
         ) => (
-          <Box key={post.id} overflowX="auto" m="2">
+          <Box key={post.id} m="2">
             {index === randomPostNum && (
               <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
                 <Text fontSize="6xl" noOfLines={3}>

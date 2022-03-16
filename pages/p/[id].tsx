@@ -62,7 +62,7 @@ const Post: React.FC<PostProps> = (props) => {
           {props?.author?.name || 'Unknown author'}
         </Text>
         <Divider my="2" />
-        <Box overflowX="scroll">
+        <Box>
           <Text
             my="4"
             fontSize="lg"

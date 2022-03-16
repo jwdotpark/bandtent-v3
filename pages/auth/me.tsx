@@ -1,8 +1,9 @@
 import Layout from '../../components/Layout'
 import { useSession } from 'next-auth/react'
 import { Media } from '../../utils/media'
-import MyPost from '../../components/MyPost'
-import { Box, Text, Image, Stack, HStack } from '@chakra-ui/react'
+import MyPost from '../../components/Auth/MyPost'
+import MeEdit from '../../components/Auth/MeEdit'
+import { Box, Text, Image, Stack, HStack, Button } from '@chakra-ui/react'
 
 const Me: React.FC = () => {
   const { data } = useSession()
@@ -26,6 +27,7 @@ const Me: React.FC = () => {
                   w="40vw"
                   borderRadius="md"
                 >
+                  <MeEdit />
                   <HStack h="100%" mx="2">
                     <Box mx="2">
                       <Image
@@ -56,11 +58,13 @@ const Me: React.FC = () => {
               {/* left */}
               <Box>
                 <Box p="2" border="1px solid gray" h="200px" borderRadius="md">
+                  <MeEdit />
+
                   <HStack h="100%" mx="2">
                     <Box mx="2">
                       <Image
                         borderRadius="full"
-                        boxSize="128px"
+                        boxSize="64px"
                         alt={data.user.name}
                         src={data.user.image}
                       />

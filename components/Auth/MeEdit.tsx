@@ -22,7 +22,17 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
-import { useForm, useFormState } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
+import Router from 'next/router'
+import { PostProps } from '../../components/Post'
+
+// type ProfileProps = {
+//   name: string
+//   email: string
+//   description: string
+//   location: string
+//   website: string
+// }
 
 const MeEdit = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -36,10 +46,19 @@ const MeEdit = () => {
 
   function onSubmit(values) {
     return new Promise<void>((resolve) => {
+      fetch('/api/profile/edit', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      })
+        .then((res) => res.json())
+        .then((data) => console.log(data))
       setTimeout(() => {
-        alert(JSON.stringify(values, null, 2))
         resolve()
-      }, 3000)
+        Router.reload()
+      }, 1000)
     })
   }
 
@@ -79,7 +98,6 @@ const MeEdit = () => {
                     {errors.name && errors.name.message}
                   </FormErrorMessage>
                 </FormControl>
-
                 {/* email */}
                 <FormControl isInvalid={errors.email}>
                   <FormLabel htmlFor="name">Email Address</FormLabel>
@@ -102,30 +120,47 @@ const MeEdit = () => {
                     {errors.email && errors.email.message}
                   </FormErrorMessage>
                 </FormControl>
-
                 {/* description */}
                 <FormControl isInvalid={errors.description}>
                   <FormLabel htmlFor="description">Description</FormLabel>
                   <Textarea
                     id="description"
                     placeholder="Description"
+                    // @ts-ignore description is not defined in default next-auth user table
+                    defaultValue={data.user.description}
                     {...register('description', {})}
                   />
                   <FormErrorMessage>
                     {errors.description && errors.description.message}
                   </FormErrorMessage>
                 </FormControl>
-
                 {/* location */}
                 <FormControl isInvalid={errors.location}>
-                  <FormLabel htmlFor="description">Location</FormLabel>
+                  <FormLabel htmlFor="location">Location</FormLabel>
                   <Input
                     id="location"
                     placeholder="Berlin, DE"
+                    // @ts-ignore location is not defined in default next-auth user table
+                    defaultValue={data.user.location}
                     {...register('location', {})}
                   />
                   <FormErrorMessage>
                     {errors.location && errors.location.message}
+                  </FormErrorMessage>
+                </FormControl>
+
+                {/* website */}
+                <FormControl isInvalid={errors.website}>
+                  <FormLabel htmlFor="website">Website</FormLabel>
+                  <Input
+                    id="website"
+                    placeholder="http://www.example.com/"
+                    // @ts-ignore location is not defined in default next-auth user table
+                    defaultValue={data.user.website}
+                    {...register('website', {})}
+                  />
+                  <FormErrorMessage>
+                    {errors.website && errors.website.message}
                   </FormErrorMessage>
                 </FormControl>
               </VStack>

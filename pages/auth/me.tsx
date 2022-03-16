@@ -40,7 +40,12 @@ const Me: React.FC = () => {
                     <Box mx="2">
                       <Text fontSize="xl">{data.user.name}</Text>
                       <Text fontSize="lg">{data.user.email}</Text>
-                      <Text fontSize="md">some description</Text>
+                      {/* @ts-ignore */}
+                      <Text fontSize="md">{data.user.description}</Text>
+                      {/* @ts-ignore */}
+                      <Text fontSize="md">{data.user.location}</Text>
+                      {/* @ts-ignore */}
+                      <Text fontSize="md">{data.user.website}</Text>
                     </Box>
                   </HStack>
                 </Box>

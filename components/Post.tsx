@@ -10,6 +10,9 @@ export type PostProps = {
   author: {
     name: string
     email: string
+    description: string
+    location: string
+    website: string
   } | null
   content: string
   published: boolean

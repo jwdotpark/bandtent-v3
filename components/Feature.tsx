@@ -10,7 +10,7 @@ const Feature = (props) => {
   const numOfPost = props.props.feed.length
   const randomPostNum = getRandomInt(numOfPost)
 
-  console.log(props)
+  // console.log(props)
   return (
     <>
       {props.props.feed.map(

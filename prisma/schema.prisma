@@ -3,17 +3,19 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   title     String
   content   String?
-  published Boolean @default(false)
+  published Boolean  @default(false)
   authorId  Int?
-  author    User?   @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  author    User?    @relation(fields: [authorId], references: [id])
 }
 
 model Account {
@@ -55,6 +57,9 @@ model User {
   updatedAt     DateTime  @updatedAt @map("updated_at")
   emailVerified DateTime? @map("email_verified")
   image         String?
+  description   String?
+  location      String?
+  website       String?
   posts         Post[]
   accounts      Account[]
   sessions      Session[]

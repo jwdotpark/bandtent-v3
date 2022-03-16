@@ -21,6 +21,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
+import { useForm } from 'react-hook-form'
 
 const MeEdit = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()

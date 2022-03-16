@@ -73,7 +73,7 @@ const Drafts: React.FC<Props> = (props) => {
                 </Text>
                 <Text fontSize="sm">{post.author.name}</Text>
                 <Divider my="2" />
-                <Text mb="2" fontSize="lg" noOfLines={5}>
+                <Text mb="2" fontSize="lg" noOfLines={5} overflowY="scroll">
                   <ReactMarkdown>{post.content}</ReactMarkdown>
                 </Text>
               </Box>

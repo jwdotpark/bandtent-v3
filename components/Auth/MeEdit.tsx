@@ -5,6 +5,7 @@ import {
   Stack,
   HStack,
   Button,
+  Textarea,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -99,6 +100,32 @@ const MeEdit = () => {
                   />
                   <FormErrorMessage>
                     {errors.email && errors.email.message}
+                  </FormErrorMessage>
+                </FormControl>
+
+                {/* description */}
+                <FormControl isInvalid={errors.description}>
+                  <FormLabel htmlFor="description">Description</FormLabel>
+                  <Textarea
+                    id="description"
+                    placeholder="Description"
+                    {...register('description', {})}
+                  />
+                  <FormErrorMessage>
+                    {errors.description && errors.description.message}
+                  </FormErrorMessage>
+                </FormControl>
+
+                {/* location */}
+                <FormControl isInvalid={errors.location}>
+                  <FormLabel htmlFor="description">Location</FormLabel>
+                  <Input
+                    id="location"
+                    placeholder="Berlin, DE"
+                    {...register('location', {})}
+                  />
+                  <FormErrorMessage>
+                    {errors.location && errors.location.message}
                   </FormErrorMessage>
                 </FormControl>
               </VStack>

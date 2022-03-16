@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         select: { name: true },
       },
     },
-    orderBy: { id: 'asc' },
+    orderBy: { id: 'desc' },
   })
   return { props: { feed } }
 }

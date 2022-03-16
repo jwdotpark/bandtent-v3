@@ -62,15 +62,17 @@ const Post: React.FC<PostProps> = (props) => {
           {props?.author?.name || 'Unknown author'}
         </Text>
         <Divider my="2" />
-        <Text
-          my="4"
-          fontSize="lg"
-          children={
-            <Text>
-              <ReactMarkdown>{props.content}</ReactMarkdown>
-            </Text>
-          }
-        />
+        <Box>
+          <Text
+            my="4"
+            fontSize="lg"
+            children={
+              <Text>
+                <ReactMarkdown>{props.content}</ReactMarkdown>
+              </Text>
+            }
+          />
+        </Box>
         <Divider my="2" />
 
         {/* button */}

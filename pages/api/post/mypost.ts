@@ -1,5 +1,4 @@
 import { getSession } from 'next-auth/react'
-import { getToken } from 'next-auth/jwt'
 import prisma from '../../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 

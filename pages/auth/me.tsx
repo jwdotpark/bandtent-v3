@@ -1,8 +1,8 @@
 import Layout from '../../components/Layout'
 import { useSession } from 'next-auth/react'
 import { Media } from '../../utils/media'
-import MyPost from '../../components/Auth/MyPost'
-import MeEdit from '../../components/Auth/MeEdit'
+import MyPost from '../../components/auth/MyPost'
+import MeEdit from '../../components/auth/MeEdit'
 import { Box, Text, Image, Stack, HStack, Button } from '@chakra-ui/react'
 
 const Me: React.FC = () => {

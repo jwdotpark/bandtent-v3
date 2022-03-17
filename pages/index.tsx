@@ -67,14 +67,10 @@ const Main: React.FC<Props> = (props) => {
                         <i>{post.author.name}</i>
                       </Text>
                       <Text fontSize="sm">
-                        {new Date(post.createdAt).toLocaleDateString(
-                          navigator.language,
-                          {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          }
-                        )}
-                        {/* <i>{post.createdAt.toISOString}</i> */}
+                        {new Date(post.createdAt).toLocaleDateString('en-DE', {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
                       </Text>
                       <Divider my="2" />
                       <Text fontSize="lg" noOfLines={3}>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import Router from 'next/router'
 import { Box, Text, Input, Textarea, Button, Stack } from '@chakra-ui/react'
+import ImageUpload from '../components/ImageUpload'
 
 const Draft: React.FC = () => {
   const [title, setTitle] = useState('')
@@ -21,6 +22,13 @@ const Draft: React.FC = () => {
       console.error(error)
     }
   }
+
+  const [imageUrl, setImageUrl] = useState<string>('')
+  const image = (data: string) => {
+    setImageUrl(data)
+  }
+
+  console.log('url: ' + imageUrl)
 
   return (
     <Layout>
@@ -47,6 +55,7 @@ const Draft: React.FC = () => {
               value={content}
             />
           </Box>
+          <ImageUpload img={image} />
           <Box>
             <Button
               mr="2"

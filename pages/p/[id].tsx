@@ -81,16 +81,25 @@ const Post: React.FC<PostProps> = (props) => {
 
         {/* button */}
         <HStack spacing={2}>
-          {!props.post.published && userHasValidSession && postBelongsToUser && (
-            <Button size="sm" onClick={() => publishPost(props.id)}>
+          <Button size="sm" onClick={() => publishPost(props.post.id)}>
+            Publish
+          </Button>
+
+          {/* {!props.post.published && userHasValidSession && postBelongsToUser && (
+            <Button size="sm" onClick={() => publishPost(props.post.id)}>
               Publish
             </Button>
-          )}
-          {userHasValidSession && postBelongsToUser && (
-            <Button size="sm" onClick={() => deletePost(props.id)}>
+          )} */}
+
+          <Button size="sm" onClick={() => deletePost(props.post.id)}>
+            Delete
+          </Button>
+
+          {/* {userHasValidSession && postBelongsToUser && (
+            <Button size="sm" onClick={() => deletePost(props.post.id)}>
               Delete
             </Button>
-          )}
+          )} */}
         </HStack>
       </Box>
     </Layout>

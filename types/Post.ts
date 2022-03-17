@@ -10,6 +10,7 @@ type PostProps = {
   } | null
   content: string
   published: boolean
+  createdAt: Date
 }
 
 export default PostProps

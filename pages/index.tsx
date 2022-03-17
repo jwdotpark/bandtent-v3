@@ -22,7 +22,12 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
     orderBy: { id: 'desc' },
   })
-  return { props: { feed } }
+  return {
+    // https://github.com/vercel/next.js/issues/11993
+    props: {
+      feed: JSON.parse(JSON.stringify(feed)),
+    },
+  }
 }
 
 type Props = {
@@ -60,6 +65,10 @@ const Main: React.FC<Props> = (props) => {
                       </Text>
                       <Text fontSize="sm">
                         <i>{post.author.name}</i>
+                      </Text>
+                      <Text fontSize="sm">
+                        {/* {post.createdAt.toLocaleDateString()} */}
+                        {/* <i>{post.createdAt}</i> */}
                       </Text>
                       <Divider my="2" />
                       <Text fontSize="lg" noOfLines={3}>

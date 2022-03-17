@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown'
 import Router from 'next/router'
 import Layout from '../../components/Layout'
 // import { PostProps } from '../../components/Post'
-import PostProps from "../../types/Post"
+import PostProps from '../../types/Post'
 import { useSession } from 'next-auth/react'
 import prisma from '../../lib/prisma'
 import { Box, Button, Text, HStack, Divider } from '@chakra-ui/react'
@@ -23,7 +23,10 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   })
   return {
-    props: post,
+    props: {
+      // post,
+      post: JSON.parse(JSON.stringify(post)),
+    },
   }
 }
 
@@ -57,10 +60,10 @@ const Post: React.FC<PostProps> = (props) => {
     <Layout>
       <Box p="4" m="2" mx="2" border="1px solid gray" borderRadius="md">
         <Text my="2" fontSize="3xl">
-          {title}
+          {props.post.title}
         </Text>
         <Text my="2" fontSize="sm">
-          {props?.author?.name || 'Unknown author'}
+          {props.post.author?.name || 'Unknown author'}
         </Text>
         <Divider my="2" />
         <Box>
@@ -69,7 +72,7 @@ const Post: React.FC<PostProps> = (props) => {
             fontSize="lg"
             children={
               <Text>
-                <ReactMarkdown>{props.content}</ReactMarkdown>
+                <ReactMarkdown>{props.post.content}</ReactMarkdown>
               </Text>
             }
           />
@@ -78,7 +81,7 @@ const Post: React.FC<PostProps> = (props) => {
 
         {/* button */}
         <HStack spacing={2}>
-          {!props.published && userHasValidSession && postBelongsToUser && (
+          {!props.post.published && userHasValidSession && postBelongsToUser && (
             <Button size="sm" onClick={() => publishPost(props.id)}>
               Publish
             </Button>

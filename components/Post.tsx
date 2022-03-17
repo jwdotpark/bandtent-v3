@@ -3,20 +3,21 @@ import Router from 'next/router'
 import ReactMarkdown from 'react-markdown'
 // import remarkGfm from 'remark-gfm'
 import { Box, Text } from '@chakra-ui/react'
+import PostProps from '../types/Post'
 
-export type PostProps = {
-  id: number
-  title: string
-  author: {
-    name: string
-    email: string
-    description: string
-    location: string
-    website: string
-  } | null
-  content: string
-  published: boolean
-}
+// export type PostProps = {
+//   id: number
+//   title: string
+//   author: {
+//     name: string
+//     email: string
+//     description: string
+//     location: string
+//     website: string
+//   } | null
+//   content: string
+//   published: boolean
+// }
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
   const authorName = post.author ? post.author.name : 'Unknown'

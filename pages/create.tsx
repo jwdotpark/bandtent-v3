@@ -11,12 +11,13 @@ const Draft: React.FC = () => {
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const body = { title, content }
+      const body = { title, content, imageUrl }
       await fetch('/api/post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
+      console.log(body)
       await Router.push('/drafts')
     } catch (error) {
       console.error(error)
@@ -24,11 +25,10 @@ const Draft: React.FC = () => {
   }
 
   const [imageUrl, setImageUrl] = useState<string>('')
-  const image = (data: string) => {
+  const pullImage = (data: string) => {
+    console.log('url: ' + data)
     setImageUrl(data)
   }
-
-  console.log('url: ' + imageUrl)
 
   return (
     <Layout>
@@ -55,7 +55,8 @@ const Draft: React.FC = () => {
               value={content}
             />
           </Box>
-          <ImageUpload img={image} />
+          <ImageUpload img={pullImage} />
+          <Input display="none" type="file" defaultValue={imageUrl} />
           <Box>
             <Button
               mr="2"

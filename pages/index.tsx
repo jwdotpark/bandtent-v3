@@ -29,7 +29,7 @@ type Props = {
   feed: PostProps[]
 }
 
-const Blog: React.FC<Props> = (props) => {
+const Main: React.FC<Props> = (props) => {
   return (
     <Layout>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -126,4 +126,4 @@ const Blog: React.FC<Props> = (props) => {
   )
 }
 
-export default Blog
+export default Main

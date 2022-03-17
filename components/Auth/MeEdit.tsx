@@ -26,13 +26,6 @@ import { useForm } from 'react-hook-form'
 import Router from 'next/router'
 import PostProps from '../../types/Post'
 
-// type ProfileProps = {
-//   name: string
-//   email: string
-//   description: string
-//   location: string
-//   website: string
-// }
 
 const MeEdit = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()

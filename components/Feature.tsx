@@ -2,6 +2,7 @@ import { Divider, Box, Text } from '@chakra-ui/react'
 import Router from 'next/router'
 import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
 import ImageComponent from '../components/ImageComponent'
+import moment from 'moment'
 
 const Feature = (props) => {
   const getRandomInt = (max: number) => {
@@ -17,27 +18,29 @@ const Feature = (props) => {
         (
           post: {
             id: Key
-            title: boolean | ReactChild | ReactFragment | ReactPortal
-            author: { name: boolean | ReactChild | ReactFragment | ReactPortal }
+            title: string
+            author: { name: string }
             content: string
             imageUrl: string
+            createdAt: Date
           },
           index: number
         ) => (
           <Box key={post.id} m="2">
             {index === randomPostNum && (
               <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-                <Text fontSize="6xl" noOfLines={3}>
+                <Box textAlign="left">
+                  <Text fontSize="sm">
+                    Posted by <b>{post.author.name}</b>{' '}
+                    <i>{moment(post.createdAt).fromNow()}</i>
+                  </Text>
+                </Box>
+                <Text fontSize="3xl" noOfLines={3} textAlign="left">
                   <b>{post.title}</b>
                 </Text>
-                <Text fontSize="sm" textAlign="right">
-                  <i>{post.author.name}</i>
-                </Text>
+
                 <Divider my="2" />
-                {post.imageUrl && (
-                  // <Image src={post.imageUrl} w="100%" objectFit="cover" />
-                  <ImageComponent props={post} />
-                )}
+                {post.imageUrl && <ImageComponent props={post} />}
                 <Text fontSize="lg" noOfLines={1000}>
                   {post.content}
                 </Text>

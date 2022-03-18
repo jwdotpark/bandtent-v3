@@ -10,6 +10,7 @@ import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
 import ImageComponent from '../components/ImageComponent'
+import moment from 'moment'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -59,21 +60,19 @@ const Main: React.FC<Props> = (props) => {
                     <Box
                       onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     >
+                      <Box>
+                        <Text fontSize="sm">
+                          Posted by <b>{post.author.name}</b>{' '}
+                          <i>{moment(post.createdAt).fromNow()}</i>
+                        </Text>
+                      </Box>
                       <Text fontSize="3xl" noOfLines={1}>
                         <b>{post.title}</b>
                       </Text>
-                      <Text fontSize="sm">
-                        <i>{post.author.name}</i>
-                      </Text>
-                      {/* <Text fontSize="sm">
-                        {new Date(post.createdAt).toLocaleDateString('en-DE', {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        })}
-                      </Text> */}
+
                       <Divider my="2" />
                       {post.imageUrl && <ImageComponent props={post} />}
-                      <Text fontSize="lg" noOfLines={3}>
+                      <Text fontSize="lg" noOfLines={3} mx="2">
                         {post.content}
                       </Text>
                     </Box>
@@ -84,7 +83,7 @@ const Main: React.FC<Props> = (props) => {
 
             {/* right column */}
             <Box w="60vw" m="2" borderRadius="md" border="1px solid gray">
-              <Box m="4" p="2">
+              <Box m="2" p="2">
                 <Feature props={props} />
               </Box>
             </Box>

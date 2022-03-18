@@ -1,5 +1,4 @@
-import { Divider, Box, Text, Image } from '@chakra-ui/react'
-import ReactMarkdown from 'react-markdown'
+import { Divider, Box, Text } from '@chakra-ui/react'
 import Router from 'next/router'
 import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
 import ImageComponent from '../components/ImageComponent'
@@ -40,7 +39,7 @@ const Feature = (props) => {
                   <ImageComponent props={post} />
                 )}
                 <Text fontSize="lg" noOfLines={1000}>
-                  <ReactMarkdown>{post.content}</ReactMarkdown>
+                  {post.content}
                 </Text>
               </Box>
             )}

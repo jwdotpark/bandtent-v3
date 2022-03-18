@@ -2,12 +2,10 @@ import React from 'react'
 import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
-// import Post, { PostProps } from '../components/Post'
 import PostProps from '../types/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
-import { Divider, Box, Text, Stack, Image } from '@chakra-ui/react'
-import ReactMarkdown from 'react-markdown'
+import { Divider, Box, Text, Stack } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
@@ -76,7 +74,7 @@ const Main: React.FC<Props> = (props) => {
                       <Divider my="2" />
                       {post.imageUrl && <ImageComponent props={post} />}
                       <Text fontSize="lg" noOfLines={3}>
-                        <ReactMarkdown>{post.content}</ReactMarkdown>
+                        {post.content}
                       </Text>
                     </Box>
                   </Box>
@@ -126,7 +124,7 @@ const Main: React.FC<Props> = (props) => {
                     <Divider my="2" />
                     {post.imageUrl && <ImageComponent props={post} />}
                     <Text fontSize="md" noOfLines={3}>
-                      <ReactMarkdown>{post.content}</ReactMarkdown>
+                      {post.content}
                     </Text>
                   </Box>
                 </Box>

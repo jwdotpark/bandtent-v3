@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
-import { Box, Button, Image, Text, Divider } from '@chakra-ui/react'
+import { Box, Text, Divider } from '@chakra-ui/react'
 import Router from 'next/router'
-import ReactMarkdown from 'react-markdown'
-import { getSession } from 'next-auth/react'
 import ImageComponent from '../../components/ImageComponent'
 
 const MyPost = () => {
@@ -39,7 +35,7 @@ const MyPost = () => {
                   <Divider my="2" />
                   {post.imageUrl && <ImageComponent props={post} />}
                   <Text fontSize="md" noOfLines={3}>
-                    <ReactMarkdown>{post.content}</ReactMarkdown>
+                    {post.content}
                   </Text>
                 </Box>
               </Box>

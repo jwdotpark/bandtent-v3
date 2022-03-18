@@ -5,10 +5,8 @@
 
 import React from 'react'
 import { GetServerSideProps } from 'next'
-import ReactMarkdown from 'react-markdown'
 import Router from 'next/router'
 import Layout from '../../components/Layout'
-// import { PostProps } from '../../components/Post'
 import PostProps from '../../types/Post'
 import { useSession } from 'next-auth/react'
 import prisma from '../../lib/prisma'
@@ -82,11 +80,7 @@ const Post: React.FC<PostProps> = (props) => {
           <Text
             my="4"
             fontSize="lg"
-            children={
-              <Text>
-                <ReactMarkdown>{props.post.content}</ReactMarkdown>
-              </Text>
-            }
+            children={<Text>{props.post.content}</Text>}
           />
         </Box>
         <Divider my="2" />

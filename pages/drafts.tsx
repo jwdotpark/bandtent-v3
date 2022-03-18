@@ -2,12 +2,9 @@ import React from 'react'
 import { GetServerSideProps } from 'next'
 import { useSession, getSession } from 'next-auth/react'
 import Layout from '../components/Layout'
-// import Post, { PostProps } from '../components/Post'
 import PostProps from '../types/Post'
 import prisma from '../lib/prisma'
-import ReactMarkdown from 'react-markdown'
-// import { Media } from '../utils/media'
-import { Box, Button, Text, Divider, Image } from '@chakra-ui/react'
+import { Box, Text, Divider, Image } from '@chakra-ui/react'
 import Router from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -79,7 +76,7 @@ const Drafts: React.FC<Props> = (props) => {
                 <Divider my="2" />
                 {post.imageUrl && <Image src={post.imageUrl} />}
                 <Text mb="2" fontSize="lg" noOfLines={5}>
-                  <ReactMarkdown>{post.content}</ReactMarkdown>
+                  {post.content}
                 </Text>
               </Box>
             </Box>

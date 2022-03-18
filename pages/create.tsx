@@ -18,7 +18,7 @@ const Draft: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      console.log(body)
+      console.log('body: ' + JSON.stringify(body))
       await Router.push('/drafts')
     } catch (error) {
       console.error(error)
@@ -26,10 +26,14 @@ const Draft: React.FC = () => {
   }
 
   const pullImage = (data: string) => {
-    // console.log('url: ' + data)
-    setImageUrl(data)
+    if (data) {
+      console.log('url: ' + data)
+      setImageUrl(data)
+    }
+    if (!data) {
+      console.log('no data')
+    }
   }
-  console.log()
 
   return (
     <Layout>
@@ -59,7 +63,12 @@ const Draft: React.FC = () => {
           {/* image */}
           <Box>
             <ImageUpload img={pullImage} />
-            <Input display="none" type="file" defaultValue={imageUrl} />
+            <Input
+              display="none"
+              type="file"
+              // value={imageUrl ? imageUrl : null}
+              defaultValue={imageUrl}
+            />
           </Box>
           <Box>
             <Button

@@ -11,6 +11,7 @@ type PostProps = {
   content: string
   published: boolean
   createdAt: Date
+  imageUrl: string
 }
 
 export default PostProps

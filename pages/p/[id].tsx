@@ -12,7 +12,7 @@ import Layout from '../../components/Layout'
 import PostProps from '../../types/Post'
 import { useSession } from 'next-auth/react'
 import prisma from '../../lib/prisma'
-import { Box, Button, Text, HStack, Divider } from '@chakra-ui/react'
+import { Box, Button, Text, HStack, Divider, Image } from '@chakra-ui/react'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -77,6 +77,7 @@ const Post: React.FC<PostProps> = (props) => {
           })}
         </Text>
         <Divider my="2" />
+        <Box>{props.post.imageUrl && <Image src={props.post.imageUrl} />}</Box>
         <Box>
           <Text
             my="4"

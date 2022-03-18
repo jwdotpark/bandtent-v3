@@ -12,6 +12,7 @@ export default async function handle(
   const { name, email, description, location, website } = req.body
   // @ts-ignore id type not exist on next-auth session
   const uid = session?.user.id
+  console.log('user id: ', uid)
   try {
     const user = await prisma.user.update({
       where: { id: Number(uid) },

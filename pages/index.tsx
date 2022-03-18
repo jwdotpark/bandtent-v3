@@ -70,7 +70,7 @@ const Main: React.FC<Props> = (props) => {
                         <b>{post.title}</b>
                       </Text>
 
-                      <Divider my="2" />
+                      <Divider mb="4" />
                       {post.imageUrl && <ImageComponent props={post} />}
                       <Text fontSize="lg" noOfLines={3} mx="2">
                         {post.content}
@@ -114,12 +114,16 @@ const Main: React.FC<Props> = (props) => {
                 >
                   {/* <Post post={post} /> */}
                   <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
+                    <Text fontSize="sm">
+                      Posted by <b>{post.author.name}</b>{' '}
+                      <i>{moment(post.createdAt).fromNow()}</i>
+                    </Text>
                     <Text fontSize="xl" noOfLines={1}>
                       <b>{post.title}</b>
                     </Text>
-                    <Text mb="2" fontSize="sm">
+                    {/* <Text mb="2" fontSize="sm">
                       <i>{post.author.name}</i>
-                    </Text>
+                    </Text> */}
                     <Divider my="2" />
                     {post.imageUrl && <ImageComponent props={post} />}
                     <Text fontSize="md" noOfLines={3}>

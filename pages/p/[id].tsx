@@ -11,6 +11,7 @@ import PostProps from '../../types/Post'
 import { useSession } from 'next-auth/react'
 import prisma from '../../lib/prisma'
 import { Box, Button, Text, HStack, Divider, Image } from '@chakra-ui/react'
+import ImageComponent from '../../components/ImageComponent'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -64,26 +65,28 @@ const Post: React.FC<PostProps> = (props) => {
           {props.post.title}
         </Text>
         <Text my="2" fontSize="sm">
-          {/* {props.post.author?.name || 'Unknown author'} */}
-          {props.post.author.name || 'Unknown author'}
+          Posted by {props.post.author.name || 'Unknown author'} on{' '}
+          <i>
+            {new Date(props.post.createdAt).toLocaleDateString('en-DE', {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          </i>
         </Text>
-        <Text my="2" fontSize="sm">
-          {/* {props.post.author?.name || 'Unknown author'} */}
-          {new Date(props.post.createdAt).toLocaleDateString('en-DE', {
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
-        </Text>
-        <Divider my="2" />
-        <Box>{props.post.imageUrl && <Image src={props.post.imageUrl} />}</Box>
+
+        <Divider mb="4" />
+        <Box>
+          {props.post.imageUrl && <ImageComponent props={props.post} />}
+        </Box>
         <Box>
           <Text
             my="4"
+            mx="2"
             fontSize="lg"
             children={<Text>{props.post.content}</Text>}
           />
         </Box>
-        <Divider my="2" />
+        <Divider mb="4" />
 
         {/* button */}
         <HStack spacing={2}>

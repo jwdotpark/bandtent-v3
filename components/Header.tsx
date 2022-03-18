@@ -15,10 +15,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import { ChevronDownIcon } from '@chakra-ui/icons'

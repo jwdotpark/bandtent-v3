@@ -6,7 +6,8 @@ import PostProps from '../types/Post'
 import prisma from '../lib/prisma'
 import { Box, Text, Divider, Image } from '@chakra-ui/react'
 import Router from 'next/router'
-
+import ImageComponent from '../components/ImageComponent'
+import moment from 'moment'
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })
   if (!session) {
@@ -55,7 +56,7 @@ const Drafts: React.FC<Props> = (props) => {
     <Layout>
       <Box m="2">
         <Box fontSize="3xl">
-          <Text>My Drafts</Text>
+          <Text>Unpublished</Text>
         </Box>
         <Box>
           {props.drafts.map((post) => (
@@ -69,12 +70,14 @@ const Drafts: React.FC<Props> = (props) => {
             >
               {/* <Post post={post} /> */}
               <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
+                <Text fontSize="sm">
+                  <i>{moment(post.createdAt).fromNow()}</i>
+                </Text>
                 <Text fontSize="3xl" noOfLines={3}>
                   {post.title}
                 </Text>
-                <Text fontSize="sm">{post.author.name}</Text>
                 <Divider my="2" />
-                {post.imageUrl && <Image src={post.imageUrl} />}
+                {post.imageUrl && <ImageComponent props={post} />}
                 <Text mb="2" fontSize="lg" noOfLines={5}>
                   {post.content}
                 </Text>

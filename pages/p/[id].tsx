@@ -50,7 +50,7 @@ const Post: React.FC<PostProps> = (props) => {
     return <div>Authenticating ...</div>
   }
   const userHasValidSession = Boolean(session)
-  const postBelongsToUser = session?.user?.email === props.author?.email
+  const postBelongsToUser = session?.user?.email === props.post.author?.email
   let title = props.title
   if (!props.published) {
     title = `${title} (Draft)`
@@ -63,7 +63,15 @@ const Post: React.FC<PostProps> = (props) => {
           {props.post.title}
         </Text>
         <Text my="2" fontSize="sm">
-          {props.post.author?.name || 'Unknown author'}
+          {/* {props.post.author?.name || 'Unknown author'} */}
+          {props.post.author.name || 'Unknown author'}
+        </Text>
+        <Text my="2" fontSize="sm">
+          {/* {props.post.author?.name || 'Unknown author'} */}
+          {new Date(props.post.createdAt).toLocaleDateString('en-DE', {
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
         </Text>
         <Divider my="2" />
         <Box>
@@ -81,25 +89,25 @@ const Post: React.FC<PostProps> = (props) => {
 
         {/* button */}
         <HStack spacing={2}>
-          <Button size="sm" onClick={() => publishPost(props.post.id)}>
+          {/* <Button size="sm" onClick={() => publishPost(props.post.id)}>
             Publish
-          </Button>
+          </Button> */}
 
-          {/* {!props.post.published && userHasValidSession && postBelongsToUser && (
+          {!props.post.published && userHasValidSession && postBelongsToUser && (
             <Button size="sm" onClick={() => publishPost(props.post.id)}>
               Publish
             </Button>
-          )} */}
+          )}
 
-          <Button size="sm" onClick={() => deletePost(props.post.id)}>
+          {/* <Button size="sm" onClick={() => deletePost(props.post.id)}>
             Delete
-          </Button>
+          </Button> */}
 
-          {/* {userHasValidSession && postBelongsToUser && (
+          {userHasValidSession && postBelongsToUser && (
             <Button size="sm" onClick={() => deletePost(props.post.id)}>
               Delete
             </Button>
-          )} */}
+          )}
         </HStack>
       </Box>
     </Layout>

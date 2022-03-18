@@ -66,12 +66,12 @@ const Main: React.FC<Props> = (props) => {
                       <Text fontSize="sm">
                         <i>{post.author.name}</i>
                       </Text>
-                      <Text fontSize="sm">
+                      {/* <Text fontSize="sm">
                         {new Date(post.createdAt).toLocaleDateString('en-DE', {
                           hour: '2-digit',
                           minute: '2-digit',
                         })}
-                      </Text>
+                      </Text> */}
                       <Divider my="2" />
                       <Text fontSize="lg" noOfLines={3}>
                         <ReactMarkdown>{post.content}</ReactMarkdown>

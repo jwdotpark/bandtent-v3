@@ -13,10 +13,13 @@ import {
   Code,
   Icon,
   Center,
+  Image,
+  useColorMode,
 } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props) {
+  const { colorMode } = useColorMode()
   let [imageUrl, setImageUrl] = useState<string>()
   let { uploadToS3, files } = useS3Upload()
 
@@ -50,17 +53,23 @@ export default function UploadPage(props) {
         </Box>
         <div {...getRootProps()}>
           <input {...getInputProps()} onChange={handleFileChange} />
-          {isDragActive && !imageUrl ? (
-            <Center w="100%" h="200px" border="1px solid red">
-              Drop the files here
-            </Center>
-          ) : (
-            <Center w="100%" h="20vh" border="1px solid red">
-              Click to select image
-            </Center>
-          )}
-
-          <img src={imageUrl} />
+          <Box my="4">
+            {imageUrl ? (
+              <Box border="2px solid gray" borderRadius="md">
+                <Image src={imageUrl} objectFit="cover" />
+              </Box>
+            ) : (
+              <Center
+                w="100%"
+                h="10vh"
+                borderRadius="md"
+                // border="2px dashed gray"
+                bg={colorMode === 'light' ? 'gray.100' : '#242a35'}
+              >
+                <Text fontSize="3xl">Click to select image</Text>
+              </Center>
+            )}
+          </Box>
         </div>
         {imageUrl && 'file uploaded!'}
       </FormControl>

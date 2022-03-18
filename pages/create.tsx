@@ -18,7 +18,6 @@ const Draft: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      console.log('body: ' + JSON.stringify(body))
       await Router.push('/drafts')
     } catch (error) {
       console.error(error)
@@ -27,7 +26,6 @@ const Draft: React.FC = () => {
 
   const pullImage = (data: string) => {
     if (data) {
-      console.log('url: ' + data)
       setImageUrl(data)
     }
   }

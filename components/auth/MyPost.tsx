@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
-import { Box, Button, Text, Divider } from '@chakra-ui/react'
+import { Box, Text, Divider } from '@chakra-ui/react'
 import Router from 'next/router'
-import ReactMarkdown from 'react-markdown'
-import { getSession } from 'next-auth/react'
+import ImageComponent from '../../components/ImageComponent'
 
 const MyPost = () => {
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
@@ -16,15 +13,17 @@ const MyPost = () => {
           My Post
         </Text>
         {!error &&
-          data?.posts.reverse().map((post) => {
+          data?.posts.map((post) => {
             return (
               <Box
                 borderRadius="md"
-                border="1px solid gray"
+                border={post.published ? '2px solid' : '2px dashed'}
+                borderColor={post.published ? 'gray' : 'gray.400'}
                 p="2"
                 mb="2"
                 key={post.id}
               >
+                {!post.published ? 'Unpublished' : 'Published'}
                 <Box
                   onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                   _hover={{ cursor: 'pointer' }}
@@ -33,8 +32,9 @@ const MyPost = () => {
                     {post.title}
                   </Text>
                   <Divider my="2" />
+                  {post.imageUrl && <ImageComponent props={post} />}
                   <Text fontSize="md" noOfLines={3}>
-                    <ReactMarkdown>{post.content}</ReactMarkdown>
+                    {post.content}
                   </Text>
                 </Box>
               </Box>

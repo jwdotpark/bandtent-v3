@@ -2,15 +2,17 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import Router from 'next/router'
 import { Box, Text, Input, Textarea, Button, Stack } from '@chakra-ui/react'
+import ImageUpload from '../components/ImageUpload'
 
 const Draft: React.FC = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [imageUrl, setImageUrl] = useState<string>('')
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const body = { title, content }
+      const body = { title, content, imageUrl }
       await fetch('/api/post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -19,6 +21,12 @@ const Draft: React.FC = () => {
       await Router.push('/drafts')
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  const pullImage = (data: string) => {
+    if (data) {
+      setImageUrl(data)
     }
   }
 
@@ -45,6 +53,16 @@ const Draft: React.FC = () => {
               placeholder="Content"
               rows={8}
               value={content}
+            />
+          </Box>
+          {/* image */}
+          <Box>
+            <ImageUpload img={pullImage} />
+            <Input
+              display="none"
+              type="file"
+              // value={imageUrl ? imageUrl : null}
+              defaultValue={imageUrl}
             />
           </Box>
           <Box>

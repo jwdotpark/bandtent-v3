@@ -2,14 +2,15 @@ import React from 'react'
 import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
-import Post, { PostProps } from '../components/Post'
+import PostProps from '../types/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
 import { Divider, Box, Text, Stack } from '@chakra-ui/react'
-import ReactMarkdown from 'react-markdown'
 import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
+import ImageComponent from '../components/ImageComponent'
+import moment from 'moment'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -21,14 +22,19 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
     orderBy: { id: 'desc' },
   })
-  return { props: { feed } }
+  return {
+    // https://github.com/vercel/next.js/issues/11993
+    props: {
+      feed: JSON.parse(JSON.stringify(feed)),
+    },
+  }
 }
 
 type Props = {
   feed: PostProps[]
 }
 
-const Blog: React.FC<Props> = (props) => {
+const Main: React.FC<Props> = (props) => {
   return (
     <Layout>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -54,15 +60,20 @@ const Blog: React.FC<Props> = (props) => {
                     <Box
                       onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     >
+                      <Box>
+                        <Text fontSize="sm">
+                          Posted by <b>{post.author.name}</b>{' '}
+                          <i>{moment(post.createdAt).fromNow()}</i>
+                        </Text>
+                      </Box>
                       <Text fontSize="3xl" noOfLines={1}>
                         <b>{post.title}</b>
                       </Text>
-                      <Text fontSize="sm">
-                        <i>{post.author.name}</i>
-                      </Text>
-                      <Divider my="2" />
-                      <Text fontSize="lg" noOfLines={3}>
-                        <ReactMarkdown>{post.content}</ReactMarkdown>
+
+                      <Divider mb="4" />
+                      {post.imageUrl && <ImageComponent props={post} />}
+                      <Text fontSize="lg" noOfLines={3} mx="2">
+                        {post.content}
                       </Text>
                     </Box>
                   </Box>
@@ -72,7 +83,7 @@ const Blog: React.FC<Props> = (props) => {
 
             {/* right column */}
             <Box w="60vw" m="2" borderRadius="md" border="1px solid gray">
-              <Box m="4" p="2">
+              <Box m="2" p="2">
                 <Feature props={props} />
               </Box>
             </Box>
@@ -103,15 +114,20 @@ const Blog: React.FC<Props> = (props) => {
                 >
                   {/* <Post post={post} /> */}
                   <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
+                    <Text fontSize="sm">
+                      Posted by <b>{post.author.name}</b>{' '}
+                      <i>{moment(post.createdAt).fromNow()}</i>
+                    </Text>
                     <Text fontSize="xl" noOfLines={1}>
                       <b>{post.title}</b>
                     </Text>
-                    <Text mb="2" fontSize="sm">
+                    {/* <Text mb="2" fontSize="sm">
                       <i>{post.author.name}</i>
-                    </Text>
+                    </Text> */}
                     <Divider my="2" />
+                    {post.imageUrl && <ImageComponent props={post} />}
                     <Text fontSize="md" noOfLines={3}>
-                      <ReactMarkdown>{post.content}</ReactMarkdown>
+                      {post.content}
                     </Text>
                   </Box>
                 </Box>
@@ -125,4 +141,4 @@ const Blog: React.FC<Props> = (props) => {
   )
 }
 
-export default Blog
+export default Main

@@ -1,7 +1,8 @@
 import { Divider, Box, Text } from '@chakra-ui/react'
-import ReactMarkdown from 'react-markdown'
 import Router from 'next/router'
 import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
+import ImageComponent from '../components/ImageComponent'
+import moment from 'moment'
 
 const Feature = (props) => {
   const getRandomInt = (max: number) => {
@@ -10,31 +11,50 @@ const Feature = (props) => {
   const numOfPost = props.props.feed.length
   const randomPostNum = getRandomInt(numOfPost)
 
-  // console.log(props)
+  console.log(props)
   return (
     <>
+      <Box border="1px solid gray" borderRadius="md" mb="4">
+        <Text m="4" fontSize="5xl">
+          {props.props.feed.length} article uploaded
+        </Text>
+      </Box>
       {props.props.feed.map(
         (
           post: {
             id: Key
-            title: boolean | ReactChild | ReactFragment | ReactPortal
-            author: { name: boolean | ReactChild | ReactFragment | ReactPortal }
+            title: string
+            author: { name: string }
             content: string
+            imageUrl: string
+            createdAt: Date
           },
           index: number
         ) => (
-          <Box key={post.id} m="2">
+          <Box key={post.id}>
             {index === randomPostNum && (
-              <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-                <Text fontSize="6xl" noOfLines={3}>
+              <Box
+                onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                border="1px solid gray"
+                borderRadius="md"
+                p="4"
+              >
+                <Box textAlign="left">
+                  <Text fontSize="sm">
+                    {/* Posted by <b>{post.author.name}</b>{' '} */}
+                    {/* <i>{moment(post.createdAt).fromNow()}</i> */}
+                  </Text>
+                </Box>
+                <Text fontSize="3xl" noOfLines={3} textAlign="left">
                   <b>{post.title}</b>
                 </Text>
-                <Text fontSize="sm" textAlign="right">
-                  <i>{post.author.name}</i>
-                </Text>
-                <Divider my="2" />
-                <Text fontSize="lg" noOfLines={1000}>
-                  <ReactMarkdown>{post.content}</ReactMarkdown>
+
+                <Divider mb="4" />
+                <Box m="2">
+                  {post.imageUrl && <ImageComponent props={post} />}
+                </Box>
+                <Text fontSize="md" noOfLines={1000} mx="4">
+                  {post.content}
                 </Text>
               </Box>
             )}

@@ -20,6 +20,8 @@ import {
   FormHelperText,
   Input,
   VStack,
+  InputGroup,
+  InputLeftAddon,
 } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
@@ -144,13 +146,23 @@ const MeEdit = () => {
               {/* website */}
               <FormControl isInvalid={errors.website}>
                 <FormLabel htmlFor="website">Website</FormLabel>
-                <Input
-                  id="website"
-                  placeholder="http://www.example.com/"
-                  // @ts-ignore location is not defined in default next-auth user table
-                  defaultValue={data.user.website}
-                  {...register('website', {})}
-                />
+                <InputGroup>
+                  {/* <InputLeftAddon children="https://www." /> */}
+                  <Input
+                    id="website"
+                    placeholder="http://www.example.com/"
+                    // @ts-ignore location is not defined in default next-auth user table
+                    defaultValue={data.user.website}
+                    {...register('website', {
+                      pattern: {
+                        value:
+                          // url validation regex
+                          /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i,
+                        message: 'Invalid URL',
+                      },
+                    })}
+                  />
+                </InputGroup>
                 <FormErrorMessage>
                   {errors.website && errors.website.message}
                 </FormErrorMessage>

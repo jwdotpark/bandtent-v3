@@ -1,3 +1,6 @@
+// @ts-nocheck
+// FIXME
+
 // pages/p/[id].tsx
 
 import React from 'react'

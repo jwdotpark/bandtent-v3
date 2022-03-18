@@ -6,11 +6,12 @@ import Layout from '../components/Layout'
 import PostProps from '../types/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
-import { Divider, Box, Text, Stack } from '@chakra-ui/react'
+import { Divider, Box, Text, Stack, Image } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
+import ImageComponent from '../components/ImageComponent'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -73,6 +74,17 @@ const Main: React.FC<Props> = (props) => {
                         })}
                       </Text> */}
                       <Divider my="2" />
+                      {post.imageUrl && (
+                        // <Box my="2">
+                        //   <Image
+                        //     borderRadius="xl"
+                        //     src={post.imageUrl}
+                        //     w="100%"
+                        //     objectFit="cover"
+                        //   />
+                        // </Box>
+                        <ImageComponent props={post} />
+                      )}
                       <Text fontSize="lg" noOfLines={3}>
                         <ReactMarkdown>{post.content}</ReactMarkdown>
                       </Text>

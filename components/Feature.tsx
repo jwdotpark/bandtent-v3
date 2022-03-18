@@ -1,7 +1,8 @@
-import { Divider, Box, Text } from '@chakra-ui/react'
+import { Divider, Box, Text, Image } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'
 import Router from 'next/router'
 import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
+import ImageComponent from '../components/ImageComponent'
 
 const Feature = (props) => {
   const getRandomInt = (max: number) => {
@@ -20,6 +21,7 @@ const Feature = (props) => {
             title: boolean | ReactChild | ReactFragment | ReactPortal
             author: { name: boolean | ReactChild | ReactFragment | ReactPortal }
             content: string
+            imageUrl: string
           },
           index: number
         ) => (
@@ -33,6 +35,10 @@ const Feature = (props) => {
                   <i>{post.author.name}</i>
                 </Text>
                 <Divider my="2" />
+                {post.imageUrl && (
+                  // <Image src={post.imageUrl} w="100%" objectFit="cover" />
+                  <ImageComponent props={post} />
+                )}
                 <Text fontSize="lg" noOfLines={1000}>
                   <ReactMarkdown>{post.content}</ReactMarkdown>
                 </Text>

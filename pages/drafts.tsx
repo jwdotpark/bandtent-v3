@@ -7,7 +7,7 @@ import PostProps from '../types/Post'
 import prisma from '../lib/prisma'
 import ReactMarkdown from 'react-markdown'
 // import { Media } from '../utils/media'
-import { Box, Button, Text, Divider } from '@chakra-ui/react'
+import { Box, Button, Text, Divider, Image } from '@chakra-ui/react'
 import Router from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -76,6 +76,7 @@ const Drafts: React.FC<Props> = (props) => {
                 </Text>
                 <Text fontSize="sm">{post.author.name}</Text>
                 <Divider my="2" />
+                {post.imageUrl && <Image src={post.imageUrl} />}
                 <Text mb="2" fontSize="lg" noOfLines={5}>
                   <ReactMarkdown>{post.content}</ReactMarkdown>
                 </Text>

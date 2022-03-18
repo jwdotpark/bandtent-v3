@@ -30,9 +30,6 @@ const Draft: React.FC = () => {
       console.log('url: ' + data)
       setImageUrl(data)
     }
-    if (!data) {
-      console.log('no data')
-    }
   }
 
   return (

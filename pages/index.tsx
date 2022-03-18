@@ -74,17 +74,7 @@ const Main: React.FC<Props> = (props) => {
                         })}
                       </Text> */}
                       <Divider my="2" />
-                      {post.imageUrl && (
-                        // <Box my="2">
-                        //   <Image
-                        //     borderRadius="xl"
-                        //     src={post.imageUrl}
-                        //     w="100%"
-                        //     objectFit="cover"
-                        //   />
-                        // </Box>
-                        <ImageComponent props={post} />
-                      )}
+                      {post.imageUrl && <ImageComponent props={post} />}
                       <Text fontSize="lg" noOfLines={3}>
                         <ReactMarkdown>{post.content}</ReactMarkdown>
                       </Text>
@@ -134,6 +124,7 @@ const Main: React.FC<Props> = (props) => {
                       <i>{post.author.name}</i>
                     </Text>
                     <Divider my="2" />
+                    {post.imageUrl && <ImageComponent props={post} />}
                     <Text fontSize="md" noOfLines={3}>
                       <ReactMarkdown>{post.content}</ReactMarkdown>
                     </Text>

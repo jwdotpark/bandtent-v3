@@ -7,6 +7,7 @@ import ImageUpload from '../components/ImageUpload'
 const Draft: React.FC = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const [imageUrl, setImageUrl] = useState<string>('')
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -24,11 +25,11 @@ const Draft: React.FC = () => {
     }
   }
 
-  const [imageUrl, setImageUrl] = useState<string>('')
   const pullImage = (data: string) => {
-    console.log('url: ' + data)
+    // console.log('url: ' + data)
     setImageUrl(data)
   }
+  console.log()
 
   return (
     <Layout>
@@ -55,8 +56,11 @@ const Draft: React.FC = () => {
               value={content}
             />
           </Box>
-          <ImageUpload img={pullImage} />
-          <Input display="none" type="file" defaultValue={imageUrl} />
+          {/* image */}
+          <Box>
+            <ImageUpload img={pullImage} />
+            <Input display="none" type="file" defaultValue={imageUrl} />
+          </Box>
           <Box>
             <Button
               mr="2"

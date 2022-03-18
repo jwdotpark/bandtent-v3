@@ -1,5 +1,17 @@
 import { useS3Upload } from 'next-s3-upload'
 import { useState } from 'react'
+import {
+  Box,
+  Text,
+  Input,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  InputLeftElement,
+  FormErrorMessage,
+  Code,
+  Icon,
+} from '@chakra-ui/react'
 
 export default function UploadPage(props) {
   let [imageUrl, setImageUrl] = useState<string>()
@@ -13,16 +25,21 @@ export default function UploadPage(props) {
   props.img(imageUrl)
 
   return (
-    <div>
-      <input onChange={handleFileChange} type="file" />
-
-      <div className="pt-8">
-        {files.map((file, index) => (
-          <div key={index}>
-            File #{index} progress: {file.progress}%
-          </div>
-        ))}
-      </div>
-    </div>
+    <>
+      <FormControl>
+        <Box>
+          <Box borderRadius="xl">
+            <Input variant="filled" onChange={handleFileChange} type="file" />
+          </Box>
+          <Box>
+            {files.map((file, index) => (
+              <Text key={index}>
+                File #{index} progress: {file.progress}%
+              </Text>
+            ))}
+          </Box>
+        </Box>
+      </FormControl>
+    </>
   )
 }

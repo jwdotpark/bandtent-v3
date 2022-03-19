@@ -42,10 +42,15 @@ const Main: React.FC<Props> = (props) => {
       {/* desktop */}
 
       <Media greaterThanOrEqual="md">
-        <Box m="2">
+        <Box m="2" boxShadow="md">
           <Stack direction={['column', 'row']} w="100%">
             {/* left column */}
-            <Box w="40vw" border="1px solid gray" borderRadius="md">
+            <Box
+              w="40vw"
+              border="1px solid gray"
+              borderRadius="md"
+              boxShadow="md"
+            >
               <section>
                 {props.feed.map((post) => (
                   <Box
@@ -54,7 +59,7 @@ const Main: React.FC<Props> = (props) => {
                     p="4"
                     m="4"
                     key={post.id}
-                    className="post"
+                    boxShadow="md"
                   >
                     {/* <Post post={post} /> */}
                     <Box
@@ -95,12 +100,13 @@ const Main: React.FC<Props> = (props) => {
       {/* left column */}
       <Media lessThan="md">
         <Stack mx="2">
-          <Box borderRadius="md" border="1px solid gray" p="2" m="1" my="4">
-            <Box m="2">
+          <Box mt="4" mb="2">
+            <Box>
               <Feature props={props} />
             </Box>
           </Box>
-          <Box w="100%">
+          {/* right column */}
+          <Box w="100%" borderRadius="xl" border="1px solid gray" m="2" p="2">
             <section>
               {props.feed.map((post) => (
                 <Box
@@ -112,7 +118,6 @@ const Main: React.FC<Props> = (props) => {
                   key={post.id}
                   className="post"
                 >
-                  {/* <Post post={post} /> */}
                   <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
                     <Text fontSize="sm">
                       Posted by <b>{post.author.name}</b>{' '}
@@ -121,12 +126,9 @@ const Main: React.FC<Props> = (props) => {
                     <Text fontSize="xl" noOfLines={1}>
                       <b>{post.title}</b>
                     </Text>
-                    {/* <Text mb="2" fontSize="sm">
-                      <i>{post.author.name}</i>
-                    </Text> */}
                     <Divider my="2" />
                     {post.imageUrl && <ImageComponent props={post} />}
-                    <Text fontSize="md" noOfLines={3}>
+                    <Text fontSize="md" noOfLines={3} mx="2">
                       {post.content}
                     </Text>
                   </Box>
@@ -134,7 +136,6 @@ const Main: React.FC<Props> = (props) => {
               ))}
             </section>
           </Box>
-          {/* right column */}
         </Stack>
       </Media>
     </Layout>

@@ -13,7 +13,7 @@ const Feature = (props) => {
 
   console.log(props)
   return (
-    <>
+    <Box boxShadow="md">
       <Box border="1px solid gray" borderRadius="md" mb="4">
         <Text m="4" fontSize="5xl">
           {props.props.feed.length} article uploaded
@@ -37,22 +37,14 @@ const Feature = (props) => {
                 onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                 border="1px solid gray"
                 borderRadius="md"
-                p="4"
+                p="2"
               >
-                <Box textAlign="left">
-                  <Text fontSize="sm">
-                    {/* Posted by <b>{post.author.name}</b>{' '} */}
-                    {/* <i>{moment(post.createdAt).fromNow()}</i> */}
-                  </Text>
-                </Box>
                 <Text fontSize="3xl" noOfLines={3} textAlign="left">
                   <b>{post.title}</b>
                 </Text>
 
                 <Divider mb="4" />
-                <Box m="2">
-                  {post.imageUrl && <ImageComponent props={post} />}
-                </Box>
+                <Box>{post.imageUrl && <ImageComponent props={post} />}</Box>
                 <Text fontSize="md" noOfLines={1000} mx="4">
                   {post.content}
                 </Text>
@@ -61,7 +53,7 @@ const Feature = (props) => {
           </Box>
         )
       )}
-    </>
+    </Box>
   )
 }
 

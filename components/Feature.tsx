@@ -22,7 +22,6 @@ const Feature = (props: {
   const numOfPost = props.props.feed.length
   const randomPostNum = getRandomInt(numOfPost)
 
-  console.log(props)
   return (
     <Box boxShadow="md">
       <Box border="2px solid gray" borderRadius="md" mb="2" boxShadow="md">

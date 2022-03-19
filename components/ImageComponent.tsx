@@ -3,7 +3,6 @@ import { Box, Image } from '@chakra-ui/react'
 const ImageComponent = (post: {
   props: { imageUrl: string; content: string }
 }) => {
-  // console.log(post.props)
   return (
     <Box my="2" boxShadow="sm" borderRadius="md" overflow="hidden">
       <Image

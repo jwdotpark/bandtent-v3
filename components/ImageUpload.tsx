@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useS3Upload } from 'next-s3-upload'
 import { useState } from 'react'
 import {
@@ -15,6 +15,7 @@ import {
   Center,
   Image,
   useColorMode,
+  Progress,
 } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
 
@@ -39,31 +40,14 @@ export default function UploadPage(props) {
   return (
     <>
       <FormControl>
-        <Box>
-          <Box borderRadius="xl">
-            {/* <Input variant="filled" onChange={handleFileChange} type="file" /> */}
-          </Box>
-          <Box>
-            {files.map((file, index) => (
-              <Text key={index}>
-                File #{index} progress: {file.progress}%
-              </Text>
-            ))}
-          </Box>
-        </Box>
         <div {...getRootProps()}>
           <input {...getInputProps()} onChange={handleFileChange} />
           <Box my="4">
-            {imageUrl ? (
-              <Box border="2px solid gray" borderRadius="md">
-                <Image src={imageUrl} objectFit="cover" />
-              </Box>
-            ) : (
+            {files.length === 0 && (
               <Center
                 w="100%"
                 h="10vh"
                 borderRadius="md"
-                // border="2px dashed gray"
                 bg={colorMode === 'light' ? 'gray.100' : '#242a35'}
               >
                 <Text fontSize="3xl">Click to select image</Text>
@@ -71,6 +55,31 @@ export default function UploadPage(props) {
             )}
           </Box>
         </div>
+        <Box>
+          {files.length !== 0 && (
+            <Center borderRadius="md">
+              <Box
+                my="2"
+                boxShadow="sm"
+                borderRadius="md"
+                overflow="clip"
+                w="50vw"
+              >
+                <Image
+                  src={imageUrl}
+                  // alt={post.props.content}
+                  objectFit="cover"
+                />
+              </Box>
+            </Center>
+          )}
+          {files.map((file, index) => (
+            <Box key={index}>
+              <Text>Uploading.. </Text>
+              <Progress hasStripe value={file.progress} />
+            </Box>
+          ))}
+        </Box>
         {imageUrl && 'file uploaded!'}
       </FormControl>
     </>

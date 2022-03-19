@@ -22,7 +22,7 @@ const Me: React.FC = () => {
               <Box w="40vw">
                 <Box
                   p="2"
-                  border="1px solid gray"
+                  border="2px solid gray"
                   h="200px"
                   w="40vw"
                   borderRadius="md"
@@ -51,7 +51,7 @@ const Me: React.FC = () => {
                 </Box>
               </Box>
               {/* right */}
-              <Box p="2" border="1px solid gray" w="60vw" borderRadius="md">
+              <Box p="2" border="2px solid gray" w="60vw" borderRadius="md">
                 <MyPost />
               </Box>
             </Stack>
@@ -62,7 +62,7 @@ const Me: React.FC = () => {
             <Stack direction={['column', 'row']} m="2">
               {/* left */}
               <Box>
-                <Box p="2" border="1px solid gray" h="200px" borderRadius="md">
+                <Box p="2" border="2px solid gray" h="200px" borderRadius="md">
                   <MeEdit />
 
                   <HStack h="100%" mx="2">
@@ -83,7 +83,7 @@ const Me: React.FC = () => {
                 </Box>
               </Box>
               {/* right */}
-              <Box p="2" border="1px solid gray" borderRadius="md">
+              <Box p="2" border="2px solid gray" borderRadius="md">
                 <MyPost />
               </Box>
             </Stack>

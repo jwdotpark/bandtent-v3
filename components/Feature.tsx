@@ -4,7 +4,18 @@ import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
 import ImageComponent from '../components/ImageComponent'
 import moment from 'moment'
 
-const Feature = (props) => {
+const Feature = (props: {
+  props: {
+    feed: {
+      id: Key
+      title: string
+      author: { name: string }
+      content: string
+      imageUrl: string
+      createdAt: Date
+    }[]
+  }
+}) => {
   const getRandomInt = (max: number) => {
     return Math.floor(Math.random() * max)
   }
@@ -14,8 +25,8 @@ const Feature = (props) => {
   console.log(props)
   return (
     <Box boxShadow="md">
-      <Box border="1px solid gray" borderRadius="md" mb="4">
-        <Text m="4" fontSize="5xl">
+      <Box border="2px solid gray" borderRadius="md" mb="2" boxShadow="md">
+        <Text m="2" fontSize="3xl" as="kbd">
           {props.props.feed.length} article uploaded
         </Text>
       </Box>
@@ -35,14 +46,14 @@ const Feature = (props) => {
             {index === randomPostNum && (
               <Box
                 onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
-                border="1px solid gray"
+                border="2px solid gray"
                 borderRadius="md"
                 p="2"
               >
+                FEATURE
                 <Text fontSize="3xl" noOfLines={3} textAlign="left">
                   <b>{post.title}</b>
                 </Text>
-
                 <Divider mb="4" />
                 <Box>{post.imageUrl && <ImageComponent props={post} />}</Box>
                 <Text fontSize="md" noOfLines={1000} mx="4">

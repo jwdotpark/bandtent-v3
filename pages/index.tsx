@@ -47,7 +47,7 @@ const Main: React.FC<Props> = (props) => {
             {/* left column */}
             <Box
               w="40vw"
-              border="1px solid gray"
+              border="2px solid gray"
               borderRadius="md"
               boxShadow="md"
             >
@@ -55,7 +55,7 @@ const Main: React.FC<Props> = (props) => {
                 {props.feed.map((post) => (
                   <Box
                     borderRadius="md"
-                    border="1px solid gray"
+                    border="2px solid gray"
                     p="4"
                     m="4"
                     key={post.id}
@@ -87,7 +87,7 @@ const Main: React.FC<Props> = (props) => {
             </Box>
 
             {/* right column */}
-            <Box w="60vw" m="2" borderRadius="md" border="1px solid gray">
+            <Box w="60vw" m="2" borderRadius="md" border="2px solid gray">
               <Box m="2" p="2">
                 <Feature props={props} />
               </Box>
@@ -99,26 +99,28 @@ const Main: React.FC<Props> = (props) => {
       {/* mobile */}
       {/* left column */}
       <Media lessThan="md">
-        <Stack mx="2">
-          <Box mt="4" mb="2">
+        <Stack mx="2" mb="4">
+          <Box mt="4" mb="8" boxShadow="md">
             <Box>
               <Feature props={props} />
             </Box>
           </Box>
           {/* right column */}
-          <Box w="100%" borderRadius="xl" border="1px solid gray" m="2" p="2">
+          <Box w="100%" borderRadius="xl" mb="2" pb="2" boxShadow="md">
             <section>
               {props.feed.map((post) => (
                 <Box
-                  p="2"
-                  m="1"
+                  p="1"
                   borderRadius="md"
-                  border="1px solid gray"
+                  border="2px solid gray"
                   mb="2"
                   key={post.id}
-                  className="post"
+                  boxShadow="md"
                 >
-                  <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
+                  <Box
+                    onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                    my="4"
+                  >
                     <Text fontSize="sm">
                       Posted by <b>{post.author.name}</b>{' '}
                       <i>{moment(post.createdAt).fromNow()}</i>
@@ -127,8 +129,10 @@ const Main: React.FC<Props> = (props) => {
                       <b>{post.title}</b>
                     </Text>
                     <Divider my="2" />
-                    {post.imageUrl && <ImageComponent props={post} />}
-                    <Text fontSize="md" noOfLines={3} mx="2">
+                    <Box mx="1">
+                      {post.imageUrl && <ImageComponent props={post} />}
+                    </Box>
+                    <Text fontSize="md" noOfLines={3} mx="1">
                       {post.content}
                     </Text>
                   </Box>

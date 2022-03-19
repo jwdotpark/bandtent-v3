@@ -63,7 +63,7 @@ const Drafts: React.FC<Props> = (props) => {
             <Box
               p="2"
               my="2"
-              border="1px solid gray"
+              border="2px solid gray"
               borderRadius="md"
               key={post.id}
               className="post"

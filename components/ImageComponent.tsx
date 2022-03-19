@@ -5,9 +5,8 @@ const ImageComponent = (post: {
 }) => {
   // console.log(post.props)
   return (
-    <Box my="2" boxShadow="md">
+    <Box my="2" boxShadow="sm" borderRadius="md" overflow="hidden">
       <Image
-        borderRadius="md"
         src={post.props.imageUrl}
         alt={post.props.content}
         w="100%"

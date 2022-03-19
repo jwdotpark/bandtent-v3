@@ -60,7 +60,7 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     <Layout>
-      <Box p="4" m="2" mx="2" border="1px solid gray" borderRadius="md">
+      <Box p="4" m="2" mx="2" border="2px solid gray" borderRadius="md">
         <Text my="2" fontSize="3xl">
           {props.post.title}
         </Text>

@@ -38,6 +38,7 @@ const AdditionalPost = ({ myPost }) => {
           >
             <Box key={post.id} border="2px solid gray" borderRadius="md" p="2">
               <Text fontSize="xl">{post.title}</Text>
+              <Divider mb="2" />
               {post.imageUrl && (
                 <AspectRatio ratio={1} borderRadius="md" overflow="clip">
                   <Image

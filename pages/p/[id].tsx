@@ -87,7 +87,7 @@ const Post: React.FC<PostProps> = (props) => {
           border="2px solid gray"
           borderRadius="md"
           boxShadow="md"
-          // w="60%"
+          w="60%"
         >
           <Text my="2" fontSize="3xl">
             {props.post.title}
@@ -105,6 +105,13 @@ const Post: React.FC<PostProps> = (props) => {
           <Divider mb="4" />
           <Box>
             {props.post.imageUrl && <ImageComponent props={props.post} />}
+          </Box>
+          <Box>
+            
+            <audio controls src={props.post.fileUrl}>
+              Your browser does not support the
+              <code>audio</code> element.
+            </audio>
           </Box>
           <Box>
             <Text

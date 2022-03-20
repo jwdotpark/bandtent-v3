@@ -12,6 +12,7 @@ type PostProps = {
   published: boolean
   createdAt: Date
   imageUrl: string
+  fileUrl: string
 }
 
 export default PostProps

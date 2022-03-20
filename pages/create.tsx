@@ -14,7 +14,7 @@ const Draft: React.FC = () => {
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      const body = { title, content, imageUrl }
+      const body = { title, content, imageUrl, fileUrl }
       await fetch('/api/post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -26,12 +26,17 @@ const Draft: React.FC = () => {
     }
   }
 
-  const pullProps = (data: string) => {
-    if (imageUrl) {
+  const pullImage = (data: string) => {
+    if (data) {
       setImageUrl(data)
+      console.log(imageUrl)
     }
-    if (fileUrl) {
+  }
+
+  const pullFile = (data: string) => {
+    if (data) {
       setFileUrl(data)
+      console.log(fileUrl)
     }
   }
 
@@ -62,18 +67,18 @@ const Draft: React.FC = () => {
           </Box>
           {/* image */}
           <Box>
-            <ImageUpload img={pullProps} />
+            <ImageUpload img={pullImage} />
             <Input display="none" type="file" defaultValue={imageUrl} />
           </Box>
           {/* file */}
           <Box>
-            <FileUpload img={pullProps} />
+            <FileUpload data={pullFile} />
             <Input display="none" type="file" defaultValue={imageUrl} />
           </Box>
           <Box>
             <Button
               mr="2"
-              disabled={!content || !title || !imageUrl}
+              disabled={!content || !title || !imageUrl || !fileUrl}
               type="submit"
               value="Create"
             >

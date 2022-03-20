@@ -76,7 +76,13 @@ const Main: React.FC<Props> = (props) => {
                       </Text>
 
                       <Divider mb="4" />
+                      {/* cover */}
                       {post.imageUrl && <ImageComponent props={post} />}
+                      {/* audio */}
+                      {/* <audio controls src={post.fileUrl}>
+                        Your browser does not support the
+                        <code>audio</code> element.
+                      </audio> */}
                       <Text fontSize="lg" noOfLines={3} mx="2">
                         {post.content}
                       </Text>

@@ -42,7 +42,12 @@ export default function UploadPage(props) {
     <>
       <FormControl>
         <div {...getRootProps()}>
-          <input {...getInputProps()} onChange={handleFileChange} />
+          <input
+            {...getInputProps()}
+            type="file"
+            accept=".png, .bmp, .jpg, .jpeg, image/*"
+            onChange={handleFileChange}
+          />
           <Box my="4">
             {files.length === 0 && (
               <Center

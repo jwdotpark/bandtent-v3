@@ -30,7 +30,7 @@ export default function UploadPage(props) {
     let { url } = await uploadToS3(file)
     setFileUrl(url)
   }
-  props.img(fileUrl)
+  props.data(fileUrl)
 
   const onDrop = useCallback((acceptedFiles) => {
     // Do something with the files
@@ -62,7 +62,7 @@ export default function UploadPage(props) {
           </Box>
         </div>
         <Box>
-          {files.length !== 0 && fileUrl && (
+          {/* {files.length !== 0 && fileUrl && (
             <Center borderRadius="md">
               <Box
                 my="2"
@@ -70,14 +70,12 @@ export default function UploadPage(props) {
                 borderRadius="md"
                 overflow="clip"
                 w="50vw"
-              >
-                {/* <Image src={imageUrl} objectFit="cover" /> */}
-              </Box>
+              ></Box>
             </Center>
-          )}
+          )} */}
           {files.map((file, index) => (
             <Box key={index}>
-              <Text>Uploading.. </Text>
+              <Text>Uploading file.. </Text>
               <Progress hasStripe value={file.progress} />
             </Box>
           ))}

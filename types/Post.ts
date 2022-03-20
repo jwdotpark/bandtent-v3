@@ -7,6 +7,7 @@ type PostProps = {
     description: string
     location: string
     website: string
+    image: string
   } | null
   content: string
   published: boolean

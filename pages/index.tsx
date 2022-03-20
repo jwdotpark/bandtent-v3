@@ -5,19 +5,21 @@ import Layout from '../components/Layout'
 import PostProps from '../types/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
-import { Divider, Box, Text, Stack } from '@chakra-ui/react'
+import { Divider, Box, Text, Stack, Image, Center } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
 import ImageComponent from '../components/ImageComponent'
 import moment from 'moment'
+import { useSession } from 'next-auth/react'
+import { userInfo } from 'os'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
       author: {
-        select: { name: true },
+        select: { name: true, image: true },
       },
     },
     orderBy: { id: 'desc' },
@@ -35,6 +37,7 @@ type Props = {
 }
 
 const Main: React.FC<Props> = (props) => {
+  console.log(props.feed)
   return (
     <Layout>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
@@ -61,16 +64,9 @@ const Main: React.FC<Props> = (props) => {
                     key={post.id}
                     boxShadow="md"
                   >
-                    {/* <Post post={post} /> */}
                     <Box
                       onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     >
-                      <Box>
-                        <Text fontSize="sm">
-                          Posted by <b>{post.author.name}</b>{' '}
-                          <i>{moment(post.createdAt).fromNow()}</i>
-                        </Text>
-                      </Box>
                       <Text fontSize="3xl" noOfLines={1}>
                         <b>{post.title}</b>
                       </Text>
@@ -79,6 +75,30 @@ const Main: React.FC<Props> = (props) => {
                       {post.imageUrl && <ImageComponent props={post} />}
                       <Text fontSize="lg" noOfLines={3} mx="2">
                         {post.content}
+                      </Text>
+                    </Box>
+                    {/* info */}
+                    <Box
+                      mt="4"
+                      boxShadow="md"
+                      border="2px solid gray"
+                      borderRadius="xl"
+                    >
+                      <Text fontSize="md">
+                        <Center justifyContent="left" ml="0" p="2">
+                          <Image
+                            mr="2"
+                            display="inline"
+                            border="2px inset  gray"
+                            src={post.author.image}
+                            fallbackSrc="https://picsum.photos/200"
+                            boxSize="2rem"
+                            borderRadius="full"
+                            // alt={post.author.name}
+                          />
+                          <b>{post.author.name}</b>,{' '}
+                          {moment(post.createdAt).fromNow()}
+                        </Center>
                       </Text>
                     </Box>
                   </Box>
@@ -121,10 +141,10 @@ const Main: React.FC<Props> = (props) => {
                     onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     my="4"
                   >
-                    <Text fontSize="sm">
+                    {/* <Text fontSize="sm">
                       Posted by <b>{post.author.name}</b>{' '}
                       <i>{moment(post.createdAt).fromNow()}</i>
-                    </Text>
+                    </Text> */}
                     <Text fontSize="xl" noOfLines={1}>
                       <b>{post.title}</b>
                     </Text>
@@ -135,6 +155,36 @@ const Main: React.FC<Props> = (props) => {
                     <Text fontSize="md" noOfLines={3} mx="1">
                       {post.content}
                     </Text>
+                    {/* info */}
+                    <Box
+                      mt="4"
+                      mb="-1"
+                      mx="1"
+                      p="1"
+                      boxShadow="md"
+                      border="2px solid gray"
+                      borderRadius="md"
+                    >
+                      <Text
+                        fontSize="sm"
+                        sx={{ transform: 'translateX(-8px)' }}
+                      >
+                        <Center justifyContent="left" mx="2">
+                          <Image
+                            mr="2"
+                            display="inline"
+                            border="2px inset  gray"
+                            src={post.author.image}
+                            fallbackSrc="https://picsum.photos/200"
+                            boxSize="1.5rem"
+                            borderRadius="full"
+                            // alt={post.author.name}
+                          />
+                          <b>{post.author.name}</b>,{' '}
+                          {moment(post.createdAt).fromNow()}
+                        </Center>
+                      </Text>
+                    </Box>
                   </Box>
                 </Box>
               ))}

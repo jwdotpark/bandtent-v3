@@ -24,6 +24,10 @@ import {
   EditIcon,
   ChatIcon,
   WarningIcon,
+  TimeIcon,
+  LockIcon,
+  UnlockIcon,
+  HamburgerIcon,
 } from '@chakra-ui/icons'
 
 const Header: React.FC = () => {
@@ -42,12 +46,26 @@ const Header: React.FC = () => {
           <Stack direction="row" p="2">
             <Link href="/">
               <Box className="bold" data-active={isActive('/')}>
-                <Button size="sm">Feed</Button>
+                <Button leftIcon={<HamburgerIcon />} size="sm">
+                  Feed
+                </Button>
               </Box>
             </Link>
             {session && (
               <Link href="/auth/me">
-                <Button size="sm">
+                <Button
+                  size="sm"
+                  leftIcon={
+                    <Image
+                      sx={{ transform: 'translateX(-3px)' }}
+                      border="1px solid gray.400"
+                      src={session.user.image}
+                      boxSize="17.5px"
+                      borderRadius="md"
+                      alt={session.user.name}
+                    />
+                  }
+                >
                   {session.user.name ? session.user.name : session.user.email}
                 </Button>
               </Link>
@@ -60,7 +78,7 @@ const Header: React.FC = () => {
             <>
               <Stack direction="row" p="2">
                 <Link href="/api/auth/signin">
-                  <Button size="sm">
+                  <Button size="sm" leftIcon={<UnlockIcon />}>
                     {status === 'loading' ? 'Validating Session..' : 'Log In'}
                   </Button>
                 </Link>
@@ -81,14 +99,15 @@ const Header: React.FC = () => {
                 {/* <Button size="sm" data-active={isActive('/drafts')}> */}
 
                 <Link href="/create">
-                  <Button size="sm">
+                  <Button size="sm" leftIcon={<PlusSquareIcon />}>
                     <Text>Add</Text>
                   </Button>
                 </Link>
-                <Button size="sm">
+                <Button size="sm" leftIcon={<TimeIcon />}>
                   <Link href="/drafts">My Drafts</Link>
                 </Button>
                 <Button
+                  leftIcon={<LockIcon />}
                   size="sm"
                   onClick={() => {
                     signOut()
@@ -111,7 +130,9 @@ const Header: React.FC = () => {
           <Box p="2">
             <Link href="/">
               <Box className="bold" data-active={isActive('/')}>
-                <Button size="sm">Feed</Button>
+                <Button leftIcon={<HamburgerIcon />} size="sm">
+                  Feed
+                </Button>
               </Box>
             </Link>
           </Box>
@@ -175,7 +196,7 @@ const Header: React.FC = () => {
                         signOut()
                         router.push('/')
                       }}
-                      icon={<WarningIcon mr="2" />}
+                      icon={<LockIcon mr="2" />}
                     >
                       <Text>Log out</Text>
                     </MenuItem>

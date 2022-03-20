@@ -3,11 +3,13 @@ import Layout from '../components/Layout'
 import Router from 'next/router'
 import { Box, Text, Input, Textarea, Button, Stack } from '@chakra-ui/react'
 import ImageUpload from '../components/ImageUpload'
+import FileUpload from '../components/FileUpload'
 
 const Draft: React.FC = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [imageUrl, setImageUrl] = useState<string>(null)
+  const [fileUrl, setFileUrl] = useState<string>(null)
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -24,9 +26,12 @@ const Draft: React.FC = () => {
     }
   }
 
-  const pullImage = (data: string) => {
-    if (data) {
+  const pullProps = (data: string) => {
+    if (imageUrl) {
       setImageUrl(data)
+    }
+    if (fileUrl) {
+      setFileUrl(data)
     }
   }
 
@@ -57,13 +62,13 @@ const Draft: React.FC = () => {
           </Box>
           {/* image */}
           <Box>
-            <ImageUpload img={pullImage} />
-            <Input
-              display="none"
-              type="file"
-              // value={imageUrl ? imageUrl : null}
-              defaultValue={imageUrl}
-            />
+            <ImageUpload img={pullProps} />
+            <Input display="none" type="file" defaultValue={imageUrl} />
+          </Box>
+          {/* file */}
+          <Box>
+            <FileUpload img={pullProps} />
+            <Input display="none" type="file" defaultValue={imageUrl} />
           </Box>
           <Box>
             <Button

@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react'
 import { getProviders, signIn, getCsrfToken, useSession } from 'next-auth/react'
 import { InferGetServerSidePropsType } from 'next'
-import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '../../components/Layout'
 import { CtxOrReq } from 'next-auth/client/_utils'
@@ -41,11 +41,18 @@ const SignIn = ({
 
   const { isOpen, onToggle } = useDisclosure()
 
+  const [height, setHeight] = useState<number>()
+  useEffect(() => {
+    if (window) {
+      setHeight(window.innerHeight)
+    }
+  }, [])
+
   return (
     <>
       <Layout>
         <VStack h="calc(100vh - 50px)">
-          <Box mt="40vh">Sign In With..</Box>
+          <Box mt={height / 2.75}>Sign In With..</Box>
           <Box>
             <VStack spacing={2}>
               <Box>

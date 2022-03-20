@@ -11,8 +11,6 @@ import Router from 'next/router'
 import Feature from '../components/Feature'
 import ImageComponent from '../components/ImageComponent'
 import moment from 'moment'
-import { useSession } from 'next-auth/react'
-import { userInfo } from 'os'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -37,7 +35,6 @@ type Props = {
 }
 
 const Main: React.FC<Props> = (props) => {
-  console.log(props.feed)
   return (
     <Layout>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />

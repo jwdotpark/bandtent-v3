@@ -1,2 +1,8 @@
 // pages/api/s3-upload.js
-export { APIRoute as default } from 'next-s3-upload'
+import { APIRoute } from 'next-s3-upload'
+
+export default APIRoute.configure({
+  key(req, filename) {
+    return `bandtent-v3/uploads/path/${filename.toUpperCase()}`
+  },
+})

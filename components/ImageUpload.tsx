@@ -24,6 +24,7 @@ export default function UploadPage(props) {
   let [imageUrl, setImageUrl] = useState<string>()
   let { uploadToS3, files } = useS3Upload()
 
+  // FIXME move to submit handler
   let handleFileChange = async (event) => {
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
@@ -65,11 +66,7 @@ export default function UploadPage(props) {
                 overflow="clip"
                 w="50vw"
               >
-                <Image
-                  src={imageUrl}
-                  // alt={post.props.content}
-                  objectFit="cover"
-                />
+                <Image src={imageUrl} objectFit="cover" />
               </Box>
             </Center>
           )}

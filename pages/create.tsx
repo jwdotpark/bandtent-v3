@@ -7,7 +7,7 @@ import ImageUpload from '../components/ImageUpload'
 const Draft: React.FC = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const [imageUrl, setImageUrl] = useState<string>('')
+  const [imageUrl, setImageUrl] = useState<string>(null)
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -68,18 +68,13 @@ const Draft: React.FC = () => {
           <Box>
             <Button
               mr="2"
-              disabled={!content || !title}
+              disabled={!content || !title || !imageUrl}
               type="submit"
               value="Create"
             >
               Create
             </Button>
-            <Button
-              mr="2"
-              // className="back"
-              // href="#"
-              onClick={() => Router.push('/')}
-            >
+            <Button mr="2" onClick={() => Router.push('/')}>
               Cancel
             </Button>
           </Box>

@@ -17,7 +17,14 @@ import {
   MenuItem,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import {
+  ChevronDownIcon,
+  AddIcon,
+  PlusSquareIcon,
+  EditIcon,
+  ChatIcon,
+  WarningIcon,
+} from '@chakra-ui/icons'
 
 const Header: React.FC = () => {
   const router = useRouter()
@@ -128,7 +135,7 @@ const Header: React.FC = () => {
           {session && (
             <>
               <Box m="2" mx="auto">
-                <Menu>
+                <Menu matchWidth={true}>
                   <MenuButton
                     as={Button}
                     size="sm"
@@ -138,21 +145,37 @@ const Header: React.FC = () => {
                   </MenuButton>
                   <MenuList>
                     <Link href="/auth/me">
-                      <MenuItem>Profile</MenuItem>
+                      <MenuItem
+                        icon={
+                          <Image
+                            sx={{ transform: 'translateX(-3px)' }}
+                            border="1px solid gray"
+                            src={session.user.image}
+                            boxSize="20px"
+                            borderRadius="md"
+                            alt={session.user.name}
+                          />
+                        }
+                      >
+                        <Text>Profile</Text>
+                      </MenuItem>
                     </Link>
                     <Link href="/create">
-                      <MenuItem>
+                      <MenuItem icon={<AddIcon mr="2" />}>
                         <Text>Add</Text>
                       </MenuItem>
                     </Link>
                     <Link href="/drafts">
-                      <MenuItem>My Drafts</MenuItem>
+                      <MenuItem icon={<PlusSquareIcon mr="2" />}>
+                        My Drafts
+                      </MenuItem>
                     </Link>
                     <MenuItem
                       onClick={() => {
                         signOut()
                         router.push('/')
                       }}
+                      icon={<WarningIcon mr="2" />}
                     >
                       <Text>Log out</Text>
                     </MenuItem>
@@ -161,15 +184,6 @@ const Header: React.FC = () => {
               </Box>
 
               <Stack direction="row" p="2">
-                {/* <Button
-                  size="sm"
-                  onClick={() => {
-                    signOut()
-                    router.push('/')
-                  }}
-                >
-                  <Text>Log out</Text>
-                </Button> */}
                 <ColorButton />
               </Stack>
             </>

@@ -10,7 +10,15 @@ import Layout from '../../components/Layout'
 import PostProps from '../../types/Post'
 import { useSession } from 'next-auth/react'
 import prisma from '../../lib/prisma'
-import { Box, Button, Text, HStack, Divider, Stack } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Text,
+  HStack,
+  Divider,
+  Stack,
+  Center,
+} from '@chakra-ui/react'
 import ImageComponent from '../../components/ImageComponent'
 import AdditionalPost from '../../components/AdditionalPost'
 
@@ -107,12 +115,16 @@ const Post: React.FC<PostProps> = (props) => {
             {/* {props.post.imageUrl && <ImageComponent props={props.post} />} */}
             <ImageComponent props={props.post} />
           </Box>
-          {/* <Box>
-            <audio controls src={props.post.fileUrl}>
-              Your browser does not support the
-              <code>audio</code> element.
-            </audio>
-          </Box> */}
+          {/* audio */}
+          {props.post.fileUrl && (
+            <Box>
+              <audio controls src={props.post.fileUrl}>
+                Your browser does not support the
+                <code>audio</code> element.
+              </audio>
+            </Box>
+          )}
+
           <Box>
             <Text
               my="4"
@@ -138,8 +150,24 @@ const Post: React.FC<PostProps> = (props) => {
             )}
           </HStack>
         </Box>
+
         <Box mx="2">
           <Box borderRadius="md" border="2px solid gray" mx="2">
+            {myPost.length > 0 && (
+              <Box mx="2" boxShadow="md">
+                <Box
+                  border="2px solid gray"
+                  borderRadius="md"
+                  p="2"
+                  mt="4"
+                  mb="2"
+                >
+                  <Text size="xl">
+                    {session.user.name}'s {myPost.length} posts{' '}
+                  </Text>
+                </Box>
+              </Box>
+            )}
             <AdditionalPost myPost={myPost} />
           </Box>
         </Box>

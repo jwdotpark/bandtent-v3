@@ -41,9 +41,9 @@ const AdditionalPost = ({ myPost }) => {
               <Text fontSize="xl">{post.title}</Text>
               <Divider mb="2" />
               {post.imageUrl && (
-                <AspectRatio ratio={1} borderRadius="md" overflow="clip">
-                  <ImageComponent props={post} />
-                </AspectRatio>
+                // <AspectRatio ratio={1} borderRadius="md" overflow="clip">
+                <ImageComponent props={post} />
+                // </AspectRatio>
               )}
               <Text noOfLines={1}>{post.content}</Text>
             </Box>

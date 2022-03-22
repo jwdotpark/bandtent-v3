@@ -80,13 +80,13 @@ const Main: React.FC<Props> = (props) => {
                         <Divider mb="4" />
                         {/* cover */}
                         <Box>
-                          <AspectRatio
+                          {/* <AspectRatio
                             ratio={1}
                             borderRadius="md"
                             overflow="clip"
-                          >
-                            <ImageComponent props={post} />
-                          </AspectRatio>
+                          > */}
+                          <ImageComponent props={post} />
+                          {/* </AspectRatio> */}
                         </Box>
                         {/* audio */}
                         {/* <audio controls src={post.fileUrl}>

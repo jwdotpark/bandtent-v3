@@ -6,7 +6,14 @@ const ImageComponent = (post: {
   return (
     <Box my="2" boxShadow="sm" borderRadius="md" overflow="hidden">
       <Image
-        src={post.props.imageUrl}
+        loading="lazy"
+        src={
+          post.props.imageUrl
+            ? post.props.imageUrl
+            : 'https://picsum.photos/400'
+        }
+        // src={post.props.imageUrl}
+        fallbackSrc="https://via.placeholder.com/300x300"
         alt={post.props.content}
         w="100%"
         objectFit="cover"

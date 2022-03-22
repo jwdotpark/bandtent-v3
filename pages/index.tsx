@@ -5,7 +5,15 @@ import Layout from '../components/Layout'
 import PostProps from '../types/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
-import { Divider, Box, Text, Stack, Image, Center } from '@chakra-ui/react'
+import {
+  Divider,
+  Box,
+  Text,
+  Stack,
+  Image,
+  Center,
+  AspectRatio,
+} from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
@@ -36,160 +44,228 @@ type Props = {
 
 const Main: React.FC<Props> = (props) => {
   return (
-    <Layout>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <>
+      <Layout>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      {/* desktop */}
+        {/* desktop */}
+        <Media greaterThanOrEqual="md">
+          <Box m="2" boxShadow="md">
+            <Stack direction={['column', 'row']} w="100%">
+              {/* left column */}
+              <Box
+                w="40vw"
+                border="2px solid gray"
+                borderRadius="md"
+                boxShadow="md"
+              >
+                <section>
+                  {props.feed.map((post) => (
+                    <Box
+                      borderRadius="md"
+                      border="2px solid gray"
+                      p="4"
+                      m="4"
+                      key={post.id}
+                      boxShadow="md"
+                    >
+                      {/* <Post post={post} /> */}
+                      <Box
+                        onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                      >
+                        <Box>
+                          <Text fontSize="sm">
+                            Posted by <b>{post.author.name}</b>{' '}
+                            <i>{moment(post.createdAt).fromNow()}</i>
+                          </Text>
+                        </Box>
+                        <Text fontSize="3xl" noOfLines={1}>
+                          <b>{post.title}</b>
+                        </Text>
 
-      <Media greaterThanOrEqual="md">
-        <Box m="2" boxShadow="md">
-          <Stack direction={['column', 'row']} w="100%">
-            {/* left column */}
-            <Box
-              w="40vw"
-              border="2px solid gray"
-              borderRadius="md"
-              boxShadow="md"
-            >
+                        <Divider mb="4" />
+                        {/* cover */}
+                        {/* {post.imageUrl && <ImageComponent props={post} />} */}
+                        <Box>
+                          <AspectRatio
+                            ratio={1}
+                            borderRadius="md"
+                            overflow="clip"
+                          >
+                            <ImageComponent props={post} />
+                          </AspectRatio>
+                        </Box>
+                        {/* audio */}
+                        {/* <audio controls src={post.fileUrl}>
+                        Your browser does not support the
+                        <code>audio</code> element.
+                      </audio> */}
+                        <Text fontSize="lg" noOfLines={3} mx="2">
+                          {post.content}
+                        </Text>
+                      </Box>
+                    </Box>
+                  ))}
+                </section>
+              </Box>
+
+              {/* right column */}
+              <Box w="60vw" m="2" borderRadius="md" border="2px solid gray">
+                <Box m="2" p="2">
+                  <Feature props={props} />
+                </Box>
+              </Box>
+            </Stack>
+          </Box>
+        </Media>
+
+        {/* mobile */}
+        {/* left column */}
+        <Media lessThan="md">
+          <Box>
+            <Stack mx="2" mb="4">
+              <Box mt="4" mb="8" boxShadow="md">
+                <Box>
+                  <Feature props={props} />
+                </Box>
+              </Box>
+              {/* right column */}
+              <Box w="100%" borderRadius="xl" mb="2" pb="2" boxShadow="md">
+                <section>
+                  {props.feed.map((post) => (
+                    <Box
+                      p="1"
+                      borderRadius="md"
+                      border="2px solid gray"
+                      mb="2"
+                      key={post.id}
+                      boxShadow="md"
+                    >
+                      <Box
+                        onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                        my="4"
+                      >
+                        <Text fontSize="3xl" noOfLines={1}>
+                          <b>{post.title}</b>
+                        </Text>
+                        <Divider my="2" />
+                        <Box mx="1">
+                          {post.imageUrl && <ImageComponent props={post} />}
+                        </Box>
+                        <Text fontSize="md" noOfLines={3} mx="1">
+                          {post.content}
+                        </Text>
+                      </Box>
+                      {/* info */}
+                      <Box
+                        mt="4"
+                        boxShadow="md"
+                        border="2px solid gray"
+                        borderRadius="xl"
+                      >
+                        <Text fontSize="md">
+                          <Center justifyContent="left" ml="0" p="2">
+                            <Image
+                              mr="2"
+                              display="inline"
+                              border="2px inset  gray"
+                              src={post.author.image}
+                              fallbackSrc="https://picsum.photos/200"
+                              boxSize="2rem"
+                              borderRadius="full"
+                              alt={post.author.name}
+                            />
+                            <b>{post.author.name}</b>,{' '}
+                            {moment(post.createdAt).fromNow()}
+                          </Center>
+                        </Text>
+                      </Box>
+                    </Box>
+                  ))}
+                </section>
+              </Box>
+            </Stack>
+          </Box>
+        </Media>
+
+        {/* mobile */}
+        {/* left column */}
+        <Media lessThan="md">
+          <Stack mx="2" mb="4">
+            <Box mt="4" mb="8" boxShadow="md">
+              <Box>
+                <Feature props={props} />
+              </Box>
+            </Box>
+            {/* right column */}
+            <Box w="100%" borderRadius="xl" mb="2" pb="2" boxShadow="md">
               <section>
                 {props.feed.map((post) => (
                   <Box
+                    p="1"
                     borderRadius="md"
                     border="2px solid gray"
-                    p="4"
-                    m="4"
+                    mb="2"
                     key={post.id}
                     boxShadow="md"
                   >
                     <Box
                       onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                      my="4"
                     >
-                      <Text fontSize="3xl" noOfLines={1}>
+                      {/* <Text fontSize="sm">
+                      Posted by <b>{post.author.name}</b>{' '}
+                      <i>{moment(post.createdAt).fromNow()}</i>
+                    </Text> */}
+                      <Text fontSize="xl" noOfLines={1}>
                         <b>{post.title}</b>
                       </Text>
-
-                      <Divider mb="4" />
-                      {post.imageUrl && <ImageComponent props={post} />}
-                      <Text fontSize="lg" noOfLines={3} mx="2">
+                      <Divider my="2" />
+                      <Box mx="1">
+                        {post.imageUrl && <ImageComponent props={post} />}
+                      </Box>
+                      <Text fontSize="md" noOfLines={3} mx="1">
                         {post.content}
                       </Text>
-                    </Box>
-                    {/* info */}
-                    <Box
-                      mt="4"
-                      boxShadow="md"
-                      border="2px solid gray"
-                      borderRadius="xl"
-                    >
-                      <Text fontSize="md">
-                        <Center justifyContent="left" ml="0" p="2">
-                          <Image
-                            mr="2"
-                            display="inline"
-                            border="2px inset  gray"
-                            src={post.author.image}
-                            fallbackSrc="https://picsum.photos/200"
-                            boxSize="2rem"
-                            borderRadius="full"
-                            alt={post.author.name}
-                          />
-                          <b>{post.author.name}</b>,{' '}
-                          {moment(post.createdAt).fromNow()}
-                        </Center>
-                      </Text>
+                      {/* info */}
+                      <Box
+                        mt="4"
+                        mb="-1"
+                        mx="1"
+                        p="1"
+                        boxShadow="md"
+                        border="2px solid gray"
+                        borderRadius="md"
+                      >
+                        <Text
+                          fontSize="sm"
+                          sx={{ transform: 'translateX(-8px)' }}
+                        >
+                          <Center justifyContent="left" mx="2">
+                            <Image
+                              mr="2"
+                              display="inline"
+                              border="2px inset  gray"
+                              src={post.author.image}
+                              fallbackSrc="https://picsum.photos/200"
+                              boxSize="1.5rem"
+                              borderRadius="full"
+                              // alt={post.author.name}
+                            />
+                            <b>{post.author.name}</b>,{' '}
+                            {moment(post.createdAt).fromNow()}
+                          </Center>
+                        </Text>
+                      </Box>
                     </Box>
                   </Box>
                 ))}
               </section>
             </Box>
-
-            {/* right column */}
-            <Box w="60vw" m="2" borderRadius="md" border="2px solid gray">
-              <Box m="2" p="2">
-                <Feature props={props} />
-              </Box>
-            </Box>
           </Stack>
-        </Box>
-      </Media>
-
-      {/* mobile */}
-      {/* left column */}
-      <Media lessThan="md">
-        <Stack mx="2" mb="4">
-          <Box mt="4" mb="8" boxShadow="md">
-            <Box>
-              <Feature props={props} />
-            </Box>
-          </Box>
-          {/* right column */}
-          <Box w="100%" borderRadius="xl" mb="2" pb="2" boxShadow="md">
-            <section>
-              {props.feed.map((post) => (
-                <Box
-                  p="1"
-                  borderRadius="md"
-                  border="2px solid gray"
-                  mb="2"
-                  key={post.id}
-                  boxShadow="md"
-                >
-                  <Box
-                    onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
-                    my="4"
-                  >
-                    {/* <Text fontSize="sm">
-                      Posted by <b>{post.author.name}</b>{' '}
-                      <i>{moment(post.createdAt).fromNow()}</i>
-                    </Text> */}
-                    <Text fontSize="xl" noOfLines={1}>
-                      <b>{post.title}</b>
-                    </Text>
-                    <Divider my="2" />
-                    <Box mx="1">
-                      {post.imageUrl && <ImageComponent props={post} />}
-                    </Box>
-                    <Text fontSize="md" noOfLines={3} mx="1">
-                      {post.content}
-                    </Text>
-                    {/* info */}
-                    <Box
-                      mt="4"
-                      mb="-1"
-                      mx="1"
-                      p="1"
-                      boxShadow="md"
-                      border="2px solid gray"
-                      borderRadius="md"
-                    >
-                      <Text
-                        fontSize="sm"
-                        sx={{ transform: 'translateX(-8px)' }}
-                      >
-                        <Center justifyContent="left" mx="2">
-                          <Image
-                            mr="2"
-                            display="inline"
-                            border="2px inset  gray"
-                            src={post.author.image}
-                            fallbackSrc="https://picsum.photos/200"
-                            boxSize="1.5rem"
-                            borderRadius="full"
-                            // alt={post.author.name}
-                          />
-                          <b>{post.author.name}</b>,{' '}
-                          {moment(post.createdAt).fromNow()}
-                        </Center>
-                      </Text>
-                    </Box>
-                  </Box>
-                </Box>
-              ))}
-            </section>
-          </Box>
-        </Stack>
-      </Media>
-    </Layout>
+        </Media>
+      </Layout>
+    </>
   )
 }
 

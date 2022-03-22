@@ -10,6 +10,7 @@ import {
   AspectRatio,
 } from '@chakra-ui/react'
 import Router from 'next/router'
+import ImageComponent from '../components/ImageComponent'
 
 const AdditionalPost = ({ myPost }) => {
   // console.log(myPost)
@@ -41,12 +42,7 @@ const AdditionalPost = ({ myPost }) => {
               <Divider mb="2" />
               {post.imageUrl && (
                 <AspectRatio ratio={1} borderRadius="md" overflow="clip">
-                  <Image
-                    boxSize="50%"
-                    src={post.imageUrl}
-                    borderRadius="md"
-                    overflow="clip"
-                  />
+                  <ImageComponent props={post} />
                 </AspectRatio>
               )}
               <Text noOfLines={1}>{post.content}</Text>

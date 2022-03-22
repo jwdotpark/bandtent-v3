@@ -21,22 +21,22 @@ import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
-  let [imageUrl, setImageUrl] = useState<string>()
+  let [fileUrl, setFileUrl] = useState<string>()
   let { uploadToS3, files } = useS3Upload()
 
   // FIXME move to submit handler
   let handleFileChange = async (event) => {
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
-    setImageUrl(url)
+    setFileUrl(url)
   }
-  props.img(imageUrl)
+  props.data(fileUrl)
 
   const onDrop = useCallback((acceptedFiles) => {
     // Do something with the files
     console.log(acceptedFiles)
   }, [])
-  const { getRootProps, getInputProps } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
   return (
     <>
@@ -45,7 +45,7 @@ export default function UploadPage(props) {
           <input
             {...getInputProps()}
             type="file"
-            accept=".png, .bmp, .jpg, .jpeg, image/*"
+            accept=".mp3, .wav, .aiff, audio/*"
             onChange={handleFileChange}
           />
           <Box my="4">
@@ -56,13 +56,13 @@ export default function UploadPage(props) {
                 borderRadius="md"
                 bg={colorMode === 'light' ? 'gray.100' : '#242a35'}
               >
-                <Text fontSize="3xl">Click to select cover</Text>
+                <Text fontSize="3xl">Click to select music</Text>
               </Center>
             )}
           </Box>
         </div>
         <Box>
-          {files.length !== 0 && imageUrl && (
+          {/* {files.length !== 0 && fileUrl && (
             <Center borderRadius="md">
               <Box
                 my="2"
@@ -70,19 +70,17 @@ export default function UploadPage(props) {
                 borderRadius="md"
                 overflow="clip"
                 w="50vw"
-              >
-                <Image src={imageUrl} objectFit="cover" />
-              </Box>
+              ></Box>
             </Center>
-          )}
+          )} */}
           {files.map((file, index) => (
             <Box key={index}>
-              <Text>Uploading.. </Text>
+              <Text>Uploading file.. </Text>
               <Progress hasStripe value={file.progress} />
             </Box>
           ))}
         </Box>
-        {imageUrl && 'file uploaded!'}
+        {fileUrl && 'file uploaded!'}
       </FormControl>
     </>
   )

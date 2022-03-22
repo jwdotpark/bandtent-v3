@@ -13,7 +13,7 @@ type Props = {
 const Layout: React.FC<Props> = (props) => (
   <Box>
     <Header />
-    <Player />
+    {/* <Player /> */}
     <Box>{props.children}</Box>
   </Box>
 )

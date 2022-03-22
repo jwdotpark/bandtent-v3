@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { useS3Upload } from 'next-s3-upload'
+import ImageComponent from '../components/ImageComponent'
 import { useState } from 'react'
 import {
   Box,
@@ -16,27 +17,28 @@ import {
   Image,
   useColorMode,
   Progress,
+  AspectRatio,
 } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
-  let [imageUrl, setImageUrl] = useState<string>()
-  let { uploadToS3, files } = useS3Upload()
+  const { uploadToS3, files } = useS3Upload()
 
-  // FIXME move to submit handler
-  let handleFileChange = async (event) => {
+  const [imageUrl, setImageUrl] = useState<string>('')
+  const [preview, setPreview] = useState<string>('')
+
+  // FIXME fix submit handler
+  const handleFileChange = async (event) => {
+    setPreview(URL.createObjectURL(event.target.files[0]))
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
     setImageUrl(url)
   }
+
   props.img(imageUrl)
 
-  const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
-    console.log(acceptedFiles)
-  }, [])
-  const { getRootProps, getInputProps } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps } = useDropzone()
 
   return (
     <>
@@ -62,7 +64,7 @@ export default function UploadPage(props) {
           </Box>
         </div>
         <Box>
-          {files.length !== 0 && imageUrl && (
+          {/* {files.length !== 0 && imageUrl && (
             <Center borderRadius="md">
               <Box
                 my="2"
@@ -74,15 +76,30 @@ export default function UploadPage(props) {
                 <Image src={imageUrl} objectFit="cover" />
               </Box>
             </Center>
+          )} */}
+          {preview && (
+            <Center>
+              <Image
+                objectFit="cover"
+                boxSize="50vw"
+                borderBottom="none"
+                borderTopRadius="xl"
+                boxShadow="md"
+                src={preview}
+              />
+            </Center>
           )}
-          {files.map((file, index) => (
-            <Box key={index}>
-              <Text>Uploading.. </Text>
-              <Progress hasStripe value={file.progress} />
-            </Box>
-          ))}
         </Box>
-        {imageUrl && 'file uploaded!'}
+        {files.map((file, index) => (
+          <Center>
+            <Box key={index} boxSize="50vw" h="100%">
+              <Progress size="lg" colorScheme="gray" value={file.progress} />
+              <Text my="2">
+                {file.progress === 100 ? 'Done!' : 'Uploading'}
+              </Text>
+            </Box>
+          </Center>
+        ))}
       </FormControl>
     </>
   )

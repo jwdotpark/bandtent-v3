@@ -1,7 +1,7 @@
 import { Box, Image, AspectRatio } from '@chakra-ui/react'
 
 const ImageComponent = (post: {
-  props: { imageUrl: string; content: string; preview: string }
+  props: { imageUrl: string; content: string }
 }) => {
   return (
     <Box my="2" boxShadow="sm" borderRadius="md" overflow="hidden">

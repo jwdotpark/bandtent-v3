@@ -73,19 +73,12 @@ const Main: React.FC<Props> = (props) => {
                       <Box
                         onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                       >
-                        {/* <Box>
-                          <Text fontSize="sm">
-                            Posted by <b>{post.author.name}</b>{' '}
-                            <i>{moment(post.createdAt).fromNow()}</i>
-                          </Text>
-                        </Box> */}
                         <Text fontSize="3xl" noOfLines={1}>
                           <b>{post.title}</b>
                         </Text>
 
                         <Divider mb="4" />
                         {/* cover */}
-                        {/* {post.imageUrl && <ImageComponent props={post} />} */}
                         <Box>
                           <AspectRatio
                             ratio={1}
@@ -186,30 +179,7 @@ const Main: React.FC<Props> = (props) => {
                           {post.content}
                         </Text>
                       </Box>
-                      {/* info */}
-                      {/* <Box
-                        mt="4"
-                        boxShadow="md"
-                        border="2px solid gray"
-                        borderRadius="xl"
-                      >
-                        <Text fontSize="md">
-                          <Center justifyContent="left" ml="0" p="2">
-                            <Image
-                              mr="2"
-                              display="inline"
-                              border="2px inset  gray"
-                              src={post.author.image}
-                              fallbackSrc="https://picsum.photos/200"
-                              boxSize="2rem"
-                              borderRadius="full"
-                              alt={post.author.name}
-                            />
-                            <b>{post.author.name}</b>,{' '}
-                            {moment(post.createdAt).fromNow()}
-                          </Center>
-                        </Text>
-                      </Box> */}
+
                       {/* info */}
                       <Box
                         mt="4"
@@ -233,7 +203,7 @@ const Main: React.FC<Props> = (props) => {
                               fallbackSrc="https://picsum.photos/200"
                               boxSize="1.5rem"
                               borderRadius="full"
-                              // alt={post.author.name}
+                              alt={post.author.name}
                             />
                             <b>{post.author.name}</b>,{' '}
                             {moment(post.createdAt).fromNow()}

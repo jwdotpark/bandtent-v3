@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 import PostProps from '../types/Post'
 import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
-import { Divider, Box, Text, Stack } from '@chakra-ui/react'
+import { Divider, Box, Text, Stack, AspectRatio } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
@@ -77,7 +77,16 @@ const Main: React.FC<Props> = (props) => {
 
                         <Divider mb="4" />
                         {/* cover */}
-                        {post.imageUrl && <ImageComponent props={post} />}
+                        {/* {post.imageUrl && <ImageComponent props={post} />} */}
+                        <Box>
+                          <AspectRatio
+                            ratio={1}
+                            borderRadius="md"
+                            overflow="clip"
+                          >
+                            <ImageComponent props={post} />
+                          </AspectRatio>
+                        </Box>
                         {/* audio */}
                         {/* <audio controls src={post.fileUrl}>
                         Your browser does not support the

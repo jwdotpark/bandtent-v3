@@ -1,7 +1,12 @@
 import React, { ReactNode } from 'react'
 import Header from './Header'
 import { Box } from '@chakra-ui/react'
-import Player from '../components/Player'
+import dynamic from 'next/dynamic'
+// import Player from '../components/Player'
+
+const Player = dynamic(() => import('../components/Player'), {
+  ssr: false,
+})
 
 type Props = {
   children: ReactNode
@@ -10,7 +15,7 @@ type Props = {
 const Layout: React.FC<Props> = (props) => (
   <Box>
     <Header />
-    <Player />
+    {/* <Player /> */}
     <Box>{props.children}</Box>
   </Box>
 )

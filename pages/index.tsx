@@ -73,12 +73,12 @@ const Main: React.FC<Props> = (props) => {
                       <Box
                         onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                       >
-                        <Box>
+                        {/* <Box>
                           <Text fontSize="sm">
                             Posted by <b>{post.author.name}</b>{' '}
                             <i>{moment(post.createdAt).fromNow()}</i>
                           </Text>
-                        </Box>
+                        </Box> */}
                         <Text fontSize="3xl" noOfLines={1}>
                           <b>{post.title}</b>
                         </Text>
@@ -102,6 +102,36 @@ const Main: React.FC<Props> = (props) => {
                       </audio> */}
                         <Text fontSize="lg" noOfLines={3} mx="2">
                           {post.content}
+                        </Text>
+                      </Box>
+                      {/* info */}
+                      <Box
+                        mt="4"
+                        mb="-1"
+                        mx="1"
+                        p="1"
+                        boxShadow="md"
+                        border="2px solid gray"
+                        borderRadius="md"
+                      >
+                        <Text
+                          fontSize="sm"
+                          sx={{ transform: 'translateX(-8px)' }}
+                        >
+                          <Center justifyContent="left" mx="2">
+                            <Image
+                              mr="2"
+                              display="inline"
+                              border="2px inset  gray"
+                              src={post.author.image}
+                              fallbackSrc="https://picsum.photos/200"
+                              boxSize="1.5rem"
+                              borderRadius="full"
+                              // alt={post.author.name}
+                            />
+                            <b>{post.author.name}</b>,{' '}
+                            {moment(post.createdAt).fromNow()}
+                          </Center>
                         </Text>
                       </Box>
                     </Box>
@@ -157,7 +187,7 @@ const Main: React.FC<Props> = (props) => {
                         </Text>
                       </Box>
                       {/* info */}
-                      <Box
+                      {/* <Box
                         mt="4"
                         boxShadow="md"
                         border="2px solid gray"
@@ -174,6 +204,36 @@ const Main: React.FC<Props> = (props) => {
                               boxSize="2rem"
                               borderRadius="full"
                               alt={post.author.name}
+                            />
+                            <b>{post.author.name}</b>,{' '}
+                            {moment(post.createdAt).fromNow()}
+                          </Center>
+                        </Text>
+                      </Box> */}
+                      {/* info */}
+                      <Box
+                        mt="4"
+                        mb="2"
+                        mx="1"
+                        p="1"
+                        boxShadow="md"
+                        border="2px solid gray"
+                        borderRadius="md"
+                      >
+                        <Text
+                          fontSize="sm"
+                          sx={{ transform: 'translateX(-8px)' }}
+                        >
+                          <Center justifyContent="left" mx="2">
+                            <Image
+                              mr="2"
+                              display="inline"
+                              border="2px inset  gray"
+                              src={post.author.image}
+                              fallbackSrc="https://picsum.photos/200"
+                              boxSize="1.5rem"
+                              borderRadius="full"
+                              // alt={post.author.name}
                             />
                             <b>{post.author.name}</b>,{' '}
                             {moment(post.createdAt).fromNow()}

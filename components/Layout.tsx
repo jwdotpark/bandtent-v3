@@ -1,7 +1,10 @@
+import dynamic from 'next/dynamic'
 import React, { ReactNode } from 'react'
 import Header from './Header'
 import { Box } from '@chakra-ui/react'
-import Player from './Player'
+const Player = dynamic(() => import('../components/Player'), {
+  ssr: false,
+})
 
 type Props = {
   children: ReactNode

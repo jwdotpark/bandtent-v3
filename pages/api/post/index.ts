@@ -9,6 +9,7 @@ export default async function handle(
   res: NextApiResponse
 ) {
   const { title, content, imageUrl, fileUrl } = req.body
+
   const session = await getSession({ req })
   const result = await prisma.post.create({
     data: {

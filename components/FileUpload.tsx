@@ -32,11 +32,7 @@ export default function UploadPage(props) {
   }
   props.data(fileUrl)
 
-  const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
-    console.log(acceptedFiles)
-  }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps } = useDropzone()
 
   return (
     <>
@@ -62,19 +58,9 @@ export default function UploadPage(props) {
           </Box>
         </div>
         <Box>
-          {/* {files.length !== 0 && fileUrl && (
-            <Center borderRadius="md">
-              <Box
-                my="2"
-                boxShadow="sm"
-                borderRadius="md"
-                overflow="clip"
-                w="50vw"
-              ></Box>
-            </Center>
-          )} */}
           {files.map((file, index) => (
             <Box key={index}>
+              {/* <Text>{JSON.stringify(files)}</Text> */}
               <Text>Uploading file.. </Text>
               <Progress hasStripe value={file.progress} />
             </Box>

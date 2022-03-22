@@ -57,13 +57,24 @@ const Header: React.FC = () => {
                   size="sm"
                   leftIcon={
                     <Image
-                      sx={{ transform: 'translateX(-3px)' }}
-                      border="1px solid gray.400"
+                      // sx={{ transform: 'translateX(-3px)' }}
+                      // mr="2"
+                      boxSize="25px"
+                      display="inline"
+                      border="1px inset  gray"
                       src={session.user.image}
-                      boxSize="17.5px"
-                      borderRadius="md"
+                      fallbackSrc="https://picsum.photos/200"
+                      borderRadius="full"
                       alt={session.user.name}
                     />
+                    // <Image
+                    //   sx={{ transform: 'translateX(-3px)' }}
+                    //   border="1px solid gray.400"
+                    //   src={session.user.image}
+                    //   boxSize="17.5px"
+                    //   borderRadius="md"
+                    //   alt={session.user.name}
+                    // />
                   }
                 >
                   {session.user.name ? session.user.name : session.user.email}

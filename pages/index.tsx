@@ -91,7 +91,7 @@ const Main: React.FC<Props> = (props) => {
                             fallbackSrc="https://picsum.photos/200"
                             boxSize="2rem"
                             borderRadius="full"
-                            // alt={post.author.name}
+                            alt={post.author.name}
                           />
                           <b>{post.author.name}</b>,{' '}
                           {moment(post.createdAt).fromNow()}

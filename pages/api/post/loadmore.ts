@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
 
+// NOTE need to give it a cursor or anchor
+
 // GET /api/post/loadmore
 export default async function handle(
   req: NextApiRequest,

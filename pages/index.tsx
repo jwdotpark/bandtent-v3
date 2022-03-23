@@ -57,12 +57,12 @@ const Main: React.FC<Props> = (props) => {
   // @ts-ignore
   const forceUpdate = useCallback(() => updateState({}), [])
 
-  // currently it does shallow copy and force rerender
-  // it needs to be deep copy to feed
   const handleMore = () => {
     fetch('/api/post/loadmore')
       .then((response) => response.json())
       .then((data) => {
+        // currently it does shallow copy and force rerender
+        // it needs to be deep copy to feed
         props.feed.push(...data)
         setFeed(props.feed)
         console.log(feed)
@@ -92,7 +92,6 @@ const Main: React.FC<Props> = (props) => {
                 boxShadow="md"
               >
                 <section>
-                  {feed.length}
                   {feed.map((post) => (
                     <Box
                       borderRadius="md"
@@ -106,7 +105,9 @@ const Main: React.FC<Props> = (props) => {
                         onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                       >
                         <Text fontSize="3xl" noOfLines={1}>
-                          <b>{post.title}</b>
+                          <b>
+                            {post.id}. {post.title}
+                          </b>
                         </Text>
 
                         <Divider mb="4" />

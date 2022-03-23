@@ -19,6 +19,7 @@
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^3.10.0",
     "aws-sdk": "^2.1095.0",
+    "cloudinary": "^1.28.1",
     "compressorjs": "^1.1.1",
     "framer-motion": "^6",
     "moment": "^2.29.1",

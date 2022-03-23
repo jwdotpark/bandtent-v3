@@ -27,7 +27,6 @@ export default function UploadPage(props) {
   // FIXME move to submit handler
   let handleFileChange = async (event) => {
     let file = event.target.files[0]
-    
     let { url } = await uploadToS3(file)
     setFileUrl(url)
   }

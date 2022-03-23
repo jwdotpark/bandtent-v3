@@ -1775,11 +1775,6 @@ moment@^2.29.1:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
 
-mp3-cutter@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/mp3-cutter/-/mp3-cutter-1.0.6.tgz#f861f6be0b7e1bc89d9b1bb64f436b632bb55747"
-  integrity sha512-5lEKhu9BFcf/9hZaiwGI5EFjL+ynwM9+IaDzxLTKgvG/JWJHLQgX65Xa/kOJgjJMNT1tuUkjpbjaiB735LFiyg==
-
 mri@^1.1.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/mri/-/mri-1.2.0.tgz"

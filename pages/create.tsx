@@ -3,7 +3,11 @@ import Layout from '../components/Layout'
 import Router from 'next/router'
 import { Box, Text, Input, Textarea, Button, Stack } from '@chakra-ui/react'
 import ImageUpload from '../components/ImageUpload'
-import FileUpload from '../components/FileUpload'
+import dynamic from 'next/dynamic'
+const FileUpload = dynamic(() => import('../components/FileUpload'), {
+  ssr: false,
+})
+// import FileUpload from '../components/FileUpload'
 
 const Draft: React.FC = () => {
   // NOTE refactor this

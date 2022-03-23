@@ -18,24 +18,20 @@ import {
   Progress,
 } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
-import audioEncoder from 'audio-encoder'
 
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
   const [fileUrl, setFileUrl] = useState<string>()
-  const [previewFile, setPreviewFile] = useState<Blob>()
-  const [previewAudio, setPreviewAudio] = useState<string>()
+  // const [previewFile, setPreviewFile] = useState<Blob>()
+  // const [previewAudio, setPreviewAudio] = useState<string>()
   const { uploadToS3, files } = useS3Upload()
 
-  // NOTE
+  // TODO trasncode before upload
   let handleFileChange = async (event) => {
     let file = event.target.files[0]
-
-    // let { url } = await uploadToS3(file)
-    // setFileUrl(url)
+    let { url } = await uploadToS3(file)
+    setFileUrl(url)
   }
-
-  console.log('trimmed: ', previewFile)
 
   props.data(fileUrl)
 

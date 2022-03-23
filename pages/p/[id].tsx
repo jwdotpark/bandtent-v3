@@ -84,9 +84,9 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     <Layout>
-      <Text fontSize="6xl" ml="2">
+      {/* <Text fontSize="6xl" ml="2">
         Posted by <b>{props.post.author.name}</b>
-      </Text>
+      </Text> */}
       <Stack w="100%">
         <Box
           p="4"
@@ -163,7 +163,7 @@ const Post: React.FC<PostProps> = (props) => {
                   mb="2"
                 >
                   <Text size="xl">
-                    {session.user.name}'s {myPost.length} posts{' '}
+                    {props.post.author.name}'s {myPost.length} more posts{' '}
                   </Text>
                 </Box>
               </Box>

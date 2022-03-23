@@ -13,6 +13,7 @@ import {
   Image,
   Center,
   AspectRatio,
+  Button,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
@@ -28,6 +29,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
         select: { name: true, image: true },
       },
     },
+    // skip: 4,
+    take: 6,
     orderBy: { id: 'desc' },
   })
   return {
@@ -41,6 +44,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 type Props = {
   feed: PostProps[]
 }
+
+
 
 const Main: React.FC<Props> = (props) => {
   return (
@@ -69,7 +74,6 @@ const Main: React.FC<Props> = (props) => {
                       key={post.id}
                       boxShadow="md"
                     >
-                      {/* <Post post={post} /> */}
                       <Box
                         onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                       >
@@ -80,13 +84,7 @@ const Main: React.FC<Props> = (props) => {
                         <Divider mb="4" />
                         {/* cover */}
                         <Box>
-                          {/* <AspectRatio
-                            ratio={1}
-                            borderRadius="md"
-                            overflow="clip"
-                          > */}
                           <ImageComponent props={post} />
-                          {/* </AspectRatio> */}
                         </Box>
                         {/* audio */}
                         {/* <audio controls src={post.fileUrl}>
@@ -130,6 +128,11 @@ const Main: React.FC<Props> = (props) => {
                     </Box>
                   ))}
                 </section>
+                <Center my="4">
+                  <Button mx="4" w="100%" size="sm">
+                    Load More
+                  </Button>
+                </Center>
               </Box>
 
               {/* right column */}
@@ -243,10 +246,6 @@ const Main: React.FC<Props> = (props) => {
                       onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                       my="4"
                     >
-                      {/* <Text fontSize="sm">
-                      Posted by <b>{post.author.name}</b>{' '}
-                      <i>{moment(post.createdAt).fromNow()}</i>
-                    </Text> */}
                       <Text fontSize="xl" noOfLines={1}>
                         <b>{post.title}</b>
                       </Text>

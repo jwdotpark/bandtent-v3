@@ -19,6 +19,7 @@ import {
   Progress,
   AspectRatio,
 } from '@chakra-ui/react'
+import { Media } from '../utils/media'
 import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props) {
@@ -52,42 +53,90 @@ export default function UploadPage(props) {
             onChange={handleFileChange}
           />
           <Box my="4">
-            {files.length === 0 && (
-              <Center
-                w="100%"
-                h="10vh"
-                borderRadius="md"
-                bg={colorMode === 'light' ? 'gray.100' : '#242a35'}
-              >
-                <Text fontSize="3xl">Click to select cover</Text>
-              </Center>
+            {!preview && (
+              <AspectRatio ratio={1}>
+                <Center
+                  borderRadius="md"
+                  bg={colorMode === 'light' ? 'gray.100' : '#242a35'}
+                >
+                  <Text fontSize="3xl">Click to select cover</Text>
+                </Center>
+              </AspectRatio>
             )}
           </Box>
         </div>
-        <Box>
-          {preview && (
-            <Center>
-              <Image
-                objectFit="cover"
-                boxSize="50vw"
-                borderBottom="none"
-                borderTopRadius="xl"
-                boxShadow="md"
-                src={preview}
-              />
-            </Center>
-          )}
-        </Box>
-        {files.map((file, index) => (
-          <Center>
-            <Box key={index} boxSize="50vw" h="100%">
-              <Progress size="lg" colorScheme="gray" value={file.progress} />
-              <Text my="2">
-                {file.progress === 100 ? 'Done!' : 'Uploading'}
-              </Text>
+        {/* preview upload */}
+        <Media greaterThanOrEqual="md">
+          <Box>
+            <Box>
+              {preview && (
+                <Center>
+                  <Image
+                    objectFit="cover"
+                    boxSize="50vw"
+                    border="2px solid gray"
+                    borderBottom="none"
+                    borderTopRadius="md"
+                    src={preview}
+                  />
+                </Center>
+              )}
             </Box>
-          </Center>
-        ))}
+            {files.map((file, index) => (
+              <Center>
+                <Box key={index} boxSize="50vw" h="100%">
+                  <Progress
+                    border="2px solid gray"
+                    borderTop="none"
+                    borderBottomRadius="md"
+                    boxShadow="md"
+                    size="lg"
+                    colorScheme="green"
+                    value={file.progress}
+                  />
+                </Box>
+              </Center>
+            ))}
+          </Box>
+        </Media>
+        <Media lessThan="md">
+          <Box>
+            <Box>
+              {preview && (
+                <Center>
+                  <Image
+                    objectFit="cover"
+                    boxSize="100vw"
+                    border="2px solid gray"
+                    borderBottom="none"
+                    borderTopRadius="md"
+                    src={preview}
+                  />
+                </Center>
+              )}
+            </Box>
+            {files.map((file, index) => (
+              <Center>
+                <Box key={index} boxSize="100vw" h="100%">
+                  <Progress
+                    border="2px solid gray"
+                    borderTop="none"
+                    borderBottomRadius="md"
+                    boxShadow="md"
+                    size="lg"
+                    colorScheme="green"
+                    value={file.progress}
+                  />
+                  {/* <Text my="2">
+                    {file.progress}
+                    <br />
+                    {file.progress === 100 ? 'Done!' : 'Uploading'}
+                  </Text> */}
+                </Box>
+              </Center>
+            ))}
+          </Box>
+        </Media>
       </FormControl>
     </>
   )

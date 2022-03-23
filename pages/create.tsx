@@ -1,8 +1,18 @@
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import Router from 'next/router'
-import { Box, Text, Input, Textarea, Button, Stack } from '@chakra-ui/react'
+import {
+  Center,
+  Box,
+  Text,
+  Input,
+  Textarea,
+  Button,
+  Stack,
+  ButtonGroup,
+} from '@chakra-ui/react'
 import ImageUpload from '../components/ImageUpload'
+import { Media } from '../utils/media'
 import dynamic from 'next/dynamic'
 const FileUpload = dynamic(() => import('../components/FileUpload'), {
   ssr: false,
@@ -47,54 +57,136 @@ const Draft: React.FC = () => {
 
   return (
     <Layout>
-      <Box m="2">
-        <form onSubmit={submitData}>
-          <Text>New Draft</Text>
-          <Box my="4">
-            <Input
-              variant="filled"
-              autoFocus
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Title"
-              type="text"
-              value={title}
-            />
+      <Media greaterThanOrEqual="md">
+        <Center m="2" mx="2">
+          <Box w="50%">
+            <form onSubmit={submitData}>
+              <Text>New Draft</Text>
+              <Box my="4">
+                <Input
+                  variant="filled"
+                  autoFocus
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Title"
+                  type="text"
+                  value={title}
+                />
+              </Box>
+              <Box my="4">
+                <Textarea
+                  variant="filled"
+                  cols={50}
+                  onChange={(e) => setContent(e.target.value)}
+                  placeholder="Content"
+                  rows={8}
+                  value={content}
+                />
+              </Box>
+              {/* image */}
+              <Box>
+                <ImageUpload img={pullImage} />
+                <Input display="none" type="file" defaultValue={imageUrl} />
+              </Box>
+              {/* file */}
+              <Box>
+                <FileUpload data={pullFile} />
+                <Input display="none" type="file" defaultValue={imageUrl} />
+              </Box>
+              <Box>
+                <ButtonGroup isAttached size="sm" w="100%" mt="2">
+                  <Button
+                    variant="solid"
+                    // mr="2"
+                    w="80%"
+                    disabled={!content || !title || !imageUrl || !fileUrl}
+                    type="submit"
+                    value="Create"
+                  >
+                    {/* Create */}
+                    {!content || !title || !imageUrl || !fileUrl
+                      ? 'Not available'
+                      : 'Submit'}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    // colorScheme="yellow"
+                    // mr="2"
+                    w="20%"
+                    onClick={() => Router.push('/')}
+                  >
+                    Cancel
+                  </Button>
+                </ButtonGroup>
+              </Box>
+            </form>
           </Box>
-          <Box my="4">
-            <Textarea
-              variant="filled"
-              cols={50}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Content"
-              rows={8}
-              value={content}
-            />
+        </Center>
+      </Media>
+      <Media lessThan="md">
+        <Center m="2" mx="2">
+          <Box w="100%">
+            <form onSubmit={submitData}>
+              <Text>New Draft</Text>
+              <Box my="4">
+                <Input
+                  variant="filled"
+                  autoFocus
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Title"
+                  type="text"
+                  value={title}
+                />
+              </Box>
+              <Box my="4">
+                <Textarea
+                  variant="filled"
+                  cols={50}
+                  onChange={(e) => setContent(e.target.value)}
+                  placeholder="Content"
+                  rows={8}
+                  value={content}
+                />
+              </Box>
+              {/* image */}
+              <Box>
+                <ImageUpload img={pullImage} />
+                <Input display="none" type="file" defaultValue={imageUrl} />
+              </Box>
+              {/* file */}
+              <Box>
+                <FileUpload data={pullFile} />
+                <Input display="none" type="file" defaultValue={imageUrl} />
+              </Box>
+              <Box>
+                <ButtonGroup isAttached size="sm" w="100%" mt="2" mb="10">
+                  <Button
+                    variant="solid"
+                    // mr="2"
+                    w="80%"
+                    disabled={!content || !title || !imageUrl || !fileUrl}
+                    type="submit"
+                    value="Create"
+                  >
+                    {/* Create */}
+                    {!content || !title || !imageUrl || !fileUrl
+                      ? 'Not available'
+                      : 'Submit'}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    // colorScheme="yellow"
+                    // mr="2"
+                    w="20%"
+                    onClick={() => Router.push('/')}
+                  >
+                    Cancel
+                  </Button>
+                </ButtonGroup>
+              </Box>
+            </form>
           </Box>
-          {/* image */}
-          <Box>
-            <ImageUpload img={pullImage} />
-            <Input display="none" type="file" defaultValue={imageUrl} />
-          </Box>
-          {/* file */}
-          <Box>
-            <FileUpload data={pullFile} />
-            <Input display="none" type="file" defaultValue={imageUrl} />
-          </Box>
-          <Box>
-            <Button
-              mr="2"
-              disabled={!content || !title || !imageUrl || !fileUrl}
-              type="submit"
-              value="Create"
-            >
-              Create
-            </Button>
-            <Button mr="2" onClick={() => Router.push('/')}>
-              Cancel
-            </Button>
-          </Box>
-        </form>
-      </Box>
+        </Center>
+      </Media>
     </Layout>
   )
 }

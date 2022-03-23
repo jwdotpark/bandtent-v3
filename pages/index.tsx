@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
 import PostProps from '../types/Post'
-import { ColorModeScript } from '@chakra-ui/react'
+import { ColorModeScript, useForceUpdate } from '@chakra-ui/react'
 import theme from '../utils/theme'
 import {
   Divider,
@@ -23,6 +23,7 @@ import useSWR from 'swr'
 
 import moment from 'moment'
 import { ConfigurationServicePlaceholders } from 'aws-sdk/lib/config_service_placeholders'
+import { useDeprecatedAnimatedState } from 'framer-motion'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -49,8 +50,11 @@ type Props = {
 }
 
 const Main: React.FC<Props> = (props) => {
+  // pagination load more callback
   const [feed, setFeed] = useState(props.feed)
-  // loadmore
+  const [, updateState] = useState()
+  const forceUpdate = useCallback(() => updateState({}), [])
+
   const handleMore = () => {
     fetch('/api/post/loadmore')
       .then((response) => response.json())
@@ -59,7 +63,13 @@ const Main: React.FC<Props> = (props) => {
         setFeed(props.feed)
         console.log(feed)
       })
+    // FIXME rerender trigger is very fish
+    forceUpdate()
   }
+
+  useEffect(() => {
+    setFeed(props.feed)
+  })
 
   return (
     <>
@@ -78,7 +88,8 @@ const Main: React.FC<Props> = (props) => {
                 boxShadow="md"
               >
                 <section>
-                  {props.feed.map((post) => (
+                  {feed.length}
+                  {feed.map((post) => (
                     <Box
                       borderRadius="md"
                       border="2px solid gray"
@@ -171,7 +182,7 @@ const Main: React.FC<Props> = (props) => {
               {/* right column */}
               <Box w="100%" borderRadius="xl" mb="2" pb="2" boxShadow="md">
                 <section>
-                  {props.feed.map((post) => (
+                  {feed.map((post) => (
                     <Box
                       p="1"
                       borderRadius="md"
@@ -246,7 +257,7 @@ const Main: React.FC<Props> = (props) => {
             {/* right column */}
             <Box w="100%" borderRadius="xl" mb="2" pb="2" boxShadow="md">
               <section>
-                {props.feed.map((post) => (
+                {feed.map((post) => (
                   <Box
                     p="1"
                     borderRadius="md"

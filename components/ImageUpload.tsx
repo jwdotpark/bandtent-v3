@@ -65,19 +65,6 @@ export default function UploadPage(props) {
           </Box>
         </div>
         <Box>
-          {/* {files.length !== 0 && imageUrl && (
-            <Center borderRadius="md">
-              <Box
-                my="2"
-                boxShadow="sm"
-                borderRadius="md"
-                overflow="clip"
-                w="50vw"
-              >
-                <Image src={imageUrl} objectFit="cover" />
-              </Box>
-            </Center>
-          )} */}
           {preview && (
             <Center>
               <Image

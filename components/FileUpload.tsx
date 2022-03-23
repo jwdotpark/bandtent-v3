@@ -22,8 +22,6 @@ import { useDropzone } from 'react-dropzone'
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
   const [fileUrl, setFileUrl] = useState<string>()
-  // const [previewFile, setPreviewFile] = useState<Blob>()
-  // const [previewAudio, setPreviewAudio] = useState<string>()
   const { uploadToS3, files } = useS3Upload()
 
   // TODO trasncode before upload
@@ -63,7 +61,6 @@ export default function UploadPage(props) {
         <Box>
           {files.map((file, index) => (
             <Box key={index}>
-              {/* <Text>{JSON.stringify(files)}</Text> */}
               <Text>Uploading file.. </Text>
               <Progress hasStripe value={file.progress} />
             </Box>

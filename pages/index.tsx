@@ -53,8 +53,12 @@ const Main: React.FC<Props> = (props) => {
   // pagination load more callback
   const [feed, setFeed] = useState(props.feed)
   const [, updateState] = useState()
+
+  // @ts-ignore
   const forceUpdate = useCallback(() => updateState({}), [])
 
+  // currently it does shallow copy and force rerender
+  // it needs to be deep copy to feed
   const handleMore = () => {
     fetch('/api/post/loadmore')
       .then((response) => response.json())

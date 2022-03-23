@@ -6,6 +6,7 @@ import ImageUpload from '../components/ImageUpload'
 import FileUpload from '../components/FileUpload'
 
 const Draft: React.FC = () => {
+  // NOTE refactor this
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [imageUrl, setImageUrl] = useState<string>(null)

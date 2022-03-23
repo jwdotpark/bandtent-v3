@@ -18,7 +18,7 @@ export default async function handle(
           },
         },
         skip: 6,
-        take: 6,
+        take: 12,
         orderBy: { id: 'desc' },
       })
       res.status(200)

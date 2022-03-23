@@ -18,33 +18,19 @@ import {
   Progress,
 } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
+import audioEncoder from 'audio-encoder'
 
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
   const [fileUrl, setFileUrl] = useState<string>()
   const [previewFile, setPreviewFile] = useState<Blob>()
   const [previewAudio, setPreviewAudio] = useState<string>()
-
   const { uploadToS3, files } = useS3Upload()
 
-  // function that trim the given audio into given second
-  
-  const trimAudio = (file) => {
-    const blob = new Blob([file], { type: 'audio/mp3' })
-    const newBlob = new Blob([blob.slice(0, blob.size / 50)], {
-      type: 'audio/mp3',
-    })
-    return newBlob
-  }
-
-  // FIXME move to submit handler
+  // NOTE
   let handleFileChange = async (event) => {
     let file = event.target.files[0]
-    // trim the mp3 above into 60 second trimmed audio
-    const trimmedFile = trimAudio(file)
-    const prevUrl = URL.createObjectURL(trimmedFile)
-    setPreviewAudio(prevUrl)
-    console.log('prev url ', previewAudio)
+
     // let { url } = await uploadToS3(file)
     // setFileUrl(url)
   }
@@ -57,8 +43,6 @@ export default function UploadPage(props) {
 
   return (
     <>
-      hi
-      <audio src={previewAudio} />
       <FormControl>
         <div {...getRootProps()}>
           <input

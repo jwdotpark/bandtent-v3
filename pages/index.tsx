@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
@@ -19,7 +19,10 @@ import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
 import ImageComponent from '../components/ImageComponent'
+import useSWR from 'swr'
+
 import moment from 'moment'
+import { ConfigurationServicePlaceholders } from 'aws-sdk/lib/config_service_placeholders'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -45,9 +48,19 @@ type Props = {
   feed: PostProps[]
 }
 
-
-
 const Main: React.FC<Props> = (props) => {
+  const [feed, setFeed] = useState(props.feed)
+  // loadmore
+  const handleMore = () => {
+    fetch('/api/post/loadmore')
+      .then((response) => response.json())
+      .then((data) => {
+        props.feed.push(...data)
+        setFeed(props.feed)
+        console.log(feed)
+      })
+  }
+
   return (
     <>
       <Layout>
@@ -129,7 +142,7 @@ const Main: React.FC<Props> = (props) => {
                   ))}
                 </section>
                 <Center my="4">
-                  <Button mx="4" w="100%" size="sm">
+                  <Button mx="4" w="100%" size="sm" onClick={handleMore}>
                     Load More
                   </Button>
                 </Center>

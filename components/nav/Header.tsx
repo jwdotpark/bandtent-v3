@@ -54,8 +54,6 @@ const Header: React.FC = () => {
                 </Button>
               </Box>
             </Link>
-            {/* search */}
-            <SearchButton />
             {session && (
               <Link href="/auth/me">
                 <Button
@@ -77,6 +75,8 @@ const Header: React.FC = () => {
                 </Button>
               </Link>
             )}
+            {/* search */}
+            <SearchButton />
           </Stack>
           <Spacer />
           {/* right */}

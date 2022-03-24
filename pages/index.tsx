@@ -13,6 +13,7 @@ import {
   Image,
   Center,
   Button,
+  useColorMode,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
@@ -45,6 +46,8 @@ type Props = {
 }
 
 const Main: React.FC<Props> = (props) => {
+  const { colorMode, toggleColorMode } = useColorMode()
+
   // pagination load more callback
   const [feed, setFeed] = useState(props.feed)
   const [, updateState] = useState()
@@ -89,6 +92,7 @@ const Main: React.FC<Props> = (props) => {
                 <section>
                   {feed.map((post) => (
                     <Box
+                      bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                       borderRadius="md"
                       border="2px solid gray"
                       p="4"

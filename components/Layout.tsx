@@ -1,21 +1,25 @@
 import dynamic from 'next/dynamic'
-import React, { ReactNode } from 'react'
 import Header from './nav/Header'
-import { Box } from '@chakra-ui/react'
+import { Box, useColorMode } from '@chakra-ui/react'
 const Player = dynamic(() => import('./utils/Player'), {
   ssr: false,
 })
 
-type Props = {
-  children: ReactNode
+const Layout = (props: {
+  children: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal
+}) => {
+  const { colorMode } = useColorMode()
+  return (
+    <>
+      <Box>
+        <Header />
+        {/* <Player /> */}
+        <Box bg={colorMode === 'light' ? 'gray.100' : 'gray.800'}>
+          {props.children}
+        </Box>
+      </Box>
+    </>
+  )
 }
-
-const Layout: React.FC<Props> = (props) => (
-  <Box>
-    <Header />
-    {/* <Player /> */}
-    <Box>{props.children}</Box>
-  </Box>
-)
 
 export default Layout

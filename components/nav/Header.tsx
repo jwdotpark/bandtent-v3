@@ -44,7 +44,7 @@ const Header: React.FC = () => {
     <nav>
       {/* desktop */}
       <Media greaterThanOrEqual="md">
-        <Flex borderBottom="1px solid gray" mx="2">
+        <Flex>
           {/* left */}
           <Stack direction="row" p="2">
             <Link href="/">
@@ -131,7 +131,7 @@ const Header: React.FC = () => {
       {/* ------------------------------------------------------------------------------- */}
       {/* mobile */}
       <Media lessThan="md">
-        <Flex borderBottom="1px solid gray" mx="2">
+        <Flex mx="2">
           {/* left */}
           <Box pt="2" pr="1">
             <Link href="/">

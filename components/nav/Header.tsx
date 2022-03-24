@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
 import ColorButton from '../misc/ColorButton'
 import {
@@ -22,9 +22,6 @@ import {
   ChevronDownIcon,
   AddIcon,
   PlusSquareIcon,
-  EditIcon,
-  ChatIcon,
-  WarningIcon,
   TimeIcon,
   LockIcon,
   UnlockIcon,
@@ -47,14 +44,17 @@ const Header: React.FC = () => {
           <Stack direction="row" p="2">
             <Link href="/">
               <Box className="bold" data-active={isActive('/')}>
-                <Button leftIcon={<HamburgerIcon />} size="sm">
+                <Button leftIcon={<HamburgerIcon />} size="sm" boxShadow="md">
                   Feed
                 </Button>
               </Box>
             </Link>
+            {/* search */}
+            <Search />
             {session && (
               <Link href="/auth/me">
                 <Button
+                  boxShadow="md"
                   size="sm"
                   leftIcon={
                     <Image
@@ -93,14 +93,19 @@ const Header: React.FC = () => {
             <>
               <Stack direction="row" p="2">
                 <Link href="/create">
-                  <Button size="sm" leftIcon={<PlusSquareIcon />}>
+                  <Button
+                    boxShadow="md"
+                    size="sm"
+                    leftIcon={<PlusSquareIcon />}
+                  >
                     <Text>Add</Text>
                   </Button>
                 </Link>
-                <Button size="sm" leftIcon={<TimeIcon />}>
+                <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
                   <Link href="/drafts">My Drafts</Link>
                 </Button>
                 <Button
+                  boxShadow="md"
                   leftIcon={<LockIcon />}
                   size="sm"
                   onClick={() => {
@@ -110,7 +115,9 @@ const Header: React.FC = () => {
                 >
                   <Text>Log out</Text>
                 </Button>
-                <ColorButton />
+                <Box boxShadow="md">
+                  <ColorButton />
+                </Box>
               </Stack>
             </>
           )}

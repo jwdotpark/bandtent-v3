@@ -1,10 +1,10 @@
-import { Media } from '../../utils/media'
 import Router from 'next/router'
 import Layout from '../../components/Layout'
 import { GetServerSideProps } from 'next'
 import prisma from '../../lib/prisma'
 import ImageComponent from '../../components/utils/ImageComponent'
-import { Box, Button, Text, HStack, Divider, Stack } from '@chakra-ui/react'
+import { Box, Text, Divider, Center, Image } from '@chakra-ui/react'
+import moment from 'moment'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const result = await prisma.post.findMany({
@@ -16,7 +16,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         search: String(params.result),
       },
     },
+    include: {
+      author: true,
+    },
   })
+
   return {
     props: {
       result: JSON.parse(JSON.stringify(result)),
@@ -25,10 +29,16 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 }
 
 const SearchPage = (props: { result: any[] }) => {
-  console.log(props.result)
   return (
     <Layout>
-      <Box border="2px solid gray" borderRadius="md" p="2" m="2" mt="2">
+      <Box
+        border="2px solid gray"
+        borderRadius="md"
+        p="2"
+        m="2"
+        mt="2"
+        boxShadow="md"
+      >
         <Text>{props.result.length} result</Text>
       </Box>
       <Box
@@ -43,6 +53,7 @@ const SearchPage = (props: { result: any[] }) => {
               boxShadow="md"
               mb="4"
               w="100%"
+              // h="`${randomInt(50, 90)}`%"
               display="inline-block"
               onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
             >
@@ -58,6 +69,31 @@ const SearchPage = (props: { result: any[] }) => {
                 <Divider mb="2" />
                 {post.imageUrl && <ImageComponent props={post} />}
                 <Text noOfLines={3}>{post.content}</Text>
+                {/* info */}
+                <Box
+                  mt="4"
+                  p="1"
+                  boxShadow="md"
+                  border="2px solid gray"
+                  borderRadius="md"
+                >
+                  <Text fontSize="sm" sx={{ transform: 'translateX(-8px)' }}>
+                    <Center justifyContent="left" mx="2">
+                      <Image
+                        mr="2"
+                        display="inline"
+                        border="2px inset  gray"
+                        src={post.author.image}
+                        fallbackSrc="https://picsum.photos/200"
+                        boxSize="1.5rem"
+                        borderRadius="full"
+                        // alt={post.author.name}
+                      />
+                      <b>{post.author.name}</b>,{' '}
+                      {moment(post.createdAt).fromNow()}
+                    </Center>
+                  </Text>
+                </Box>
               </Box>
             </Box>
           ))}

@@ -19,7 +19,7 @@ import {
   Stack,
   Center,
 } from '@chakra-ui/react'
-import ImageComponent from '../../components/ImageComponent'
+import ImageComponent from '../../components/utils/ImageComponent'
 import AdditionalPost from '../../components/AdditionalPost'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {

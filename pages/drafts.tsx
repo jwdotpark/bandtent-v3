@@ -6,7 +6,7 @@ import PostProps from '../types/Post'
 import prisma from '../lib/prisma'
 import { Box, Text, Divider, Image } from '@chakra-ui/react'
 import Router from 'next/router'
-import ImageComponent from '../components/ImageComponent'
+import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })

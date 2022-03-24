@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import { Box, Text, Divider } from '@chakra-ui/react'
 import Router from 'next/router'
-import ImageComponent from '../../components/ImageComponent'
+import ImageComponent from '../utils/ImageComponent'
 
 const MyPost = () => {
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())

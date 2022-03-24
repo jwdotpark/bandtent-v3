@@ -11,10 +11,10 @@ import {
   Stack,
   ButtonGroup,
 } from '@chakra-ui/react'
-import ImageUpload from '../components/ImageUpload'
+import ImageUpload from '../components/utils/ImageUpload'
 import { Media } from '../utils/media'
 import dynamic from 'next/dynamic'
-const FileUpload = dynamic(() => import('../components/FileUpload'), {
+const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
   ssr: false,
 })
 // import FileUpload from '../components/FileUpload'

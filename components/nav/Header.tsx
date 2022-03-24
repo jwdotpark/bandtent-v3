@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Router, useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
-import ColorButton from '../components/misc/ColorButton'
+import ColorButton from '../misc/ColorButton'
 import {
   Stack,
   Flex,
@@ -16,7 +16,7 @@ import {
   MenuList,
   MenuItem,
 } from '@chakra-ui/react'
-import { Media } from '../utils/media'
+import { Media } from '../../utils/media'
 import {
   ChevronDownIcon,
   AddIcon,

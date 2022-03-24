@@ -10,7 +10,7 @@ import {
   AspectRatio,
 } from '@chakra-ui/react'
 import Router from 'next/router'
-import ImageComponent from '../components/ImageComponent'
+import ImageComponent from './utils/ImageComponent'
 
 const AdditionalPost = ({ myPost }) => {
   // console.log(myPost)

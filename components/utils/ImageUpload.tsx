@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { useS3Upload } from 'next-s3-upload'
-import ImageComponent from '../components/ImageComponent'
+import ImageComponent from './ImageComponent'
 import { useState } from 'react'
 import {
   Box,
@@ -19,7 +19,7 @@ import {
   Progress,
   AspectRatio,
 } from '@chakra-ui/react'
-import { Media } from '../utils/media'
+import { Media } from '../../utils/media'
 import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props) {

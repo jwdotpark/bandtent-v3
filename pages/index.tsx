@@ -18,7 +18,7 @@ import {
 import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
-import ImageComponent from '../components/ImageComponent'
+import ImageComponent from '../components/utils/ImageComponent'
 import useSWR from 'swr'
 
 import moment from 'moment'

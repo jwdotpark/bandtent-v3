@@ -1,7 +1,7 @@
 import { Divider, Box, Text } from '@chakra-ui/react'
 import Router from 'next/router'
 import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
-import ImageComponent from '../components/ImageComponent'
+import ImageComponent from './utils/ImageComponent'
 import moment from 'moment'
 
 const Feature = (props: {

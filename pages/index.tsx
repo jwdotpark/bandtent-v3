@@ -3,7 +3,7 @@ import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
 import PostProps from '../types/Post'
-import { ColorModeScript, useForceUpdate } from '@chakra-ui/react'
+import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
 import {
   Divider,
@@ -12,18 +12,13 @@ import {
   Stack,
   Image,
   Center,
-  AspectRatio,
   Button,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
-import useSWR from 'swr'
-
 import moment from 'moment'
-import { ConfigurationServicePlaceholders } from 'aws-sdk/lib/config_service_placeholders'
-import { useDeprecatedAnimatedState } from 'framer-motion'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({

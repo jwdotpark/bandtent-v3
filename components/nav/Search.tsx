@@ -1,35 +1,24 @@
 import Link from 'next/link'
 import {
-  Stack,
-  Flex,
-  Spacer,
   Box,
-  Text,
   Button,
-  Image,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Input,
   InputLeftElement,
+  InputRightElement,
   InputGroup,
 } from '@chakra-ui/react'
-import {
-  ChevronDownIcon,
-  AddIcon,
-  PlusSquareIcon,
-  EditIcon,
-  ChatIcon,
-  WarningIcon,
-  TimeIcon,
-  LockIcon,
-  UnlockIcon,
-  HamburgerIcon,
-  SearchIcon,
-} from '@chakra-ui/icons'
+import { SearchIcon, ChevronRightIcon } from '@chakra-ui/icons'
+import useSWR from 'swr'
 
 const Search = () => {
+  const fetcher = async (query: string) => {
+    const res = await fetch(`/api/search?q=${query}`)
+    return await res.json()
+  }
+
+  const result = useSWR('/api/search', fetcher)
+  console.log(result)
+
   return (
     <Link href="/">
       <Box className="bold">
@@ -43,6 +32,16 @@ const Search = () => {
             placeholder="Search"
             borderRadius="md"
             border="2px solid gray"
+          />
+          <InputRightElement
+            sx={{ borderLeftRadius: 'none' }}
+            _hover={{ cursor: 'pointer' }}
+            pointerEvents="stroke"
+            children={
+              <Button size="sm" variant="solid" borderLeftRadius="none">
+                <ChevronRightIcon />
+              </Button>
+            }
           />
         </InputGroup>
       </Box>

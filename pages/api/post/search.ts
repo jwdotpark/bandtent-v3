@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
 
+// GET /api/post/search
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse

@@ -14,9 +14,7 @@ const Layout = (props: {
       <Box>
         <Header />
         {/* <Player /> */}
-        <Box bg={colorMode === 'light' ? 'gray.100' : 'gray.800'}>
-          {props.children}
-        </Box>
+        <Box>{props.children}</Box>
       </Box>
     </>
   )

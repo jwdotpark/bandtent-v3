@@ -12,7 +12,6 @@ import { SearchIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import Router from 'next/router'
 
 const SearchButton = () => {
-  const [searchResult, setSearchResult] = useState()
   const [keyword, setKeyword] = useState(null)
   const handleSearch = (event: { preventDefault: () => void }) => {
     event.preventDefault()
@@ -20,7 +19,6 @@ const SearchButton = () => {
       Router.push('/search/' + keyword)
     }
   }
-
   return (
     <Box className="bold">
       <form>
@@ -34,7 +32,6 @@ const SearchButton = () => {
             placeholder="Search"
             borderRadius="md"
             border="2px solid gray"
-            // onBlur={handleSearch}
             onChange={(e) => {
               setKeyword(e.target.value)
             }}

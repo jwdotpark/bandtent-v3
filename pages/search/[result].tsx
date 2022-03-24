@@ -42,7 +42,11 @@ const SearchPage = (props: { result: any[] }) => {
         mt="2"
         boxShadow="md"
       >
-        <Text>{props.result.length} result</Text>
+        <Text>
+          {props.result.length !== 0
+            ? props.result.length + ' results'
+            : 'None!'}
+        </Text>
       </Box>
       <Box
         p="2"

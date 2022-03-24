@@ -13,16 +13,12 @@ import Router from 'next/router'
 
 const SearchButton = () => {
   const [searchResult, setSearchResult] = useState()
-  const [keyword, setKeyword] = useState('')
-  const handleSearch = (event) => {
-    // fetch('/api/post/search')
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data)
-    //     setSearchResult(searchResult)
-    //   })
+  const [keyword, setKeyword] = useState(null)
+  const handleSearch = (event: { preventDefault: () => void }) => {
     event.preventDefault()
-    Router.push('/search/' + keyword)
+    if (keyword) {
+      Router.push('/search/' + keyword)
+    }
   }
 
   return (

@@ -54,7 +54,9 @@ const Feature = (props: {
                   <b>{post.title}</b>
                 </Text>
                 <Divider mb="4" />
-                <Box>{post.imageUrl && <ImageComponent props={post} />}</Box>
+                <Box m="2">
+                  {post.imageUrl && <ImageComponent props={post} />}
+                </Box>
                 <Text fontSize="md" noOfLines={1000} mx="4">
                   {post.content}
                 </Text>

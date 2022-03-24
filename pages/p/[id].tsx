@@ -10,7 +10,15 @@ import Layout from '../../components/Layout'
 import PostProps from '../../types/Post'
 import { useSession } from 'next-auth/react'
 import prisma from '../../lib/prisma'
-import { Box, Button, Text, HStack, Divider, Stack } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Text,
+  HStack,
+  Divider,
+  Stack,
+  Center,
+} from '@chakra-ui/react'
 import ImageComponent from '../../components/utils/ImageComponent'
 import AdditionalPost from '../../components/AdditionalPost'
 
@@ -87,7 +95,7 @@ const Post: React.FC<PostProps> = (props) => {
           border="2px solid gray"
           borderRadius="md"
           boxShadow="md"
-          // w="65.5%"
+          w="60%"
         >
           <Text my="2" fontSize="3xl">
             {props.post.title}
@@ -103,8 +111,8 @@ const Post: React.FC<PostProps> = (props) => {
           </Text>
 
           <Divider mb="4" />
+          {/* {props.post.imageUrl && <ImageComponent props={props.post} />} */}
           <Box>
-            {/* {props.post.imageUrl && <ImageComponent props={props.post} />} */}
             <ImageComponent props={props.post} />
           </Box>
           {/* audio */}

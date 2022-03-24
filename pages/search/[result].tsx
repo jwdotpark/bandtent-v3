@@ -19,6 +19,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     include: {
       author: true,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   })
 
   return {

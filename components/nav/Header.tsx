@@ -17,6 +17,7 @@ import {
   MenuItem,
 } from '@chakra-ui/react'
 import { Media } from '../../utils/media'
+import Search from './Search'
 import {
   ChevronDownIcon,
   AddIcon,
@@ -57,8 +58,6 @@ const Header: React.FC = () => {
                   size="sm"
                   leftIcon={
                     <Image
-                      // sx={{ transform: 'translateX(-3px)' }}
-                      // mr="2"
                       boxSize="25px"
                       display="inline"
                       border="1px inset  gray"
@@ -67,14 +66,6 @@ const Header: React.FC = () => {
                       borderRadius="full"
                       alt={session.user.name}
                     />
-                    // <Image
-                    //   sx={{ transform: 'translateX(-3px)' }}
-                    //   border="1px solid gray.400"
-                    //   src={session.user.image}
-                    //   boxSize="17.5px"
-                    //   borderRadius="md"
-                    //   alt={session.user.name}
-                    // />
                   }
                 >
                   {session.user.name ? session.user.name : session.user.email}
@@ -101,14 +92,6 @@ const Header: React.FC = () => {
           {session && (
             <>
               <Stack direction="row" p="2">
-                {/* <Link href="/auth/me">
-                  <Button size="sm">
-                    {session.user.name ? session.user.name : session.user.email}
-                  </Button>
-                </Link> */}
-
-                {/* <Button size="sm" data-active={isActive('/drafts')}> */}
-
                 <Link href="/create">
                   <Button size="sm" leftIcon={<PlusSquareIcon />}>
                     <Text>Add</Text>

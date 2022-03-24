@@ -95,7 +95,7 @@ const Post: React.FC<PostProps> = (props) => {
           border="2px solid gray"
           borderRadius="md"
           boxShadow="md"
-          w="60%"
+          // w="60%"
         >
           <Text my="2" fontSize="3xl">
             {props.post.title}

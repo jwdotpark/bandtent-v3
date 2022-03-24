@@ -15,6 +15,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useColorMode,
 } from '@chakra-ui/react'
 import { Media } from '../../utils/media'
 import SearchButton from './SearchButton'
@@ -26,9 +27,13 @@ import {
   LockIcon,
   UnlockIcon,
   HamburgerIcon,
+  SettingsIcon,
+  SunIcon,
+  MoonIcon,
 } from '@chakra-ui/icons'
 
 const Header: React.FC = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
   const router = useRouter()
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname
@@ -123,12 +128,12 @@ const Header: React.FC = () => {
           )}
         </Flex>
       </Media>
-
+      {/* ------------------------------------------------------------------------------- */}
       {/* mobile */}
       <Media lessThan="md">
         <Flex borderBottom="1px solid gray" mx="2">
           {/* left */}
-          <Box p="2">
+          <Box pt="2" pr="1">
             <Link href="/">
               <Box className="bold" data-active={isActive('/')}>
                 <Button leftIcon={<HamburgerIcon />} size="sm">
@@ -136,6 +141,10 @@ const Header: React.FC = () => {
                 </Button>
               </Box>
             </Link>
+          </Box>
+          {/* search */}
+          <Box p="2">
+            <SearchButton />
           </Box>
           <Spacer />
           {/* right */}
@@ -163,7 +172,8 @@ const Header: React.FC = () => {
                     size="sm"
                     rightIcon={<ChevronDownIcon />}
                   >
-                    <Text>{session.user.name}</Text>
+                    {/* <Text>{session.user.name}</Text> */}
+                    <SettingsIcon />
                   </MenuButton>
                   <MenuList>
                     <Link href="/auth/me">
@@ -179,35 +189,37 @@ const Header: React.FC = () => {
                           />
                         }
                       >
-                        <Text>Profile</Text>
+                        <Text ml="-2">{session.user.name}</Text>
                       </MenuItem>
                     </Link>
                     <Link href="/create">
-                      <MenuItem icon={<AddIcon mr="2" />}>
+                      <MenuItem icon={<AddIcon />}>
                         <Text>Add</Text>
                       </MenuItem>
                     </Link>
                     <Link href="/drafts">
-                      <MenuItem icon={<PlusSquareIcon mr="2" />}>
-                        My Drafts
-                      </MenuItem>
+                      <MenuItem icon={<PlusSquareIcon />}>My Drafts</MenuItem>
                     </Link>
+                    <MenuItem
+                      icon={colorMode === 'light' ? <SunIcon /> : <MoonIcon />}
+                      onClick={toggleColorMode}
+                    >
+                      <Text>
+                        {colorMode === 'light' ? 'Go Light' : 'Go Dark'}
+                      </Text>
+                    </MenuItem>
                     <MenuItem
                       onClick={() => {
                         signOut()
                         router.push('/')
                       }}
-                      icon={<LockIcon mr="2" />}
+                      icon={<LockIcon />}
                     >
                       <Text>Log out</Text>
                     </MenuItem>
                   </MenuList>
                 </Menu>
               </Box>
-
-              <Stack direction="row" p="2">
-                <ColorButton />
-              </Stack>
             </>
           )}
         </Flex>

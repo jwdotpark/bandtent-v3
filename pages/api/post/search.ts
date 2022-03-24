@@ -13,9 +13,6 @@ export default async function handle(
         title: {
           search: word,
         },
-        content: {
-          search: word,
-        },
       },
     })
     res.status(200)

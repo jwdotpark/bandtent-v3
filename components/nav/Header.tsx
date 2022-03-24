@@ -17,7 +17,7 @@ import {
   MenuItem,
 } from '@chakra-ui/react'
 import { Media } from '../../utils/media'
-import Search from './Search'
+import SearchButton from './SearchButton'
 import {
   ChevronDownIcon,
   AddIcon,
@@ -50,7 +50,7 @@ const Header: React.FC = () => {
               </Box>
             </Link>
             {/* search */}
-            <Search />
+            <SearchButton />
             {session && (
               <Link href="/auth/me">
                 <Button

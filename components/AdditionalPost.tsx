@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Text,
-  HStack,
-  Divider,
-  Stack,
-  Image,
-  Center,
-  AspectRatio,
-} from '@chakra-ui/react'
+import { Box, Text, Divider } from '@chakra-ui/react'
 import Router from 'next/router'
 import ImageComponent from './utils/ImageComponent'
 

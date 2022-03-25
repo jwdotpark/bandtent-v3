@@ -44,14 +44,12 @@ const Draft: React.FC = () => {
   const pullImage = (data: string) => {
     if (data) {
       setImageUrl(data)
-      console.log(imageUrl)
     }
   }
 
   const pullFile = (data: string) => {
     if (data) {
       setFileUrl(data)
-      console.log(fileUrl)
     }
   }
 
@@ -115,8 +113,6 @@ const Draft: React.FC = () => {
                   </Button>
                   <Button
                     variant="outline"
-                    // colorScheme="yellow"
-                    // mr="2"
                     w="20%"
                     onClick={() => Router.push('/')}
                   >

@@ -5,10 +5,16 @@ import MyPost from '../../components/auth/MyPost'
 import MeEdit from '../../components/auth/MeEdit'
 import { Box, Text, Image, Stack, HStack, Center, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { useState } from 'react'
 
 const Me: React.FC = () => {
   const { data } = useSession()
 
+  const [numOfPost, setNumOfPost] = useState(0)
+  const pull_number = (data: number) => {
+    setNumOfPost(data)
+  }
+  
   return (
     <Layout>
       {data ? (
@@ -55,7 +61,6 @@ const Me: React.FC = () => {
                           </a>
                         </Center>
                       </Text>
-                      {/* https://www.google.com/maps/search/berlin,+de/ */}
                       <Text fontSize="md">
                         <Center>
                           <Link
@@ -96,7 +101,7 @@ const Me: React.FC = () => {
               </Box>
               {/* right */}
               <Box p="2" border="2px solid gray" w="60vw" borderRadius="md">
-                <MyPost />
+                <MyPost func={pull_number} />
               </Box>
             </Stack>
           </Media>
@@ -105,25 +110,74 @@ const Me: React.FC = () => {
           <Media lessThan="md">
             <Stack direction={['column', 'row']} m="2">
               {/* left */}
-              <Box>
-                <Box p="2" border="2px solid gray" h="200px" borderRadius="md">
-                  <MeEdit />
-
-                  <HStack h="100%" mx="2">
-                    <Box mx="2">
+              <Box boxShadow="md">
+                <Box
+                  p="2"
+                  border="2px solid gray"
+                  // w="40vw"
+                  borderRadius="md"
+                  overflow="clip"
+                >
+                  <Box
+                    boxShadow="md"
+                    py="4"
+                    borderRadius="md"
+                    border="2px solid gray"
+                    overflow="clip"
+                  >
+                    <Center>
                       <Image
+                        boxShadow="xl"
+                        border="2px solid gray"
                         borderRadius="full"
-                        boxSize="64px"
+                        boxSize="50%"
                         alt={data.user.name}
                         src={data.user.image}
                       />
+                    </Center>
+                    <Box p="2">
+                      <Box mt="2">
+                        <Text fontSize="3xl" as="b">
+                          <Center>{data.user.name}</Center>
+                        </Text>
+                      </Box>
+                      <Text fontSize="md">
+                        <Center>
+                          <a href={'mailto:' + data.user.email}>
+                            <Text color="blue.400">{data.user.email}</Text>
+                          </a>
+                        </Center>
+                      </Text>
+                      <Text fontSize="md">
+                        <Center>
+                          <Link
+                            isExternal
+                            href={
+                              'https://www.google.com/maps/search/' +
+                              data.user.location
+                            }
+                          >
+                            <Text color="blue.400">{data.user.location}</Text>
+                          </Link>
+                        </Center>
+                      </Text>
+                      <Text fontSize="md">
+                        <Center>
+                          <Link href={data.user.website} isExternal>
+                            <Text color="blue.400">
+                              {data.user.website} <ExternalLinkIcon mx="2px" />
+                            </Text>
+                          </Link>
+                        </Center>
+                      </Text>
+                      <Box mt="2" p="4">
+                        <Text fontSize="md">{data.user.description}</Text>
+                      </Box>
                     </Box>
-                    <Box mx="2">
-                      <Text fontSize="xl">{data.user.name}</Text>
-                      <Text fontSize="lg">{data.user.email}</Text>
-                      <Text fontSize="md">some description</Text>
-                    </Box>
-                  </HStack>
+                  </Box>
+                  <Box mt="2">
+                    <MeEdit />
+                  </Box>
                 </Box>
               </Box>
               {/* right */}

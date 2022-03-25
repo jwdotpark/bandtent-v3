@@ -2,16 +2,38 @@ import useSWR from 'swr'
 import { Box, Text, Divider } from '@chakra-ui/react'
 import Router from 'next/router'
 import ImageComponent from '../utils/ImageComponent'
+import { useEffect, useState } from 'react'
 
-const MyPost = () => {
+const MyPost = (props) => {
+  const [num, setNum] = useState(0)
+
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
   const { data, error } = useSWR('/api/post/mypost', fetcher)
+
+  useEffect(() => {
+    if (data) {
+      setNum(data.posts.length)
+    }
+  }, [data])
+
+  props.func(num)
+
   return (
     <>
-      <Box>
-        <Text fontSize="3xl" my="4">
-          My Post
-        </Text>
+      <Box boxShadow="md" mb="2">
+        <Box
+          border="2px solid gray"
+          borderRadius="md"
+          p="2"
+          mb="2"
+          boxShadow="md"
+        >
+          <Text fontSize="md">
+            {data && data.posts.length !== 1
+              ? data.posts.length + ' posts uploaded..'
+              : 'No item uploaded..'}
+          </Text>
+        </Box>
         {!error &&
           data?.posts
             .slice(0)
@@ -19,14 +41,14 @@ const MyPost = () => {
             .map((post) => {
               return (
                 <Box
+                  boxShadow="md"
                   borderRadius="md"
-                  border={post.published ? '2px solid' : '2px dashed'}
+                  border={post.published ? '2px solid' : '4px dashed'}
                   borderColor={post.published ? 'gray' : 'gray.400'}
                   p="2"
                   mb="2"
                   key={post.id}
                 >
-                  {!post.published ? 'Unpublished' : 'Published'}
                   <Box
                     onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     _hover={{ cursor: 'pointer' }}
@@ -35,7 +57,9 @@ const MyPost = () => {
                       {post.title}
                     </Text>
                     <Divider my="2" />
-                    {post.imageUrl && <ImageComponent props={post} />}
+                    <Box m="2">
+                      {post.imageUrl && <ImageComponent props={post} />}
+                    </Box>
                     <Text fontSize="md" noOfLines={3}>
                       {post.content}
                     </Text>

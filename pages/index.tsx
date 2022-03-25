@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     where: { published: true },
     include: {
       author: {
-        select: { name: true, image: true },
+        select: { name: true, image: true, id: true },
       },
     },
     // skip: 4,
@@ -128,6 +128,7 @@ const Main: React.FC<Props> = (props) => {
                         </Box>
                       </Box>
                       {/* info */}
+                      {JSON.stringify(post.authorId)}
                       <Box
                         mt="4"
                         mb="-1"
@@ -137,6 +138,12 @@ const Main: React.FC<Props> = (props) => {
                         // border="2px solid gray"
                         bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                         borderRadius="xl"
+                        onClick={() =>
+                          Router.push(
+                            '/auth/[authorId]',
+                            `/auth/${post.authorId}`
+                          )
+                        }
                       >
                         <Text
                           fontSize="sm"

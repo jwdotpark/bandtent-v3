@@ -40,6 +40,7 @@ const Header: React.FC = () => {
 
   const { data: session, status } = useSession()
 
+  // console.log(session.user.id)
   return (
     <nav>
       {/* desktop */}
@@ -69,7 +70,7 @@ const Header: React.FC = () => {
                 </Box>
               </Link>
               {session && (
-                <Link href="/auth/me">
+                <Link href={'/auth/' + session.user.id}>
                   <Button
                     boxShadow="md"
                     size="sm"
@@ -191,7 +192,7 @@ const Header: React.FC = () => {
                     <SettingsIcon />
                   </MenuButton>
                   <MenuList>
-                    <Link href="/auth/me">
+                    <Link href={'/auth/' + session.user.id}>
                       <MenuItem
                         icon={
                           <Image

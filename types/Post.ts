@@ -15,6 +15,7 @@ type PostProps = {
   createdAt: Date
   imageUrl: string
   fileUrl: string
+  authorId: number
 }
 
 export default PostProps

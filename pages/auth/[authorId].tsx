@@ -1,3 +1,5 @@
+//  @ts-nocheck FIXME
+
 import Layout from '../../components/Layout'
 import { useSession } from 'next-auth/react'
 import { Media } from '../../utils/media'
@@ -14,8 +16,27 @@ import {
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
+import { GetServerSideProps } from 'next'
+import prisma from '../../lib/prisma'
 
-const Me: React.FC = () => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  console.log('ssr: ', params)
+  const user = await prisma.user.findUnique({
+    where: {
+      id: Number(params.authorId),
+    },
+  })
+  return {
+    props: {
+      user: JSON.parse(JSON.stringify(user)),
+    },
+  }
+}
+
+const Me: React.FC = (props) => {
+  const user = props
+  console.log(props.user.name)
+
   const { data } = useSession()
   const { colorMode } = useColorMode()
 
@@ -26,7 +47,7 @@ const Me: React.FC = () => {
 
   return (
     <Layout>
-      {data ? (
+      {props ? (
         <>
           {/* desktop */}
           <Media greaterThanOrEqual="md">
@@ -55,20 +76,20 @@ const Me: React.FC = () => {
                         border="2px solid gray"
                         borderRadius="full"
                         boxSize="50%"
-                        alt={data.user.name}
-                        src={data.user.image}
+                        alt={props.user.name}
+                        src={props.user.image}
                       />
                     </Center>
                     <Box p="2">
                       <Box mt="2">
                         <Text fontSize="3xl" as="b">
-                          <Center>{data.user.name}</Center>
+                          <Center>{props.user.name}</Center>
                         </Text>
                       </Box>
                       <Text fontSize="md">
                         <Center>
-                          <a href={'mailto:' + data.user.email}>
-                            <Text color="blue.400">{data.user.email}</Text>
+                          <a href={'mailto:' + props.user.email}>
+                            <Text color="blue.400">{props.user.email}</Text>
                           </a>
                         </Center>
                       </Text>
@@ -78,18 +99,18 @@ const Me: React.FC = () => {
                             isExternal
                             href={
                               'https://www.google.com/maps/search/' +
-                              data.user.location
+                              props.user.location
                             }
                           >
-                            <Text color="blue.400">{data.user.location}</Text>
+                            <Text color="blue.400">{props.user.location}</Text>
                           </Link>
                         </Center>
                       </Text>
                       <Text fontSize="md">
                         <Center>
-                          <Link href={data.user.website} isExternal>
+                          <Link href={props.user.website} isExternal>
                             <Text color="blue.400">
-                              {data.user.website} <ExternalLinkIcon mx="2px" />
+                              {props.user.website} <ExternalLinkIcon mx="2px" />
                             </Text>
                           </Link>
                         </Center>
@@ -101,12 +122,12 @@ const Me: React.FC = () => {
                         borderRadius="xl"
                         bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                       >
-                        <Text fontSize="md">{data.user.description}</Text>
+                        <Text fontSize="md">{props.user.description}</Text>
                       </Box>
                     </Box>
                   </Box>
                   <Box mt="2" mx="2">
-                    <MeEdit />
+                    {/* <MeEdit props={props} /> */}
                   </Box>
                 </Box>
               </Box>
@@ -148,20 +169,20 @@ const Me: React.FC = () => {
                         border="2px solid gray"
                         borderRadius="full"
                         boxSize="50%"
-                        alt={data.user.name}
-                        src={data.user.image}
+                        alt={props.user.name}
+                        src={props.user.image}
                       />
                     </Center>
                     <Box p="2">
                       <Box mt="2">
                         <Text fontSize="3xl" as="b">
-                          <Center>{data.user.name}</Center>
+                          <Center>{props.user.name}</Center>
                         </Text>
                       </Box>
                       <Text fontSize="md">
                         <Center>
-                          <a href={'mailto:' + data.user.email}>
-                            <Text color="blue.400">{data.user.email}</Text>
+                          <a href={'mailto:' + props.user.email}>
+                            <Text color="blue.400">{props.user.email}</Text>
                           </a>
                         </Center>
                       </Text>
@@ -171,30 +192,28 @@ const Me: React.FC = () => {
                             isExternal
                             href={
                               'https://www.google.com/maps/search/' +
-                              data.user.location
+                              props.user.location
                             }
                           >
-                            <Text color="blue.400">{data.user.location}</Text>
+                            <Text color="blue.400">{props.user.location}</Text>
                           </Link>
                         </Center>
                       </Text>
                       <Text fontSize="md">
                         <Center>
-                          <Link href={data.user.website} isExternal>
+                          <Link href={props.user.website} isExternal>
                             <Text color="blue.400">
-                              {data.user.website} <ExternalLinkIcon mx="2px" />
+                              {props.user.website} <ExternalLinkIcon mx="2px" />
                             </Text>
                           </Link>
                         </Center>
                       </Text>
                       <Box mt="2" p="4">
-                        <Text fontSize="md">{data.user.description}</Text>
+                        <Text fontSize="md">{props.user.description}</Text>
                       </Box>
                     </Box>
                   </Box>
-                  <Box mt="2">
-                    <MeEdit />
-                  </Box>
+                  <Box mt="2">{/* <MeEdit /> */}</Box>
                 </Box>
               </Box>
               {/* right */}

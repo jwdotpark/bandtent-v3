@@ -22,9 +22,10 @@ import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import Router from 'next/router'
 
-const MeEdit = () => {
+const MeEdit = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { data } = useSession()
+  // const { props } = useSession()
+  console.log(props)
 
   const {
     handleSubmit,
@@ -43,7 +44,7 @@ const MeEdit = () => {
         body: JSON.stringify(values),
       })
         .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((props) => console.log(props))
         .then((error) => {
           console.error('Error: ', error)
         })
@@ -55,6 +56,9 @@ const MeEdit = () => {
   }
 
   const { colorMode } = useColorMode()
+
+  // console.log(props.props.user)
+  const user = props.props.user
 
   return (
     <>
@@ -77,25 +81,21 @@ const MeEdit = () => {
             bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
             borderRadius="xl"
           >
-            <ModalHeader>{data.user.name}</ModalHeader>
+            <ModalHeader>{user.name}</ModalHeader>
             <ModalCloseButton />
             <form onSubmit={handleSubmit(onSubmit)}>
               <ModalBody>
                 {/* <VStack spacing={2}> */}
                 {/* image input */}
                 <Box>
-                  <Image
-                    loading="lazy"
-                    borderRadius="xl"
-                    src={data.user.image}
-                  />
+                  <Image loading="lazy" borderRadius="xl" src={user.image} />
                 </Box>
                 {/* name */}
                 <FormControl isInvalid={errors.name}>
                   <FormLabel htmlFor="name">User Name</FormLabel>
                   <Input
                     id="name"
-                    defaultValue={data.user.name}
+                    defaultValue={user.name}
                     {...register('name', {
                       required: 'User name is required.',
                       minLength: {
@@ -113,7 +113,7 @@ const MeEdit = () => {
                   <FormLabel htmlFor="name">Email Address</FormLabel>
                   <Input
                     id="email"
-                    defaultValue={data.user.email}
+                    defaultValue={user.email}
                     {...register('email', {
                       required: 'Email address is required',
                       minLength: {
@@ -137,7 +137,7 @@ const MeEdit = () => {
                     id="description"
                     placeholder="Description"
                     // @ts-ignore description is not defined in default next-auth user table
-                    defaultValue={data.user.description}
+                    defaultValue={user.description}
                     {...register('description', {})}
                   />
                   <FormErrorMessage>
@@ -151,7 +151,7 @@ const MeEdit = () => {
                     id="location"
                     placeholder="Berlin, DE"
                     // @ts-ignore location is not defined in default next-auth user table
-                    defaultValue={data.user.location}
+                    defaultValue={user.location}
                     {...register('location', {})}
                   />
                   <FormErrorMessage>
@@ -168,7 +168,7 @@ const MeEdit = () => {
                       id="website"
                       placeholder="http://www.example.com/"
                       // @ts-ignore location is not defined in default next-auth user table
-                      defaultValue={data.user.website}
+                      defaultValue={user.website}
                       {...register('website', {
                         pattern: {
                           value:

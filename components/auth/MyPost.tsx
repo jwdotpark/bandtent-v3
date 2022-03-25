@@ -18,7 +18,7 @@ const MyPost = (props) => {
     }
   }, [data])
 
-  props.func(num)
+  // props.func(num)
 
   return (
     <>

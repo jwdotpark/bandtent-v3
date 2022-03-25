@@ -103,11 +103,10 @@ const Main: React.FC<Props> = (props) => {
                     >
                       <Box
                         onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                        _hover={{ cursor: 'pointer' }}
                       >
                         <Text fontSize="3xl" noOfLines={1}>
-                          <b>
-                            {post.id}. {post.title}
-                          </b>
+                          <b>{post.title}</b>
                         </Text>
 
                         <Divider mb="4" />
@@ -128,8 +127,8 @@ const Main: React.FC<Props> = (props) => {
                       <Box
                         mt="4"
                         mb="-1"
-                        mx="1"
-                        p="1"
+                        // mx="1"
+                        p="2"
                         boxShadow="md"
                         border="2px solid gray"
                         borderRadius="md"

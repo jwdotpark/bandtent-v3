@@ -49,8 +49,10 @@ const Feature = (props: {
                 borderRadius="md"
                 p="2"
               >
-                FEATURE
-                <Text fontSize="3xl" noOfLines={3} textAlign="left">
+                <Text textAlign="right">
+                  <i>FEATURE</i>
+                </Text>
+                <Text ml="2" fontSize="3xl" noOfLines={3} textAlign="left">
                   <b>{post.title}</b>
                 </Text>
                 <Divider mb="4" />

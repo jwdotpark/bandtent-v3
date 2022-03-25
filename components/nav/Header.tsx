@@ -48,13 +48,14 @@ const Header: React.FC = () => {
           <Flex
             as="header"
             position="fixed"
-            ml="4"
-            w="calc(100% - 2rem)"
+            ml="2"
+            w="calc(100% - 1rem)"
             zIndex="tooltip"
-            border="2px solid gray"
+            // border="2px solid gray"
             borderRadius="xl"
-            bg={colorMode === 'light' ? 'white' : 'gray.700'}
+            bg={colorMode === 'light' ? 'gray.300' : 'gray.900'}
             sx={{ transform: 'translateY(-4px)' }}
+            boxShadow="xl"
           >
             {/* left */}
             <Stack direction="row" p="2">

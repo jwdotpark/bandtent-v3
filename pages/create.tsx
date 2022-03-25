@@ -62,7 +62,7 @@ const Draft: React.FC = () => {
           <Box w="50%">
             <form onSubmit={submitData}>
               <Text>New Draft</Text>
-              <Box my="4">
+              <Box my="4" boxShadow="md">
                 <Input
                   variant="filled"
                   autoFocus
@@ -72,7 +72,7 @@ const Draft: React.FC = () => {
                   value={title}
                 />
               </Box>
-              <Box my="4">
+              <Box my="4" boxShadow="md">
                 <Textarea
                   variant="filled"
                   cols={50}
@@ -83,17 +83,23 @@ const Draft: React.FC = () => {
                 />
               </Box>
               {/* image */}
-              <Box>
+              <Box boxShadow="md">
                 <ImageUpload img={pullImage} />
                 <Input display="none" type="file" defaultValue={imageUrl} />
               </Box>
               {/* file */}
-              <Box>
+              <Box boxShadow="md">
                 <FileUpload data={pullFile} />
                 <Input display="none" type="file" defaultValue={imageUrl} />
               </Box>
               <Box>
-                <ButtonGroup isAttached size="sm" w="100%" mt="2">
+                <ButtonGroup
+                  isAttached
+                  size="sm"
+                  w="100%"
+                  mt="2"
+                  boxShadow="md"
+                >
                   <Button
                     variant="solid"
                     // mr="2"

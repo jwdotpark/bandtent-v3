@@ -1,10 +1,12 @@
 import useSWR from 'swr'
-import { Box, Text, Divider } from '@chakra-ui/react'
+import { Box, Text, Divider, useColorMode } from '@chakra-ui/react'
 import Router from 'next/router'
 import ImageComponent from '../utils/ImageComponent'
 import { useEffect, useState } from 'react'
 
 const MyPost = (props) => {
+  const { colorMode } = useColorMode()
+
   const [num, setNum] = useState(0)
 
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
@@ -20,12 +22,13 @@ const MyPost = (props) => {
 
   return (
     <>
-      <Box boxShadow="md" mb="2">
+      <Box my="2" mb="4">
         <Box
-          border="2px solid gray"
-          borderRadius="md"
+          bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+          borderRadius="xl"
           p="2"
           mb="2"
+          my="2"
           boxShadow="md"
         >
           <Text fontSize="md">
@@ -41,12 +44,14 @@ const MyPost = (props) => {
             .map((post) => {
               return (
                 <Box
+                  my="4"
                   boxShadow="md"
-                  borderRadius="md"
-                  border={post.published ? '2px solid' : '4px dashed'}
-                  borderColor={post.published ? 'gray' : 'gray.400'}
+                  borderRadius="xl"
+                  // border={post.published ? '2px solid' : '4px dashed'}
+                  // borderColor={post.published ? 'gray' : 'gray.400'}
+                  bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                   p="2"
-                  mb="2"
+                  mb="4"
                   key={post.id}
                 >
                   <Box

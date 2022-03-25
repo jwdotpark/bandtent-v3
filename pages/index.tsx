@@ -46,7 +46,7 @@ type Props = {
 }
 
 const Main: React.FC<Props> = (props) => {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { colorMode } = useColorMode()
 
   // pagination load more callback
   const [feed, setFeed] = useState(props.feed)

@@ -1,18 +1,9 @@
-import { useCallback, useEffect } from 'react'
 import { useS3Upload } from 'next-s3-upload'
-import ImageComponent from './ImageComponent'
 import { useState } from 'react'
 import {
   Box,
   Text,
-  Input,
   FormControl,
-  FormLabel,
-  InputGroup,
-  InputLeftElement,
-  FormErrorMessage,
-  Code,
-  Icon,
   Center,
   Image,
   useColorMode,
@@ -34,6 +25,7 @@ export default function UploadPage(props) {
     setPreview(URL.createObjectURL(event.target.files[0]))
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
+    console.log('imageurl: ', url)
     setImageUrl(url)
   }
 

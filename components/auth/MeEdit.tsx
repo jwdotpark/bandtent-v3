@@ -55,7 +55,7 @@ const MeEdit = () => {
 
   return (
     <>
-      <Button onClick={onOpen} size="sm">
+      <Button onClick={onOpen} size="sm" w="100%" boxShadow="md">
         Edit
       </Button>
       {/* modal */}

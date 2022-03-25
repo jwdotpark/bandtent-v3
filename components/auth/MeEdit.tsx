@@ -69,7 +69,7 @@ const MeEdit = () => {
               {/* <VStack spacing={2}> */}
               {/* image input */}
               <Box>
-                <Image borderRadius="xl" src={data.user.image} />
+                <Image loading="lazy" borderRadius="xl" src={data.user.image} />
               </Box>
               {/* name */}
               <FormControl isInvalid={errors.name}>

@@ -80,6 +80,7 @@ const Main: React.FC<Props> = (props) => {
 
         {/* desktop */}
         <Media greaterThanOrEqual="md">
+          {/* navbar space */}
           <Box m="2" boxShadow="md">
             <Stack direction={['column', 'row']} w="100%">
               {/* left column */}
@@ -92,7 +93,7 @@ const Main: React.FC<Props> = (props) => {
                 <section>
                   {feed.map((post) => (
                     <Box
-                      bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                      // bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                       borderRadius="md"
                       border="2px solid gray"
                       p="4"
@@ -115,10 +116,10 @@ const Main: React.FC<Props> = (props) => {
                           <ImageComponent props={post} />
                         </Box>
                         {/* audio */}
-                        {/* <audio controls src={post.fileUrl}>
-                        Your browser does not support the
-                        <code>audio</code> element.
-                      </audio> */}
+                        <audio preload="none" controls src={post.fileUrl}>
+                          Your browser does not support the
+                          <code>audio</code> element.
+                        </audio>
                         <Text fontSize="lg" noOfLines={3} mx="2">
                           {post.content}
                         </Text>

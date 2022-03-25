@@ -44,89 +44,101 @@ const Header: React.FC = () => {
     <nav>
       {/* desktop */}
       <Media greaterThanOrEqual="md">
-        <Flex>
-          {/* left */}
-          <Stack direction="row" p="2">
-            <Link href="/">
-              <Box className="bold" data-active={isActive('/')}>
-                <Button leftIcon={<HamburgerIcon />} size="sm" boxShadow="md">
-                  Feed
-                </Button>
-              </Box>
-            </Link>
-            {session && (
-              <Link href="/auth/me">
-                <Button
-                  boxShadow="md"
-                  size="sm"
-                  leftIcon={
-                    <Image
-                      boxSize="25px"
-                      display="inline"
-                      border="1px inset  gray"
-                      src={session.user.image}
-                      fallbackSrc="https://picsum.photos/200"
-                      borderRadius="full"
-                      alt={session.user.name}
-                    />
-                  }
-                >
-                  {session.user.name ? session.user.name : session.user.email}
-                </Button>
-              </Link>
-            )}
-            {/* search */}
-            <SearchButton />
-          </Stack>
-          <Spacer />
-          {/* right */}
-          {/* no login */}
-          {!session && (
-            <>
-              <Stack direction="row" p="2">
-                <Link href="/api/auth/signin">
-                  <Button size="sm" leftIcon={<UnlockIcon />}>
-                    {status === 'loading' ? 'Validating Session..' : 'Log In'}
+        <Box>
+          <Flex
+            as="header"
+            position="fixed"
+            ml="4"
+            w="calc(100% - 2rem)"
+            zIndex="tooltip"
+            border="2px solid gray"
+            borderRadius="xl"
+            bg={colorMode === 'light' ? 'white' : 'gray.700'}
+            sx={{ transform: 'translateY(-4px)' }}
+          >
+            {/* left */}
+            <Stack direction="row" p="2">
+              <Link href="/">
+                <Box className="bold" data-active={isActive('/')}>
+                  <Button leftIcon={<HamburgerIcon />} size="sm" boxShadow="md">
+                    Feed
                   </Button>
-                </Link>
-                <ColorButton />
-              </Stack>
-            </>
-          )}
-          {/* yes login */}
-          {session && (
-            <>
-              <Stack direction="row" p="2">
-                <Link href="/create">
+                </Box>
+              </Link>
+              {session && (
+                <Link href="/auth/me">
                   <Button
                     boxShadow="md"
                     size="sm"
-                    leftIcon={<PlusSquareIcon />}
+                    leftIcon={
+                      <Image
+                        boxSize="25px"
+                        display="inline"
+                        border="1px inset  gray"
+                        src={session.user.image}
+                        fallbackSrc="https://picsum.photos/200"
+                        borderRadius="full"
+                        alt={session.user.name}
+                      />
+                    }
                   >
-                    <Text>Add</Text>
+                    {session.user.name ? session.user.name : session.user.email}
                   </Button>
                 </Link>
-                <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
-                  <Link href="/drafts">My Drafts</Link>
-                </Button>
-                <Button
-                  boxShadow="md"
-                  leftIcon={<LockIcon />}
-                  size="sm"
-                  onClick={() => {
-                    signOut()
-                    router.push('/')
-                  }}
-                >
-                  <Text>Log out</Text>
-                </Button>
-                <Box boxShadow="md">
+              )}
+              {/* search */}
+              <SearchButton />
+            </Stack>
+            <Spacer />
+            {/* right */}
+            {/* no login */}
+            {!session && (
+              <>
+                <Stack direction="row" p="2">
+                  <Link href="/api/auth/signin">
+                    <Button size="sm" leftIcon={<UnlockIcon />}>
+                      {status === 'loading' ? 'Validating Session..' : 'Log In'}
+                    </Button>
+                  </Link>
                   <ColorButton />
-                </Box>
-              </Stack>
-            </>
-          )}
-        </Flex>
+                </Stack>
+              </>
+            )}
+            {/* yes login */}
+            {session && (
+              <>
+                <Stack direction="row" p="2">
+                  <Link href="/create">
+                    <Button
+                      boxShadow="md"
+                      size="sm"
+                      leftIcon={<PlusSquareIcon />}
+                    >
+                      <Text>Add</Text>
+                    </Button>
+                  </Link>
+                  <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
+                    <Link href="/drafts">My Drafts</Link>
+                  </Button>
+                  <Button
+                    boxShadow="md"
+                    leftIcon={<LockIcon />}
+                    size="sm"
+                    onClick={() => {
+                      signOut()
+                      router.push('/')
+                    }}
+                  >
+                    <Text>Log out</Text>
+                  </Button>
+                  <Box boxShadow="md">
+                    <ColorButton />
+                  </Box>
+                </Stack>
+              </>
+            )}
+          </Flex>
+        </Box>
       </Media>
       {/* ------------------------------------------------------------------------------- */}
       {/* mobile */}

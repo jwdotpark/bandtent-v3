@@ -14,7 +14,7 @@ const Layout = (props: {
       <Box>
         <Header />
         {/* <Player /> */}
-        <Box>{props.children}</Box>
+        <Box sx={{ transform: 'translateY(3.5rem)' }}>{props.children}</Box>
       </Box>
     </>
   )

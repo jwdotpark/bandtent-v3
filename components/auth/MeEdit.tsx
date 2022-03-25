@@ -1,9 +1,6 @@
 import {
   Box,
-  Text,
   Image,
-  Stack,
-  HStack,
   Button,
   Textarea,
   Modal,
@@ -17,16 +14,12 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  FormHelperText,
   Input,
-  VStack,
   InputGroup,
-  InputLeftAddon,
 } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import Router from 'next/router'
-import PostProps from '../../types/Post'
 
 const MeEdit = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()

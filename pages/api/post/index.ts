@@ -10,14 +10,20 @@ export default async function handle(
   const { title, content, imageUrl, fileUrl } = req.body
 
   const session = await getSession({ req })
-  const result = await prisma.post.create({
-    data: {
-      title: title,
-      content: content,
-      imageUrl: imageUrl,
-      fileUrl: fileUrl,
-      author: { connect: { email: session?.user?.email } },
-    },
-  })
-  res.json(result)
+  if (session) {
+    const result = await prisma.post.create({
+      data: {
+        title: title,
+        content: content,
+        imageUrl: imageUrl,
+        fileUrl: fileUrl,
+        author: { connect: { email: session?.user?.email } },
+      },
+    })
+    res.status(200)
+    res.json(result)
+  } else {
+    res.status(500)
+    res.json({ error: 'No Authorization' })
+  }
 }

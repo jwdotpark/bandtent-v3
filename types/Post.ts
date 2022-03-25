@@ -2,6 +2,7 @@ type PostProps = {
   id: number
   title: string
   author: {
+    uid: number
     name: string
     email: string
     description: string

@@ -38,7 +38,8 @@ const MeEdit = () => {
     formState: { errors, isSubmitting, isValid },
   } = useForm({ mode: 'onChange' })
 
-  function onSubmit(values) {
+  // FIXME something's wrong with fetching but can't figure out
+  function onSubmit(values: any) {
     return new Promise<void>((resolve) => {
       fetch('/api/profile/edit', {
         method: 'PUT',
@@ -49,6 +50,9 @@ const MeEdit = () => {
       })
         .then((res) => res.json())
         .then((data) => console.log(data))
+        .then((error) => {
+          console.error('Error: ', error)
+        })
       setTimeout(() => {
         resolve()
         Router.reload()

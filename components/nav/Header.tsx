@@ -53,8 +53,10 @@ const Header: React.FC = () => {
             zIndex="tooltip"
             // border="2px solid gray"
             borderRadius="xl"
-            bg={colorMode === 'light' ? 'gray.300' : 'gray.900'}
-            sx={{ transform: 'translateY(-4px)' }}
+            bg={colorMode === 'light' ? 'gray.300' : 'gray.800'}
+            sx={{
+              transform: 'translateY(-4px)',
+            }}
             boxShadow="xl"
           >
             {/* left */}

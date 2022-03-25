@@ -86,16 +86,18 @@ const Main: React.FC<Props> = (props) => {
               {/* left column */}
               <Box
                 w="40vw"
-                border="2px solid gray"
-                borderRadius="md"
+                bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                borderRadius="xl"
+                // border="1px solid"
+                borderColor="gray.300"
                 boxShadow="md"
+                // mr="2"
               >
                 <section>
                   {feed.map((post) => (
                     <Box
-                      // bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
-                      borderRadius="md"
-                      border="2px solid gray"
+                      bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                      borderRadius="xl"
                       p="4"
                       m="4"
                       key={post.id}
@@ -108,20 +110,22 @@ const Main: React.FC<Props> = (props) => {
                         <Text fontSize="3xl" noOfLines={1}>
                           <b>{post.title}</b>
                         </Text>
+                        <Text textAlign="right" fontSize="xl" noOfLines={3}>
+                          {post.content}
+                        </Text>
 
-                        <Divider mb="4" />
+                        {/* <Divider mb="2" /> */}
                         {/* cover */}
                         <Box>
                           <ImageComponent props={post} />
                         </Box>
-                        {/* audio */}
-                        <audio preload="none" controls src={post.fileUrl}>
-                          Your browser does not support the
-                          <code>audio</code> element.
-                        </audio>
-                        <Text fontSize="lg" noOfLines={3} mx="2">
-                          {post.content}
-                        </Text>
+                        <Box my="4">
+                          {/* audio */}
+                          <audio preload="none" controls src={post.fileUrl}>
+                            Your browser does not support the
+                            <code>audio</code> element.
+                          </audio>
+                        </Box>
                       </Box>
                       {/* info */}
                       <Box
@@ -130,8 +134,9 @@ const Main: React.FC<Props> = (props) => {
                         // mx="1"
                         p="2"
                         boxShadow="md"
-                        border="2px solid gray"
-                        borderRadius="md"
+                        // border="2px solid gray"
+                        bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                        borderRadius="xl"
                       >
                         <Text
                           fontSize="sm"
@@ -156,16 +161,34 @@ const Main: React.FC<Props> = (props) => {
                     </Box>
                   ))}
                 </section>
-                <Center my="4">
-                  <Button mx="4" w="100%" size="sm" onClick={handleMore}>
-                    Load More
+                <Center my="4" mx="2">
+                  <Button
+                    mx="4"
+                    w="100%"
+                    size="sm"
+                    colorScheme="gray"
+                    // border="1px solid black"
+                    borderRadius="xl"
+                    onClick={handleMore}
+                    boxShadow=""
+                  >
+                    <Text fontSize="sm">Load More</Text>
                   </Button>
                 </Center>
               </Box>
 
               {/* right column */}
-              <Box w="60vw" m="2" borderRadius="md" border="2px solid gray">
-                <Box m="2" p="2">
+              <Box
+                w="60vw"
+                m="2"
+                ml="2"
+                borderRadius="xl"
+                // border="1px solid"
+                // borderColor="gray.300"
+                bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                // border="2px solid gray"
+              >
+                <Box m="2" p="2" overflow="clip">
                   <Feature props={props} />
                 </Box>
               </Box>
@@ -189,7 +212,7 @@ const Main: React.FC<Props> = (props) => {
                   {feed.map((post) => (
                     <Box
                       p="1"
-                      borderRadius="md"
+                      borderRadius="xl"
                       border="2px solid gray"
                       mb="2"
                       key={post.id}
@@ -219,7 +242,7 @@ const Main: React.FC<Props> = (props) => {
                         p="1"
                         boxShadow="md"
                         border="2px solid gray"
-                        borderRadius="md"
+                        borderRadius="xl"
                       >
                         <Text
                           fontSize="sm"
@@ -264,7 +287,7 @@ const Main: React.FC<Props> = (props) => {
                 {feed.map((post) => (
                   <Box
                     p="1"
-                    borderRadius="md"
+                    borderRadius="xl"
                     border="2px solid gray"
                     mb="2"
                     key={post.id}
@@ -292,7 +315,7 @@ const Main: React.FC<Props> = (props) => {
                         p="1"
                         boxShadow="md"
                         border="2px solid gray"
-                        borderRadius="md"
+                        borderRadius="xl"
                       >
                         <Text
                           fontSize="sm"

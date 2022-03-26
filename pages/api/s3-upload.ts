@@ -6,3 +6,4 @@ export default APIRoute.configure({
     return `bandtent-v3/uploads/path/${filename.toUpperCase()}`
   },
 })
+

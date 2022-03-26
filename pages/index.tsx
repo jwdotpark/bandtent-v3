@@ -82,6 +82,13 @@ const Main: React.FC<Props> = (props) => {
         <Media greaterThanOrEqual="md">
           {/* navbar space */}
           <Box m="2" boxShadow="md">
+            <Button
+              onClick={() => {
+                throw new Error('Sentry error!')
+              }}
+            >
+              Make Error
+            </Button>
             <Stack direction={['column', 'row']} w="100%">
               {/* left column */}
               <Box

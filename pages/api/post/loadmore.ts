@@ -1,13 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
+import { withSentry } from '@sentry/nextjs'
 
 // NOTE need to give it a cursor or anchor
 
 // GET /api/post/loadmore
-export default async function handle(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function handle(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.method === 'GET') {
       const morePost = await prisma.post.findMany({
@@ -31,3 +29,5 @@ export default async function handle(
     await prisma.$disconnect()
   }
 }
+
+export default withSentry(handle)

@@ -1,11 +1,24 @@
-import { Box, Image, AspectRatio, Center } from '@chakra-ui/react'
+import { Box, Image, AspectRatio, Center, useColorMode } from '@chakra-ui/react'
 
 const ImageComponent = (post: {
   props: { imageUrl: string; content: string }
 }) => {
+  const { colorMode } = useColorMode()
   return (
-    <Box my="2" boxShadow="md" borderRadius="xl" overflow="hidden">
-      <AspectRatio maxW="1080px" ratio={1} borderRadius="xl" overflow="clip">
+    <Box
+      my="2"
+      // boxShadow="md"
+      sx={{
+        boxShadow:
+          'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+      }}
+      borderRadius="xl"
+      overflow="clip"
+      border="1rem solid"
+      borderBottom="4rem solid"
+      borderColor={colorMode === 'light' ? 'gray.100' : 'gray.300'}
+    >
+      <AspectRatio maxW="1080px" ratio={1} borderRadius="sm" overflow="clip">
         <Image
           loading="lazy"
           src={

@@ -61,6 +61,7 @@ const Me: React.FC = (props) => {
                   // border="2px solid gray"
                   bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                   borderRadius="xl"
+                  boxShadow="md"
                   overflow="clip"
                 >
                   <Box

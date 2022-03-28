@@ -51,6 +51,7 @@ const SearchPage = (props: { result: any[] }) => {
         m="2"
         // mt="2"
         boxShadow="md"
+        overflow="clip"
       >
         <Box
           p="2"
@@ -62,6 +63,8 @@ const SearchPage = (props: { result: any[] }) => {
           {props.result.length !== 0 &&
             props.result.map((post) => (
               <Box
+                overflow="clip"
+                borderRadius="xl"
                 boxShadow="md"
                 mb="4"
                 w="100%"
@@ -69,6 +72,7 @@ const SearchPage = (props: { result: any[] }) => {
                 onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
               >
                 <Box
+                  overflow="clip"
                   key={post.id}
                   // border="2px solid gray"
                   bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}

@@ -206,13 +206,14 @@ const Post: React.FC<PostProps> = (props) => {
         mx="2"
         mt="2"
       >
-        <Box mt="2">
+        <Box mt="4">
           {myPost.length > 0 && (
-            <Box mx="2">
+            <Box mx="2" mt="2">
               <Box
                 boxShadow="md"
                 borderRadius="xl"
                 p="2"
+                my="2"
                 bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
               >
                 <Text size="xl">

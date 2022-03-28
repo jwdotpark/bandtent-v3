@@ -10,7 +10,7 @@ const AdditionalPost = ({ myPost }) => {
       p="2"
       w="100%"
       mx="auto"
-      sx={{ columnCount: [1, 2, 3, 4, 5], columnGap: '2' }}
+      sx={{ columnCount: [1, 2, 3, 4, 5], columnGap: '4' }}
     >
       {myPost
         .slice(0)
@@ -23,7 +23,7 @@ const AdditionalPost = ({ myPost }) => {
             content: string
           }) => (
             <Box
-              mb="2"
+              mb="4"
               w="100%"
               display="inline-block"
               onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
@@ -33,7 +33,7 @@ const AdditionalPost = ({ myPost }) => {
                 bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                 boxShadow="md"
                 borderRadius="xl"
-                p="2"
+                p="4"
               >
                 <Text fontSize="xl">{post.title}</Text>
                 <Divider mb="2" />

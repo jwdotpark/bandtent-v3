@@ -27,6 +27,7 @@ const MyPost = (props) => {
           bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
           borderRadius="xl"
           p="2"
+          m="2"
           mb="2"
           my="2"
           boxShadow="md"
@@ -44,6 +45,7 @@ const MyPost = (props) => {
             .map((post) => {
               return (
                 <Box
+                  // border="1px solid red"
                   my="4"
                   boxShadow="md"
                   borderRadius="xl"
@@ -51,10 +53,12 @@ const MyPost = (props) => {
                   // borderColor={post.published ? 'gray' : 'gray.400'}
                   bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                   p="2"
+                  m="2"
                   mb="4"
                   key={post.id}
                 >
                   <Box
+                    p="2"
                     onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     _hover={{ cursor: 'pointer' }}
                   >
@@ -62,10 +66,10 @@ const MyPost = (props) => {
                       {post.title}
                     </Text>
                     <Divider my="2" />
-                    <Box m="2">
+                    <Box>
                       {post.imageUrl && <ImageComponent props={post} />}
                     </Box>
-                    <Text fontSize="md" noOfLines={3}>
+                    <Text fontSize="md" noOfLines={3} m="2">
                       {post.content}
                     </Text>
                   </Box>

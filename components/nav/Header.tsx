@@ -112,10 +112,10 @@ const Header: React.FC = () => {
             {/* search */}
             <motion.div
               whileHover={{
-                scale: 1.1,
+                scale: 1.05,
               }}
               transition={{ ease: 'easeInOut', duration: 0.1 }}
-              whileFocus={{ scale: 1.1 }}
+              whileFocus={{ scale: 1.05 }}
             >
               <SearchButton />
             </motion.div>

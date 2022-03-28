@@ -70,7 +70,6 @@ const SearchPage = (props: { result: any[] }) => {
                 mb="4"
                 w="100%"
                 display="inline-block"
-                onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
               >
                 <Box
                   overflow="clip"
@@ -80,12 +79,17 @@ const SearchPage = (props: { result: any[] }) => {
                   borderRadius="xl"
                   p="4"
                 >
-                  <Text fontSize="xl" noOfLines={3}>
-                    {post.title}
-                  </Text>
-                  <Divider mb="2" />
-                  {post.imageUrl && <ImageComponent props={post} />}
-                  <Text noOfLines={3}>{post.content}</Text>
+                  <Box
+                    _hover={{ cursor: 'pointer' }}
+                    onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                  >
+                    <Text fontSize="xl" noOfLines={3}>
+                      {post.title}
+                    </Text>
+                    <Divider mb="2" />
+                    {post.imageUrl && <ImageComponent props={post} />}
+                    <Text noOfLines={3}>{post.content}</Text>
+                  </Box>
                   {/* info */}
                   <motion.div
                     whileHover={{
@@ -96,6 +100,12 @@ const SearchPage = (props: { result: any[] }) => {
                   >
                     <Box
                       _hover={{ cursor: 'pointer' }}
+                      onClick={() =>
+                        Router.push(
+                          '/auth/[authorId]',
+                          `/auth/${post.authorId}`
+                        )
+                      }
                       mt="4"
                       p="1"
                       boxShadow="md"

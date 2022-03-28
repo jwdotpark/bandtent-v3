@@ -1,10 +1,12 @@
 import { getSession } from 'next-auth/react'
 import prisma from '../../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { withSentry } from '@sentry/nextjs'
 
 // GET /api/post/mypost/:uid
-export async function handle(req: NextApiRequest, res: NextApiResponse) {
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const session = await getSession({ req })
   // @ts-ignore id type not exist on next-auth session
   const uid: number = session.user.id
@@ -27,5 +29,3 @@ export async function handle(req: NextApiRequest, res: NextApiResponse) {
     await prisma.$disconnect()
   }
 }
-
-export default withSentry(handle)

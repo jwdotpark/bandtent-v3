@@ -1,8 +1,7 @@
 import prisma from '../../../lib/prisma'
-import { withSentry } from '@sentry/nextjs'
 
 // DELETE /api/post/:id
-export async function handle(req, res) {
+export default async function handle(req, res) {
   const postId = req.query.id
   if (req.method === 'DELETE') {
     const post = await prisma.post.delete({
@@ -15,5 +14,3 @@ export async function handle(req, res) {
     )
   }
 }
-
-export default withSentry(handle)

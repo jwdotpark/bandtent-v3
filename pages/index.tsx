@@ -87,7 +87,7 @@ const Main: React.FC<Props> = (props) => {
                 throw new Error('Sentry error!')
               }}
             >
-              Make Error
+              Make Error 
             </Button>
             <Stack direction={['column', 'row']} w="100%">
               {/* left column */}

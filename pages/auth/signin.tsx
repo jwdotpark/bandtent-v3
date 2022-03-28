@@ -42,7 +42,7 @@ const SignIn = ({
   const { isOpen, onToggle } = useDisclosure()
 
   const [height, setHeight] = useState<number>()
-  
+
   useEffect(() => {
     if (window) {
       setHeight(window.innerHeight)
@@ -52,7 +52,7 @@ const SignIn = ({
   return (
     <>
       <Layout>
-        <VStack h="calc(100vh - 50px)">
+        <VStack h="calc(100vh - 50px)" mt="2">
           <Box mt={height / 2.75}>Sign In With..</Box>
           <Box>
             <VStack spacing={2}>

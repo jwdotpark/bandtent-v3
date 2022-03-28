@@ -93,13 +93,8 @@ const Me: React.FC = (props) => {
                             overflow="clip"
                           >
                             <Image
-                              src={
-                                props.user.image
-                                  ? props.user.image
-                                  : 'https://picsum.photos/400'
-                              }
-                              // src={post.props.imageUrl}
-                              fallbackSrc="https://via.placeholder.com/300x300"
+                              src={props.user.image}
+                              fallbackSrc="https://picsum.photos/400"
                               alt={props.content}
                               w="100%"
                               objectFit="cover"

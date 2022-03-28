@@ -18,7 +18,7 @@ const MyPost = (props) => {
     }
   }, [data])
 
-  // props.func(num)
+  if (error) return 'Failed to load'
 
   return (
     <>
@@ -26,10 +26,9 @@ const MyPost = (props) => {
         <Box
           bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
           borderRadius="xl"
-          p="2"
+          p="4"
           m="2"
-          mb="2"
-          my="2"
+          mb="4"
           boxShadow="md"
         >
           <Text fontSize="md">
@@ -38,6 +37,7 @@ const MyPost = (props) => {
               : 'No item uploaded..'}
           </Text>
         </Box>
+
         {!error &&
           data?.posts
             .slice(0)
@@ -45,33 +45,30 @@ const MyPost = (props) => {
             .map((post) => {
               return (
                 <Box
-                  // border="1px solid red"
-                  my="4"
+                  py="2"
                   boxShadow="md"
                   borderRadius="xl"
-                  // border={post.published ? '2px solid' : '4px dashed'}
-                  // borderColor={post.published ? 'gray' : 'gray.400'}
                   bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                  border={!post.published ? '3px dashed gray' : null}
                   p="2"
                   m="2"
                   mb="4"
                   key={post.id}
                 >
+                  {/* {post.published ? 'yes' : 'no'} */}
                   <Box
                     p="2"
                     onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     _hover={{ cursor: 'pointer' }}
                   >
-                    <Text fontSize="xl" noOfLines={3}>
-                      {post.title}
+                    <Text fontSize="3xl" noOfLines={3}>
+                      {post.title} {post.published ? null : '- unpublished'}
                     </Text>
+                    <Text fontSize="xl">{post.content}</Text>
                     <Divider my="2" />
                     <Box>
                       {post.imageUrl && <ImageComponent props={post} />}
                     </Box>
-                    <Text fontSize="md" noOfLines={3} m="2">
-                      {post.content}
-                    </Text>
                   </Box>
                 </Box>
               )

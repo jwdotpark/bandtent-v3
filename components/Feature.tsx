@@ -58,7 +58,7 @@ const Feature = (props: {
                     borderRadius="md"
                     p="2"
                   >
-                    <Text textAlign="right">
+                    <Text ml="2">
                       <i>FEATURE</i>
                     </Text>
                     <Text ml="2" fontSize="3xl" noOfLines={3} textAlign="left">

@@ -89,14 +89,14 @@ const Post: React.FC<PostProps> = (props) => {
   return (
     // FIXME layout navbar weirdly Y translated..?
     <Layout>
-      <Stack direction={['column', 'row']} w="100%" pr="2" mt="2">
+      <Stack direction={['column', 'row']} w="100%" pr="2" mt="2" h="100%">
         {/* left column */}
         <Box>
           <Stack w="75vw">
             <Box
               p="4"
               ml="2"
-              mb="2"
+              // mb="2"
               bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
               borderRadius="xl"
               boxShadow="md"
@@ -194,19 +194,26 @@ const Post: React.FC<PostProps> = (props) => {
           borderRadius="xl"
           boxShadow="md"
         >
-          
+          asdfasdf
         </Box>
       </Stack>
-      <Box mx="2">
-        <Box borderRadius="md" border="2px solid gray" mt="2">
+      <Box
+        borderRadius="xl"
+        border={
+          colorMode === 'light' ? 'solid 1px #edf2f7' : 'solid 1px #4a5568'
+        }
+        bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+        mx="2"
+        mt="2"
+      >
+        <Box mt="2">
           {myPost.length > 0 && (
-            <Box mx="2" boxShadow="md">
+            <Box mx="2">
               <Box
-                border="2px solid gray"
-                borderRadius="md"
+                boxShadow="md"
+                borderRadius="xl"
                 p="2"
-                mt="4"
-                mb="2"
+                bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
               >
                 <Text size="xl">
                   {props.post.author.name}'s {myPost.length} more posts{' '}

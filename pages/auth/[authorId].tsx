@@ -12,12 +12,14 @@ import {
   Stack,
   Center,
   Link,
+  AspectRatio,
   useColorMode,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
 import { GetServerSideProps } from 'next'
 import prisma from '../../lib/prisma'
+import ImageComponent from '../../components/utils/ImageComponent'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   console.log('ssr: ', params)
@@ -70,15 +72,41 @@ const Me: React.FC = (props) => {
                     bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                     overflow="clip"
                   >
-                    <Center>
-                      <Image
-                        boxShadow="xl"
-                        border="2px solid gray"
+                    <Center py="4">
+                      <Box
                         borderRadius="full"
-                        boxSize="50%"
-                        alt={props.user.name}
-                        src={props.user.image}
-                      />
+                        overflow="clip"
+                        boxSize="200px"
+                        alignContent="center"
+                        boxShadow="xl"
+                      >
+                        <Box
+                          my="2"
+                          boxShadow="sm"
+                          borderRadius="md"
+                          overflow="hidden"
+                        >
+                          <AspectRatio
+                            maxW="1000px"
+                            ratio={1}
+                            borderRadius="full"
+                            overflow="clip"
+                          >
+                            <Image
+                              src={
+                                props.user.image
+                                  ? props.user.image
+                                  : 'https://picsum.photos/400'
+                              }
+                              // src={post.props.imageUrl}
+                              fallbackSrc="https://via.placeholder.com/300x300"
+                              alt={props.content}
+                              w="100%"
+                              objectFit="cover"
+                            />
+                          </AspectRatio>
+                        </Box>
+                      </Box>
                     </Center>
                     <Box p="2">
                       <Box mt="2">

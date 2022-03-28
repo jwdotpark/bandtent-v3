@@ -1,12 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import prisma from '../../../lib/prisma'
+import { withSentry } from '@sentry/nextjs'
 
 // POST /api/post
-export default async function handle(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export async function handle(req: NextApiRequest, res: NextApiResponse) {
   const { title, content, imageUrl, fileUrl } = req.body
 
   const session = await getSession({ req })
@@ -27,3 +25,5 @@ export default async function handle(
     res.json({ error: 'No Authorization' })
   }
 }
+
+export default withSentry(handle)

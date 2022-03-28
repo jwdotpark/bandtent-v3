@@ -1,10 +1,10 @@
-import { Box, Image, AspectRatio } from '@chakra-ui/react'
+import { Box, Image, AspectRatio, Center } from '@chakra-ui/react'
 
 const ImageComponent = (post: {
   props: { imageUrl: string; content: string }
 }) => {
   return (
-    <Box my="2" boxShadow="sm" borderRadius="md" overflow="hidden">
+    <Box my="2" boxShadow="md" borderRadius="xl" overflow="hidden">
       <AspectRatio maxW="1080px" ratio={1} borderRadius="xl" overflow="clip">
         <Image
           loading="lazy"
@@ -14,7 +14,7 @@ const ImageComponent = (post: {
               : 'https://picsum.photos/400'
           }
           // src={post.props.imageUrl}
-          fallbackSrc="https://via.placeholder.com/300x300"
+          // fallbackSrc="https://via.placeholder.com/300x300"
           alt={post.props.content}
           w="100%"
           objectFit="cover"

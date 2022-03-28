@@ -110,7 +110,7 @@ const Main: React.FC<Props> = (props) => {
                         <Text fontSize="3xl" noOfLines={1}>
                           <b>{post.title}</b>
                         </Text>
-                        <Text textAlign="right" fontSize="xl" noOfLines={3}>
+                        <Text fontSize="xl" noOfLines={1}>
                           {post.content}
                         </Text>
 
@@ -128,10 +128,9 @@ const Main: React.FC<Props> = (props) => {
                         </Box>
                       </Box>
                       {/* info */}
-                      {JSON.stringify(post.authorId)}
                       <Box
                         mt="4"
-                        mb="-1"
+                        // mb="-1"
                         // mx="1"
                         p="2"
                         boxShadow="md"
@@ -173,11 +172,11 @@ const Main: React.FC<Props> = (props) => {
                     mx="4"
                     w="100%"
                     size="sm"
-                    colorScheme="gray"
+                    colorScheme="blackAlpha"
                     // border="1px solid black"
                     borderRadius="xl"
                     onClick={handleMore}
-                    boxShadow=""
+                    boxShadow="md"
                   >
                     <Text fontSize="sm">Load More</Text>
                   </Button>
@@ -190,10 +189,7 @@ const Main: React.FC<Props> = (props) => {
                 m="2"
                 ml="2"
                 borderRadius="xl"
-                // border="1px solid"
-                // borderColor="gray.300"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
-                // border="2px solid gray"
               >
                 <Box m="2" p="2" overflow="clip">
                   <Feature props={props} />

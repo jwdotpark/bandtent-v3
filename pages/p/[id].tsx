@@ -1,4 +1,3 @@
-// @ts-nocheck
 // FIXME
 
 // pages/p/[id].tsx
@@ -18,6 +17,8 @@ import {
   Divider,
   Stack,
   Center,
+  Image,
+  useColorMode,
 } from '@chakra-ui/react'
 import ImageComponent from '../../components/utils/ImageComponent'
 import AdditionalPost from '../../components/AdditionalPost'
@@ -29,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
     include: {
       author: {
-        select: { name: true, email: true },
+        select: { name: true, email: true, image: true },
       },
     },
   })
@@ -69,6 +70,8 @@ async function deletePost(id: number): Promise<void> {
 }
 
 const Post: React.FC<PostProps> = (props) => {
+  const { colorMode } = useColorMode()
+
   const { data: session, status } = useSession()
   if (status === 'loading') {
     return <div>Authenticating ...</div>
@@ -80,98 +83,148 @@ const Post: React.FC<PostProps> = (props) => {
     title = `${title} (Draft)`
   }
 
+  // @ts-ignore
   const myPost = props.myPost[0].author.posts
 
   return (
+    // FIXME layout navbar weirdly Y translated..?
     <Layout>
-      {/* <Text fontSize="6xl" ml="2">
-        Posted by <b>{props.post.author.name}</b>
-      </Text> */}
-      <Stack w="100%">
-        <Box
-          p="4"
-          m="2"
-          mx="2"
-          border="2px solid gray"
-          borderRadius="md"
-          boxShadow="md"
-          // w="60%"
-        >
-          <Text my="2" fontSize="3xl">
-            {props.post.title}
-          </Text>
-          <Text my="2" fontSize="sm">
-            Posted by {props.post.author.name || 'Unknown author'} on{' '}
-            <i>
-              {new Date(props.post.createdAt).toLocaleDateString('en-DE', {
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
-            </i>
-          </Text>
-
-          <Divider mb="4" />
-          {/* {props.post.imageUrl && <ImageComponent props={props.post} />} */}
-          <Box>
-            <ImageComponent props={props.post} />
-          </Box>
-          {/* audio */}
-          {props.post.fileUrl && (
-            <Box>
-              <audio controls src={props.post.fileUrl}>
-                Your browser does not support the
-                <code>audio</code> element.
-              </audio>
-            </Box>
-          )}
-
-          <Box>
-            <Text
-              my="4"
-              mx="2"
-              fontSize="lg"
-              children={<Text>{props.post.content}</Text>}
-            />
-          </Box>
-          <Divider mb="4" />
-
-          {/* button */}
-          <HStack spacing={2}>
-            {!props.post.published && userHasValidSession && postBelongsToUser && (
-              <Button size="sm" onClick={() => publishPost(props.post.id)}>
-                Publish
-              </Button>
-            )}
-
-            {userHasValidSession && postBelongsToUser && (
-              <Button size="sm" onClick={() => deletePost(props.post.id)}>
-                Delete
-              </Button>
-            )}
-          </HStack>
-        </Box>
-
-        <Box mx="2">
-          <Box borderRadius="md" border="2px solid gray" mx="2">
-            {myPost.length > 0 && (
-              <Box mx="2" boxShadow="md">
-                <Box
-                  border="2px solid gray"
-                  borderRadius="md"
-                  p="2"
-                  mt="4"
-                  mb="2"
-                >
-                  <Text size="xl">
-                    {props.post.author.name}'s {myPost.length} more posts{' '}
-                  </Text>
-                </Box>
+      <Stack direction={['column', 'row']} w="100%" pr="2" mt="2" h="100%">
+        {/* left column */}
+        <Box>
+          <Stack w="75vw">
+            <Box
+              p="4"
+              ml="2"
+              // mb="2"
+              bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+              borderRadius="xl"
+              boxShadow="md"
+            >
+              <Text mb="2" fontSize="3xl">
+                {props.post.title}
+              </Text>
+              <Box>
+                <Text
+                  fontSize="lg"
+                  children={<Text>{props.post.content}</Text>}
+                />
               </Box>
-            )}
-            <AdditionalPost myPost={myPost} />
-          </Box>
+              <Box
+                _hover={{ cursor: 'pointer' }}
+                onClick={() =>
+                  Router.push(
+                    '/auth/[authorId]',
+                    `/auth/${props.post.authorId}`
+                  )
+                }
+              >
+                <Text my="2" fontSize="md" textAlign="right">
+                  Posted by{' '}
+                  <Image
+                    mx="1"
+                    display="inline"
+                    border="1px inset  gray"
+                    src={props.post.author.image}
+                    fallbackSrc="https://picsum.photos/400"
+                    boxSize="1.5rem"
+                    borderRadius="full"
+                    alt={props.post.author.name}
+                    sx={{ transform: 'translateY(5px)' }}
+                  />{' '}
+                  {props.post.author.name || 'Unknown author'} on{' '}
+                  <i>
+                    {new Date(props.post.createdAt).toLocaleDateString(
+                      'en-DE',
+                      {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      }
+                    )}
+                  </i>
+                </Text>
+              </Box>
+              <Divider mb="2" />
+              <Box>
+                <ImageComponent props={props.post} />
+              </Box>
+              {/* audio */}
+              {props.post.fileUrl && (
+                <Box>
+                  <audio controls src={props.post.fileUrl}>
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </Box>
+              )}
+              <Divider mb="4" />
+              {/* button */}
+              <HStack spacing={2}>
+                {!props.post.published &&
+                  userHasValidSession &&
+                  postBelongsToUser && (
+                    <Button
+                      size="sm"
+                      onClick={() => publishPost(props.post.id)}
+                    >
+                      Publish
+                    </Button>
+                  )}
+
+                {userHasValidSession && postBelongsToUser && (
+                  <Button
+                    colorScheme="blackAlpha"
+                    size="sm"
+                    onClick={() => deletePost(props.post.id)}
+                  >
+                    Delete
+                  </Button>
+                )}
+              </HStack>
+            </Box>
+          </Stack>
+        </Box>
+        {/* right column */}
+        <Box
+          w="25vw"
+          p="4"
+          ml="2"
+          mb="2"
+          bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+          borderRadius="xl"
+          boxShadow="md"
+        >
+          asdfasdf
         </Box>
       </Stack>
+      <Box
+        borderRadius="xl"
+        border={
+          colorMode === 'light' ? 'solid 1px #edf2f7' : 'solid 1px #4a5568'
+        }
+        bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+        mx="2"
+        mt="2"
+      >
+        <Box mt="4">
+          {myPost.length > 0 && (
+            <Box mx="2" mt="2">
+              <Box
+                boxShadow="md"
+                borderRadius="xl"
+                p="2"
+                my="2"
+                bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+              >
+                <Text size="xl">
+                  {props.post.author.name}'s {myPost.length} more posts{' '}
+                </Text>
+              </Box>
+            </Box>
+          )}
+          <AdditionalPost myPost={myPost} />
+        </Box>
+      </Box>
     </Layout>
   )
 }

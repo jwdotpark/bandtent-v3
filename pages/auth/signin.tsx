@@ -42,6 +42,7 @@ const SignIn = ({
   const { isOpen, onToggle } = useDisclosure()
 
   const [height, setHeight] = useState<number>()
+  
   useEffect(() => {
     if (window) {
       setHeight(window.innerHeight)
@@ -101,7 +102,7 @@ const SignIn = ({
                     if (provider.id !== 'email') {
                       return (
                         <>
-                          <Box key={provider.name}>
+                          <Box key={i}>
                             <Box>
                               <Button
                                 w="150px"

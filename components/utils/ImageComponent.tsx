@@ -18,7 +18,7 @@ const ImageComponent = (post: {
       borderBottom="4rem solid"
       borderColor={colorMode === 'light' ? 'gray.100' : 'gray.300'}
     >
-      <AspectRatio maxW="1080px" ratio={1} borderRadius="sm" overflow="clip">
+      <AspectRatio maxW="1080px" ratio={1} borderRadius="xl" overflow="clip">
         <Image
           loading="lazy"
           src={

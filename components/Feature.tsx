@@ -3,26 +3,16 @@ import Router from 'next/router'
 import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
 import ImageComponent from './utils/ImageComponent'
 import moment from 'moment'
+import useSWR from 'swr'
 
-const Feature = (props: {
-  props: {
-    feed: {
-      id: Key
-      title: string
-      author: { name: string }
-      content: string
-      imageUrl: string
-      createdAt: Date
-    }[]
-  }
-}) => {
-  const getRandomInt = (max: number) => {
-    return Math.floor(Math.random() * max)
-  }
-  const numOfPost = props.props.feed.length
-  const randomPostNum = getRandomInt(numOfPost)
-  const { colorMode, toggleColorMode } = useColorMode()
+const Feature = (props: { props }) => {
+  const { colorMode } = useColorMode()
 
+  const fetcher = (url: string) => fetch(url).then((r) => r.json())
+  // const numOfPost = useSWR('/api/post/count', fetcher)
+  const { data, error } = useSWR('/api/post/count', fetcher)
+
+  console.log(data)
   return (
     <Box boxShadow="md">
       <Box
@@ -32,7 +22,7 @@ const Feature = (props: {
         boxShadow="md"
       >
         <Text mx="2" fontSize="3xl" p="2">
-          <b>{props.props.feed.length} article uploaded</b>
+          <b>{JSON.stringify(data)} article uploaded</b>
         </Text>
       </Box>
       <Box mt="4">

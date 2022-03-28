@@ -29,8 +29,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         select: { name: true, image: true, id: true },
       },
     },
-    // skip: 4,
-    take: 6,
+    take: 10,
     orderBy: { id: 'desc' },
   })
   return {
@@ -38,6 +37,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       feed: JSON.parse(JSON.stringify(feed)),
     },
+    revalidate: 60 * 30,
   }
 }
 
@@ -173,7 +173,6 @@ const Main: React.FC<Props> = (props) => {
                     w="100%"
                     size="sm"
                     colorScheme="blackAlpha"
-                    // border="1px solid black"
                     borderRadius="xl"
                     onClick={handleMore}
                     boxShadow="md"

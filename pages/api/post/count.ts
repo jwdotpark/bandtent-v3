@@ -8,7 +8,6 @@ export default async function handle(
 ) {
   try {
     const numOfPost = await prisma.post.count()
-    console.log(numOfPost)
     res.status(200)
     res.json(numOfPost)
   } catch (e) {

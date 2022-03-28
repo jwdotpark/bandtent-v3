@@ -18,8 +18,15 @@ const ImageComponent = (post: {
       borderBottom="4rem solid"
       borderColor={colorMode === 'light' ? 'gray.100' : 'gray.300'}
     >
-      <AspectRatio maxW="1080px" ratio={1} borderRadius="xl" overflow="clip">
+      <AspectRatio
+        maxW="1080px"
+        ratio={1}
+        // borderRadius="xl"
+        overflow="clip"
+        // m="-1"
+      >
         <Image
+          // borderRadius="xl"
           loading="lazy"
           src={
             post.props.imageUrl
@@ -29,7 +36,7 @@ const ImageComponent = (post: {
           // src={post.props.imageUrl}
           // fallbackSrc="https://via.placeholder.com/300x300"
           alt={post.props.content}
-          w="100%"
+          // w="100%"
           objectFit="cover"
         />
       </AspectRatio>

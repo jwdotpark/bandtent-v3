@@ -131,13 +131,11 @@ const Main: React.FC<Props> = (props) => {
                       {/* info */}
                       <Box
                         mt="4"
-                        // mb="-1"
-                        // mx="1"
                         p="2"
                         boxShadow="md"
-                        // border="2px solid gray"
                         bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                         borderRadius="xl"
+                        _hover={{ cursor: 'pointer' }}
                         onClick={() =>
                           Router.push(
                             '/auth/[authorId]',

@@ -31,6 +31,7 @@ import {
   SunIcon,
   MoonIcon,
 } from '@chakra-ui/icons'
+import { invertScale } from 'framer-motion/types/value/use-inverted-scale'
 
 const Header: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -53,8 +54,13 @@ const Header: React.FC = () => {
           zIndex="tooltip"
           // border="2px solid gray"
           borderRadius="xl"
-          bg={colorMode === 'light' ? 'gray.300' : 'gray.800'}
-          boxShadow="xl"
+          bg={colorMode === 'light' ? '#cbd5e0' : '#2d3748'}
+          // sx={{ backdropFilter: 'blur(10px) saturate(50%) ' }}
+          // boxShadow="xl"
+          sx={{
+            boxShadow:
+              'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
+          }}
         >
           {/* left */}
           <Stack direction="row" p="2">

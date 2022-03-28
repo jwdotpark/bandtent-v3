@@ -88,118 +88,136 @@ const Post: React.FC<PostProps> = (props) => {
 
   return (
     // FIXME layout navbar weirdly Y translated..?
-    <Box sx={{ transform: 'translateY(8px)' }}>
-      <Layout>
-        <Stack w="75%">
-          <Box
-            p="4"
-            m="2"
-            mb="2"
-            bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
-            borderRadius="xl"
-            boxShadow="md"
-          >
-            <Text mb="2" fontSize="3xl">
-              {props.post.title}
-            </Text>
+    <Layout>
+      <Stack direction={['column', 'row']} w="100%" pr="2" mt="2">
+        {/* left column */}
+        <Box>
+          <Stack w="75vw">
             <Box
-              _hover={{ cursor: 'pointer' }}
-              onClick={() =>
-                Router.push('/auth/[authorId]', `/auth/${props.post.authorId}`)
-              }
+              p="4"
+              ml="2"
+              mb="2"
+              bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+              borderRadius="xl"
+              boxShadow="md"
             >
-              <Text my="2" fontSize="md" textAlign="right">
-                Posted by{' '}
-                <Image
-                  mx="1"
-                  display="inline"
-                  border="1px inset  gray"
-                  src={props.post.author.image}
-                  fallbackSrc="https://picsum.photos/400"
-                  boxSize="1.5rem"
-                  borderRadius="full"
-                  alt={props.post.author.name}
-                  sx={{ transform: 'translateY(5px)' }}
-                />{' '}
-                {props.post.author.name || 'Unknown author'} on{' '}
-                <i>
-                  {new Date(props.post.createdAt).toLocaleDateString('en-DE', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </i>
+              <Text mb="2" fontSize="3xl">
+                {props.post.title}
               </Text>
-            </Box>
-
-            <Divider mb="2" />
-            <Box>
-              <ImageComponent props={props.post} />
-            </Box>
-
-            {/* audio */}
-            {props.post.fileUrl && (
               <Box>
-                <audio controls src={props.post.fileUrl}>
-                  Your browser does not support the
-                  <code>audio</code> element.
-                </audio>
+                <Text
+                  fontSize="lg"
+                  children={<Text>{props.post.content}</Text>}
+                />
               </Box>
-            )}
+              <Box
+                _hover={{ cursor: 'pointer' }}
+                onClick={() =>
+                  Router.push(
+                    '/auth/[authorId]',
+                    `/auth/${props.post.authorId}`
+                  )
+                }
+              >
+                <Text my="2" fontSize="md" textAlign="right">
+                  Posted by{' '}
+                  <Image
+                    mx="1"
+                    display="inline"
+                    border="1px inset  gray"
+                    src={props.post.author.image}
+                    fallbackSrc="https://picsum.photos/400"
+                    boxSize="1.5rem"
+                    borderRadius="full"
+                    alt={props.post.author.name}
+                    sx={{ transform: 'translateY(5px)' }}
+                  />{' '}
+                  {props.post.author.name || 'Unknown author'} on{' '}
+                  <i>
+                    {new Date(props.post.createdAt).toLocaleDateString(
+                      'en-DE',
+                      {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      }
+                    )}
+                  </i>
+                </Text>
+              </Box>
+              <Divider mb="2" />
+              <Box>
+                <ImageComponent props={props.post} />
+              </Box>
+              {/* audio */}
+              {props.post.fileUrl && (
+                <Box>
+                  <audio controls src={props.post.fileUrl}>
+                    Your browser does not support the
+                    <code>audio</code> element.
+                  </audio>
+                </Box>
+              )}
+              <Divider mb="4" />
+              {/* button */}
+              <HStack spacing={2}>
+                {!props.post.published &&
+                  userHasValidSession &&
+                  postBelongsToUser && (
+                    <Button
+                      size="sm"
+                      onClick={() => publishPost(props.post.id)}
+                    >
+                      Publish
+                    </Button>
+                  )}
 
-            <Box>
-              <Text
-                my="4"
-                mx="2"
-                fontSize="lg"
-                children={<Text>{props.post.content}</Text>}
-              />
-            </Box>
-            <Divider mb="4" />
-
-            {/* button */}
-            <HStack spacing={2}>
-              {!props.post.published &&
-                userHasValidSession &&
-                postBelongsToUser && (
-                  <Button size="sm" onClick={() => publishPost(props.post.id)}>
-                    Publish
+                {userHasValidSession && postBelongsToUser && (
+                  <Button
+                    colorScheme="blackAlpha"
+                    size="sm"
+                    onClick={() => deletePost(props.post.id)}
+                  >
+                    Delete
                   </Button>
                 )}
-
-              {userHasValidSession && postBelongsToUser && (
-                <Button
-                  colorScheme="blackAlpha"
-                  size="sm"
-                  onClick={() => deletePost(props.post.id)}
-                >
-                  Delete
-                </Button>
-              )}
-            </HStack>
-          </Box>
-        </Stack>
-        <Box mx="2">
-          <Box borderRadius="md" border="2px solid gray" mt="2">
-            {myPost.length > 0 && (
-              <Box mx="2" boxShadow="md">
-                <Box
-                  border="2px solid gray"
-                  borderRadius="md"
-                  p="2"
-                  mt="4"
-                  mb="2"
-                >
-                  <Text size="xl">
-                    {props.post.author.name}'s {myPost.length} more posts{' '}
-                  </Text>
-                </Box>
-              </Box>
-            )}
-            <AdditionalPost myPost={myPost} />
-          </Box>
+              </HStack>
+            </Box>
+          </Stack>
         </Box>
-      </Layout>
-    </Box>
+        {/* right column */}
+        <Box
+          w="25vw"
+          p="4"
+          ml="2"
+          mb="2"
+          bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+          borderRadius="xl"
+          boxShadow="md"
+        >
+          
+        </Box>
+      </Stack>
+      <Box mx="2">
+        <Box borderRadius="md" border="2px solid gray" mt="2">
+          {myPost.length > 0 && (
+            <Box mx="2" boxShadow="md">
+              <Box
+                border="2px solid gray"
+                borderRadius="md"
+                p="2"
+                mt="4"
+                mb="2"
+              >
+                <Text size="xl">
+                  {props.post.author.name}'s {myPost.length} more posts{' '}
+                </Text>
+              </Box>
+            </Box>
+          )}
+          <AdditionalPost myPost={myPost} />
+        </Box>
+      </Box>
+    </Layout>
   )
 }
 

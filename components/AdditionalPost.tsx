@@ -13,7 +13,7 @@ const AdditionalPost = ({ myPost }) => {
       {myPost
         .slice(0)
         .reverse()
-        .map((post) => (
+        .map((post: { id?: number; title?: string; imageUrl: string; content: string }) => (
           <Box
             boxShadow="md"
             mb="4"

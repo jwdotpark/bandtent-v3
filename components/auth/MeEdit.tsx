@@ -34,7 +34,7 @@ const MeEdit = (props) => {
   } = useForm({ mode: 'onChange' })
 
   // FIXME something's wrong with fetching but can't figure out
-  function onSubmit(values: any) {
+  function onSubmit(values) {
     return new Promise<void>((resolve) => {
       fetch('/api/profile/edit', {
         method: 'PUT',

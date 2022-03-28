@@ -3,13 +3,15 @@ import prisma from '../../../lib/prisma'
 
 // NOTE need to give it a cursor or anchor
 
-// GET /api/post/loadmore
+// POST /api/post/loadmore
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    if (req.method === 'GET') {
+    if (req.method === 'POST') {
+      // const { myCursor } = req.body
+      console.log(req.body)
       const morePost = await prisma.post.findMany({
         where: { published: true },
         include: {
@@ -17,16 +19,20 @@ export default async function handle(
             select: { name: true, image: true },
           },
         },
-        skip: 6,
-        take: 12,
+        cursor: {
+          id: req.body - 1,
+        },
+        take: 10,
         orderBy: { id: 'desc' },
       })
       res.status(200)
       res.json(morePost)
     }
   } catch (e) {
+    // console.log(e)
     res.status(500)
-    res.json({ error: 'Unable to fetch post' })
+    res.json({ error: e.message })
+    console.log(e)
   } finally {
     await prisma.$disconnect()
   }

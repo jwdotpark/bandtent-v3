@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import prisma from '../lib/prisma'
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Layout from '../components/Layout'
 import PostProps from '../types/Post'
 import { ColorModeScript } from '@chakra-ui/react'
@@ -21,7 +21,7 @@ import Feature from '../components/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
@@ -50,28 +50,30 @@ const Main: React.FC<Props> = (props) => {
 
   // pagination load more callback
   const [feed, setFeed] = useState(props.feed)
-  const [, updateState] = useState()
+  const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
 
-  // @ts-ignore
-  const forceUpdate = useCallback(() => updateState({}), [])
-
-  const handleMore = () => {
-    fetch('/api/post/loadmore')
-      .then((response) => response.json())
-      .then((data) => {
-        // currently it does shallow copy and force rerender
-        // it needs to be deep copy to feed
-        props.feed.push(...data)
-        setFeed(props.feed)
-        console.log(feed)
+  const handleMore = async () => {
+    try {
+      const result = await fetch('api/post/loadmore', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cursor),
       })
-    // FIXME rerender trigger is very fish
-    forceUpdate()
+      const data = await result.json()
+      setFeed([...feed, ...data])
+      console.log('data length: ', data.length)
+
+      setCursor(data[data.length - 1].id)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      console.log('feed: ', feed)
+    }
   }
 
   useEffect(() => {
     setFeed(props.feed)
-  })
+  }, [props.feed])
 
   return (
     <>
@@ -108,7 +110,9 @@ const Main: React.FC<Props> = (props) => {
                         _hover={{ cursor: 'pointer' }}
                       >
                         <Text fontSize="3xl" noOfLines={1}>
-                          <b>{post.title}</b>
+                          <b>
+                            {post.id} {post.title}
+                          </b>
                         </Text>
                         <Text fontSize="xl" noOfLines={1}>
                           {post.content}

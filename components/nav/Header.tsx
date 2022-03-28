@@ -32,6 +32,7 @@ import {
   MoonIcon,
 } from '@chakra-ui/icons'
 import { invertScale } from 'framer-motion/types/value/use-inverted-scale'
+import { motion } from 'framer-motion'
 
 const Header: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -64,36 +65,60 @@ const Header: React.FC = () => {
         >
           {/* left */}
           <Stack direction="row" p="2">
-            <Link href="/">
-              <Box className="bold" data-active={isActive('/')}>
-                <Button leftIcon={<HamburgerIcon />} size="sm" boxShadow="md">
-                  Feed
-                </Button>
-              </Box>
-            </Link>
-            {session && (
-              <Link href={'/auth/' + session.user.id}>
-                <Button
-                  boxShadow="md"
-                  size="sm"
-                  leftIcon={
-                    <Image
-                      boxSize="25px"
-                      display="inline"
-                      border="1px inset  gray"
-                      src={session.user.image}
-                      fallbackSrc="https://picsum.photos/200"
-                      borderRadius="full"
-                      alt={session.user.name}
-                    />
-                  }
-                >
-                  {session.user.name ? session.user.name : session.user.email}
-                </Button>
+            <motion.div
+              whileHover={{
+                scale: 1.05,
+              }}
+              transition={{ ease: 'easeInOut', duration: 0.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="/">
+                <Box className="bold" data-active={isActive('/')}>
+                  <Button leftIcon={<HamburgerIcon />} size="sm" boxShadow="md">
+                    Feed
+                  </Button>
+                </Box>
               </Link>
+            </motion.div>
+            {session && (
+              <motion.div
+                whileHover={{
+                  scale: 1.05,
+                }}
+                transition={{ ease: 'easeInOut', duration: 0.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link href={'/auth/' + session.user.id}>
+                  <Button
+                    boxShadow="md"
+                    size="sm"
+                    leftIcon={
+                      <Image
+                        boxSize="25px"
+                        display="inline"
+                        border="1px inset  gray"
+                        src={session.user.image}
+                        fallbackSrc="https://picsum.photos/200"
+                        borderRadius="full"
+                        alt={session.user.name}
+                      />
+                    }
+                  >
+                    {session.user.name ? session.user.name : session.user.email}
+                  </Button>
+                </Link>
+              </motion.div>
             )}
             {/* search */}
-            <SearchButton />
+            <motion.div
+              whileHover={{
+                scale: 1.1,
+              }}
+              transition={{ ease: 'easeInOut', duration: 0.1 }}
+              whileFocus={{ scale: 1.1 }}
+            >
+              <SearchButton />
+            </motion.div>
           </Stack>
           <Spacer />
           {/* right */}
@@ -114,32 +139,64 @@ const Header: React.FC = () => {
           {session && (
             <>
               <Stack direction="row" p="2">
-                <Link href="/create">
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                  }}
+                  transition={{ ease: 'easeInOut', duration: 0.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link href="/create">
+                    <Button
+                      boxShadow="md"
+                      size="sm"
+                      leftIcon={<PlusSquareIcon />}
+                    >
+                      <Text>Add</Text>
+                    </Button>
+                  </Link>
+                </motion.div>
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                  }}
+                  transition={{ ease: 'easeInOut', duration: 0.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
+                    <Link href="/drafts">My Drafts</Link>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                  }}
+                  transition={{ ease: 'easeInOut', duration: 0.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Button
                     boxShadow="md"
+                    leftIcon={<LockIcon />}
                     size="sm"
-                    leftIcon={<PlusSquareIcon />}
+                    onClick={() => {
+                      signOut()
+                      router.push('/')
+                    }}
                   >
-                    <Text>Add</Text>
+                    <Text>Log out</Text>
                   </Button>
-                </Link>
-                <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
-                  <Link href="/drafts">My Drafts</Link>
-                </Button>
-                <Button
-                  boxShadow="md"
-                  leftIcon={<LockIcon />}
-                  size="sm"
-                  onClick={() => {
-                    signOut()
-                    router.push('/')
+                </motion.div>
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
                   }}
+                  transition={{ ease: 'easeInOut', duration: 0.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Text>Log out</Text>
-                </Button>
-                <Box boxShadow="md">
-                  <ColorButton />
-                </Box>
+                  <Box boxShadow="md">
+                    <ColorButton />
+                  </Box>
+                </motion.div>
               </Stack>
             </>
           )}

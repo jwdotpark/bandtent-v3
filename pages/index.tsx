@@ -20,6 +20,7 @@ import Router from 'next/router'
 import Feature from '../components/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
+import { motion } from 'framer-motion'
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
@@ -80,17 +81,19 @@ const Main: React.FC<Props> = (props) => {
         {/* desktop */}
         <Media greaterThanOrEqual="md">
           {/* navbar space */}
-          <Box m="2" boxShadow="md">
+          <Box m="2">
             <Stack direction={['column', 'row']} w="100%">
               {/* left column */}
               <Box
                 w="40vw"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                 borderRadius="xl"
-                // border="1px solid"
                 borderColor="gray.300"
                 boxShadow="md"
-                // mr="2"
+                sx={{
+                  boxShadow:
+                    'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+                }}
               >
                 <section>
                   {feed.map((post) => (
@@ -117,6 +120,7 @@ const Main: React.FC<Props> = (props) => {
 
                         {/* <Divider mb="2" /> */}
                         {/* cover */}
+
                         <Box>
                           <ImageComponent props={post} />
                         </Box>
@@ -128,41 +132,50 @@ const Main: React.FC<Props> = (props) => {
                           </audio>
                         </Box>
                       </Box>
+
                       {/* info */}
-                      <Box
-                        mt="4"
-                        p="2"
-                        boxShadow="md"
-                        bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
-                        borderRadius="xl"
-                        _hover={{ cursor: 'pointer' }}
-                        onClick={() =>
-                          Router.push(
-                            '/auth/[authorId]',
-                            `/auth/${post.authorId}`
-                          )
-                        }
+                      <motion.div
+                        whileHover={{
+                          scale: 1.02,
+                        }}
+                        transition={{ ease: 'easeInOut', duration: 0.2 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        <Text
-                          fontSize="sm"
-                          sx={{ transform: 'translateX(-8px)' }}
+                        <Box
+                          mt="4"
+                          p="2"
+                          boxShadow="md"
+                          bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                          borderRadius="xl"
+                          _hover={{ cursor: 'pointer' }}
+                          onClick={() =>
+                            Router.push(
+                              '/auth/[authorId]',
+                              `/auth/${post.authorId}`
+                            )
+                          }
                         >
-                          <Center justifyContent="left" mx="2">
-                            <Image
-                              mr="2"
-                              display="inline"
-                              border="2px inset  gray"
-                              src={post.author.image}
-                              fallbackSrc="https://picsum.photos/200"
-                              boxSize="1.5rem"
-                              borderRadius="full"
-                              // alt={post.author.name}
-                            />
-                            <b>{post.author.name}</b>,{' '}
-                            {moment(post.createdAt).fromNow()}
-                          </Center>
-                        </Text>
-                      </Box>
+                          <Text
+                            fontSize="sm"
+                            sx={{ transform: 'translateX(-8px)' }}
+                          >
+                            <Center justifyContent="left" mx="2">
+                              <Image
+                                mr="2"
+                                display="inline"
+                                border="2px inset  gray"
+                                src={post.author.image}
+                                fallbackSrc="https://picsum.photos/200"
+                                boxSize="1.5rem"
+                                borderRadius="full"
+                                // alt={post.author.name}
+                              />
+                              <b>{post.author.name}</b>,{' '}
+                              {moment(post.createdAt).fromNow()}
+                            </Center>
+                          </Text>
+                        </Box>
+                      </motion.div>
                     </Box>
                   ))}
                 </section>
@@ -184,10 +197,15 @@ const Main: React.FC<Props> = (props) => {
               {/* right column */}
               <Box
                 w="60vw"
+                h="100%"
                 m="2"
                 ml="2"
                 borderRadius="xl"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                sx={{
+                  boxShadow:
+                    'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+                }}
               >
                 <Box m="2" p="2" overflow="clip">
                   <Feature props={props} />

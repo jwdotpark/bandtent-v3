@@ -25,7 +25,6 @@ import Router from 'next/router'
 const MeEdit = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   // const { props } = useSession()
-  console.log(props)
 
   const {
     handleSubmit,
@@ -44,7 +43,7 @@ const MeEdit = (props) => {
         body: JSON.stringify(values),
       })
         .then((res) => res.json())
-        .then((props) => console.log(props))
+        // .then((props) => console.log(props))
         .then((error) => {
           console.error('Error: ', error)
         })

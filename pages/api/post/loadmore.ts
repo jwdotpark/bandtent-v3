@@ -11,7 +11,7 @@ export default async function handle(
   try {
     if (req.method === 'POST') {
       // const { myCursor } = req.body
-      console.log(req.body)
+      // console.log(req.body)
       const morePost = await prisma.post.findMany({
         where: { published: true },
         include: {

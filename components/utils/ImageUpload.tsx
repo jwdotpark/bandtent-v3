@@ -25,7 +25,7 @@ export default function UploadPage(props) {
     setPreview(URL.createObjectURL(event.target.files[0]))
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
-    console.log('imageurl: ', url)
+    // console.log('imageurl: ', url)
     setImageUrl(url)
   }
 

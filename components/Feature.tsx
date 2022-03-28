@@ -12,7 +12,6 @@ const Feature = (props: { props }) => {
   // const numOfPost = useSWR('/api/post/count', fetcher)
   const { data, error } = useSWR('/api/post/count', fetcher)
 
-  console.log(data)
   return (
     <Box boxShadow="md">
       <Box

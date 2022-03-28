@@ -12,6 +12,7 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import moment from 'moment'
+import { motion } from 'framer-motion'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const result = await prisma.post.findMany({
@@ -86,31 +87,43 @@ const SearchPage = (props: { result: any[] }) => {
                   {post.imageUrl && <ImageComponent props={post} />}
                   <Text noOfLines={3}>{post.content}</Text>
                   {/* info */}
-                  <Box
-                    mt="4"
-                    p="1"
-                    boxShadow="md"
-                    // border="2px solid gray"
-                    bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
-                    borderRadius="xl"
+                  <motion.div
+                    whileHover={{
+                      scale: 1.02,
+                    }}
+                    transition={{ ease: 'easeInOut', duration: 0.2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <Text fontSize="sm" sx={{ transform: 'translateX(-8px)' }}>
-                      <Center justifyContent="left" mx="2">
-                        <Image
-                          mr="2"
-                          display="inline"
-                          border="2px inset  gray"
-                          src={post.author.image}
-                          fallbackSrc="https://picsum.photos/200"
-                          boxSize="1.5rem"
-                          borderRadius="full"
-                          // alt={post.author.name}
-                        />
-                        <b>{post.author.name}</b>,{' '}
-                        {moment(post.createdAt).fromNow()}
-                      </Center>
-                    </Text>
-                  </Box>
+                    <Box
+                      _hover={{ cursor: 'pointer' }}
+                      mt="4"
+                      p="1"
+                      boxShadow="md"
+                      // border="2px solid gray"
+                      bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                      borderRadius="xl"
+                    >
+                      <Text
+                        fontSize="sm"
+                        sx={{ transform: 'translateX(-8px)' }}
+                      >
+                        <Center justifyContent="left" mx="2">
+                          <Image
+                            mr="2"
+                            display="inline"
+                            border="2px inset  gray"
+                            src={post.author.image}
+                            fallbackSrc="https://picsum.photos/200"
+                            boxSize="1.5rem"
+                            borderRadius="full"
+                            // alt={post.author.name}
+                          />
+                          <b>{post.author.name}</b>,{' '}
+                          {moment(post.createdAt).fromNow()}
+                        </Center>
+                      </Text>
+                    </Box>
+                  </motion.div>
                 </Box>
               </Box>
             ))}

@@ -32,7 +32,7 @@ const Player = () => {
       }}
       updatePosition={{ x: position.x, y: position.y }}
       onDrag={(e: MouseEvent) => {
-        console.log(e.x, e.y)
+        // console.log(e.x, e.y)
         setPosition({ x: e.x, y: e.y })
       }}
     >

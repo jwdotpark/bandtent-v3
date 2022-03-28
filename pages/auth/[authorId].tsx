@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 const Me: React.FC = (props) => {
   const user = props
-  console.log(props.user.name)
+  // console.log(props.user.name)
 
   const { data } = useSession()
   const { colorMode } = useColorMode()

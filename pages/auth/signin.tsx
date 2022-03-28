@@ -52,7 +52,7 @@ const SignIn = ({
   return (
     <>
       <Layout>
-        <VStack h="calc(100vh - 50px)" mt="2">
+        <VStack h="calc(100vh - 70px)" mt="2">
           <Box mt={height / 2.75}>Sign In With..</Box>
           <Box>
             <VStack spacing={2}>

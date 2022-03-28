@@ -82,13 +82,6 @@ const Main: React.FC<Props> = (props) => {
         <Media greaterThanOrEqual="md">
           {/* navbar space */}
           <Box m="2" boxShadow="md">
-            <Button
-              onClick={() => {
-                throw new Error('Sentry error!')
-              }}
-            >
-              Make Error 
-            </Button>
             <Stack direction={['column', 'row']} w="100%">
               {/* left column */}
               <Box
@@ -135,7 +128,6 @@ const Main: React.FC<Props> = (props) => {
                         </Box>
                       </Box>
                       {/* info */}
-                      {JSON.stringify(post.authorId)}
                       <Box
                         mt="4"
                         mb="-1"
@@ -180,11 +172,11 @@ const Main: React.FC<Props> = (props) => {
                     mx="4"
                     w="100%"
                     size="sm"
-                    colorScheme="gray"
+                    colorScheme="blackAlpha"
                     // border="1px solid black"
                     borderRadius="xl"
                     onClick={handleMore}
-                    boxShadow=""
+                    boxShadow="md"
                   >
                     <Text fontSize="sm">Load More</Text>
                   </Button>

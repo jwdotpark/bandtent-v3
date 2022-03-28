@@ -45,104 +45,99 @@ const Header: React.FC = () => {
     <nav>
       {/* desktop */}
       <Media greaterThanOrEqual="md">
-        <Box>
-          <Flex
-            as="header"
-            position="fixed"
-            ml="2"
-            w="calc(100% - 1rem)"
-            zIndex="tooltip"
-            // border="2px solid gray"
-            borderRadius="xl"
-            bg={colorMode === 'light' ? 'gray.300' : 'gray.800'}
-            sx={{
-              transform: 'translateY(-4px)',
-            }}
-            boxShadow="xl"
-          >
-            {/* left */}
-            <Stack direction="row" p="2">
-              <Link href="/">
-                <Box className="bold" data-active={isActive('/')}>
-                  <Button leftIcon={<HamburgerIcon />} size="sm" boxShadow="md">
-                    Feed
-                  </Button>
-                </Box>
+        <Flex
+          as="header"
+          position="fixed"
+          ml="2"
+          w="calc(100% - 1rem)"
+          zIndex="tooltip"
+          // border="2px solid gray"
+          borderRadius="xl"
+          bg={colorMode === 'light' ? 'gray.300' : 'gray.800'}
+          boxShadow="xl"
+        >
+          {/* left */}
+          <Stack direction="row" p="2">
+            <Link href="/">
+              <Box className="bold" data-active={isActive('/')}>
+                <Button leftIcon={<HamburgerIcon />} size="sm" boxShadow="md">
+                  Feed
+                </Button>
+              </Box>
+            </Link>
+            {session && (
+              <Link href={'/auth/' + session.user.id}>
+                <Button
+                  boxShadow="md"
+                  size="sm"
+                  leftIcon={
+                    <Image
+                      boxSize="25px"
+                      display="inline"
+                      border="1px inset  gray"
+                      src={session.user.image}
+                      fallbackSrc="https://picsum.photos/200"
+                      borderRadius="full"
+                      alt={session.user.name}
+                    />
+                  }
+                >
+                  {session.user.name ? session.user.name : session.user.email}
+                </Button>
               </Link>
-              {session && (
-                <Link href={'/auth/' + session.user.id}>
-                  <Button
-                    boxShadow="md"
-                    size="sm"
-                    leftIcon={
-                      <Image
-                        boxSize="25px"
-                        display="inline"
-                        border="1px inset  gray"
-                        src={session.user.image}
-                        fallbackSrc="https://picsum.photos/200"
-                        borderRadius="full"
-                        alt={session.user.name}
-                      />
-                    }
-                  >
-                    {session.user.name ? session.user.name : session.user.email}
+            )}
+            {/* search */}
+            <SearchButton />
+          </Stack>
+          <Spacer />
+          {/* right */}
+          {/* no login */}
+          {!session && (
+            <>
+              <Stack direction="row" p="2">
+                <Link href="/api/auth/signin">
+                  <Button size="sm" leftIcon={<UnlockIcon />}>
+                    {status === 'loading' ? 'Validating Session..' : 'Log In'}
                   </Button>
                 </Link>
-              )}
-              {/* search */}
-              <SearchButton />
-            </Stack>
-            <Spacer />
-            {/* right */}
-            {/* no login */}
-            {!session && (
-              <>
-                <Stack direction="row" p="2">
-                  <Link href="/api/auth/signin">
-                    <Button size="sm" leftIcon={<UnlockIcon />}>
-                      {status === 'loading' ? 'Validating Session..' : 'Log In'}
-                    </Button>
-                  </Link>
-                  <ColorButton />
-                </Stack>
-              </>
-            )}
-            {/* yes login */}
-            {session && (
-              <>
-                <Stack direction="row" p="2">
-                  <Link href="/create">
-                    <Button
-                      boxShadow="md"
-                      size="sm"
-                      leftIcon={<PlusSquareIcon />}
-                    >
-                      <Text>Add</Text>
-                    </Button>
-                  </Link>
-                  <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
-                    <Link href="/drafts">My Drafts</Link>
-                  </Button>
+                <ColorButton />
+              </Stack>
+            </>
+          )}
+          {/* yes login */}
+          {session && (
+            <>
+              <Stack direction="row" p="2">
+                <Link href="/create">
                   <Button
                     boxShadow="md"
-                    leftIcon={<LockIcon />}
                     size="sm"
-                    onClick={() => {
-                      signOut()
-                      router.push('/')
-                    }}
+                    leftIcon={<PlusSquareIcon />}
                   >
-                    <Text>Log out</Text>
+                    <Text>Add</Text>
                   </Button>
-                  <Box boxShadow="md">
-                    <ColorButton />
-                  </Box>
-                </Stack>
-              </>
-            )}
-          </Flex>
-        </Box>
+                </Link>
+                <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
+                  <Link href="/drafts">My Drafts</Link>
+                </Button>
+                <Button
+                  boxShadow="md"
+                  leftIcon={<LockIcon />}
+                  size="sm"
+                  onClick={() => {
+                    signOut()
+                    router.push('/')
+                  }}
+                >
+                  <Text>Log out</Text>
+                </Button>
+                <Box boxShadow="md">
+                  <ColorButton />
+                </Box>
+              </Stack>
+            </>
+          )}
+        </Flex>
       </Media>
       {/* ------------------------------------------------------------------------------- */}
       {/* mobile */}

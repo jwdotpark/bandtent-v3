@@ -22,7 +22,7 @@ import prisma from '../../lib/prisma'
 import ImageComponent from '../../components/utils/ImageComponent'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  console.log('ssr: ', params)
+  // console.log('ssr: ', params)
   const user = await prisma.user.findUnique({
     where: {
       id: Number(params.authorId),

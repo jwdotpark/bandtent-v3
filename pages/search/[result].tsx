@@ -96,7 +96,7 @@ const SearchPage = (props: { result: any[] }) => {
                       scale: 1.02,
                     }}
                     transition={{ ease: 'easeInOut', duration: 0.2 }}
-                    whileTap={{ scale: 0.98 }}
+                    // whileTap={{ scale: 0.98 }}
                   >
                     <Box
                       _hover={{ cursor: 'pointer' }}

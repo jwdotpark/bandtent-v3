@@ -139,7 +139,7 @@ const Main: React.FC<Props> = (props) => {
                           scale: 1.02,
                         }}
                         transition={{ ease: 'easeInOut', duration: 0.2 }}
-                        whileTap={{ scale: 0.98 }}
+                        // whileTap={{ scale: 0.98 }}
                       >
                         <Box
                           mt="4"

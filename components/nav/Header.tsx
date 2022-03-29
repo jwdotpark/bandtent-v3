@@ -69,8 +69,8 @@ const Header: React.FC = () => {
               whileHover={{
                 scale: 1.05,
               }}
-              transition={{ ease: 'easeInOut', duration: 0.1 }}
-              whileTap={{ scale: 0.95 }}
+              transition={{ ease: 'easeInOut', duration: 0.25 }}
+              // whileTap={{ scale: 0.95 }}
             >
               <Link href="/">
                 <Box className="bold" data-active={isActive('/')}>
@@ -85,8 +85,8 @@ const Header: React.FC = () => {
                 whileHover={{
                   scale: 1.05,
                 }}
-                transition={{ ease: 'easeInOut', duration: 0.1 }}
-                whileTap={{ scale: 0.95 }}
+                transition={{ ease: 'easeInOut', duration: 0.25 }}
+                // whileTap={{ scale: 0.95 }}
               >
                 <Link href={'/auth/' + session.user.id}>
                   <Button
@@ -114,7 +114,7 @@ const Header: React.FC = () => {
               whileHover={{
                 scale: 1.05,
               }}
-              transition={{ ease: 'easeInOut', duration: 0.1 }}
+              transition={{ ease: 'easeInOut', duration: 0.25 }}
               whileFocus={{ scale: 1.05 }}
             >
               <SearchButton />
@@ -143,8 +143,8 @@ const Header: React.FC = () => {
                   whileHover={{
                     scale: 1.05,
                   }}
-                  transition={{ ease: 'easeInOut', duration: 0.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  transition={{ ease: 'easeInOut', duration: 0.25 }}
+                  // whileTap={{ scale: 0.95 }}
                 >
                   <Link href="/create">
                     <Button
@@ -160,8 +160,8 @@ const Header: React.FC = () => {
                   whileHover={{
                     scale: 1.05,
                   }}
-                  transition={{ ease: 'easeInOut', duration: 0.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  transition={{ ease: 'easeInOut', duration: 0.25 }}
+                  // whileTap={{ scale: 0.95 }}
                 >
                   <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
                     <Link href="/drafts">My Drafts</Link>
@@ -171,8 +171,8 @@ const Header: React.FC = () => {
                   whileHover={{
                     scale: 1.05,
                   }}
-                  transition={{ ease: 'easeInOut', duration: 0.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  transition={{ ease: 'easeInOut', duration: 0.25 }}
+                  // whileTap={{ scale: 0.95 }}
                 >
                   <Button
                     boxShadow="md"
@@ -190,8 +190,8 @@ const Header: React.FC = () => {
                   whileHover={{
                     scale: 1.05,
                   }}
-                  transition={{ ease: 'easeInOut', duration: 0.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  transition={{ ease: 'easeInOut', duration: 0.25 }}
+                  // whileTap={{ scale: 0.95 }}
                 >
                   <Box boxShadow="md">
                     <ColorButton />

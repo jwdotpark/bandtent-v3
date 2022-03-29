@@ -11,7 +11,7 @@ const ImageComponent = (post: {
         scale: 1.02,
       }}
       transition={{ ease: 'easeInOut', duration: 0.2 }}
-      whileTap={{ scale: 0.98 }}
+      // whileTap={{ scale: 0.98 }}
     >
       <Box
         my="2"

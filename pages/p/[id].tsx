@@ -19,6 +19,7 @@ import {
   Center,
   Image,
   useColorMode,
+  ButtonGroup,
 } from '@chakra-ui/react'
 import ImageComponent from '../../components/utils/ImageComponent'
 import AdditionalPost from '../../components/AdditionalPost'
@@ -69,6 +70,13 @@ async function deletePost(id: number): Promise<void> {
   Router.push('/')
 }
 
+async function unpublishPost(id: number): Promise<void> {
+  await fetch(`/api/publish/unpublish/${id}`, {
+    method: 'PUT',
+  })
+  Router.push('/')
+}
+
 const Post: React.FC<PostProps> = (props) => {
   const { colorMode } = useColorMode()
 
@@ -78,6 +86,7 @@ const Post: React.FC<PostProps> = (props) => {
   }
   const userHasValidSession = Boolean(session)
   const postBelongsToUser = session?.user?.email === props.post.author?.email
+
   let title = props.title
   if (!props.published) {
     title = `${title} (Draft)`
@@ -144,6 +153,45 @@ const Post: React.FC<PostProps> = (props) => {
                   </i>
                 </Text>
               </Box>
+              {/* button */}
+              <HStack spacing={2}>
+                <ButtonGroup size="xs" isAttached w="100%">
+                  {!props.post.published &&
+                    userHasValidSession &&
+                    postBelongsToUser && (
+                      <Button
+                        size="sm"
+                        colorScheme="green"
+                        onClick={() => publishPost(props.post.id)}
+                      >
+                        Publish
+                      </Button>
+                    )}
+                  {props.post.published &&
+                    userHasValidSession &&
+                    postBelongsToUser && (
+                      <Button
+                        boxShadow="md"
+                        colorScheme="yellow"
+                        size="sm"
+                        onClick={() => unpublishPost(props.post.id)}
+                      >
+                        Unpublish
+                      </Button>
+                    )}
+
+                  {userHasValidSession && postBelongsToUser && (
+                    <Button
+                      boxShadow="md"
+                      colorScheme="red"
+                      size="sm"
+                      onClick={() => deletePost(props.post.id)}
+                    >
+                      Delete
+                    </Button>
+                  )}
+                </ButtonGroup>
+              </HStack>
               <Divider mb="2" />
               <Box>
                 <ImageComponent props={props.post} />
@@ -158,29 +206,6 @@ const Post: React.FC<PostProps> = (props) => {
                 </Box>
               )}
               <Divider mb="4" />
-              {/* button */}
-              <HStack spacing={2}>
-                {!props.post.published &&
-                  userHasValidSession &&
-                  postBelongsToUser && (
-                    <Button
-                      size="sm"
-                      onClick={() => publishPost(props.post.id)}
-                    >
-                      Publish
-                    </Button>
-                  )}
-
-                {userHasValidSession && postBelongsToUser && (
-                  <Button
-                    colorScheme="blackAlpha"
-                    size="sm"
-                    onClick={() => deletePost(props.post.id)}
-                  >
-                    Delete
-                  </Button>
-                )}
-              </HStack>
             </Box>
           </Stack>
         </Box>

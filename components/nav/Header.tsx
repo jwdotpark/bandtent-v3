@@ -49,8 +49,6 @@ const Header: React.FC = (props) => {
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
   const { data: unPubNum, error } = useSWR('/api/profile/unpub', fetcher)
 
-  console.log('unPubNum: ', unPubNum)
-
   return (
     <nav>
       {/* desktop */}

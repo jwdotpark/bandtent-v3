@@ -29,7 +29,6 @@ export default async function handle(
       res.json(morePost)
     }
   } catch (e) {
-    // console.log(e)
     res.status(500)
     res.json({ error: e.message })
     console.log(e)

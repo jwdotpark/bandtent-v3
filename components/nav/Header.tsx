@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
@@ -31,18 +31,26 @@ import {
   SunIcon,
   MoonIcon,
 } from '@chakra-ui/icons'
-import { invertScale } from 'framer-motion/types/value/use-inverted-scale'
 import { motion } from 'framer-motion'
+import { GetServerSideProps } from 'next'
+import prisma from '../../lib/prisma'
+import useSWR from 'swr'
 
-const Header: React.FC = () => {
+const Header: React.FC = (props) => {
   const { colorMode, toggleColorMode } = useColorMode()
+
   const router = useRouter()
+
   const isActive: (pathname: string) => boolean = (pathname) =>
     router.pathname === pathname
 
   const { data: session, status } = useSession()
 
-  // console.log(session.user.id)
+  const fetcher = (url: string) => fetch(url).then((r) => r.json())
+  const { data: unPubNum, error } = useSWR('/api/profile/unpub', fetcher)
+
+  console.log('unPubNum: ', unPubNum)
+
   return (
     <nav>
       {/* desktop */}
@@ -156,17 +164,23 @@ const Header: React.FC = () => {
                     </Button>
                   </Link>
                 </motion.div>
-                <motion.div
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  transition={{ ease: 'easeInOut', duration: 0.25 }}
-                  // whileTap={{ scale: 0.95 }}
-                >
-                  <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
-                    <Link href="/drafts">My Drafts</Link>
-                  </Button>
-                </motion.div>
+                {unPubNum !== 0 && (
+                  <motion.div
+                    whileHover={{
+                      scale: 1.05,
+                    }}
+                    transition={{ ease: 'easeInOut', duration: 0.25 }}
+                    // whileTap={{ scale: 0.95 }}
+                  >
+                    <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
+                      <Link href="/drafts">
+                        <Text>
+                          {unPubNum > 0 ? unPubNum + ' available' : null}
+                        </Text>
+                      </Link>
+                    </Button>
+                  </motion.div>
+                )}
                 <motion.div
                   whileHover={{
                     scale: 1.05,

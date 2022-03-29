@@ -9,7 +9,6 @@ const Feature = (props: { props }) => {
   const { colorMode } = useColorMode()
 
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
-  // const numOfPost = useSWR('/api/post/count', fetcher)
   const { data, error } = useSWR('/api/post/count', fetcher)
 
   return (

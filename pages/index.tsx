@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'

@@ -4,7 +4,7 @@ import { useSession, getSession } from 'next-auth/react'
 import Layout from '../components/Layout'
 import PostProps from '../types/Post'
 import prisma from '../lib/prisma'
-import { Box, Text, Divider, Image } from '@chakra-ui/react'
+import { Box, Text, Divider, Image, useColorMode } from '@chakra-ui/react'
 import Router from 'next/router'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
@@ -39,6 +39,7 @@ type Props = {
 }
 
 const Drafts: React.FC<Props> = (props) => {
+  const { colorMode } = useColorMode()
   const { data: session } = useSession()
 
   if (!session) {
@@ -55,31 +56,42 @@ const Drafts: React.FC<Props> = (props) => {
   return (
     <Layout>
       <Box m="2">
-        <Box fontSize="3xl">
+        <Box>
           <Text>Unpublished</Text>
         </Box>
-        <Box>
+        <Box
+          p="2"
+          w="100%"
+          mx="auto"
+          sx={{ columnCount: [1, 2, 3], columnGap: '4' }}
+        >
           {props.drafts.map((post) => (
             <Box
+              bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
               p="2"
               my="2"
-              border="2px solid gray"
-              borderRadius="md"
+              // border="2px solid gray"
+              borderRadius="xl"
               key={post.id}
-              className="post"
+              mb="4"
+              w="100%"
+              display="inline-block"
             >
               {/* <Post post={post} /> */}
-              <Box onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}>
-                <Text fontSize="sm">
-                  <i>{moment(post.createdAt).fromNow()}</i>
-                </Text>
+              <Box
+                onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
+                p="2"
+              >
                 <Text fontSize="3xl" noOfLines={3}>
                   {post.title}
                 </Text>
-                <Divider my="2" />
-                {post.imageUrl && <ImageComponent props={post} />}
                 <Text mb="2" fontSize="lg" noOfLines={5}>
                   {post.content}
+                </Text>
+                <Divider my="2" />
+                {post.imageUrl && <ImageComponent props={post} />}
+                <Text textAlign="right" mr="2" fontSize="sm">
+                  {moment(post.createdAt).fromNow()}
                 </Text>
               </Box>
             </Box>

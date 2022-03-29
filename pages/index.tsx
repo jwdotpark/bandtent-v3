@@ -109,9 +109,7 @@ const Main: React.FC<Props> = (props) => {
                         _hover={{ cursor: 'pointer' }}
                       >
                         <Text fontSize="3xl" noOfLines={1}>
-                          <b>
-                            {post.id} {post.title}
-                          </b>
+                          <b>{post.title}</b>
                         </Text>
                         <Text fontSize="xl" noOfLines={1}>
                           {post.content}

@@ -51,7 +51,7 @@ export default function UploadPage(props) {
                 w="100%"
                 h="10vh"
                 borderRadius="md"
-                bg={colorMode === 'light' ? 'gray.100' : '#242a35'}
+                bg={colorMode === 'light' ? 'gray.100' : '#394353'}
               >
                 <Text fontSize="3xl">Click to select music</Text>
               </Center>

@@ -10,6 +10,7 @@ import {
   Button,
   Stack,
   ButtonGroup,
+  useColorMode,
 } from '@chakra-ui/react'
 import ImageUpload from '../components/utils/ImageUpload'
 import { Media } from '../utils/media'
@@ -20,6 +21,8 @@ const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
 // import FileUpload from '../components/FileUpload'
 
 const Draft: React.FC = () => {
+  const { colorMode } = useColorMode()
+
   // NOTE refactor this
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -56,8 +59,15 @@ const Draft: React.FC = () => {
   return (
     <Layout>
       <Media greaterThanOrEqual="md">
-        <Center m="2" mx="2">
-          <Box w="50%">
+        <Box m="2" mx="2">
+          <Box
+            mt="2"
+            w="50%"
+            bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+            borderRadius="xl"
+            boxShadow="md"
+            p="4"
+          >
             <form onSubmit={submitData}>
               <Text>New Draft</Text>
               <Box my="4" boxShadow="md">
@@ -65,32 +75,32 @@ const Draft: React.FC = () => {
                   variant="filled"
                   autoFocus
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Title"
+                  placeholder="Artist"
                   type="text"
                   value={title}
                 />
               </Box>
               <Box my="4" boxShadow="md">
-                <Textarea
+                <Input
                   variant="filled"
-                  cols={50}
+                  // cols={50}
                   onChange={(e) => setContent(e.target.value)}
-                  placeholder="Content"
-                  rows={8}
+                  placeholder="Title"
+                  // rows={8}
                   value={content}
                 />
               </Box>
               {/* image */}
-              <Box boxShadow="md">
+              <Box>
                 <ImageUpload img={pullImage} />
                 <Input display="none" type="file" defaultValue={imageUrl} />
               </Box>
               {/* file */}
-              <Box boxShadow="md">
+              <Box>
                 <FileUpload data={pullFile} />
                 <Input display="none" type="file" defaultValue={imageUrl} />
               </Box>
-              <Box>
+              <Box mt="2">
                 <ButtonGroup
                   isAttached
                   size="sm"
@@ -122,7 +132,7 @@ const Draft: React.FC = () => {
               </Box>
             </form>
           </Box>
-        </Center>
+        </Box>
       </Media>
       <Media lessThan="md">
         <Center m="2" mx="2">

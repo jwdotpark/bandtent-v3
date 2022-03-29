@@ -48,7 +48,7 @@ export default function UploadPage(props) {
               <AspectRatio ratio={1}>
                 <Center
                   borderRadius="md"
-                  bg={colorMode === 'light' ? 'gray.100' : '#242a35'}
+                  bg={colorMode === 'light' ? 'gray.100' : '#394353'}
                 >
                   <Text fontSize="3xl">Click to select cover</Text>
                 </Center>
@@ -65,8 +65,11 @@ export default function UploadPage(props) {
                   <Image
                     objectFit="cover"
                     boxSize="50vw"
-                    border="2px solid gray"
-                    borderBottom="none"
+                    border="1rem solid"
+                    borderBottom="4rem solid"
+                    borderColor={
+                      colorMode === 'light' ? 'gray.100' : 'gray.300'
+                    }
                     borderTopRadius="md"
                     src={preview}
                   />
@@ -77,12 +80,12 @@ export default function UploadPage(props) {
               <Center>
                 <Box key={index} boxSize="50vw" h="100%">
                   <Progress
-                    border="2px solid gray"
+                    // border="2px solid gray"
                     borderTop="none"
                     borderBottomRadius="md"
                     boxShadow="md"
                     size="lg"
-                    colorScheme="green"
+                    colorScheme="gray"
                     value={file.progress}
                   />
                 </Box>
@@ -110,12 +113,12 @@ export default function UploadPage(props) {
               <Center>
                 <Box key={index} boxSize="100vw" h="100%">
                   <Progress
-                    border="2px solid gray"
+                    // border="2px solid gray"
                     borderTop="none"
                     borderBottomRadius="md"
                     boxShadow="md"
                     size="lg"
-                    colorScheme="green"
+                    colorScheme="gray"
                     value={file.progress}
                   />
                   {/* <Text my="2">

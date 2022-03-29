@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import prisma from '../lib/prisma'
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
 import PostProps from '../types/Post'
 import { ColorModeScript } from '@chakra-ui/react'
@@ -22,7 +22,7 @@ import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
@@ -38,7 +38,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       feed: JSON.parse(JSON.stringify(feed)),
     },
-    revalidate: 60 * 30,
   }
 }
 

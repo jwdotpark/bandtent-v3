@@ -8,7 +8,6 @@ const Player = dynamic(() => import('./utils/Player'), {
 const Layout = (props: {
   children: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal
 }) => {
-  const { colorMode } = useColorMode()
   return (
     <>
       <Box>

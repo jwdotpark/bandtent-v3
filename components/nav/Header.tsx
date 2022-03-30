@@ -58,8 +58,8 @@ const Header: React.FC = (props) => {
           w="calc(100% - 1rem)"
           zIndex="tooltip"
           borderRadius="xl"
-          bg={colorMode === 'light' ? '#cbd5e0' : '#2d3748'}
-          border={colorMode === 'light' ? null : '2px solid #8969b4'}
+          bg={colorMode === 'light' ? '#cbd5e0' : '#383a59'}
+          // border={colorMode === 'light' ? null : '2px solid #8969b4'}
           sx={{
             boxShadow:
               'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
@@ -75,8 +75,18 @@ const Header: React.FC = (props) => {
             >
               <Link href="/">
                 <Box className="bold" data-active={isActive('/')}>
-                  <Button leftIcon={<HamburgerIcon />} size="sm" boxShadow="md">
-                    Feed
+                  <Button
+                    leftIcon={
+                      <HamburgerIcon
+                        color={colorMode === 'light' ? null : '#50fa7b'}
+                      />
+                    }
+                    size="sm"
+                    boxShadow="md"
+                  >
+                    <Text color={colorMode === 'light' ? null : '#50fa7b'}>
+                      Feed
+                    </Text>
                   </Button>
                 </Box>
               </Link>
@@ -104,7 +114,11 @@ const Header: React.FC = (props) => {
                       />
                     }
                   >
-                    {session.user.name ? session.user.name : session.user.email}
+                    <Text color={colorMode === 'light' ? null : '#8be9fd'}>
+                      {session.user.name
+                        ? session.user.name
+                        : session.user.email}
+                    </Text>
                   </Button>
                 </Link>
               </motion.div>
@@ -150,9 +164,15 @@ const Header: React.FC = (props) => {
                     <Button
                       boxShadow="md"
                       size="sm"
-                      leftIcon={<PlusSquareIcon />}
+                      leftIcon={
+                        <PlusSquareIcon
+                          color={colorMode === 'light' ? null : '#bd93f9'}
+                        />
+                      }
                     >
-                      <Text>Add</Text>
+                      <Text color={colorMode === 'light' ? null : '#bd93f9'}>
+                        Add
+                      </Text>
                     </Button>
                   </Link>
                 </motion.div>
@@ -164,9 +184,17 @@ const Header: React.FC = (props) => {
                     transition={{ ease: 'easeInOut', duration: 0.25 }}
                     // whileTap={{ scale: 0.95 }}
                   >
-                    <Button boxShadow="md" size="sm" leftIcon={<TimeIcon />}>
+                    <Button
+                      boxShadow="md"
+                      size="sm"
+                      leftIcon={
+                        <TimeIcon
+                          color={colorMode === 'light' ? null : '#ffc587'}
+                        />
+                      }
+                    >
                       <Link href="/drafts">
-                        <Text>
+                        <Text color={colorMode === 'light' ? null : '#ffc587'}>
                           {unPubNum > 0 ? unPubNum + ' available' : null}
                         </Text>
                       </Link>
@@ -182,14 +210,20 @@ const Header: React.FC = (props) => {
                 >
                   <Button
                     boxShadow="md"
-                    leftIcon={<LockIcon />}
+                    leftIcon={
+                      <LockIcon
+                        color={colorMode === 'light' ? null : '#ff5555'}
+                      />
+                    }
                     size="sm"
                     onClick={() => {
                       signOut()
                       router.push('/')
                     }}
                   >
-                    <Text>Log out</Text>
+                    <Text color={colorMode === 'light' ? null : '#ff5555'}>
+                      Log out
+                    </Text>
                   </Button>
                 </motion.div>
                 <motion.div
@@ -273,8 +307,16 @@ const Header: React.FC = (props) => {
                       </MenuItem>
                     </Link>
                     <Link href="/create">
-                      <MenuItem icon={<AddIcon />}>
-                        <Text>Add</Text>
+                      <MenuItem
+                        icon={
+                          <AddIcon
+                            color={colorMode === 'light' ? null : '#6272a4'}
+                          />
+                        }
+                      >
+                        <Text color={colorMode === 'light' ? null : '#6272a4'}>
+                          Add
+                        </Text>
                       </MenuItem>
                     </Link>
                     <Link href="/drafts">

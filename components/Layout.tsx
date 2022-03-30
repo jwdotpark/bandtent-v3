@@ -13,10 +13,10 @@ const Layout = (props: {
     <>
       <Box>
         <Header />
-        <Player />
+        {/* <Player /> */}
         <Box
           sx={{
-            transform: 'translateY(4rem)',
+            transform: 'translateY(3.5rem)',
           }}
         >
           {props.children}

@@ -52,25 +52,7 @@ const Player = () => {
     //     </Center>
     //   </Center>
     // </Rnd>
-    <Button
-      position="sticky"
-      zIndex="tooltip"
-      top="calc(100vh - 90px)"
-      left="calc(100vw - 110px)"
-      boxShadow="xl"
-      bg={colorMode === 'light' ? '#6272a4' : '#ffb86c'}
-      _hover={{
-        backgroundColor: colorMode === 'light' ? '#3f4969' : '#a17444',
-      }}
-      _active={{
-        backgroundColor: colorMode === 'light' ? '#171b27' : '#503921',
-      }}
-      borderRadius="full"
-      w="5rem"
-      h="5rem"
-    >
-      Play
-    </Button>
+    <>button</>
   )
 }
 

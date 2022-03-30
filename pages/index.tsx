@@ -111,87 +111,96 @@ const Main: React.FC<Props> = (props) => {
                 >
                   <section>
                     {feed.map((post) => (
-                      <Box
-                        // minW="100%"
-                        display="inline-block"
-                        bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-                        borderRadius="xl"
-                        p="4"
-                        mt="2"
-                        mb="2"
-                        mx="2"
-                        key={post.id}
-                        boxShadow="md"
-                        w="100%"
-                        // border="1px solid red"
+                      <motion.div
+                        whileHover={{
+                          scale: 1.02,
+                        }}
+                        transition={{ ease: 'easeInOut', duration: 0.2 }}
                       >
                         <Box
-                          onClick={() =>
-                            Router.push('/p/[id]', `/p/${post.id}`)
-                          }
-                          _hover={{ cursor: 'pointer' }}
-                        >
-                          <Text fontSize="3xl" noOfLines={1}>
-                            <b>{post.title}</b>
-                          </Text>
-                          <Text fontSize="xl" noOfLines={1}>
-                            {post.content}
-                          </Text>
-                          <Box>
-                            <ImageComponent props={post} />
-                          </Box>
-                          <Box my="4">
-                            {/* audio */}
-                            <audio preload="none" controls src={post.fileUrl}>
-                              Your browser does not support the
-                              <code>audio</code> element.
-                            </audio>
-                          </Box>
-                        </Box>
-
-                        {/* info */}
-                        <motion.div
-                          whileHover={{
-                            scale: 1.02,
-                          }}
-                          transition={{ ease: 'easeInOut', duration: 0.2 }}
-                          // whileTap={{ scale: 0.98 }}
+                          // minW="100%"
+                          display="inline-block"
+                          bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                          borderRadius="xl"
+                          p="4"
+                          mt="2"
+                          mb="2"
+                          mx="2"
+                          key={post.id}
+                          boxShadow="md"
+                          w="100%"
+                          // border="1px solid red"
                         >
                           <Box
-                            mt="4"
-                            p="2"
-                            boxShadow="md"
-                            bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
-                            borderRadius="xl"
-                            _hover={{ cursor: 'pointer' }}
                             onClick={() =>
-                              Router.push(
-                                '/auth/[authorId]',
-                                `/auth/${post.authorId}`
-                              )
+                              Router.push('/p/[id]', `/p/${post.id}`)
                             }
+                            _hover={{ cursor: 'pointer' }}
                           >
-                            <Text
-                              fontSize="sm"
-                              sx={{ transform: 'translateX(-8px)' }}
-                            >
-                              <Center justifyContent="left" mx="2">
-                                <Image
-                                  display="inline"
-                                  border="2px inset  gray"
-                                  src={post.author.image}
-                                  fallbackSrc="https://picsum.photos/200"
-                                  boxSize="1.5rem"
-                                  borderRadius="full"
-                                  // alt={post.author.name}
-                                />
-                                <b>{post.author.name}</b>,{' '}
-                                {moment(post.createdAt).fromNow()}
-                              </Center>
+                            <Text fontSize="3xl" noOfLines={1}>
+                              <b>{post.title}</b>
                             </Text>
+                            <Text fontSize="xl" noOfLines={1}>
+                              {post.content}
+                            </Text>
+                            <Box>
+                              <ImageComponent props={post} />
+                            </Box>
+                            <Box my="4">
+                              {/* audio */}
+                              <audio preload="none" controls src={post.fileUrl}>
+                                Your browser does not support the
+                                <code>audio</code> element.
+                              </audio>
+                            </Box>
                           </Box>
-                        </motion.div>
-                      </Box>
+
+                          {/* info */}
+                          <motion.div
+                            whileHover={{
+                              scale: 1.02,
+                            }}
+                            transition={{ ease: 'easeInOut', duration: 0.2 }}
+                          >
+                            <Box
+                              mt="4"
+                              p="2"
+                              boxShadow="md"
+                              bg={
+                                colorMode === 'light' ? 'gray.400' : 'gray.600'
+                              }
+                              borderRadius="xl"
+                              _hover={{ cursor: 'pointer' }}
+                              onClick={() =>
+                                Router.push(
+                                  '/auth/[authorId]',
+                                  `/auth/${post.authorId}`
+                                )
+                              }
+                            >
+                              <Text
+                                fontSize="sm"
+                                sx={{ transform: 'translateX(-8px)' }}
+                              >
+                                <Center justifyContent="left" mx="2">
+                                  <Image
+                                    display="inline"
+                                    border="2px inset  gray"
+                                    src={post.author.image}
+                                    fallbackSrc="https://picsum.photos/200"
+                                    boxSize="1.5rem"
+                                    borderRadius="full"
+                                    mr="1"
+                                    // alt={post.author.name}
+                                  />
+                                  <b> {post.author.name}</b>,{' '}
+                                  {moment(post.createdAt).fromNow()}
+                                </Center>
+                              </Text>
+                            </Box>
+                          </motion.div>
+                        </Box>
+                      </motion.div>
                     ))}
                   </section>
                 </Box>

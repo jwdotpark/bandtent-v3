@@ -22,7 +22,11 @@ import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {

@@ -108,35 +108,40 @@ const Me: React.FC = (props) => {
                           <Center>{props.user.name}</Center>
                         </Text>
                       </Box>
-                      <Text fontSize="xl">
-                        <Center>
-                          <a href={'mailto:' + props.user.email}>
-                            <Text color="blue.400">{props.user.email}</Text>
-                          </a>
-                        </Center>
-                      </Text>
-                      <Text fontSize="xl">
-                        <Center>
-                          <Link
-                            isExternal
-                            href={
-                              'https://www.google.com/maps/search/' +
-                              props.user.location
-                            }
-                          >
-                            <Text color="blue.400">{props.user.location}</Text>
-                          </Link>
-                        </Center>
-                      </Text>
-                      <Text fontSize="md">
-                        <Center>
-                          <Link href={props.user.website} isExternal>
-                            <Text color="blue.400">
-                              {props.user.website} <ExternalLinkIcon mx="2px" />
-                            </Text>
-                          </Link>
-                        </Center>
-                      </Text>
+                      <Box textAlign="left">
+                        <Text fontSize="xl">
+                          <Center>
+                            <a href={'mailto:' + props.user.email}>
+                              <Text color="#50fa7b">{props.user.email} </Text>
+                            </a>
+                          </Center>
+                        </Text>
+                        <Text fontSize="xl">
+                          <Center>
+                            <Link
+                              isExternal
+                              href={
+                                'https://www.google.com/maps/search/' +
+                                props.user.location
+                              }
+                            >
+                              <Text color="#50fa7b">
+                                {props.user.location}{' '}
+                              </Text>
+                            </Link>
+                          </Center>
+                        </Text>
+                        <Text fontSize="md">
+                          <Center>
+                            <Link href={props.user.website} isExternal>
+                              <Text color="#50fa7b">
+                                {props.user.website}{' '}
+                                <ExternalLinkIcon mx="2px" />
+                              </Text>
+                            </Link>
+                          </Center>
+                        </Text>
+                      </Box>
                       <Box
                         m="4"
                         mt="2"

@@ -78,7 +78,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
         <ModalOverlay />
         <ModalContent borderRadius="xl">
           <Box
-            bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+            bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
             borderRadius="xl"
           >
             <ModalHeader>{user.name}</ModalHeader>
@@ -95,6 +95,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                   <FormLabel htmlFor="name">Artist Name</FormLabel>
                   <Input
                     id="name"
+                    variant="filled"
                     defaultValue={user.name}
                     {...register('name', {
                       required: 'User name is required.',
@@ -113,6 +114,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                   <FormLabel htmlFor="name">Email Address</FormLabel>
                   <Input
                     id="email"
+                    variant="filled"
                     defaultValue={user.email}
                     {...register('email', {
                       required: 'Email address is required',
@@ -134,6 +136,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                 <FormControl isInvalid={errors.description} my="2">
                   <FormLabel htmlFor="description">Description</FormLabel>
                   <Textarea
+                    variant="filled"
                     id="description"
                     placeholder="Description"
                     // @ts-ignore description is not defined in default next-auth user table
@@ -153,6 +156,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                 <FormControl isInvalid={errors.location}>
                   <FormLabel htmlFor="location">Location</FormLabel>
                   <Input
+                    variant="filled"
                     id="location"
                     placeholder="Berlin, DE"
                     // @ts-ignore location is not defined in default next-auth user table
@@ -170,6 +174,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                   <InputGroup>
                     {/* <InputLeftAddon children="https://www." /> */}
                     <Input
+                      variant="filled"
                       id="website"
                       placeholder="http://www.example.com/"
                       // @ts-ignore location is not defined in default next-auth user table

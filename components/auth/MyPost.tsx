@@ -90,7 +90,7 @@ const MyPost = (props) => {
                       key={post.id}
                       boxShadow="md"
                       w="100%"
-                      border={!post.published ? '3px dashed gray' : null}
+                      border={!post.published ? '3px dashed #ff79c6' : null}
                     >
                       {/* {post.published ? 'yes' : 'no'} */}
                       <Box

@@ -62,8 +62,8 @@ const Header: React.FC = (props) => {
           // border="2px solid gray"
           borderRadius="xl"
           bg={colorMode === 'light' ? '#cbd5e0' : '#2d3748'}
+          border={colorMode === 'light' ? null : '2px solid #8969b4'}
           // sx={{ backdropFilter: 'blur(10px) saturate(50%) ' }}
-          // boxShadow="xl"
           sx={{
             boxShadow:
               'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',

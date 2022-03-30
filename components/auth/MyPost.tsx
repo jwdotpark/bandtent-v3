@@ -16,11 +16,9 @@ const MyPost = (props) => {
   const { colorMode } = useColorMode()
   const [num, setNum] = useState(0)
 
-  console.log(props.uid)
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
   const { data, error } = useSWR(`/api/post/mypost/${props.uid}`, fetcher)
 
-  console.log('data', data)
   useEffect(() => {
     if (data) {
       setNum(data.posts.length)

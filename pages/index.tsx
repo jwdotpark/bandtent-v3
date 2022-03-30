@@ -221,22 +221,7 @@ const Main: React.FC<Props> = (props) => {
               </Box>
 
               {/* right column */}
-              <Box
-                w="60vw"
-                h="100%"
-                m="2"
-                ml="2"
-                borderRadius="xl"
-                bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
-                sx={{
-                  boxShadow:
-                    'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
-                }}
-              >
-                <Box m="2" p="2" overflow="clip">
-                  <Feature props={props} />
-                </Box>
-              </Box>
+              <Feature props={props} />
             </Stack>
           </Box>
         </Media>

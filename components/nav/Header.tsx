@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
@@ -32,8 +32,6 @@ import {
   MoonIcon,
 } from '@chakra-ui/icons'
 import { motion } from 'framer-motion'
-import { GetServerSideProps } from 'next'
-import prisma from '../../lib/prisma'
 import useSWR from 'swr'
 
 const Header: React.FC = (props) => {
@@ -59,11 +57,9 @@ const Header: React.FC = (props) => {
           ml="2"
           w="calc(100% - 1rem)"
           zIndex="tooltip"
-          // border="2px solid gray"
           borderRadius="xl"
           bg={colorMode === 'light' ? '#cbd5e0' : '#2d3748'}
           border={colorMode === 'light' ? null : '2px solid #8969b4'}
-          // sx={{ backdropFilter: 'blur(10px) saturate(50%) ' }}
           sx={{
             boxShadow:
               'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
@@ -76,7 +72,6 @@ const Header: React.FC = (props) => {
                 scale: 1.05,
               }}
               transition={{ ease: 'easeInOut', duration: 0.25 }}
-              // whileTap={{ scale: 0.95 }}
             >
               <Link href="/">
                 <Box className="bold" data-active={isActive('/')}>
@@ -92,7 +87,6 @@ const Header: React.FC = (props) => {
                   scale: 1.05,
                 }}
                 transition={{ ease: 'easeInOut', duration: 0.25 }}
-                // whileTap={{ scale: 0.95 }}
               >
                 <Link href={'/auth/' + session.user.id}>
                   <Button

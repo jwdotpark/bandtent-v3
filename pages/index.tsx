@@ -57,7 +57,7 @@ const Main: React.FC<Props> = (props) => {
   const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
   const [isLoading, setIsLoading] = useState(false)
 
-  // FIXME data[(data.length - 1)] is undefined after third load... 
+  // FIXME data[(data.length - 1)] is undefined after third load...
   const handleMore = async () => {
     setIsLoading(true)
     try {
@@ -97,22 +97,22 @@ const Main: React.FC<Props> = (props) => {
                   w="60vw"
                   bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                   borderRadius="xl"
-                  // borderColor="gray.300"
                   boxShadow="md"
                   px="2"
                   pt="1"
+                  pr="6"
                   sx={{
                     boxShadow:
                       'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
                     columnCount: [1, 2],
-                    columnGap: '0',
+                    columnGap: '4',
                     columnWidth: '100%',
                   }}
-                  // py="1"
                 >
                   <section>
                     {feed.map((post) => (
                       <Box
+                        // minW="100%"
                         display="inline-block"
                         bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                         borderRadius="xl"
@@ -122,6 +122,7 @@ const Main: React.FC<Props> = (props) => {
                         mx="2"
                         key={post.id}
                         boxShadow="md"
+                        w="100%"
                         // border="1px solid red"
                       >
                         <Box
@@ -176,7 +177,6 @@ const Main: React.FC<Props> = (props) => {
                             >
                               <Center justifyContent="left" mx="2">
                                 <Image
-                                  // mr="2"
                                   display="inline"
                                   border="2px inset  gray"
                                   src={post.author.image}

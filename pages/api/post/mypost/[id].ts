@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/react'
-import prisma from '../../../lib/prisma'
+import prisma from '../../../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 // GET /api/post/mypost/:uid
@@ -7,14 +7,10 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req })
-  // @ts-ignore id type not exist on next-auth session
-  const uid: number = session.user.id
-
   try {
     const result = await prisma.user.findUnique({
       where: {
-        id: Number(uid),
+        id: Number(req.query.id),
       },
       include: {
         posts: true,

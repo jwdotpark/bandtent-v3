@@ -57,7 +57,7 @@ const Main: React.FC<Props> = (props) => {
   const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
   const [isLoading, setIsLoading] = useState(false)
 
-  // FIXME data[(data.length - 1)] is undefined after third load...
+  // data[(data.length - 1)] is undefined after third load...
   const handleMore = async () => {
     setIsLoading(true)
     try {
@@ -68,7 +68,6 @@ const Main: React.FC<Props> = (props) => {
       })
       const data = await result.json()
       setCursor(feed[feed.length - 1].id)
-      // setCursor(data[data.length - 1].id)
       setFeed([...feed, ...data])
     } catch (error) {
       console.error(error)

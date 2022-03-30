@@ -14,19 +14,20 @@ import { motion } from 'framer-motion'
 
 const MyPost = (props) => {
   const { colorMode } = useColorMode()
-
   const [num, setNum] = useState(0)
 
+  console.log(props.uid)
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
-  const { data, error } = useSWR('/api/post/mypost', fetcher)
+  const { data, error } = useSWR(`/api/post/mypost/${props.uid}`, fetcher)
 
+  console.log('data', data)
   useEffect(() => {
     if (data) {
       setNum(data.posts.length)
     }
   }, [data])
 
-  if (error) return 'Failed to load'
+  if (error) return <Center h="100%">Failed to load</Center>
   if (!data)
     return (
       <Center h="100%">
@@ -68,7 +69,7 @@ const MyPost = (props) => {
           }}
         >
           {!error &&
-            data?.posts
+            data.posts
               .slice(0)
               .reverse()
               .map((post) => {

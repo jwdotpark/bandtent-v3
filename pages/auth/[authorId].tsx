@@ -19,7 +19,6 @@ import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
 import { GetServerSideProps } from 'next'
 import prisma from '../../lib/prisma'
-import ImageComponent from '../../components/utils/ImageComponent'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const user = await prisma.user.findUnique({
@@ -35,8 +34,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 }
 
 const Me: React.FC = (props) => {
-  // const user = props
-
   const { data } = useSession()
   const { colorMode } = useColorMode()
 
@@ -44,6 +41,8 @@ const Me: React.FC = (props) => {
   const pull_number = (data: number) => {
     setNumOfPost(data)
   }
+
+  const uid = props.user.id
 
   return (
     <Layout>
@@ -166,7 +165,7 @@ const Me: React.FC = (props) => {
                 w="60vw"
                 borderRadius="xl"
               >
-                <MyPost func={pull_number} />
+                <MyPost func={pull_number} uid={uid} />
               </Box>
             </Stack>
           </Media>

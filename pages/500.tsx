@@ -5,7 +5,7 @@ export default function Custom404() {
   return (
     <Layout>
       <Center h="calc(100vh - 70px)" mt="2">
-        <Text fontSize="6xl">500</Text>
+        <Text sx={{ fontSize: '25rem' }}>500</Text>
       </Center>
     </Layout>
   )

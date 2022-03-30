@@ -55,8 +55,11 @@ const Main: React.FC<Props> = (props) => {
   // pagination load more callback
   const [feed, setFeed] = useState(props.feed)
   const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
+  const [isLoading, setIsLoading] = useState(false)
 
+  // FIXME data[(data.length - 1)] is undefined after third load... 
   const handleMore = async () => {
+    setIsLoading(true)
     try {
       const result = await fetch('api/post/loadmore', {
         method: 'POST',
@@ -64,11 +67,13 @@ const Main: React.FC<Props> = (props) => {
         body: JSON.stringify(cursor),
       })
       const data = await result.json()
-      setCursor(data[data.length - 1].id)
+      setCursor(feed[feed.length - 1].id)
+      // setCursor(data[data.length - 1].id)
       setFeed([...feed, ...data])
     } catch (error) {
       console.error(error)
     } finally {
+      setIsLoading(false)
     }
   }
 
@@ -86,111 +91,123 @@ const Main: React.FC<Props> = (props) => {
           {/* navbar space */}
           <Box m="2">
             <Stack direction={['column', 'row']} w="100%">
-              {/* left column */}
-              <Box
-                w="40vw"
-                bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
-                borderRadius="xl"
-                borderColor="gray.300"
-                boxShadow="md"
-                sx={{
-                  boxShadow:
-                    'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
-                }}
-              >
-                <section>
-                  {feed.map((post) => (
-                    <Box
-                      bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-                      borderRadius="xl"
-                      p="4"
-                      m="4"
-                      key={post.id}
-                      boxShadow="md"
-                    >
+              <Box>
+                {/* left column */}
+                <Box
+                  w="60vw"
+                  bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                  borderRadius="xl"
+                  // borderColor="gray.300"
+                  boxShadow="md"
+                  px="2"
+                  pt="1"
+                  sx={{
+                    boxShadow:
+                      'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+                    columnCount: [1, 2],
+                    columnGap: '0',
+                    columnWidth: '100%',
+                  }}
+                  // py="1"
+                >
+                  <section>
+                    {feed.map((post) => (
                       <Box
-                        onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
-                        _hover={{ cursor: 'pointer' }}
-                      >
-                        <Text fontSize="3xl" noOfLines={1}>
-                          <b>{post.title}</b>
-                        </Text>
-                        <Text fontSize="xl" noOfLines={1}>
-                          {post.content}
-                        </Text>
-
-                        {/* <Divider mb="2" /> */}
-                        {/* cover */}
-
-                        <Box>
-                          <ImageComponent props={post} />
-                        </Box>
-                        <Box my="4">
-                          {/* audio */}
-                          <audio preload="none" controls src={post.fileUrl}>
-                            Your browser does not support the
-                            <code>audio</code> element.
-                          </audio>
-                        </Box>
-                      </Box>
-
-                      {/* info */}
-                      <motion.div
-                        whileHover={{
-                          scale: 1.02,
-                        }}
-                        transition={{ ease: 'easeInOut', duration: 0.2 }}
-                        // whileTap={{ scale: 0.98 }}
+                        display="inline-block"
+                        bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                        borderRadius="xl"
+                        p="4"
+                        mt="2"
+                        mb="2"
+                        mx="2"
+                        key={post.id}
+                        boxShadow="md"
+                        // border="1px solid red"
                       >
                         <Box
-                          mt="4"
-                          p="2"
-                          boxShadow="md"
-                          bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
-                          borderRadius="xl"
-                          _hover={{ cursor: 'pointer' }}
                           onClick={() =>
-                            Router.push(
-                              '/auth/[authorId]',
-                              `/auth/${post.authorId}`
-                            )
+                            Router.push('/p/[id]', `/p/${post.id}`)
                           }
+                          _hover={{ cursor: 'pointer' }}
                         >
-                          <Text
-                            fontSize="sm"
-                            sx={{ transform: 'translateX(-8px)' }}
-                          >
-                            <Center justifyContent="left" mx="2">
-                              <Image
-                                mr="2"
-                                display="inline"
-                                border="2px inset  gray"
-                                src={post.author.image}
-                                fallbackSrc="https://picsum.photos/200"
-                                boxSize="1.5rem"
-                                borderRadius="full"
-                                // alt={post.author.name}
-                              />
-                              <b>{post.author.name}</b>,{' '}
-                              {moment(post.createdAt).fromNow()}
-                            </Center>
+                          <Text fontSize="3xl" noOfLines={1}>
+                            <b>{post.title}</b>
                           </Text>
+                          <Text fontSize="xl" noOfLines={1}>
+                            {post.content}
+                          </Text>
+                          <Box>
+                            <ImageComponent props={post} />
+                          </Box>
+                          <Box my="4">
+                            {/* audio */}
+                            <audio preload="none" controls src={post.fileUrl}>
+                              Your browser does not support the
+                              <code>audio</code> element.
+                            </audio>
+                          </Box>
                         </Box>
-                      </motion.div>
-                    </Box>
-                  ))}
-                </section>
-                <Center my="4" mx="2">
+
+                        {/* info */}
+                        <motion.div
+                          whileHover={{
+                            scale: 1.02,
+                          }}
+                          transition={{ ease: 'easeInOut', duration: 0.2 }}
+                          // whileTap={{ scale: 0.98 }}
+                        >
+                          <Box
+                            mt="4"
+                            p="2"
+                            boxShadow="md"
+                            bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                            borderRadius="xl"
+                            _hover={{ cursor: 'pointer' }}
+                            onClick={() =>
+                              Router.push(
+                                '/auth/[authorId]',
+                                `/auth/${post.authorId}`
+                              )
+                            }
+                          >
+                            <Text
+                              fontSize="sm"
+                              sx={{ transform: 'translateX(-8px)' }}
+                            >
+                              <Center justifyContent="left" mx="2">
+                                <Image
+                                  // mr="2"
+                                  display="inline"
+                                  border="2px inset  gray"
+                                  src={post.author.image}
+                                  fallbackSrc="https://picsum.photos/200"
+                                  boxSize="1.5rem"
+                                  borderRadius="full"
+                                  // alt={post.author.name}
+                                />
+                                <b>{post.author.name}</b>,{' '}
+                                {moment(post.createdAt).fromNow()}
+                              </Center>
+                            </Text>
+                          </Box>
+                        </motion.div>
+                      </Box>
+                    ))}
+                  </section>
+                </Box>
+                <Center my="4">
                   <Button
-                    mx="4"
+                    // mx="4"
                     w="100%"
                     size="sm"
-                    colorScheme="blackAlpha"
+                    colorScheme="gray"
                     borderRadius="xl"
                     onClick={handleMore}
                     boxShadow="md"
                   >
-                    <Text fontSize="sm">Load More</Text>
+                    <Text fontSize="sm">
+                      {isLoading ? 'Loading..' : 'Load More'}
+                    </Text>
                   </Button>
                 </Center>
               </Box>

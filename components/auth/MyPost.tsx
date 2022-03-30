@@ -31,9 +31,9 @@ const MyPost = (props) => {
           mb="4"
           boxShadow="md"
         >
-          <Text fontSize="md">
+          <Text fontSize="xl">
             {data && data.posts.length !== 1
-              ? data.posts.length + ' posts uploaded..'
+              ? data.posts.length + ' posts uploaded.'
               : 'No item uploaded..'}
           </Text>
         </Box>

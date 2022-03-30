@@ -22,7 +22,6 @@ import prisma from '../../lib/prisma'
 import ImageComponent from '../../components/utils/ImageComponent'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  // console.log('ssr: ', params)
   const user = await prisma.user.findUnique({
     where: {
       id: Number(params.authorId),
@@ -36,8 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 }
 
 const Me: React.FC = (props) => {
-  const user = props
-  // console.log(props.user.name)
+  // const user = props
 
   const { data } = useSession()
   const { colorMode } = useColorMode()
@@ -110,14 +108,14 @@ const Me: React.FC = (props) => {
                           <Center>{props.user.name}</Center>
                         </Text>
                       </Box>
-                      <Text fontSize="md">
+                      <Text fontSize="xl">
                         <Center>
                           <a href={'mailto:' + props.user.email}>
                             <Text color="blue.400">{props.user.email}</Text>
                           </a>
                         </Center>
                       </Text>
-                      <Text fontSize="md">
+                      <Text fontSize="xl">
                         <Center>
                           <Link
                             isExternal
@@ -149,9 +147,9 @@ const Me: React.FC = (props) => {
                         <Text fontSize="md">{props.user.description}</Text>
                       </Box>
                     </Box>
-                  </Box>
-                  <Box mt="2" mx="2">
-                    {/* <MeEdit props={props} /> */}
+                    <Box mx="2" mt="-2">
+                      <MeEdit props={props} />
+                    </Box>
                   </Box>
                 </Box>
               </Box>

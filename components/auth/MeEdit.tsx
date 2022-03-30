@@ -17,14 +17,23 @@ import {
   Input,
   InputGroup,
   useColorMode,
+  Center,
 } from '@chakra-ui/react'
-import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import Router from 'next/router'
 
-const MeEdit = (props) => {
+type FormData = {
+  name: string
+  description: string
+  image: string
+  email: string
+  id: number
+}
+
+const MeEdit = (props: { props: { user: { id: any } } }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  // const { props } = useSession()
+  // @ts-ignore id is not missing?
+  const user: FormData = props.props.user
 
   const {
     handleSubmit,
@@ -32,48 +41,40 @@ const MeEdit = (props) => {
     formState: { errors, isSubmitting, isValid },
   } = useForm({ mode: 'onChange' })
 
-  // FIXME something's wrong with fetching but can't figure out
-  function onSubmit(values) {
-    return new Promise<void>((resolve) => {
-      fetch('/api/profile/edit', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      })
-        .then((res) => res.json())
-        // .then((props) => console.log(props))
-        .then((error) => {
-          console.error('Error: ', error)
-        })
-      setTimeout(() => {
-        resolve()
-        Router.reload()
-      }, 1000)
+  async function onSubmit(values) {
+    await fetch('/api/profile/edit', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
     })
+      .then((res) => res.json())
+      .then((error) => {
+        console.error('Error: ', error)
+      })
+    Router.push('/auth/[authorId]', `/auth/${user.id}`)
+    onClose()
   }
 
   const { colorMode } = useColorMode()
 
-  // console.log(props.props.user)
-  const user = props.props.user
-
   return (
-    <>
+    <Center>
       <Button
         borderRadius="xl"
-        colorScheme="blackAlpha"
         onClick={onOpen}
         size="sm"
         w="100%"
         boxShadow="md"
-        my="2"
+        mx="4"
+        mb="4"
       >
         Edit
       </Button>
+
       {/* modal */}
-      <Modal isOpen={isOpen} onClose={onClose} size="xs">
+      <Modal isOpen={isOpen} onClose={onClose} size="md" isCentered>
         <ModalOverlay />
         <ModalContent borderRadius="xl">
           <Box
@@ -86,12 +87,12 @@ const MeEdit = (props) => {
               <ModalBody>
                 {/* <VStack spacing={2}> */}
                 {/* image input */}
-                <Box>
-                  <Image loading="lazy" borderRadius="xl" src={user.image} />
-                </Box>
+                <Center mb="4">
+                  <Image loading="lazy" borderRadius="full" src={user.image} />
+                </Center>
                 {/* name */}
                 <FormControl isInvalid={errors.name}>
-                  <FormLabel htmlFor="name">User Name</FormLabel>
+                  <FormLabel htmlFor="name">Artist Name</FormLabel>
                   <Input
                     id="name"
                     defaultValue={user.name}
@@ -108,7 +109,7 @@ const MeEdit = (props) => {
                   </FormErrorMessage>
                 </FormControl>
                 {/* email */}
-                <FormControl isInvalid={errors.email}>
+                <FormControl isInvalid={errors.email} my="2">
                   <FormLabel htmlFor="name">Email Address</FormLabel>
                   <Input
                     id="email"
@@ -130,14 +131,19 @@ const MeEdit = (props) => {
                   </FormErrorMessage>
                 </FormControl>
                 {/* description */}
-                <FormControl isInvalid={errors.description}>
+                <FormControl isInvalid={errors.description} my="2">
                   <FormLabel htmlFor="description">Description</FormLabel>
                   <Textarea
                     id="description"
                     placeholder="Description"
                     // @ts-ignore description is not defined in default next-auth user table
                     defaultValue={user.description}
-                    {...register('description', {})}
+                    {...register('description', {
+                      pattern: {
+                        value: /^(?=.{0,800}$)/,
+                        message: 'Too much description!',
+                      },
+                    })}
                   />
                   <FormErrorMessage>
                     {errors.description && errors.description.message}
@@ -199,7 +205,7 @@ const MeEdit = (props) => {
           </Box>
         </ModalContent>
       </Modal>
-    </>
+    </Center>
   )
 }
 

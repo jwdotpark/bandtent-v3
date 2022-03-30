@@ -60,19 +60,21 @@ async function publishPost(id: number): Promise<void> {
   await fetch(`/api/publish/${id}`, {
     method: 'PUT',
   })
-  await Router.push('/')
-}
-
-async function deletePost(id: number): Promise<void> {
-  await fetch(`/api/post/${id}`, {
-    method: 'DELETE',
-  })
-  Router.push('/')
+  // await Router.push('/')
+  Router.push('/p/[id]', `/p/${id}`)
 }
 
 async function unpublishPost(id: number): Promise<void> {
   await fetch(`/api/publish/unpublish/${id}`, {
     method: 'PUT',
+  })
+  // Router.push('/')
+  Router.push('/p/[id]', `/p/${id}`)
+}
+
+async function deletePost(id: number): Promise<void> {
+  await fetch(`/api/post/${id}`, {
+    method: 'DELETE',
   })
   Router.push('/')
 }

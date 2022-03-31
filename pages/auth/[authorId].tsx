@@ -159,7 +159,8 @@ const Me: React.FC = (props) => {
               </Box>
               {/* right */}
               <Box
-                p="2"
+                // p="2"
+                pt="2"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                 boxShadow="md"
                 w="60vw"

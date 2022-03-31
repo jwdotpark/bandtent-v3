@@ -41,22 +41,25 @@ const MyPost = (props) => {
           borderRadius="xl"
           p="4"
           m="2"
+          mx="4"
           mb="4"
           boxShadow="md"
         >
           <Text fontSize="xl">
             {data && data.posts.length !== 1
-              ? data.posts.length + ' posts uploaded.'
+              ?  data.posts.length + ' posts uploaded.'
               : 'No item uploaded.'}
           </Text>
         </Box>
 
         <Box
-          bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+          bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+          // border="1px solid red"
           borderRadius="xl"
           boxShadow="md"
+          mx="4"
           px="2"
-          pt="1"
+          pt="2"
           pr="6"
           sx={{
             boxShadow:
@@ -81,7 +84,7 @@ const MyPost = (props) => {
                   >
                     <Box
                       display="inline-block"
-                      bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                      bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                       borderRadius="xl"
                       p="4"
                       mt="2"

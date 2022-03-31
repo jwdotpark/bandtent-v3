@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Box, Text, Center, useColorMode, Button } from '@chakra-ui/react'
-import { Rnd } from 'react-rnd'
 import { motion } from 'framer-motion'
 
 const Player = () => {

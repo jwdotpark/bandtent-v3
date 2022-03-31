@@ -55,7 +55,6 @@ const Me: React.FC = (props) => {
               <Box w="40vw">
                 <Box
                   p="2"
-                  // border="2px solid gray"
                   bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                   borderRadius="xl"
                   boxShadow="md"
@@ -65,40 +64,33 @@ const Me: React.FC = (props) => {
                     boxShadow="md"
                     pt="4"
                     borderRadius="xl"
-                    // border="2px solid gray"
                     m="2"
                     bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                     overflow="clip"
+                    py="4"
                   >
-                    <Center py="4">
+                    <Center>
                       <Box
                         borderRadius="full"
                         overflow="clip"
-                        boxSize="200px"
+                        boxSize="15rem"
                         alignContent="center"
                         boxShadow="xl"
                       >
-                        <Box
-                          my="2"
-                          boxShadow="sm"
-                          borderRadius="md"
-                          overflow="hidden"
+                        <AspectRatio
+                          maxW="500px"
+                          ratio={1}
+                          borderRadius="full"
+                          overflow="clip"
                         >
-                          <AspectRatio
-                            maxW="1000px"
-                            ratio={1}
-                            borderRadius="full"
-                            overflow="clip"
-                          >
-                            <Image
-                              src={props.user.image}
-                              fallbackSrc="https://picsum.photos/400"
-                              alt={props.content}
-                              w="100%"
-                              objectFit="cover"
-                            />
-                          </AspectRatio>
-                        </Box>
+                          <Image
+                            src={props.user.image}
+                            fallbackSrc="https://picsum.photos/400"
+                            alt={props.content}
+                            w="100%"
+                            objectFit="cover"
+                          />
+                        </AspectRatio>
                       </Box>
                     </Center>
                     <Box p="2">

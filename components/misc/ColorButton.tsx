@@ -5,7 +5,11 @@ const ColorButton = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Button size="sm" onClick={toggleColorMode}>
-      {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+      {colorMode === 'light' ? (
+        <MoonIcon w={3} h={3} />
+      ) : (
+        <SunIcon w={3} h={3} />
+      )}
     </Button>
   )
 }

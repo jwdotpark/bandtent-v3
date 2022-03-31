@@ -18,6 +18,7 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { Media } from '../../utils/media'
+import Player from '../utils/Player'
 import SearchButton from './SearchButton'
 import {
   ChevronDownIcon,
@@ -133,6 +134,7 @@ const Header: React.FC = (props) => {
             >
               <SearchButton />
             </motion.div>
+            <Player />
           </Stack>
           <Spacer />
           {/* right */}

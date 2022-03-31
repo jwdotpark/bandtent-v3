@@ -3,55 +3,19 @@ import { Box, Text, Center, useColorMode, Button } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 const Player = () => {
-  // const { colorMode } = useColorMode()
-
-  // const rndNum = (max: number) => {
-  //   return Math.floor(Math.random() * Math.floor(max))
-  // }
-
-  // const [position, setPosition] = useState({
-  //   x: rndNum(window.innerWidth / 2),
-  //   y: rndNum(window.innerHeight / 2),
-  // })
-
-  // const panel = {
-  //   w: 400,
-  //   h: 200,
-  //   z: 99999999,
-  // }
-
+  const { colorMode } = useColorMode()
   return (
-    // <Rnd
-    //   enableResizing={false}
-    //   zIndex={panel.z}
-    //   default={{
-    //     x: position.x,
-    //     y: position.y,
-    //     width: panel.w,
-    //     height: panel.h,
-    //   }}
-    //   updatePosition={{ x: position.x, y: position.y }}
-    //   onDrag={(e: MouseEvent) => {
-    //     // console.log(e.x, e.y)
-    //     setPosition({ x: e.x, y: e.y })
-    //   }}
-    // >
-    //   <Center
-    //     boxShadow="xl"
-    //     bg={colorMode === 'dark' ? '#323e56' : '#f5f5f5'}
-    //     border="4px solid gray"
-    //     borderRadius="xl"
-    //     w={panel.w}
-    //     h={panel.h}
-    //     zIndex={panel.z}
-    //   >
-    //     <Center>
-    //       <Text>x: {position.x}</Text>
-    //       <Text>y: {position.y}</Text>
-    //     </Center>
-    //   </Center>
-    // </Rnd>
-    <>button</>
+    <motion.div
+      whileHover={{
+        scale: 1.05,
+      }}
+      transition={{ ease: 'easeInOut', duration: 0.25 }}
+      whileFocus={{ scale: 1.05 }}
+    >
+      <Button size="sm" py="2" color={colorMode === 'light' ? null : '#f1fa8c'}>
+        Bufo Alvarius (Deafblind Remix) - Hypho, Xakra, Deafblind
+      </Button>
+    </motion.div>
   )
 }
 

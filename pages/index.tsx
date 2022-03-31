@@ -3,7 +3,6 @@ import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
 import PostProps from '../types/Post'
-import { ColorModeScript } from '@chakra-ui/react'
 import theme from '../utils/theme'
 import {
   Divider,
@@ -14,6 +13,7 @@ import {
   Center,
   Button,
   useColorMode,
+  ColorModeScript,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'

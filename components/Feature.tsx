@@ -7,9 +7,8 @@ import {
   Spinner,
 } from '@chakra-ui/react'
 import Router from 'next/router'
-import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
+import { Key } from 'react'
 import ImageComponent from './utils/ImageComponent'
-import moment from 'moment'
 import useSWR from 'swr'
 
 const Feature = (props: { props }) => {

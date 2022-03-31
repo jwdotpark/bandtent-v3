@@ -20,7 +20,6 @@ export default function UploadPage(props) {
   const [imageUrl, setImageUrl] = useState<string>('')
   const [preview, setPreview] = useState<string>('')
 
-  // FIXME fix submit handler
   const handleFileChange = async (event) => {
     setPreview(URL.createObjectURL(event.target.files[0]))
     let file = event.target.files[0]

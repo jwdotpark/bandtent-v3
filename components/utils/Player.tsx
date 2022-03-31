@@ -4,7 +4,7 @@ import { Rnd } from 'react-rnd'
 import { motion } from 'framer-motion'
 
 const Player = () => {
-  const { colorMode } = useColorMode()
+  // const { colorMode } = useColorMode()
 
   // const rndNum = (max: number) => {
   //   return Math.floor(Math.random() * Math.floor(max))

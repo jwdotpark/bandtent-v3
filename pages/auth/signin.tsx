@@ -37,7 +37,7 @@ const SignIn = ({
     if (session) {
       router.push('/')
     }
-  }, [session])
+  }, [router, session])
 
   const { isOpen, onToggle } = useDisclosure()
 

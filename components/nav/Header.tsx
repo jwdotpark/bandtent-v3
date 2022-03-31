@@ -73,7 +73,7 @@ const Header: React.FC = (props) => {
               }}
               transition={{ ease: 'easeInOut', duration: 0.25 }}
             >
-              <Link href="/">
+              <Link href="/" passHref>
                 <Box className="bold" data-active={isActive('/')}>
                   <Button
                     leftIcon={
@@ -98,7 +98,7 @@ const Header: React.FC = (props) => {
                 }}
                 transition={{ ease: 'easeInOut', duration: 0.25 }}
               >
-                <Link href={'/auth/' + session.user.id}>
+                <Link href={'/auth/' + session.user.id} passHref>
                   <Button
                     boxShadow="md"
                     size="sm"
@@ -140,7 +140,7 @@ const Header: React.FC = (props) => {
           {!session && (
             <>
               <Stack direction="row" p="2">
-                <Link href="/api/auth/signin">
+                <Link href="/api/auth/signin" passHref>
                   <Button size="sm" leftIcon={<UnlockIcon />}>
                     {status === 'loading' ? 'Validating Session..' : 'Log In'}
                   </Button>
@@ -160,7 +160,7 @@ const Header: React.FC = (props) => {
                   transition={{ ease: 'easeInOut', duration: 0.25 }}
                   // whileTap={{ scale: 0.95 }}
                 >
-                  <Link href="/create">
+                  <Link href="/create" passHref>
                     <Button
                       boxShadow="md"
                       size="sm"
@@ -193,7 +193,7 @@ const Header: React.FC = (props) => {
                         />
                       }
                     >
-                      <Link href="/drafts">
+                      <Link href="/drafts" passHref>
                         <Text color={colorMode === 'light' ? null : '#ffc587'}>
                           {unPubNum > 0 ? unPubNum + ' available' : null}
                         </Text>
@@ -248,7 +248,7 @@ const Header: React.FC = (props) => {
         <Flex mx="2">
           {/* left */}
           <Box pt="2" pr="1">
-            <Link href="/">
+            <Link href="/" passHref>
               <Box className="bold" data-active={isActive('/')}>
                 <Button leftIcon={<HamburgerIcon />} size="sm">
                   Feed
@@ -267,7 +267,7 @@ const Header: React.FC = (props) => {
           {!session && (
             <>
               <Stack direction="row" p="2">
-                <Link href="/api/auth/signin">
+                <Link href="/api/auth/signin" passHref>
                   <Button size="sm">
                     {status === 'loading' ? 'Validating Session..' : 'Log In'}
                   </Button>
@@ -290,7 +290,7 @@ const Header: React.FC = (props) => {
                     <SettingsIcon />
                   </MenuButton>
                   <MenuList>
-                    <Link href={'/auth/' + session.user.id}>
+                    <Link href={'/auth/' + session.user.id} passHref>
                       <MenuItem
                         icon={
                           <Image
@@ -306,7 +306,7 @@ const Header: React.FC = (props) => {
                         <Text ml="-2">{session.user.name}</Text>
                       </MenuItem>
                     </Link>
-                    <Link href="/create">
+                    <Link href="/create" passHref>
                       <MenuItem
                         icon={
                           <AddIcon
@@ -319,7 +319,7 @@ const Header: React.FC = (props) => {
                         </Text>
                       </MenuItem>
                     </Link>
-                    <Link href="/drafts">
+                    <Link href="/drafts" passHref>
                       <MenuItem icon={<PlusSquareIcon />}>My Drafts</MenuItem>
                     </Link>
                     <MenuItem

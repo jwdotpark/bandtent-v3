@@ -88,7 +88,12 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                 {/* <VStack spacing={2}> */}
                 {/* image input */}
                 <Center mb="4">
-                  <Image loading="lazy" borderRadius="full" src={user.image} />
+                  <Image
+                    loading="lazy"
+                    borderRadius="full"
+                    src={user.image}
+                    alt={user.name}
+                  />
                 </Center>
                 {/* name */}
                 <FormControl isInvalid={errors.name}>

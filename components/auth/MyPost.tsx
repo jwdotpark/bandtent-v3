@@ -73,6 +73,7 @@ const MyPost = (props) => {
               .map((post) => {
                 return (
                   <motion.div
+                    key={post.id}
                     whileHover={{
                       scale: 1.02,
                     }}
@@ -86,7 +87,6 @@ const MyPost = (props) => {
                       mt="2"
                       mb="2"
                       mx="2"
-                      key={post.id}
                       boxShadow="md"
                       w="100%"
                       border={!post.published ? '3px dashed #ff79c6' : null}

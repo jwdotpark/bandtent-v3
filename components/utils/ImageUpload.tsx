@@ -71,13 +71,14 @@ export default function UploadPage(props) {
                     }
                     borderTopRadius="md"
                     src={preview}
+                    alt="preview"
                   />
                 </Center>
               )}
             </Box>
             {files.map((file, index) => (
-              <Center>
-                <Box key={index} boxSize="50vw" h="100%">
+              <Center key={index}>
+                <Box boxSize="50vw" h="100%">
                   <Progress
                     // border="2px solid gray"
                     borderTop="none"
@@ -104,13 +105,14 @@ export default function UploadPage(props) {
                     borderBottom="none"
                     borderTopRadius="md"
                     src={preview}
+                    alt="preview"
                   />
                 </Center>
               )}
             </Box>
             {files.map((file, index) => (
-              <Center>
-                <Box key={index} boxSize="100vw" h="100%">
+              <Center key={index}>
+                <Box boxSize="100vw" h="100%">
                   <Progress
                     // border="2px solid gray"
                     borderTop="none"

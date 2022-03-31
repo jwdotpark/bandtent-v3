@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { useState } from 'react'
 import Link from 'next/link'
 import {

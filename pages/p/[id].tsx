@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 // FIXME
 
 // pages/p/[id].tsx
@@ -244,6 +245,7 @@ const Post: React.FC<PostProps> = (props) => {
                 bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
               >
                 <Text size="xl">
+                  {/* eslint-disable-next-line react/no-unescaped-entities */}
                   {props.post.author.name}'s {myPost.length} more posts{' '}
                 </Text>
               </Box>

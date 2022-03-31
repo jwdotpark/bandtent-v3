@@ -115,6 +115,7 @@ const Main: React.FC<Props> = (props) => {
                           scale: 1.02,
                         }}
                         transition={{ ease: 'easeInOut', duration: 0.2 }}
+                        key={post.id}
                       >
                         <Box
                           // minW="100%"
@@ -125,7 +126,6 @@ const Main: React.FC<Props> = (props) => {
                           mt="2"
                           mb="2"
                           mx="2"
-                          key={post.id}
                           boxShadow="md"
                           w="100%"
                           // border="1px solid red"
@@ -186,11 +186,11 @@ const Main: React.FC<Props> = (props) => {
                                     display="inline"
                                     border="2px inset  gray"
                                     src={post.author.image}
+                                    alt={post.author.name}
                                     fallbackSrc="https://picsum.photos/200"
                                     boxSize="1.5rem"
                                     borderRadius="full"
                                     mr="1"
-                                    // alt={post.author.name}
                                   />
                                   <b> {post.author.name}</b>,{' '}
                                   {moment(post.createdAt).fromNow()}
@@ -360,7 +360,7 @@ const Main: React.FC<Props> = (props) => {
                               fallbackSrc="https://picsum.photos/200"
                               boxSize="1.5rem"
                               borderRadius="full"
-                              // alt={post.author.name}
+                              alt={post.author.name}
                             />
                             <b>{post.author.name}</b>,{' '}
                             {moment(post.createdAt).fromNow()}

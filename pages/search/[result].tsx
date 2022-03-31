@@ -70,11 +70,10 @@ const SearchPage = (props: { result: any[] }) => {
                 mb="4"
                 w="100%"
                 display="inline-block"
+                key={post.id}
               >
                 <Box
                   overflow="clip"
-                  key={post.id}
-                  // border="2px solid gray"
                   bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                   borderRadius="xl"
                   p="4"
@@ -126,7 +125,7 @@ const SearchPage = (props: { result: any[] }) => {
                             fallbackSrc="https://picsum.photos/200"
                             boxSize="1.5rem"
                             borderRadius="full"
-                            // alt={post.author.name}
+                            alt={post.author.name}
                           />
                           <b>{post.author.name}</b>,{' '}
                           {moment(post.createdAt).fromNow()}

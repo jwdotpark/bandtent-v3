@@ -23,13 +23,13 @@ const AdditionalPost = ({ myPost }) => {
             content: string
           }) => (
             <Box
+              key={post.id}
               mb="4"
               w="100%"
               display="inline-block"
               onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
             >
               <Box
-                key={post.id}
                 bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                 boxShadow="md"
                 borderRadius="xl"

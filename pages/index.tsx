@@ -14,6 +14,8 @@ import {
   Button,
   useColorMode,
   ColorModeScript,
+  HStack,
+  VStack,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
@@ -118,7 +120,6 @@ const Main: React.FC<Props> = (props) => {
                         key={post.id}
                       >
                         <Box
-                          // minW="100%"
                           display="inline-block"
                           bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                           borderRadius="xl"
@@ -128,23 +129,27 @@ const Main: React.FC<Props> = (props) => {
                           mx="2"
                           boxShadow="md"
                           w="100%"
-                          // border="1px solid red"
                         >
+                          {post.id}
                           <Box
                             onClick={() =>
                               Router.push('/p/[id]', `/p/${post.id}`)
                             }
                             _hover={{ cursor: 'pointer' }}
                           >
-                            <Text fontSize="3xl" noOfLines={1}>
-                              <b>{post.title}</b>
-                            </Text>
-                            <Text fontSize="xl" noOfLines={1}>
-                              {post.content}
-                            </Text>
-                            <Box>
-                              <ImageComponent props={post} />
-                            </Box>
+                            <HStack>
+                              <Box boxSize="75px">
+                                <ImageComponent props={post} />
+                              </Box>
+                              <VStack>
+                                <Text fontSize="xl" noOfLines={1}>
+                                  {post.title}
+                                </Text>
+                                <Text fontSize="xl" noOfLines={1}>
+                                  {post.content}
+                                </Text>
+                              </VStack>
+                            </HStack>
                             <Box my="4">
                               {/* audio */}
                               <audio preload="none" controls src={post.fileUrl}>

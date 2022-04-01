@@ -8,11 +8,9 @@ export default async function handle(
 ) {
   try {
     const numOfPost = await prisma.post.count()
-    res.status(200)
-    res.json(numOfPost)
+    res.status(200).json(numOfPost)
   } catch (e) {
-    res.status(500)
-    res.json({ error: e })
+    res.status(500).json({ error: e })
   } finally {
     await prisma.$disconnect()
   }

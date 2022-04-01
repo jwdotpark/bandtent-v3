@@ -5,9 +5,9 @@ import { useRouter } from 'next/router'
 import { useScrollRestoration } from '../utils/useScrollRestoration'
 import { MediaContextProvider } from '../utils/media'
 
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-  console.log(metric)
-}
+// export function reportWebVitals(metric: NextWebVitalsMetric) {
+//   console.log(metric)
+// }
 
 const App = ({ Component, pageProps }: AppProps) => {
   // scroll preseervation

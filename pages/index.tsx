@@ -25,12 +25,13 @@ import Feature from '../components/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
+const WaveSurferComponent = dynamic(
+  import('../components/utils/WaveSurferComponent'),
+  { ssr: false }
+)
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  // res.setHeader(
-  //   'Cache-Control',
-  //   'public, s-maxage=10, stale-while-revalidate=59'
-  // )
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
@@ -42,7 +43,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     orderBy: { id: 'desc' },
   })
   return {
-    // https://github.com/vercel/next.js/issues/11993
     props: {
       feed: JSON.parse(JSON.stringify(feed)),
     },
@@ -83,8 +83,6 @@ const Main: React.FC<Props> = (props) => {
   useEffect(() => {
     setFeed(props.feed)
   }, [props.feed])
-
-  
 
   return (
     <>
@@ -131,11 +129,11 @@ const Main: React.FC<Props> = (props) => {
                           >
                             <Stack direction="row" p="4">
                               <Box
-                                // border="1px solid red"
                                 sx={{ aspectRatio: 1 }}
-                                // w="200px"
-                                // h="200px"
                                 boxSize="150px"
+                                onClick={() =>
+                                  Router.push('/p/[id]', `/p/${post.id}`)
+                                }
                               >
                                 <Image
                                   boxShadow="md"
@@ -149,16 +147,9 @@ const Main: React.FC<Props> = (props) => {
                                   alt={post.content}
                                   objectFit="cover"
                                   boxSize="150px"
-                                  // w="150px"
-                                  // h="150px"
                                 />
                               </Box>
-                              <Box
-                                onClick={() =>
-                                  Router.push('/p/[id]', `/p/${post.id}`)
-                                }
-                                w="100%"
-                              >
+                              <Box w="100%">
                                 {/* info */}
                                 <motion.div
                                   whileHover={{
@@ -203,6 +194,7 @@ const Main: React.FC<Props> = (props) => {
                                 </Text>
                                 {/* audio */}
                                 <Box>
+                                  <WaveSurferComponent url={post.fileUrl} />
                                   <audio
                                     preload="none"
                                     controls

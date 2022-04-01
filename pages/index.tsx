@@ -32,6 +32,7 @@ const WaveSurferComponent = dynamic(
 )
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  res.setHeader('Cache-Control', 'Access-Control-Allow-Origin: *')
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {

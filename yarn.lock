@@ -3101,6 +3101,11 @@ react-style-singleton@^2.1.0:
     invariant "^2.2.4"
     tslib "^1.0.0"
 
+react-wavesurfer.js@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/react-wavesurfer.js/-/react-wavesurfer.js-0.0.5.tgz#e2f4e1195f9b01c084ced1aa3e4ddda89de394ab"
+  integrity sha512-KLjNTKS25xfsTWrJd+knXF5wFH8CRu7repXSeDSjh4zhj27QbNL5jtcK8pNl82/kcoTeB0fZvtCcxPreEE8dQw==
+
 react@17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"

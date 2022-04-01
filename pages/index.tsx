@@ -26,6 +26,7 @@ import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
+// import WaveSurferComponent from '../components/utils/WaveSurferComponent'
 const WaveSurferComponent = dynamic(
   import('../components/utils/WaveSurferComponent'),
   { ssr: false }
@@ -190,12 +191,19 @@ const Main: React.FC<Props> = (props) => {
                                     </Text>
                                   </Box>
                                 </motion.div>
-                                <Text fontSize="xl" noOfLines={1}>
-                                  {post.title} - {post.content}
-                                </Text>
+                                <Box
+                                  onClick={() =>
+                                    Router.push('/p/[id]', `/p/${post.id}`)
+                                  }
+                                >
+                                  <Text fontSize="xl" noOfLines={1}>
+                                    {post.title} - {post.content}
+                                  </Text>
+                                </Box>
                                 {/* audio */}
                                 <Box>
-                                  <WaveSurferComponent url={post.fileUrl} />
+                                  insert audio play here
+                                  {/* <WaveSurferComponent url={post.fileUrl} /> */}
                                   {/* <audio
                                     preload="none"
                                     controls

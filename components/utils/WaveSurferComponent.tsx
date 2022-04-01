@@ -19,14 +19,15 @@ const WaveSurferComponent = (props) => {
   useEffect(() => {
     const waveSurfer = WaveSurfer.create({
       container: containerRef.current,
+      backend: 'MediaElement',
       responsive: true,
-      barWidth: 2,
+      barWidth: 1,
       barHeight: 5,
       cursorWidth: 0,
-      barGap: 0.01,
-      height: 40,
-      barRadius: 0.5,
-      waveColor: '#000',
+      barGap: 1,
+      height: 50,
+      barRadius: 1,
+      waveColor: '#555ab6',
       normalize: false,
     })
     waveSurfer.load(audio)

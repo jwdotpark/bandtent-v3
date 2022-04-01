@@ -2,40 +2,59 @@
 
 import { useRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { Box, Button, useColorMode } from '@chakra-ui/react'
-// import WaveSurfer from 'wavesurfer.js'
-import Wavesurfer from 'react-wavesurfer.js'
+import WaveSurfer from 'wavesurfer.js'
+// import Wavesurfer from 'react-wavesurfer.js'
 
 const WaveSurferComponent = (props) => {
   const { colorMode } = useColorMode()
-  const [playing, setPlaying] = useState(false)
-  const [position, setPosition] = useState(0)
-  const [muted, setMuted] = useState(false)
 
-  const handlePositionChange = (position) => {
-    // console.log(position)
-  }
-  const onReadyHandler = () => console.log('done loading!')
+  const containerRef = useRef()
+  const waveSurferRef = useRef({
+    isPlaying: () => false,
+  })
+  const [isPlaying, toggleIsPlaying] = useState(false)
 
-  const handlePlay = () => {
-    setPlaying(!playing)
-  }
+  // console.log(props.url)
+  const audio = props.url
+  useEffect(() => {
+    const waveSurfer = WaveSurfer.create({
+      container: containerRef.current,
+      responsive: true,
+      barWidth: 2,
+      barHeight: 5,
+      cursorWidth: 0,
+      barGap: 0.01,
+      height: 40,
+      barRadius: 0.5,
+      waveColor: '#000',
+      normalize: false,
+    })
+    waveSurfer.load(audio)
+    waveSurfer.on('ready', () => {
+      waveSurferRef.current = waveSurfer
+    })
+
+    return () => {
+      waveSurfer.destroy()
+    }
+  }, [audio])
 
   return (
-    <Box border="1px solid green">
-      <Wavesurfer
-        // src="./audio.mp3"
-        src={props.url}
-        position={position}
-        onPositionChange={handlePositionChange}
-        onReady={onReadyHandler}
-        playing={playing}
-        muted={muted}
-        // responsive={true}
-        waveColor={colorMode === 'light' ? 'red.100' : 'red.300'}
-        progressColor={colorMode === 'light' ? 'red.100' : 'red.300'}
-        cursorColor={colorMode === 'light' ? 'red.100' : 'red.300'}
-      />
-      <Button onClick={handlePlay}>{playing ? 'Pause' : 'Play'}</Button>
+    <Box>
+      <div ref={containerRef} />
+      <Box w="100%" m="2">
+        <Button
+          size="sm"
+          w="100%"
+          onClick={() => {
+            waveSurferRef.current.playPause()
+            toggleIsPlaying(waveSurferRef.current.isPlaying())
+          }}
+          type="button"
+        >
+          {isPlaying ? 'Pause' : 'Play'}
+        </Button>
+      </Box>
     </Box>
   )
 }

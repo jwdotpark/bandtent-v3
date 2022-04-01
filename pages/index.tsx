@@ -196,14 +196,14 @@ const Main: React.FC<Props> = (props) => {
                                 {/* audio */}
                                 <Box>
                                   <WaveSurferComponent url={post.fileUrl} />
-                                  <audio
+                                  {/* <audio
                                     preload="none"
                                     controls
                                     src={post.fileUrl}
                                   >
                                     Your browser does not support the
                                     <code>audio</code> element.
-                                  </audio>
+                                  </audio> */}
                                 </Box>
                               </Box>
                             </Stack>

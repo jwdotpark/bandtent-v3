@@ -84,6 +84,8 @@ const Main: React.FC<Props> = (props) => {
     setFeed(props.feed)
   }, [props.feed])
 
+  
+
   return (
     <>
       <Layout>

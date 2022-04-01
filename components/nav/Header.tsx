@@ -68,9 +68,9 @@ const Header: React.FC = (props) => {
           bg={colorMode === 'light' ? '#cbd5e0' : '#383a59'}
           // border={colorMode === 'light' ? null : '2px solid #8969b4'}
           sx={{
-            // boxShadow:
-            //   'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
-            boxShadow: clay.boxShadow,
+            boxShadow:
+              'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
+            // boxShadow: clay.boxShadow,
           }}
         >
           {/* left */}

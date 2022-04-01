@@ -26,6 +26,7 @@ const ImageComponent = (post: {
           }
           alt={post.props.content}
           objectFit="cover"
+          // boxSize="150px"
         />
       </AspectRatio>
     </Box>

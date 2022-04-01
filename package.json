@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "concurrently 'next' 'npx prisma studio'",
+    "dev": "next",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

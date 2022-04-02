@@ -14,11 +14,6 @@ import {
   Button,
   useColorMode,
   ColorModeScript,
-  HStack,
-  VStack,
-  Flex,
-  AspectRatio,
-  Spacer,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'

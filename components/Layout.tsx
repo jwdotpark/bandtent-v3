@@ -6,7 +6,6 @@ import FooterPlayer from './utils/FooterPlayer'
 const Layout = (props: {
   children: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal
 }) => {
-  let url = './audio.mp3'
   return (
     <>
       <Header />

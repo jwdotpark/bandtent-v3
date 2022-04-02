@@ -17,7 +17,7 @@ const Layout = (props: {
       >
         {props.children}
       </Box>
-      {/* <FooterPlayer url={url} /> */}
+      <FooterPlayer />
     </>
   )
 }

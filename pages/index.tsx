@@ -122,32 +122,49 @@ const Main: React.FC<Props> = (props) => {
                         >
                           <Box
                             _hover={{ cursor: 'pointer' }}
-                            alignContent="baseline"
+                            // alignContent="baseline"
                           >
                             <Stack direction="row" p="4">
                               <Box
+                                position="relative"
+                                // border="1px solid red"
                                 sx={{ aspectRatio: 1 }}
                                 boxSize="150px"
                                 h="75px"
-                                onClick={() =>
-                                  Router.push('/p/[id]', `/p/${post.id}`)
-                                }
+                                // onClick={() =>
+                                //   Router.push('/p/[id]', `/p/${post.id}`)
+                                // }
                               >
-                                <Image
-                                  boxShadow="md"
-                                  borderRadius="xl"
-                                  loading="lazy"
-                                  src={
-                                    post.imageUrl
-                                      ? post.imageUrl
-                                      : 'https://picsum.photos/400'
-                                  }
-                                  alt={post.content}
-                                  objectFit="cover"
-                                  boxSize="100px"
-                                />
+                                <Box onClick={() => console.log('play')}>
+                                  <motion.div
+                                    whileHover={{
+                                      scale: 1.02,
+                                    }}
+                                    whileTap={{
+                                      scale: 0.98,
+                                    }}
+                                    transition={{
+                                      ease: 'easeInOut',
+                                      duration: 0.2,
+                                    }}
+                                    key={post.id}
+                                  >
+                                    <Image
+                                      boxShadow="md"
+                                      borderRadius="xl"
+                                      loading="lazy"
+                                      src={
+                                        post.imageUrl
+                                          ? post.imageUrl
+                                          : 'https://picsum.photos/400'
+                                      }
+                                      alt={post.content}
+                                      objectFit="cover"
+                                      boxSize="100px"
+                                    />
+                                  </motion.div>
+                                </Box>
                               </Box>
-
                               <Box
                                 borderRadius="xl"
                                 bg={

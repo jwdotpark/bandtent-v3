@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Box,
   Text,
@@ -15,16 +15,15 @@ import musicAtom from '../../store/store'
 const Player = React.memo(function PlayerComponent() {
   const { colorMode } = useColorMode()
   const [music] = useAtom(musicAtom)
+  const [playing, setPlaying] = useState(false)
+
   useEffect(() => {
     setPlaying(true)
   }, [music])
 
-  const [playing, setPlaying] = useState(false)
-
   const handlePlayButtonClick = () => {
     setPlaying(!playing)
   }
-  console.log('rerendered')
 
   return (
     <motion.div

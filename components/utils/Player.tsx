@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import {
   Box,
   Text,
@@ -12,7 +12,7 @@ import ReactPlayer from 'react-player'
 import { useAtom } from 'jotai'
 import musicAtom from '../../store/store'
 
-const Player = () => {
+const Player = React.memo(function PlayerComponent() {
   const { colorMode } = useColorMode()
   const [music] = useAtom(musicAtom)
   useEffect(() => {
@@ -24,6 +24,7 @@ const Player = () => {
   const handlePlayButtonClick = () => {
     setPlaying(!playing)
   }
+  console.log('rerendered')
 
   return (
     <motion.div
@@ -54,6 +55,6 @@ const Player = () => {
       </ButtonGroup>
     </motion.div>
   )
-}
+})
 
 export default Player

@@ -8,4 +8,6 @@ const musicAtom = atom({
   fileUrl: '',
 })
 
+export const staticMusicAtom = atom(null, (_get, set) => set(musicAtom))
+
 export default musicAtom

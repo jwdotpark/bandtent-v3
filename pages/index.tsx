@@ -21,7 +21,8 @@ import Feature from '../components/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
-import { useAtom } from 'jotai'
+import { atom, useAtom } from 'jotai'
+import { useUpdateAtom } from 'jotai/utils'
 import musicAtom from '../store/store'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
@@ -78,6 +79,7 @@ const Main: React.FC<Props> = (props) => {
   }, [props.feed])
 
   const [selectMusic, setSelectMusic] = useAtom(musicAtom)
+
   const handleMusic = (music) => {
     setSelectMusic(music)
   }

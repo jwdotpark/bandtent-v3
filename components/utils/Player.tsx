@@ -34,6 +34,7 @@ const Player = React.memo(function PlayerComponent() {
     >
       <Box display="none">
         <ReactPlayer playing={playing} url={music.fileUrl} />
+        {/* <audio id="audio" src={music.fileUrl} controls /> */}
       </Box>
       <ButtonGroup isAttached>
         <Button

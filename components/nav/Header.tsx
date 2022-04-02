@@ -48,12 +48,6 @@ const Header: React.FC = (props) => {
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
   const { data: unPubNum, error } = useSWR('/api/profile/unpub', fetcher)
 
-  const clay = {
-    boxShadow: `   8px 8px 16px 0 rgba(0, 0, 0, .25), /* Outset shadow */
-    inset -8px -8px 12px 0 rgba(0, 0, 0, .25), /* Dark inset shadow */
-    inset 8px 8px 12px 0 rgba(255, 255, 255, 0.4); /* Light inset shadow */`,
-  }
-
   return (
     <nav>
       {/* desktop */}
@@ -141,7 +135,7 @@ const Header: React.FC = (props) => {
             >
               <SearchButton />
             </motion.div>
-            <Player />
+            {/* <Player /> */}
           </Stack>
           <Spacer />
           {/* right */}

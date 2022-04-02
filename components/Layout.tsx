@@ -11,9 +11,10 @@ const Layout = (props: {
     <>
       <Header />
       <Box
-      // sx={{
-      //   transform: 'translateY(3.5rem)',
-      // }}
+        pb="6"
+        sx={{
+          transform: 'translateY(3.5rem)',
+        }}
       >
         {props.children}
       </Box>

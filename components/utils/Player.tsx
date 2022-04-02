@@ -8,9 +8,13 @@ import {
   ButtonGroup,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { useAtom } from 'jotai'
+import musicAtom from '../../store/store'
 
 const Player = () => {
   const { colorMode } = useColorMode()
+  const [music] = useAtom(musicAtom)
+  
   return (
     <motion.div
       whileHover={{
@@ -27,7 +31,7 @@ const Player = () => {
           py="2"
           color={colorMode === 'light' ? null : '#f1fa8c'}
         >
-          Bufo Alvarius (Deafblind Remix) - Hypho, Xakra, Deafblind
+          {music.title} - {music.content}
         </Button>
       </ButtonGroup>
     </motion.div>

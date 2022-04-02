@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, createContext } from 'react'
 import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
@@ -21,6 +21,8 @@ import Feature from '../components/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
+import { useAtom } from 'jotai'
+import musicAtom from '../store/store'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   res.setHeader('Cache-Control', 'Access-Control-Allow-Origin: *')
@@ -48,12 +50,11 @@ type Props = {
 const Main: React.FC<Props> = (props) => {
   const { colorMode } = useColorMode()
 
-  // pagination load more callback
+  // load more posts with pagination query
   const [feed, setFeed] = useState(props.feed)
   const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
   const [isLoading, setIsLoading] = useState(false)
 
-  // data[(data.length - 1)] is undefined after third load...
   const handleMore = async () => {
     setIsLoading(true)
     try {
@@ -76,11 +77,15 @@ const Main: React.FC<Props> = (props) => {
     setFeed(props.feed)
   }, [props.feed])
 
+  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
+  const handleMusic = (music) => {
+    setSelectMusic(music)
+  }
+
   return (
     <>
       <Layout>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-
         {/* desktop */}
         <Media greaterThanOrEqual="md">
           {/* navbar space */}
@@ -124,7 +129,11 @@ const Main: React.FC<Props> = (props) => {
                                 boxSize="150px"
                                 h="75px"
                               >
-                                <Box onClick={() => console.log('play')}>
+                                <Box
+                                  onClick={() => {
+                                    handleMusic(post)
+                                  }}
+                                >
                                   <motion.div
                                     whileHover={{
                                       scale: 1.02,

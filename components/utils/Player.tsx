@@ -6,6 +6,7 @@ import {
   useColorMode,
   Button,
   ButtonGroup,
+  VStack,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import ReactPlayer from 'react-player'
@@ -26,11 +27,13 @@ const Player = React.memo(function PlayerComponent() {
   }
 
   return (
-    <motion.div
-      whileHover={{
-        scale: 1.02,
-      }}
-      transition={{ ease: 'easeInOut', duration: 0.2 }}
+    <Box
+      position="fixed"
+      bottom="0"
+      left="0"
+      zIndex="tooltip"
+      w="100%"
+      bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
     >
       <Box display="none">
         <ReactPlayer playing={playing} url={music.fileUrl} />
@@ -45,15 +48,11 @@ const Player = React.memo(function PlayerComponent() {
         >
           {playing ? 'Pause' : 'Play'}
         </Button>
-        <Button
-          size="sm"
-          py="2"
-          color={colorMode === 'light' ? null : '#f1fa8c'}
-        >
+        <Center border="1px solid red">
           {music.title} - {music.content}
-        </Button>
+        </Center>
       </ButtonGroup>
-    </motion.div>
+    </Box>
   )
 })
 

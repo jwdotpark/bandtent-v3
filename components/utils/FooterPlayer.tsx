@@ -6,11 +6,6 @@ import {
   Stack,
   useColorMode,
 } from '@chakra-ui/react'
-// import WaveSurferComponent from './WaveSurferComponent'
-import dynamic from 'next/dynamic'
-const WaveSurferComponent = dynamic(import('../utils/WaveSurferComponent'), {
-  ssr: false,
-})
 
 const FooterPlayer = (url) => {
   const { colorMode } = useColorMode()

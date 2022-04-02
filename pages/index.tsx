@@ -26,12 +26,6 @@ import Feature from '../components/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
-import dynamic from 'next/dynamic'
-// import WaveSurferComponent from '../components/utils/WaveSurferComponent'
-const WaveSurferComponent = dynamic(
-  import('../components/utils/WaveSurferComponent'),
-  { ssr: false }
-)
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   res.setHeader('Cache-Control', 'Access-Control-Allow-Origin: *')
@@ -134,7 +128,7 @@ const Main: React.FC<Props> = (props) => {
                               <Box
                                 sx={{ aspectRatio: 1 }}
                                 boxSize="150px"
-                                h="125px"
+                                h="75px"
                                 onClick={() =>
                                   Router.push('/p/[id]', `/p/${post.id}`)
                                 }
@@ -150,66 +144,83 @@ const Main: React.FC<Props> = (props) => {
                                   }
                                   alt={post.content}
                                   objectFit="cover"
-                                  boxSize="125px"
+                                  boxSize="100px"
                                 />
                               </Box>
-                              <Box w="100%">
-                                <Box
-                                  onClick={() =>
-                                    Router.push('/p/[id]', `/p/${post.id}`)
-                                  }
-                                >
-                                  <Text fontSize="2xl" noOfLines={1}>
+
+                              <Box
+                                borderRadius="xl"
+                                bg={
+                                  colorMode === 'light'
+                                    ? 'gray.400'
+                                    : 'gray.600'
+                                }
+                                p="2"
+                                h="100px"
+                                w="100%"
+                                onClick={() =>
+                                  Router.push('/p/[id]', `/p/${post.id}`)
+                                }
+                              >
+                                <Box>
+                                  <Text fontSize="3xl" noOfLines={1}>
                                     {post.title}
                                   </Text>
-                                  <Text fontSize="xl" noOfLines={1}>
+                                  <Text fontSize="md" noOfLines={1}>
                                     {post.content}
                                   </Text>
                                 </Box>
-                                {/* info */}
-                                <Spacer />
-                                <Box alignContent="right">
-                                  <motion.div
-                                    whileHover={{
-                                      scale: 1.02,
-                                    }}
-                                    transition={{
-                                      ease: 'easeInOut',
-                                      duration: 0.2,
-                                    }}
-                                  >
-                                    <Box
-                                      onClick={() =>
-                                        Router.push(
-                                          '/auth/[authorId]',
-                                          `/auth/${post.authorId}`
-                                        )
-                                      }
-                                    >
-                                      <Text
-                                        fontSize="sm"
-                                        sx={{ transform: 'translateX(-8px)' }}
-                                      >
-                                        <Center justifyContent="left" mx="2">
-                                          <Image
-                                            display="inline"
-                                            border="2px inset  gray"
-                                            src={post.author.image}
-                                            alt={post.author.name}
-                                            fallbackSrc="https://picsum.photos/200"
-                                            boxSize="1.5rem"
-                                            borderRadius="full"
-                                            mr="1"
-                                          />
-                                          <b> {post.author.name}</b>,{' '}
-                                          {moment(post.createdAt).fromNow()}
-                                        </Center>
-                                      </Text>
-                                    </Box>
-                                  </motion.div>
-                                </Box>
                               </Box>
                             </Stack>
+                            {/* info */}
+                            <motion.div
+                              whileHover={{
+                                scale: 1.02,
+                              }}
+                              transition={{
+                                ease: 'easeInOut',
+                                duration: 0.2,
+                              }}
+                            >
+                              <Box
+                                alignContent="right"
+                                borderRadius="xl"
+                                p="1"
+                                mb="4"
+                                // mt="1"
+                                mx="4"
+                                bg={
+                                  colorMode === 'light'
+                                    ? 'gray.400'
+                                    : 'gray.600'
+                                }
+                                onClick={() =>
+                                  Router.push(
+                                    '/auth/[authorId]',
+                                    `/auth/${post.authorId}`
+                                  )
+                                }
+                              >
+                                <Box>
+                                  <Center justifyContent="left" mx="2">
+                                    <Image
+                                      display="inline"
+                                      border="2px inset  gray"
+                                      src={post.author.image}
+                                      alt={post.author.name}
+                                      fallbackSrc="https://picsum.photos/200"
+                                      boxSize="1.5rem"
+                                      borderRadius="full"
+                                      mr="2"
+                                    />
+                                    <Text size="xs" textAlign="right">
+                                      {post.author.name},{' '}
+                                      {moment(post.createdAt).fromNow()}
+                                    </Text>
+                                  </Center>
+                                </Box>
+                              </Box>
+                            </motion.div>
                           </Box>
                         </Box>
                       </motion.div>

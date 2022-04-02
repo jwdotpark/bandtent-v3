@@ -120,10 +120,7 @@ const Main: React.FC<Props> = (props) => {
                           boxShadow="md"
                           w="100%"
                         >
-                          <Box
-                            _hover={{ cursor: 'pointer' }}
-                            // alignContent="baseline"
-                          >
+                          <Box _hover={{ cursor: 'pointer' }}>
                             <Stack direction="row" p="4">
                               <Box
                                 position="relative"
@@ -131,9 +128,6 @@ const Main: React.FC<Props> = (props) => {
                                 sx={{ aspectRatio: 1 }}
                                 boxSize="150px"
                                 h="75px"
-                                // onClick={() =>
-                                //   Router.push('/p/[id]', `/p/${post.id}`)
-                                // }
                               >
                                 <Box onClick={() => console.log('play')}>
                                   <motion.div

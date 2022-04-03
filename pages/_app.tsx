@@ -4,11 +4,12 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useScrollRestoration } from '../utils/useScrollRestoration'
 import { MediaContextProvider } from '../utils/media'
-import Player from '../components/utils/Player'
 
-// export function reportWebVitals(metric: NextWebVitalsMetric) {
-//   console.log(metric)
-// }
+// FIXME Player render cycle
+import dynamic from 'next/dynamic'
+const Player = dynamic(() => import('../components/utils/Player'), {
+  ssr: false,
+})
 
 const App = ({ Component, pageProps }: AppProps) => {
   // scroll preseervation

@@ -17,7 +17,9 @@ const MyPost = (props) => {
   const [num, setNum] = useState(0)
 
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
-  const { data, error } = useSWR(`/api/post/mypost/${props.uid}`, fetcher)
+  const { data, error } = useSWR(`/api/post/mypost/${props.uid}`, fetcher, {
+    refreshInterval: 1000 * 60,
+  })
 
   useEffect(() => {
     if (data) {
@@ -47,7 +49,7 @@ const MyPost = (props) => {
         >
           <Text fontSize="xl">
             {data && data.posts.length !== 1
-              ?  data.posts.length + ' posts uploaded.'
+              ? data.posts.length + ' posts uploaded.'
               : 'No item uploaded.'}
           </Text>
         </Box>

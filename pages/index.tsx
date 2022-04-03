@@ -26,7 +26,7 @@ import { useUpdateAtom } from 'jotai/utils'
 import musicAtom from '../store/store'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  res.setHeader('Cache-Control', 'Access-Control-Allow-Origin: *')
+  // res.setHeader('Cache-Control', 'Access-Control-Allow-Origin: *')
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {

@@ -1,16 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Box,
   Text,
   Center,
   useColorMode,
   Button,
-  ButtonGroup,
-  VStack,
-  Stack,
   HStack,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverArrow,
+  PopoverCloseButton,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
 } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../../store/store'
 import Wavesurfer from 'react-wavesurfer.js'
@@ -20,7 +26,6 @@ import { GiSettingsKnobs } from 'react-icons/gi'
 const Player = React.memo(function PlayerComponent() {
   const { colorMode } = useColorMode()
   const [music] = useAtom(musicAtom)
-  const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
     setPlaying(true)
@@ -30,36 +35,88 @@ const Player = React.memo(function PlayerComponent() {
     setPlaying(!playing)
   }
 
-  // wavesurfer
+  // wavesurfer options
+  const [playing, setPlaying] = useState(false)
+  const [volume, setVolume] = useState(1)
   const [position, setPosition] = useState(0)
-  // const [muted, setMuted] = useState(false)
+  const [muted, setMuted] = useState(false)
+  const [bpm, setBpm] = useState(1)
 
   const handlePositionChange = (position) => {
     // console.log('pos changed: ', position)
   }
   const onReadyHandler = () => console.log('done loading!')
 
+  // set bpm when new music loaded
+  useEffect(() => {
+    setBpm(1)
+  }, [music])
+
   return (
     <HStack
       w="calc(100vw)"
-      // borderRadius="xl"
-      // border="2px solid green"
       position="fixed"
       bottom="0"
       left="0"
       p="2"
-      // h="30px"
       bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
       zIndex="tooltip"
-      // pl="10"
       sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
     >
       <Button mx="1" size="xl" onClick={handlePlayButtonClick}>
         {playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
       </Button>
-      <Button mx="1" size="xl">
-        <GiSettingsKnobs />
-      </Button>
+
+      <Popover placement="top-end">
+        <PopoverTrigger>
+          <Button mx="1" size="xl">
+            <GiSettingsKnobs />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          borderRadius="xl"
+          sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
+          bg={colorMode === 'light' ? 'gray.200' : 'gray.800'}
+        >
+          <PopoverArrow />
+          <PopoverCloseButton />
+          <PopoverBody p="4">
+            bpm
+            <Slider
+              aria-label="slider-ex-1"
+              defaultValue={1}
+              value={bpm}
+              onChange={(value) => setBpm(value)}
+              step={0.01}
+              min={0.5}
+              max={1.5}
+              onDoubleClick={() => setBpm(1)}
+            >
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+            volume
+            <Slider
+              aria-label="slider-ex-1"
+              defaultValue={100}
+              value={volume}
+              onChange={(value) => setVolume(value)}
+              step={0.01}
+              min={0}
+              max={1}
+              onDoubleClick={() => setVolume(1)}
+            >
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
+
       <HStack h="auto">
         <Center h="auto" fontSize="sm">
           <Text sx={{ whiteSpace: 'nowrap' }}>
@@ -75,20 +132,24 @@ const Player = React.memo(function PlayerComponent() {
       <Box w="100%" h="20px" m="2">
         <Wavesurfer
           src={music.fileUrl}
-          position={position}
+          pos={position}
           onPositionChange={handlePositionChange}
           onReady={onReadyHandler}
           playing={playing}
           responsive={true}
           autoCenter={true}
           barHeight={2}
-          audioRate={1}
           height={20}
           cursorWidth={0}
           waveColor={colorMode === 'light' ? '#bd93f9' : '#50fa7b'}
+          volume={volume}
+          audioRate={bpm}
+          progressColor={colorMode === 'light' ? '#7a5f9f' : '#2f9747'}
+          onFinish={() => {
+            alert('finish')
+          }}
         />
       </Box>
-      <Box></Box>
     </HStack>
   )
 })

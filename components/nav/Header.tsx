@@ -46,7 +46,10 @@ const Header: React.FC = (props) => {
   const { data: session, status } = useSession()
 
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
-  const { data: unPubNum, error } = useSWR('/api/profile/unpub', fetcher)
+  const { data: unPubNum, error } = useSWR('/api/profile/unpub', fetcher, {
+    // NOTE interval 1hr for now
+    refreshInterval: 1000 * 60,
+  })
 
   return (
     <nav>

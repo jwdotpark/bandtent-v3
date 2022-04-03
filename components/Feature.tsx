@@ -15,7 +15,10 @@ const Feature = (props: { props }) => {
   const { colorMode } = useColorMode()
 
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
-  const { data, error } = useSWR('/api/post/count', fetcher)
+  const { data, error } = useSWR('/api/post/count', fetcher, {
+    // NOTE interval 1hr for now
+    refreshInterval: 1000 * 60,
+  })
 
   if (error) return <Center h="100%">Failed to load</Center>
   if (!data)

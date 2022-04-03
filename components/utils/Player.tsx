@@ -37,19 +37,19 @@ const Player = React.memo(function PlayerComponent() {
     >
       <Box display="none">
         <ReactPlayer playing={playing} url={music.fileUrl} />
-        {/* <audio id="audio" src={music.fileUrl} controls /> */}
       </Box>
       <ButtonGroup isAttached>
         <Button
           variant="solid"
-          size="sm"
+          size="xs"
           colorScheme="purple"
+          borderRadius="none"
           onClick={handlePlayButtonClick}
         >
           {playing ? 'Pause' : 'Play'}
         </Button>
-        <Center border="1px solid red">
-          {music.title} - {music.content}
+        <Center ml="2">
+          {music.title}, {music.content}
         </Center>
       </ButtonGroup>
     </Box>

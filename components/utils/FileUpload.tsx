@@ -1,19 +1,10 @@
-import { useCallback, useEffect } from 'react'
 import { useS3Upload } from 'next-s3-upload'
 import { useState } from 'react'
 import {
   Box,
   Text,
-  Input,
   FormControl,
-  FormLabel,
-  InputGroup,
-  InputLeftElement,
-  FormErrorMessage,
-  Code,
-  Icon,
   Center,
-  Image,
   useColorMode,
   Progress,
 } from '@chakra-ui/react'

@@ -59,17 +59,20 @@ const Draft: React.FC = () => {
   return (
     <Layout>
       <Media greaterThanOrEqual="md">
-        <Box m="2" mx="2">
+        <Center m="2" mx="2">
           <Box
             mt="2"
             w="50%"
+            maxW="600px"
+            // minH="800px"
+            minH="calc(100vh - 8rem)"
             bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
             borderRadius="xl"
             boxShadow="md"
             p="4"
           >
             <form onSubmit={submitData}>
-              <Text>New Draft</Text>
+              <Text pl="2">New Item</Text>
               <Box my="4" boxShadow="md">
                 <Input
                   variant="filled"
@@ -109,8 +112,6 @@ const Draft: React.FC = () => {
                   boxShadow="md"
                 >
                   <Button
-                    variant="solid"
-                    // mr="2"
                     w="80%"
                     disabled={!content || !title || !imageUrl || !fileUrl}
                     type="submit"
@@ -121,18 +122,14 @@ const Draft: React.FC = () => {
                       ? 'Not available'
                       : 'Submit'}
                   </Button>
-                  <Button
-                    variant="outline"
-                    w="20%"
-                    onClick={() => Router.push('/')}
-                  >
+                  <Button w="20%" onClick={() => Router.push('/')}>
                     Cancel
                   </Button>
                 </ButtonGroup>
               </Box>
             </form>
           </Box>
-        </Box>
+        </Center>
       </Media>
       <Media lessThan="md">
         <Center m="2" mx="2">

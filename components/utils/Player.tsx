@@ -55,13 +55,14 @@ const Player = React.memo(function PlayerComponent() {
 
   return (
     <HStack
-      w="calc(100vw - 28px)"
+      // w="calc(100% - 16px)"
+      w="calc(100vw)"
       position="fixed"
-      bottom="6px"
-      left="8px"
+      bottom="0"
+      left="0"
       p="1"
-      borderRadius="xl"
-      bg={colorMode === 'light' ? 'gray.300' : '#383a59'}
+      // borderRadius="xl"
+      bg={colorMode === 'light' ? 'gray.400' : '#383a59'}
       zIndex="tooltip"
       sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
     >
@@ -135,7 +136,7 @@ const Player = React.memo(function PlayerComponent() {
           </Text>
         </Center>
       </HStack>
-      <Box w="100%" h="20px" m="1">
+      <Box w="100%" h="20px" m="1" px="6">
         <Wavesurfer
           src={music.fileUrl}
           pos={position}
@@ -147,10 +148,10 @@ const Player = React.memo(function PlayerComponent() {
           barHeight={2}
           height={20}
           cursorWidth={0}
-          waveColor={colorMode === 'light' ? '#bd93f9' : '#50fa7b'}
+          waveColor={colorMode === 'light' ? '#ff5555' : '#50fa7b'}
           volume={volume}
           audioRate={bpm}
-          progressColor={colorMode === 'light' ? '#7a5f9f' : '#2f9747'}
+          progressColor={colorMode === 'light' ? '#8a2d2d' : '#2f9747'}
           onFinish={() => {
             setPlaying(false)
           }}

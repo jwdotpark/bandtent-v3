@@ -85,10 +85,12 @@ const SearchPage = (props: { result: any[] }) => {
                   >
                     <Text fontSize="xl" noOfLines={3}>
                       {post.title}
+                      <Text noOfLines={3} fontSize="md">
+                        {post.content}
+                      </Text>
                     </Text>
-                    <Divider mb="2" />
+                    {/* <Divider my="2" /> */}
                     {post.imageUrl && <ImageComponent props={post} />}
-                    <Text noOfLines={3}>{post.content}</Text>
                   </Box>
                   {/* info */}
                   <motion.div
@@ -96,7 +98,6 @@ const SearchPage = (props: { result: any[] }) => {
                       scale: 1.02,
                     }}
                     transition={{ ease: 'easeInOut', duration: 0.2 }}
-                    // whileTap={{ scale: 0.98 }}
                   >
                     <Box
                       _hover={{ cursor: 'pointer' }}

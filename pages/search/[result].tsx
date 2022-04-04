@@ -15,13 +15,14 @@ import moment from 'moment'
 import { motion } from 'framer-motion'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const queries = JSON.stringify(params?.result)
   const result = await prisma.post.findMany({
     where: {
       title: {
-        search: String(params.result),
+        search: queries.split(' ').join(' | '),
       },
       content: {
-        search: String(params.result),
+        search: queries.split(' ').join(' | '),
       },
     },
     include: {
@@ -59,7 +60,7 @@ const SearchPage = (props: { result: any[] }) => {
           // mt="2"
           w="100%"
           mx="auto"
-          sx={{ columnCount: [1, 2, 3, 4], columnGap: '4' }}
+          sx={{ columnCount: [1, 2, 3, 4, 5], columnGap: '4' }}
         >
           {props.result.length !== 0 &&
             props.result.map((post) => (

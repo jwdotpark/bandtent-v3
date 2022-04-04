@@ -1,6 +1,5 @@
 /* eslint-disable react/no-children-prop */
 import { useState } from 'react'
-import Link from 'next/link'
 import {
   Box,
   Button,
@@ -14,6 +13,7 @@ import Router from 'next/router'
 
 const SearchButton = () => {
   const [keyword, setKeyword] = useState(null)
+
   const handleSearch = (event: { preventDefault: () => void }) => {
     event.preventDefault()
     if (keyword) {

@@ -22,6 +22,7 @@ import musicAtom from '../../store/store'
 import Wavesurfer from 'react-wavesurfer.js'
 import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import { GiSettingsKnobs } from 'react-icons/gi'
+import Router from 'next/router'
 
 const Player = React.memo(function PlayerComponent() {
   const { colorMode } = useColorMode()
@@ -54,12 +55,13 @@ const Player = React.memo(function PlayerComponent() {
 
   return (
     <HStack
-      w="calc(100vw)"
+      w="calc(100vw - 28px)"
       position="fixed"
-      bottom="0"
-      left="0"
+      bottom="6px"
+      left="8px"
       p="2"
-      bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+      borderRadius="xl"
+      bg={colorMode === 'light' ? 'gray.300' : '#383a59'}
       zIndex="tooltip"
       sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
     >
@@ -117,7 +119,11 @@ const Player = React.memo(function PlayerComponent() {
         </PopoverContent>
       </Popover>
 
-      <HStack h="auto">
+      <HStack
+        h="auto"
+        onClick={() => Router.push('/p/[id]', `/p/${music.id}`)}
+        _hover={{ cursor: 'pointer' }}
+      >
         <Center h="auto" fontSize="sm">
           <Text sx={{ whiteSpace: 'nowrap' }}>
             <b>{music.title}</b>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
@@ -53,6 +54,11 @@ const Header: React.FC = (props) => {
 
   return (
     <nav>
+      <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <title>Bandtent</title>
+      </Head>
       {/* desktop */}
       <Media greaterThanOrEqual="md">
         <Flex

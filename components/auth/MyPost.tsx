@@ -91,7 +91,7 @@ const MyPost = (props) => {
                   >
                     <Box
                       display="inline-block"
-                      bg={colorMode === 'light' ? 'gray.300' : 'gray.600'}
+                      bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                       borderRadius="xl"
                       my="2"
                       mx="2"
@@ -143,7 +143,7 @@ const MyPost = (props) => {
                           </Box>
                           <Box
                             borderRadius="xl"
-                            bg={colorMode === 'light' ? 'gray.400' : 'gray.700'}
+                            bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                             p="4"
                             h="100px"
                             w="100%"

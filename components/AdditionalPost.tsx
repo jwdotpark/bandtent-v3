@@ -10,7 +10,7 @@ const AdditionalPost = ({ myPost }) => {
       p="2"
       w="100%"
       mx="auto"
-      sx={{ columnCount: [1, 2, 3, 4, 5], columnGap: '4' }}
+      sx={{ columnCount: [1, 2, 3], columnGap: '4' }}
     >
       {myPost
         .slice(0)
@@ -30,15 +30,24 @@ const AdditionalPost = ({ myPost }) => {
               onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
             >
               <Box
-                bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                bg={colorMode === 'light' ? 'gray.400' : 'gray.700'}
                 boxShadow="md"
                 borderRadius="xl"
                 p="4"
               >
-                <Text fontSize="xl">{post.title}</Text>
-                <Divider mb="2" />
-                {post.imageUrl && <ImageComponent props={post} />}
-                <Text noOfLines={1}>{post.content}</Text>
+                <Box
+                  p="2"
+                  mb="4"
+                  borderRadius="xl"
+                  boxShadow="md"
+                  bg={colorMode === 'light' ? 'gray.300' : 'gray.600'}
+                >
+                  <Text fontSize="xl">{post.title}</Text>
+                  <Text noOfLines={1}>{post.content}</Text>
+                </Box>
+                <Box mt="2">
+                  {post.imageUrl && <ImageComponent props={post} />}
+                </Box>
               </Box>
             </Box>
           )

@@ -54,6 +54,7 @@ const Main: React.FC<Props> = (props) => {
   const [feed, setFeed] = useState(props.feed)
   const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
   const [isLoading, setIsLoading] = useState(false)
+  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
 
   const handleMore = async () => {
     setIsLoading(true)
@@ -76,8 +77,6 @@ const Main: React.FC<Props> = (props) => {
   useEffect(() => {
     setFeed(props.feed)
   }, [props.feed])
-
-  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
 
   const handleMusic = (music) => {
     setSelectMusic(music)

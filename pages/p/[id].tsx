@@ -3,7 +3,7 @@
 
 // pages/p/[id].tsx
 
-import React from 'react'
+import React, { useState } from 'react'
 import { GetServerSideProps } from 'next'
 import Router from 'next/router'
 import Layout from '../../components/Layout'
@@ -25,6 +25,9 @@ import {
 } from '@chakra-ui/react'
 import ImageComponent from '../../components/utils/ImageComponent'
 import AdditionalPost from '../../components/AdditionalPost'
+import { DeleteIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { useAtom } from 'jotai'
+import musicAtom from '../../store/store'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
@@ -62,7 +65,6 @@ async function publishPost(id: number): Promise<void> {
   await fetch(`/api/publish/${id}`, {
     method: 'PUT',
   })
-  // await Router.push('/')
   Router.push('/p/[id]', `/p/${id}`)
 }
 
@@ -70,7 +72,6 @@ async function unpublishPost(id: number): Promise<void> {
   await fetch(`/api/publish/unpublish/${id}`, {
     method: 'PUT',
   })
-  // Router.push('/')
   Router.push('/p/[id]', `/p/${id}`)
 }
 
@@ -83,6 +84,7 @@ async function deletePost(id: number): Promise<void> {
 
 const Post: React.FC<PostProps> = (props) => {
   const { colorMode } = useColorMode()
+  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
 
   const { data: session, status } = useSession()
   if (status === 'loading') {
@@ -103,6 +105,10 @@ const Post: React.FC<PostProps> = (props) => {
   // @ts-ignore
   const myPost = props.myPost[0].author.posts
 
+  const handleMusic = (music) => {
+    setSelectMusic(music)
+  }
+
   return (
     <Layout>
       <Stack direction={['column', 'row']} w="100%" pr="2" mt="2" h="100%">
@@ -112,7 +118,6 @@ const Post: React.FC<PostProps> = (props) => {
             <Box
               p="4"
               ml="2"
-              // mb="2"
               bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
               borderRadius="xl"
               boxShadow="md"
@@ -121,105 +126,122 @@ const Post: React.FC<PostProps> = (props) => {
                 borderRadius="xl"
                 boxShadow="md"
                 p="4"
-                bg={colorMode === 'light' ? 'gray.200' : 'gray.500'}
+                bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
               >
                 <Box
                   borderRadius="xl"
                   boxShadow="md"
                   p="4"
-                  bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                  bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                   mb="4"
                 >
-                  <Text mb="2" fontSize="3xl">
-                    {props.post.title}
-                  </Text>
-                  <Text
-                    fontSize="3xl"
-                    children={<Text>{props.post.content}</Text>}
-                  />
-                  <Box
-                    _hover={{ cursor: 'pointer' }}
-                    onClick={() =>
-                      Router.push(
-                        '/auth/[authorId]',
-                        `/auth/${props.post.authorId}`
-                      )
-                    }
-                  >
-                    <Text my="2" fontSize="md">
-                      <Image
-                        // mx="1"
-                        display="inline"
-                        border="1px inset  gray"
-                        src={props.post.author.image}
-                        fallbackSrc="https://picsum.photos/400"
-                        boxSize="1.5rem"
-                        borderRadius="full"
-                        alt={props.post.author.name}
-                        sx={{ transform: 'translateY(5px)' }}
-                      />{' '}
-                      {props.post.author.name || 'Unknown author'}{' '}
-                      {new Date(props.post.createdAt).toLocaleDateString(
-                        'en-DE',
-                        {
-                          hour: '2-digit',
-                          minute: '2-digit',
-                        }
-                      )}
+                  <Box ml="2">
+                    <Text mb="2" fontSize="3xl">
+                      {props.post.title}
                     </Text>
+                    <Text
+                      fontSize="3xl"
+                      children={<Text>{props.post.content}</Text>}
+                    />
+                    <Box
+                      _hover={{ cursor: 'pointer' }}
+                      onClick={() =>
+                        Router.push(
+                          '/auth/[authorId]',
+                          `/auth/${props.post.authorId}`
+                        )
+                      }
+                    >
+                      <Text my="2" fontSize="md">
+                        <Image
+                          // mx="1"
+                          display="inline"
+                          border="1px inset  gray"
+                          src={props.post.author.image}
+                          fallbackSrc="https://picsum.photos/400"
+                          boxSize="1.5rem"
+                          borderRadius="full"
+                          alt={props.post.author.name}
+                          sx={{ transform: 'translateY(5px)' }}
+                        />{' '}
+                        Post by {props.post.author.name || 'Unknown author'} on{' '}
+                        {new Date(props.post.createdAt).toLocaleDateString(
+                          'en-DE',
+                          {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          }
+                        )}
+                      </Text>
+                    </Box>
                   </Box>
                 </Box>
-                {/* image and button */}
                 <Box
                   borderRadius="xl"
-                  boxShadow="md"
-                  p="4"
-                  bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                  // boxShadow="md"
+                  p="2"
+                  bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                 >
-                  {/* button */}
-                  <Center border="1px solid red">
-                    <ButtonGroup size="xs" mb="-2">
-                      {!props.post.published &&
-                        userHasValidSession &&
-                        postBelongsToUser && (
-                          <Button
-                            borderRadius="none"
-                            size="sm"
-                            colorScheme="green"
-                            onClick={() => publishPost(props.post.id)}
-                          >
-                            Publish
-                          </Button>
-                        )}
-                      {props.post.published &&
-                        userHasValidSession &&
-                        postBelongsToUser && (
-                          <Button
-                            borderRadius="none"
-                            boxShadow="md"
-                            colorScheme="yellow"
-                            size="sm"
-                            onClick={() => unpublishPost(props.post.id)}
-                          >
-                            Unpublish
-                          </Button>
-                        )}
-
-                      {userHasValidSession && postBelongsToUser && (
-                        <Button
-                          borderRadius="none"
-                          boxShadow="md"
-                          colorScheme="red"
-                          size="sm"
-                          onClick={() => deletePost(props.post.id)}
-                        >
-                          Delete
-                        </Button>
-                      )}
-                    </ButtonGroup>
-                  </Center>
-                  <Box mt="-1">
+                  {/* image */}
+                  <Box
+                    p="2"
+                    onClick={() => {
+                      handleMusic(props.post)
+                    }}
+                  >
                     <ImageComponent props={props.post} />
+                  </Box>
+                  {/* button */}
+                  <Box p="2">
+                    <Center w="100%">
+                      <ButtonGroup
+                        w="100%"
+                        isAttached
+                        size="xs"
+                        boxShadow="md"
+                        overflow="clip"
+                      >
+                        {!props.post.published &&
+                          userHasValidSession &&
+                          postBelongsToUser && (
+                            <Button
+                              w="100%"
+                              size="sm"
+                              colorScheme="green"
+                              onClick={() => publishPost(props.post.id)}
+                              leftIcon={<ViewIcon />}
+                            >
+                              Publish
+                            </Button>
+                          )}
+                        {props.post.published &&
+                          userHasValidSession &&
+                          postBelongsToUser && (
+                            <Button
+                              w="100%"
+                              boxShadow="md"
+                              colorScheme="yellow"
+                              size="sm"
+                              onClick={() => unpublishPost(props.post.id)}
+                              leftIcon={<ViewOffIcon />}
+                            >
+                              Unpublish
+                            </Button>
+                          )}
+
+                        {userHasValidSession && postBelongsToUser && (
+                          <Button
+                            boxShadow="md"
+                            colorScheme="red"
+                            size="sm"
+                            onClick={() => deletePost(props.post.id)}
+                            leftIcon={<DeleteIcon />}
+                          >
+                            Delete
+                          </Button>
+                        )}
+                      </ButtonGroup>
+                    </Center>
                   </Box>
                 </Box>
               </Box>
@@ -248,7 +270,7 @@ const Post: React.FC<PostProps> = (props) => {
         mx="2"
         mt="2"
       >
-        <Box mt="4">
+        <Box p="2">
           {myPost.length > 0 && (
             <Box mx="2" mt="2">
               <Box
@@ -256,9 +278,9 @@ const Post: React.FC<PostProps> = (props) => {
                 borderRadius="xl"
                 p="2"
                 my="2"
-                bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                bg={colorMode === 'light' ? 'gray.400' : 'gray.700'}
               >
-                <Text size="xl">
+                <Text size="xl" mx="2">
                   {/* eslint-disable-next-line react/no-unescaped-entities */}
                   {props.post.author.name}'s {myPost.length} more posts{' '}
                 </Text>

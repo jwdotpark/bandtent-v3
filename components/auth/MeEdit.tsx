@@ -68,7 +68,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
         w="100%"
         boxShadow="md"
         mx="4"
-        mb="4"
+        mb="2"
       >
         Edit
       </Button>
@@ -81,7 +81,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
             bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
             borderRadius="xl"
           >
-            <ModalHeader>{user.name}</ModalHeader>
+            <ModalHeader>Edit Profile</ModalHeader>
             <ModalCloseButton />
             <form onSubmit={handleSubmit(onSubmit)}>
               <ModalBody>

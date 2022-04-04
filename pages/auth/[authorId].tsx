@@ -34,10 +34,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 }
 
 const Me: React.FC = (props) => {
-  const { data } = useSession()
+  // const { data } = useSession()
   const { colorMode } = useColorMode()
 
   const [numOfPost, setNumOfPost] = useState(0)
+
   const pull_number = (data: number) => {
     setNumOfPost(data)
   }
@@ -105,7 +106,7 @@ const Me: React.FC = (props) => {
                         <Text fontSize="xl">
                           <Center>
                             <a href={'mailto:' + props.user.email}>
-                              <Text color="#50fa7b">{props.user.email} </Text>
+                              <Text>{props.user.email} </Text>
                             </a>
                           </Center>
                         </Text>
@@ -118,16 +119,14 @@ const Me: React.FC = (props) => {
                                 props.user.location
                               }
                             >
-                              <Text color="#50fa7b">
-                                {props.user.location}{' '}
-                              </Text>
+                              <Text>{props.user.location} </Text>
                             </Link>
                           </Center>
                         </Text>
                         <Text fontSize="md">
                           <Center>
                             <Link href={props.user.website} isExternal>
-                              <Text color="#50fa7b">
+                              <Text>
                                 {props.user.website}{' '}
                                 <ExternalLinkIcon mx="2px" />
                               </Text>
@@ -145,7 +144,7 @@ const Me: React.FC = (props) => {
                         <Text fontSize="md">{props.user.description}</Text>
                       </Box>
                     </Box>
-                    <Box mx="2" mt="-2">
+                    <Box mx="2" my="-2">
                       <MeEdit props={props} />
                     </Box>
                   </Box>

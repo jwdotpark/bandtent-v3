@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import prisma from '../lib/prisma'
 import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
@@ -21,8 +21,7 @@ import Feature from '../components/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
-import { atom, useAtom } from 'jotai'
-import { useUpdateAtom } from 'jotai/utils'
+import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {

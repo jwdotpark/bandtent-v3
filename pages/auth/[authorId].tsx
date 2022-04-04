@@ -52,7 +52,7 @@ const Me: React.FC = (props) => {
           <Media greaterThanOrEqual="md">
             <Stack direction={['column', 'row']} m="2">
               {/* left */}
-              <Box w="40vw">
+              <Box w="45vw">
                 <Box
                   p="2"
                   bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}

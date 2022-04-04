@@ -6,11 +6,16 @@ import {
   useColorMode,
   Center,
   Spinner,
+  Image,
+  Stack,
 } from '@chakra-ui/react'
 import Router from 'next/router'
 import ImageComponent from '../utils/ImageComponent'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useAtom } from 'jotai'
+import musicAtom from '../../store/store'
+import moment from 'moment'
 
 const MyPost = (props) => {
   const { colorMode } = useColorMode()
@@ -26,6 +31,12 @@ const MyPost = (props) => {
       setNum(data.posts.length)
     }
   }, [data])
+
+  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
+
+  const handleMusic = (music) => {
+    setSelectMusic(music)
+  }
 
   if (error) return <Center h="100%">Failed to load</Center>
   if (!data)
@@ -56,20 +67,12 @@ const MyPost = (props) => {
 
         <Box
           bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-          // border="1px solid red"
           borderRadius="xl"
           boxShadow="md"
           mx="4"
           px="2"
           pt="2"
           pr="6"
-          // sx={{
-          //   boxShadow:
-          //     'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
-          //   columnCount: [1, 2],
-          //   columnGap: '4',
-          //   columnWidth: '100%',
-          // }}
         >
           {!error &&
             data.posts
@@ -78,38 +81,83 @@ const MyPost = (props) => {
               .map((post) => {
                 return (
                   <motion.div
-                    key={post.id}
                     whileHover={{
                       scale: 1.02,
                     }}
                     transition={{ ease: 'easeInOut', duration: 0.2 }}
+                    key={post.id}
                   >
                     <Box
                       display="inline-block"
-                      bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                      bg={colorMode === 'light' ? 'gray.300' : 'gray.600'}
                       borderRadius="xl"
-                      p="4"
-                      mt="2"
-                      mb="2"
+                      my="2"
                       mx="2"
                       boxShadow="md"
                       w="100%"
-                      border={!post.published ? '3px dashed #ff79c6' : null}
                     >
-                      {/* {post.published ? 'yes' : 'no'} */}
-                      <Box
-                        p="2"
-                        onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
-                        _hover={{ cursor: 'pointer' }}
-                      >
-                        <Text fontSize="3xl" noOfLines={3}>
-                          {post.title} {post.published ? null : '- unpublished'}
-                        </Text>
-                        <Text fontSize="xl">{post.content}</Text>
-                        <Divider my="2" />
-                        <Box>
-                          {post.imageUrl && <ImageComponent props={post} />}
-                        </Box>
+                      <Box _hover={{ cursor: 'pointer' }}>
+                        <Stack direction="row" p="4">
+                          <Box
+                            position="relative"
+                            sx={{ aspectRatio: 1 }}
+                            boxSize="150px"
+                            h="75px"
+                          >
+                            <Box
+                              onClick={() => {
+                                handleMusic(post)
+                              }}
+                            >
+                              <motion.div
+                                whileHover={{
+                                  scale: 1.02,
+                                }}
+                                whileTap={{
+                                  scale: 0.98,
+                                }}
+                                transition={{
+                                  ease: 'easeInOut',
+                                  duration: 0.2,
+                                }}
+                                key={post.id}
+                              >
+                                <Image
+                                  boxShadow="md"
+                                  borderRadius="xl"
+                                  loading="lazy"
+                                  src={
+                                    post.imageUrl
+                                      ? post.imageUrl
+                                      : 'https://picsum.photos/400'
+                                  }
+                                  alt={post.content}
+                                  objectFit="cover"
+                                  boxSize="100px"
+                                />
+                              </motion.div>
+                            </Box>
+                          </Box>
+                          <Box
+                            borderRadius="xl"
+                            bg={colorMode === 'light' ? 'gray.400' : 'gray.700'}
+                            p="4"
+                            h="100px"
+                            w="100%"
+                            onClick={() =>
+                              Router.push('/p/[id]', `/p/${post.id}`)
+                            }
+                          >
+                            <Box>
+                              <Text fontSize="md" noOfLines={1}>
+                                {post.title}
+                              </Text>
+                              <Text fontSize="2xl" noOfLines={1}>
+                                {post.content}
+                              </Text>
+                            </Box>
+                          </Box>
+                        </Stack>
                       </Box>
                     </Box>
                   </motion.div>

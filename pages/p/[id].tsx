@@ -205,7 +205,7 @@ const Post: React.FC<PostProps> = (props) => {
                           userHasValidSession &&
                           postBelongsToUser && (
                             <Button
-                              w="100%"
+                              w="80%"
                               size="sm"
                               colorScheme="green"
                               onClick={() => publishPost(props.post.id)}
@@ -218,7 +218,7 @@ const Post: React.FC<PostProps> = (props) => {
                           userHasValidSession &&
                           postBelongsToUser && (
                             <Button
-                              w="100%"
+                              w="80%"
                               boxShadow="md"
                               colorScheme="yellow"
                               size="sm"
@@ -231,6 +231,7 @@ const Post: React.FC<PostProps> = (props) => {
 
                         {userHasValidSession && postBelongsToUser && (
                           <Button
+                            w="20%"
                             boxShadow="md"
                             colorScheme="red"
                             size="sm"

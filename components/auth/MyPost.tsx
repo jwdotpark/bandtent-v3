@@ -52,7 +52,7 @@ const MyPost = (props) => {
         <Box
           bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
           borderRadius="xl"
-          p="4"
+          p="2"
           m="2"
           mx="4"
           mb="4"

@@ -142,7 +142,7 @@ const Drafts: React.FC<Props> = (props) => {
                       w="100%"
                       onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                     >
-                      <Box>
+                      <Box p="2">
                         <Text fontSize="3xl" noOfLines={1}>
                           {post.title}
                         </Text>
@@ -171,7 +171,7 @@ const Drafts: React.FC<Props> = (props) => {
                       mx="4"
                       bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                     >
-                      <Text size="xs" mx="2">
+                      <Text size="xs" mx="2" p="1">
                         Uploaded on{' '}
                         {new Date(post.createdAt).toLocaleDateString('en-DE', {
                           hour: '2-digit',

@@ -78,8 +78,8 @@ const MyPost = (props) => {
         >
           {!error &&
             data.posts
-              .slice(0)
-              .reverse()
+              // .slice(0)
+              // .reverse()
               .map((post) => {
                 return (
                   <motion.div

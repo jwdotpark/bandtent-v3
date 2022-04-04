@@ -135,7 +135,7 @@ const Post: React.FC<PostProps> = (props) => {
                   bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                   mb="4"
                 >
-                  <Box ml="2">
+                  <Box>
                     <Text mb="2" fontSize="3xl">
                       {props.post.title}
                     </Text>

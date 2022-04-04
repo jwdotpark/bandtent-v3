@@ -101,7 +101,7 @@ const MyPost = (props) => {
                           <Box
                             position="relative"
                             sx={{ aspectRatio: 1 }}
-                            boxSize="150px"
+                            boxSize="140px"
                             h="75px"
                           >
                             <Box

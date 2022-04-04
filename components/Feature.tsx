@@ -23,7 +23,7 @@ const Feature = (props: { props }) => {
   if (error) return <Center h="100%">Failed to load</Center>
   if (!data)
     return (
-      <Center h="100%">
+      <Center h="100%" w="100%">
         <Spinner />
       </Center>
     )

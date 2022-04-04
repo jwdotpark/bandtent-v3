@@ -21,6 +21,7 @@ import {
   Image,
   useColorMode,
   ButtonGroup,
+  Spinner,
 } from '@chakra-ui/react'
 import ImageComponent from '../../components/utils/ImageComponent'
 import AdditionalPost from '../../components/AdditionalPost'
@@ -85,7 +86,11 @@ const Post: React.FC<PostProps> = (props) => {
 
   const { data: session, status } = useSession()
   if (status === 'loading') {
-    return <div>Authenticating ...</div>
+    return (
+      <Center h="100vh">
+        <Spinner />
+      </Center>
+    )
   }
   const userHasValidSession = Boolean(session)
   const postBelongsToUser = session?.user?.email === props.post.author?.email
@@ -99,12 +104,11 @@ const Post: React.FC<PostProps> = (props) => {
   const myPost = props.myPost[0].author.posts
 
   return (
-    // FIXME layout navbar weirdly Y translated..?
     <Layout>
       <Stack direction={['column', 'row']} w="100%" pr="2" mt="2" h="100%">
         {/* left column */}
         <Box>
-          <Stack w="75vw">
+          <Stack w="50vw">
             <Box
               p="4"
               ml="2"
@@ -113,108 +117,118 @@ const Post: React.FC<PostProps> = (props) => {
               borderRadius="xl"
               boxShadow="md"
             >
-              <Text mb="2" fontSize="3xl">
-                {props.post.title}
-              </Text>
-              <Box>
-                <Text
-                  fontSize="lg"
-                  children={<Text>{props.post.content}</Text>}
-                />
-              </Box>
               <Box
-                _hover={{ cursor: 'pointer' }}
-                onClick={() =>
-                  Router.push(
-                    '/auth/[authorId]',
-                    `/auth/${props.post.authorId}`
-                  )
-                }
+                borderRadius="xl"
+                boxShadow="md"
+                p="4"
+                bg={colorMode === 'light' ? 'gray.200' : 'gray.500'}
               >
-                <Text my="2" fontSize="md" textAlign="right">
-                  Posted by{' '}
-                  <Image
-                    mx="1"
-                    display="inline"
-                    border="1px inset  gray"
-                    src={props.post.author.image}
-                    fallbackSrc="https://picsum.photos/400"
-                    boxSize="1.5rem"
-                    borderRadius="full"
-                    alt={props.post.author.name}
-                    sx={{ transform: 'translateY(5px)' }}
-                  />{' '}
-                  {props.post.author.name || 'Unknown author'} on{' '}
-                  <i>
-                    {new Date(props.post.createdAt).toLocaleDateString(
-                      'en-DE',
-                      {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      }
-                    )}
-                  </i>
-                </Text>
-              </Box>
-              {/* button */}
-              <HStack spacing={2}>
-                <ButtonGroup size="xs" isAttached w="100%">
-                  {!props.post.published &&
-                    userHasValidSession &&
-                    postBelongsToUser && (
-                      <Button
-                        size="sm"
-                        colorScheme="green"
-                        onClick={() => publishPost(props.post.id)}
-                      >
-                        Publish
-                      </Button>
-                    )}
-                  {props.post.published &&
-                    userHasValidSession &&
-                    postBelongsToUser && (
-                      <Button
-                        boxShadow="md"
-                        colorScheme="yellow"
-                        size="sm"
-                        onClick={() => unpublishPost(props.post.id)}
-                      >
-                        Unpublish
-                      </Button>
-                    )}
-
-                  {userHasValidSession && postBelongsToUser && (
-                    <Button
-                      boxShadow="md"
-                      colorScheme="red"
-                      size="sm"
-                      onClick={() => deletePost(props.post.id)}
-                    >
-                      Delete
-                    </Button>
-                  )}
-                </ButtonGroup>
-              </HStack>
-              <Divider mb="2" />
-              <Box>
-                <ImageComponent props={props.post} />
-              </Box>
-              {/* audio */}
-              {props.post.fileUrl && (
-                <Box>
-                  <audio controls src={props.post.fileUrl}>
-                    Your browser does not support the
-                    <code>audio</code> element.
-                  </audio>
+                <Box
+                  borderRadius="xl"
+                  boxShadow="md"
+                  p="4"
+                  bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                  mb="4"
+                >
+                  <Text mb="2" fontSize="3xl">
+                    {props.post.title}
+                  </Text>
+                  <Text
+                    fontSize="3xl"
+                    children={<Text>{props.post.content}</Text>}
+                  />
+                  <Box
+                    _hover={{ cursor: 'pointer' }}
+                    onClick={() =>
+                      Router.push(
+                        '/auth/[authorId]',
+                        `/auth/${props.post.authorId}`
+                      )
+                    }
+                  >
+                    <Text my="2" fontSize="md">
+                      <Image
+                        // mx="1"
+                        display="inline"
+                        border="1px inset  gray"
+                        src={props.post.author.image}
+                        fallbackSrc="https://picsum.photos/400"
+                        boxSize="1.5rem"
+                        borderRadius="full"
+                        alt={props.post.author.name}
+                        sx={{ transform: 'translateY(5px)' }}
+                      />{' '}
+                      {props.post.author.name || 'Unknown author'}{' '}
+                      {new Date(props.post.createdAt).toLocaleDateString(
+                        'en-DE',
+                        {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        }
+                      )}
+                    </Text>
+                  </Box>
                 </Box>
-              )}
-              <Divider mb="4" />
+                {/* image and button */}
+                <Box
+                  borderRadius="xl"
+                  boxShadow="md"
+                  p="4"
+                  bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                >
+                  {/* button */}
+                  <Center border="1px solid red">
+                    <ButtonGroup size="xs" mb="-2">
+                      {!props.post.published &&
+                        userHasValidSession &&
+                        postBelongsToUser && (
+                          <Button
+                            borderRadius="none"
+                            size="sm"
+                            colorScheme="green"
+                            onClick={() => publishPost(props.post.id)}
+                          >
+                            Publish
+                          </Button>
+                        )}
+                      {props.post.published &&
+                        userHasValidSession &&
+                        postBelongsToUser && (
+                          <Button
+                            borderRadius="none"
+                            boxShadow="md"
+                            colorScheme="yellow"
+                            size="sm"
+                            onClick={() => unpublishPost(props.post.id)}
+                          >
+                            Unpublish
+                          </Button>
+                        )}
+
+                      {userHasValidSession && postBelongsToUser && (
+                        <Button
+                          borderRadius="none"
+                          boxShadow="md"
+                          colorScheme="red"
+                          size="sm"
+                          onClick={() => deletePost(props.post.id)}
+                        >
+                          Delete
+                        </Button>
+                      )}
+                    </ButtonGroup>
+                  </Center>
+                  <Box mt="-1">
+                    <ImageComponent props={props.post} />
+                  </Box>
+                </Box>
+              </Box>
             </Box>
           </Stack>
         </Box>
         {/* right column */}
         <Box
-          w="25vw"
+          w="100%"
           p="4"
           ml="2"
           mb="2"

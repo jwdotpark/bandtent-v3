@@ -69,10 +69,12 @@ const MyPost = (props) => {
           bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
           borderRadius="xl"
           boxShadow="md"
+          mb="2"
           mx="4"
           px="2"
           pt="2"
           pr="6"
+          pb="2"
         >
           {!error &&
             data.posts
@@ -93,6 +95,7 @@ const MyPost = (props) => {
                       borderRadius="xl"
                       my="2"
                       mx="2"
+                      mb="2"
                       boxShadow="md"
                       w="100%"
                     >

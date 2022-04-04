@@ -54,6 +54,8 @@ const Me: React.FC = (props) => {
               {/* left */}
               <Box w="45vw">
                 <Box
+                  position="sticky"
+                  top="2"
                   p="2"
                   bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                   borderRadius="xl"

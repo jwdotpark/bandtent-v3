@@ -9,11 +9,13 @@ import {
   Progress,
 } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
+import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg'
 
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
   const [fileUrl, setFileUrl] = useState<string>()
   const { uploadToS3, files } = useS3Upload()
+  props.data(fileUrl)
 
   // TODO trasncode before upload
   let handleFileChange = async (event) => {
@@ -22,9 +24,35 @@ export default function UploadPage(props) {
     setFileUrl(url)
   }
 
-  props.data(fileUrl)
-
   const { getRootProps, getInputProps } = useDropzone()
+
+  // // ffmpeg
+  // const [audio, setAudio] = useState('./audio.mp3')
+  // const [message, setMessage] = useState('Click to transcode')
+  // const ffmpeg = createFFmpeg({
+  //   log: true,
+  // })
+
+  // const doTranscode = async () => {
+  //   setMessage('Loading ffmpeg-core.js')
+  //   await ffmpeg.load()
+  //   setMessage('Start transcoding')
+  //   ffmpeg.FS('writeFile', 'audio.mp3', await fetchFile(audio))
+  //   await ffmpeg.run('-i', 'audio.mp3', 'someother.wav')
+  //   setMessage('Complete transcoding')
+  //   const data = ffmpeg.FS('readFile', 'test.mp4')
+  //   setAudio(
+  //     URL.createObjectURL(new Blob([data.buffer], { type: 'audio/mp3' }))
+  //   )
+  // }
+
+  // const handleMPEGclick = (e) => {
+  //   e.preventDefault()
+  //   doTranscode
+  // }
+
+  // console.log(audio)
+  // console.log(fileUrl)
 
   return (
     <>
@@ -36,6 +64,11 @@ export default function UploadPage(props) {
             accept=".mp3, .wav, .aiff, audio/*"
             onChange={handleFileChange}
           />
+          {/* <Box>
+            <audio src="./audio.mp3" controls />
+            <button onClick={handleMPEGclick}>Start</button>
+            <p>{message}</p>
+          </Box> */}
           <Box my="4">
             {files.length === 0 && (
               <Center

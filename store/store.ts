@@ -2,8 +2,8 @@ import { atom } from 'jotai'
 
 const musicAtom = atom({
   id: 0,
-  title: 'artist',
-  content: 'track',
+  title: '',
+  content: '',
   imageUrl: '',
   fileUrl: '',
 })

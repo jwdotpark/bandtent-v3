@@ -65,13 +65,13 @@ const Player = React.memo(function PlayerComponent() {
       zIndex="tooltip"
       sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
     >
-      <Button mx="1" size="xl" onClick={handlePlayButtonClick}>
+      <Button mx="1" size="sm" variant="ghost" onClick={handlePlayButtonClick}>
         {playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
       </Button>
 
       <Popover placement="top-end">
         <PopoverTrigger>
-          <Button mx="1" size="xl">
+          <Button mx="1" size="sm" variant="ghost">
             <GiSettingsKnobs />
           </Button>
         </PopoverTrigger>
@@ -152,7 +152,7 @@ const Player = React.memo(function PlayerComponent() {
           audioRate={bpm}
           progressColor={colorMode === 'light' ? '#7a5f9f' : '#2f9747'}
           onFinish={() => {
-            alert('finish')
+            setPlaying(false)
           }}
         />
       </Box>

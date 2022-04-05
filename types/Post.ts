@@ -1,6 +1,8 @@
 // FIXME
 // nested type declarations is fucked up
 
+import { NumberResults } from 'aws-sdk/clients/clouddirectory'
+
 type PostProps = {
   id: number
   title: string
@@ -38,6 +40,19 @@ type PostProps = {
     fileUrl: string
     authorId: number
   }
+  comments: {
+    content: string
+    createdAt: Date
+    id: number
+    postId: number
+    userId: number
+    length: number
+  }
 }
 
+type CommentProps = {
+  id: number
+  comment: string
+  createdAt: Date
+}
 export default PostProps

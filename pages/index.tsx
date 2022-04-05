@@ -23,15 +23,16 @@ import moment from 'moment'
 import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
+import { GiConsoleController } from 'react-icons/gi'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  // res.setHeader('Cache-Control', 'Access-Control-Allow-Origin: *')
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
       author: {
         select: { name: true, image: true, id: true },
       },
+      comments: true,
     },
     take: 10,
     orderBy: { id: 'desc' },
@@ -56,7 +57,8 @@ const Main: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [selectMusic, setSelectMusic] = useAtom(musicAtom)
 
-  const handleMore = async () => {
+  const handleMore = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
     setIsLoading(true)
     try {
       const result = await fetch('api/post/loadmore', {
@@ -73,6 +75,8 @@ const Main: React.FC<Props> = (props) => {
       setIsLoading(false)
     }
   }
+
+  // console.log(feed)
 
   useEffect(() => {
     setFeed(props.feed)
@@ -232,6 +236,9 @@ const Main: React.FC<Props> = (props) => {
                                       {post.author.name},{' '}
                                       {moment(post.createdAt).fromNow()}
                                     </Text>
+                                    <Box mx="4">
+                                      {post.comments.length} comments
+                                    </Box>
                                   </Center>
                                 </Box>
                               </Box>

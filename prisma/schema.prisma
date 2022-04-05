@@ -21,6 +21,7 @@ model Post {
   author    User?     @relation(fields: [authorId], references: [id])
   comments  Comment[]
 
+
 }
 
 model Account {
@@ -81,6 +82,7 @@ model Comment {
   Post      Post?    @relation(fields: [postId], references: [id])
   postId    Int?
   createdAt DateTime @default(now()) @map("created_at")
+
 }
 
 model VerificationToken {

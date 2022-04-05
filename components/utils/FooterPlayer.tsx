@@ -10,7 +10,7 @@ import {
 const FooterPlayer = (url) => {
   const { colorMode } = useColorMode()
   // const url = './audio.mp3'
-  console.log(url)
+  // console.log(url)
   return (
     <Box
       position="fixed"

@@ -25,6 +25,7 @@ import {
 } from '@chakra-ui/react'
 import ImageComponent from '../../components/utils/ImageComponent'
 import AdditionalPost from '../../components/AdditionalPost'
+import Comment from '../../components/post/Comment'
 import { DeleteIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useAtom } from 'jotai'
 import musicAtom from '../../store/store'
@@ -259,7 +260,7 @@ const Post: React.FC<PostProps> = (props) => {
           borderRadius="xl"
           boxShadow="md"
         >
-          asdfasdf
+          <Comment props={props} />
         </Box>
       </Stack>
       <Box

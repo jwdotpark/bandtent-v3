@@ -15,13 +15,11 @@ model Post {
   content   String?
   published Boolean   @default(false)
   authorId  Int?
+  createdAt DateTime  @default(now()) @map("created_at")
   imageUrl  String?
   fileUrl   String?
-  createdAt DateTime  @default(now()) @map("created_at")
   author    User?     @relation(fields: [authorId], references: [id])
   comments  Comment[]
-
-
 }
 
 model Account {
@@ -66,10 +64,10 @@ model User {
   description   String?
   location      String?
   website       String?
+  Comment       Comment[]
   posts         Post[]
   accounts      Account[]
   sessions      Session[]
-  Comment       Comment[]
 
   @@map("users")
 }
@@ -77,12 +75,11 @@ model User {
 model Comment {
   id        Int      @id @default(autoincrement())
   content   String
-  User      User?    @relation(fields: [userId], references: [id])
   userId    Int?
-  Post      Post?    @relation(fields: [postId], references: [id])
   postId    Int?
   createdAt DateTime @default(now()) @map("created_at")
-
+  Post      Post?    @relation(fields: [postId], references: [id])
+  User      User?    @relation(fields: [userId], references: [id])
 }
 
 model VerificationToken {

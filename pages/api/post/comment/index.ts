@@ -10,8 +10,6 @@ export default async function handle(
   const { comment, authorId, uid, id } = req.body
   const session = await getSession({ req })
 
-  console.log('body: ', req.body)
-
   if (session && req.method === 'POST') {
     // FIXME
     /*

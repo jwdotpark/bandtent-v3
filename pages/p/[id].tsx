@@ -1,4 +1,5 @@
 /* eslint-disable react/no-children-prop */
+// @ts-nocheck
 // FIXME
 
 // pages/p/[id].tsx
@@ -103,7 +104,6 @@ const Post: React.FC<PostProps> = (props) => {
     title = `${title} (Draft)`
   }
 
-  // @ts-ignore
   const myPost = props.myPost[0].author.posts
 
   const handleMusic = (music) => {

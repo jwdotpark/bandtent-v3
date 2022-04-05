@@ -6,6 +6,7 @@ import {
   useColorMode,
   Button,
   HStack,
+  VStack,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -43,65 +44,87 @@ const Player = React.memo(function PlayerComponent() {
   const [muted, setMuted] = useState(false)
   const [bpm, setBpm] = useState(1)
 
+  const currentBpmButton = () => {
+    return (
+      <Button size="xs" borderRadius="full" colorScheme="blue">
+        <Text sx={{ fontSize: '10px' }}>{(100 * (bpm - 1)).toFixed(1)}</Text>
+      </Button>
+    )
+  }
+
+  const currentVolumeButton = () => {
+    return (
+      <Button size="xs" borderRadius="full" colorScheme="blue">
+        <Text sx={{ fontSize: '10px' }}>{(volume * 100).toFixed(0)}</Text>
+      </Button>
+    )
+  }
+
   const handlePositionChange = (position) => {
     // console.log('pos changed: ', position)
   }
-  const onReadyHandler = () => console.log('done loading!')
+  const onReadyHandler = () => {
+    // console.log('done loading!')
+  }
 
-  // set bpm when new music loaded
   useEffect(() => {
     setBpm(1)
   }, [music])
 
   return (
     <HStack
-      // w="calc(100% - 16px)"
       w="calc(100vw)"
       position="fixed"
       bottom="0"
       left="0"
       p="1"
-      // borderRadius="xl"
       bg={colorMode === 'light' ? 'gray.400' : '#383a59'}
       zIndex="tooltip"
       sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
     >
-      <Button mx="1" size="xs" variant="ghost" onClick={handlePlayButtonClick}>
-        {playing ? <BsFillPauseFill /> : <BsFillPlayFill />}
+      <Button size="sm" variant="ghost" onClick={handlePlayButtonClick}>
+        {playing ? <BsFillPauseFill size={30} /> : <BsFillPlayFill size={30} />}
       </Button>
 
       <Popover placement="top-end">
         <PopoverTrigger>
-          <Button mx="1" size="xs" variant="ghost">
-            <GiSettingsKnobs />
+          <Button size="sm" variant="ghost">
+            <GiSettingsKnobs size={20} />
           </Button>
         </PopoverTrigger>
         <PopoverContent
+          px="2"
           borderRadius="xl"
           sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
-          bg={colorMode === 'light' ? 'gray.200' : 'gray.800'}
+          bg={colorMode === 'light' ? 'gray.200' : 'gray.700'}
         >
-          <PopoverArrow />
+          <PopoverArrow bg={colorMode === 'light' ? 'gray.200' : 'gray.700'} />
           <PopoverCloseButton />
-          <PopoverBody p="4">
-            bpm
+          <PopoverBody p="4" my="2">
+            Pitch
             <Slider
+              my="2"
               aria-label="slider-ex-1"
               defaultValue={1}
               value={bpm}
               onChange={(value) => setBpm(value)}
-              step={0.01}
-              min={0.5}
-              max={1.5}
+              step={0.0001}
+              min={0.92}
+              max={1.08}
               onDoubleClick={() => setBpm(1)}
             >
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
-              <SliderThumb />
+              <SliderThumb>
+                <SliderThumb>
+                  <Box color="tomato" as={currentBpmButton} />
+                </SliderThumb>
+              </SliderThumb>
             </Slider>
-            volume
+            Volume
             <Slider
+              mt="2"
               aria-label="slider-ex-1"
               defaultValue={100}
               value={volume}
@@ -114,7 +137,9 @@ const Player = React.memo(function PlayerComponent() {
               <SliderTrack>
                 <SliderFilledTrack />
               </SliderTrack>
-              <SliderThumb />
+              <SliderThumb>
+                <Box color="tomato" as={currentVolumeButton} />
+              </SliderThumb>
             </Slider>
           </PopoverBody>
         </PopoverContent>
@@ -130,13 +155,13 @@ const Player = React.memo(function PlayerComponent() {
             <b>{music.title}</b>
           </Text>
         </Center>
-        <Center h="auto" mr="2" fontSize="sm">
+        <Center h="auto" fontSize="sm">
           <Text sx={{ whiteSpace: 'nowrap' }}>
             <b>{music.content}</b>
           </Text>
         </Center>
       </HStack>
-      <Box w="100%" h="20px" m="1" px="6">
+      <Box w="100%" h="20px" m="1" pr="6">
         <Wavesurfer
           src={music.fileUrl}
           pos={position}

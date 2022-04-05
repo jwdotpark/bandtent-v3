@@ -10,6 +10,11 @@ import {
   Center,
   Image,
   useColorMode,
+  Spacer,
+  HStack,
+  VStack,
+  Flex,
+  Square,
 } from '@chakra-ui/react'
 import moment from 'moment'
 import { motion } from 'framer-motion'
@@ -83,12 +88,21 @@ const SearchPage = (props: { result: any[] }) => {
                     _hover={{ cursor: 'pointer' }}
                     onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                   >
-                    <Text fontSize="xl" noOfLines={3}>
-                      {post.title}
-                      <Text noOfLines={3} fontSize="md">
-                        {post.content}
+                    <Box
+                      p="2"
+                      pl="4"
+                      mb="4"
+                      boxShadow="md"
+                      bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                      borderRadius="xl"
+                    >
+                      <Text fontSize="xl" noOfLines={3}>
+                        {post.title}
+                        <Text noOfLines={3} fontSize="md">
+                          {post.content}
+                        </Text>
                       </Text>
-                    </Text>
+                    </Box>
                     {/* <Divider my="2" /> */}
                     {post.imageUrl && <ImageComponent props={post} />}
                   </Box>
@@ -99,7 +113,9 @@ const SearchPage = (props: { result: any[] }) => {
                     }}
                     transition={{ ease: 'easeInOut', duration: 0.2 }}
                   >
-                    <Box
+                    <Flex
+                      p="2"
+                      direction="row"
                       _hover={{ cursor: 'pointer' }}
                       onClick={() =>
                         Router.push(
@@ -108,32 +124,34 @@ const SearchPage = (props: { result: any[] }) => {
                         )
                       }
                       mt="4"
-                      p="1"
                       boxShadow="md"
-                      // border="2px solid gray"
                       bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                       borderRadius="xl"
                     >
-                      <Text
-                        fontSize="sm"
-                        sx={{ transform: 'translateX(-8px)' }}
-                      >
-                        <Center justifyContent="left" mx="2">
-                          <Image
-                            mr="2"
-                            display="inline"
-                            border="2px inset  gray"
-                            src={post.author.image}
-                            fallbackSrc="https://picsum.photos/200"
-                            boxSize="1.5rem"
-                            borderRadius="full"
-                            alt={post.author.name}
-                          />
-                          <b>{post.author.name}</b>,{' '}
+                      <Center>
+                        <Image
+                          mr="2"
+                          display="inline"
+                          src={post.author.image}
+                          fallbackSrc="https://picsum.photos/200"
+                          boxSize="2.25rem"
+                          borderRadius="full"
+                          alt={post.author.name}
+                        />
+                      </Center>
+                      <Box>
+                        <Text
+                          sx={{ whiteSpace: 'nowrap' }}
+                          noOfLines={1}
+                          fontSize="sm"
+                        >
+                          <b>{post.author.name}</b>
+                        </Text>
+                        <Text fontSize="sm" sx={{ whiteSpace: 'nowrap' }}>
                           {moment(post.createdAt).fromNow()}
-                        </Center>
-                      </Text>
-                    </Box>
+                        </Text>
+                      </Box>
+                    </Flex>
                   </motion.div>
                 </Box>
               </Box>

@@ -2,7 +2,6 @@ import useSWR from 'swr'
 import {
   Box,
   Text,
-  Divider,
   useColorMode,
   Center,
   Spinner,
@@ -10,12 +9,10 @@ import {
   Stack,
 } from '@chakra-ui/react'
 import Router from 'next/router'
-import ImageComponent from '../utils/ImageComponent'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../../store/store'
-import moment from 'moment'
 
 const MyPost = (props) => {
   const { colorMode } = useColorMode()
@@ -38,6 +35,14 @@ const MyPost = (props) => {
     setSelectMusic(music)
   }
 
+  const Unpublished = () => {
+    return (
+      <>
+        <Box>Unpublished!</Box>
+      </>
+    )
+  }
+
   if (error) return <Center h="100%">Failed to load</Center>
   if (!data)
     return (
@@ -58,9 +63,9 @@ const MyPost = (props) => {
           mb="4"
           boxShadow="md"
         >
-          <Text fontSize="xl">
+          <Text fontSize="xl" ml="2">
             {data && data.posts.length !== 1
-              ? data.posts.length + ' posts uploaded.'
+              ? data.posts.length + ' articles uploaded.'
               : 'No item uploaded.'}
           </Text>
         </Box>
@@ -77,95 +82,95 @@ const MyPost = (props) => {
           pb="2"
         >
           {!error &&
-            data.posts
-              // .slice(0)
-              // .reverse()
-              .map((post) => {
-                return (
-                  <motion.div
-                    whileHover={{
-                      scale: 1.02,
-                    }}
-                    transition={{ ease: 'easeInOut', duration: 0.2 }}
-                    key={post.id}
+            data.posts.map((post) => {
+              return (
+                <motion.div
+                  whileHover={{
+                    scale: 1.02,
+                  }}
+                  transition={{ ease: 'easeInOut', duration: 0.2 }}
+                  key={post.id}
+                >
+                  {JSON.stringify(post.id)}
+                  <Box
+                    border={post.published ? null : '3px dashed #f61d98'}
+                    display="inline-block"
+                    bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                    borderRadius="xl"
+                    my="2"
+                    mx="2"
+                    mb="2"
+                    boxShadow="md"
+                    w="100%"
                   >
-                    <Box
-                      display="inline-block"
-                      bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
-                      borderRadius="xl"
-                      my="2"
-                      mx="2"
-                      mb="2"
-                      boxShadow="md"
-                      w="100%"
-                    >
-                      <Box _hover={{ cursor: 'pointer' }}>
-                        <Stack direction="row" p="4">
+                    <Box _hover={{ cursor: 'pointer' }}>
+                      <Stack direction="row" p="4">
+                        <Box
+                          position="relative"
+                          sx={{ aspectRatio: 1 }}
+                          boxSize="140px"
+                          h="75px"
+                        >
                           <Box
-                            position="relative"
-                            sx={{ aspectRatio: 1 }}
-                            boxSize="140px"
-                            h="75px"
+                            onClick={() => {
+                              handleMusic(post)
+                            }}
                           >
-                            <Box
-                              onClick={() => {
-                                handleMusic(post)
+                            <motion.div
+                              whileHover={{
+                                scale: 1.02,
                               }}
+                              whileTap={{
+                                scale: 0.98,
+                              }}
+                              transition={{
+                                ease: 'easeInOut',
+                                duration: 0.2,
+                              }}
+                              key={post.id}
                             >
-                              <motion.div
-                                whileHover={{
-                                  scale: 1.02,
-                                }}
-                                whileTap={{
-                                  scale: 0.98,
-                                }}
-                                transition={{
-                                  ease: 'easeInOut',
-                                  duration: 0.2,
-                                }}
-                                key={post.id}
-                              >
-                                <Image
-                                  boxShadow="md"
-                                  borderRadius="xl"
-                                  loading="lazy"
-                                  src={
-                                    post.imageUrl
-                                      ? post.imageUrl
-                                      : 'https://picsum.photos/400'
-                                  }
-                                  alt={post.content}
-                                  objectFit="cover"
-                                  boxSize="100px"
-                                />
-                              </motion.div>
-                            </Box>
+                              <Image
+                                boxShadow="md"
+                                borderRadius="xl"
+                                loading="lazy"
+                                src={
+                                  post.imageUrl
+                                    ? post.imageUrl
+                                    : 'https://picsum.photos/400'
+                                }
+                                alt={post.content}
+                                objectFit="cover"
+                                boxSize="100px"
+                              />
+                            </motion.div>
                           </Box>
-                          <Box
-                            borderRadius="xl"
-                            bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-                            p="4"
-                            h="100px"
-                            w="100%"
-                            onClick={() =>
-                              Router.push('/p/[id]', `/p/${post.id}`)
-                            }
-                          >
-                            <Box>
-                              <Text fontSize="md" noOfLines={1}>
-                                {post.title}
-                              </Text>
-                              <Text fontSize="2xl" noOfLines={1}>
-                                {post.content}
-                              </Text>
-                            </Box>
+                        </Box>
+                        <Box
+                          borderRadius="xl"
+                          bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                          p="4"
+                          h="100px"
+                          w="100%"
+                          onClick={() =>
+                            Router.push('/p/[id]', `/p/${post.id}`)
+                          }
+                        >
+                          <Box>
+                            <Text fontSize="md" noOfLines={1}>
+                              {post.title}
+                              {!post.published && <Unpublished />}
+                            </Text>
+                            <Text fontSize="2xl" noOfLines={1}>
+                              {post.content}
+                            </Text>
                           </Box>
-                        </Stack>
-                      </Box>
+                        </Box>
+                      </Stack>
                     </Box>
-                  </motion.div>
-                )
-              })}
+                  </Box>
+                </motion.div>
+              )
+            })}
         </Box>
         {error && <Text>Failed to load</Text>}
       </Box>

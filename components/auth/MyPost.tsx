@@ -91,7 +91,7 @@ const MyPost = (props) => {
                   transition={{ ease: 'easeInOut', duration: 0.2 }}
                   key={post.id}
                 >
-                  {JSON.stringify(post.id)}
+                  {/* {JSON.stringify(post.id)} */}
                   <Box
                     border={post.published ? null : '3px dashed #f61d98'}
                     display="inline-block"

@@ -1,4 +1,3 @@
-import { getSession } from 'next-auth/react'
 import prisma from '../../../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 
@@ -13,7 +12,11 @@ export default async function handle(
         id: Number(req.query.id),
       },
       include: {
-        posts: true,
+        posts: {
+          orderBy: {
+            id: 'desc',
+          },
+        },
       },
     })
     res.status(200)

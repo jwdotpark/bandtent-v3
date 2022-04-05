@@ -12,10 +12,6 @@ export default async function handle(
 
   if (session && req.method === 'POST') {
     // FIXME
-    /*
-    Type error: 
-    Property 'comment' does not exist on type 'PrismaClient<PrismaClientOptions, never, RejectOnNotFound | RejectPerOperation>'.
-    */
     const result = await prisma.comment.create({
       data: {
         userId: uid,

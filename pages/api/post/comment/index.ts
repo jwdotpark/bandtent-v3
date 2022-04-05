@@ -12,7 +12,7 @@ export default async function handle(
 
   if (session && req.method === 'POST') {
     // FIXME case sensitive error?
-    const result = await prisma.Comment.create({
+    const result = await prisma.comment.create({
       data: {
         userId: uid,
         content: comment,

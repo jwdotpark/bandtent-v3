@@ -11,7 +11,6 @@ import {
   Spinner,
   Text,
   FormControl,
-  Tooltip,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
@@ -52,7 +51,7 @@ const Comment = (props) => {
     const result = await fetch(`/api/post/comment/delete/${id}`, {
       method: 'DELETE',
     })
-    const data = await result.json()
+    // const data = await result.json()
     fetchComment()
   }
 

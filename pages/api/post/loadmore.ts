@@ -14,6 +14,7 @@ export default async function handle(
           author: {
             select: { name: true, image: true },
           },
+          comments: true,
         },
         cursor: {
           id: req.body - 1,
@@ -23,6 +24,7 @@ export default async function handle(
       })
       res.status(200)
       res.json(morePost)
+      console.log('feteched more post: ', morePost)
     }
   } catch (e) {
     res.status(500)

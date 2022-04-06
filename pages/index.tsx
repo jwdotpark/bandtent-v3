@@ -67,7 +67,6 @@ const Main: React.FC<Props> = (props) => {
         body: JSON.stringify(cursor),
       })
       const data = await result.json()
-      console.log(data)
       setCursor(feed[feed.length - 1].id)
       setFeed([...feed, ...data])
     } catch (error) {

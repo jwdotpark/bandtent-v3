@@ -132,7 +132,7 @@ const Comment = (props) => {
                 {comment.User.id === uid && (
                   <Button
                     variant="ghost"
-                    ml="2"
+                    mx="2"
                     size="xs"
                     onClick={() => deleteComment(comment.id)}
                   >

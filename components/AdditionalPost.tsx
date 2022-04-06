@@ -1,4 +1,5 @@
 import { Box, Text, Divider, useColorMode } from '@chakra-ui/react'
+import { motion } from 'framer-motion'
 import Router from 'next/router'
 import ImageComponent from './utils/ImageComponent'
 
@@ -22,34 +23,42 @@ const AdditionalPost = ({ myPost }) => {
             imageUrl: string
             content: string
           }) => (
-            <Box
+            <motion.div
+              whileHover={{
+                scale: 1.02,
+              }}
+              transition={{ ease: 'easeInOut', duration: 0.2 }}
               key={post.id}
-              mb="4"
-              w="100%"
-              display="inline-block"
-              onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
             >
               <Box
-                bg={colorMode === 'light' ? 'gray.400' : 'gray.700'}
-                boxShadow="md"
-                borderRadius="xl"
-                p="4"
+                // key={post.id}
+                mb="4"
+                w="100%"
+                display="inline-block"
+                onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
               >
                 <Box
-                  p="2"
-                  mb="4"
-                  borderRadius="xl"
+                  bg={colorMode === 'light' ? 'gray.400' : 'gray.700'}
                   boxShadow="md"
-                  bg={colorMode === 'light' ? 'gray.300' : 'gray.600'}
+                  borderRadius="xl"
+                  p="4"
                 >
-                  <Text fontSize="xl">{post.title}</Text>
-                  <Text noOfLines={1}>{post.content}</Text>
-                </Box>
-                <Box mt="2">
-                  {post.imageUrl && <ImageComponent props={post} />}
+                  <Box
+                    p="2"
+                    mb="4"
+                    borderRadius="xl"
+                    boxShadow="md"
+                    bg={colorMode === 'light' ? 'gray.300' : 'gray.600'}
+                  >
+                    <Text fontSize="xl">{post.title}</Text>
+                    <Text noOfLines={1}>{post.content}</Text>
+                  </Box>
+                  <Box mt="2">
+                    {post.imageUrl && <ImageComponent props={post} />}
+                  </Box>
                 </Box>
               </Box>
-            </Box>
+            </motion.div>
           )
         )}
     </Box>

@@ -11,6 +11,7 @@ import {
   Spinner,
   Text,
   FormControl,
+  Tooltip,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
@@ -160,7 +161,7 @@ const Comment = (props) => {
                 }}
               >
                 {errors.comment && (
-                  <Text fontSize="xs" mx="2">
+                  <Text mb="1" fontSize="md" mx="2" color="gray.500">
                     {errors.comment.message}
                   </Text>
                 )}
@@ -168,30 +169,33 @@ const Comment = (props) => {
                   size="md"
                   borderRadius="xl"
                   boxShadow="md"
-                  border={colorMode === 'light' ? 'gray.400' : '#383a59'}
-                  bg={colorMode === 'light' ? 'gray.400' : '#383a59'}
+                  border={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                  bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                 >
                   <Input
+                    size="md"
+                    variant="filled"
+                    autoComplete="false"
                     placeholder="Comment here"
-                    _placeholder={{ color: 'gray.500' }}
+                    _placeholder={{ color: 'gray.400' }}
                     borderRadius="xl"
                     border="none"
                     {...register('comment', {
+                      required: "This can't be empty.",
                       minLength: {
                         value: 4,
-                        message:
-                          'Minimum character length should be more than 4 characters.',
+                        message: 'Too short!',
                       },
                       maxLength: {
                         value: 180,
-                        message:
-                          'Maximum character length should be less than 180 characters.',
+                        message: 'Too long!',
                       },
                     })}
                   />
 
                   <InputRightElement w="10%">
                     <Button
+                      disabled={isLoading}
                       variant="linked"
                       size="md"
                       w="100%"

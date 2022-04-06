@@ -19,6 +19,7 @@ import moment from 'moment'
 import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import Router from 'next/router'
+import { DeleteIcon } from '@chakra-ui/icons'
 
 const Comment = (props) => {
   const { data: session } = useSession()
@@ -43,6 +44,15 @@ const Comment = (props) => {
     const data = await result.json()
     setCommentFeed(data.comments)
     setIsFetching(false)
+  }
+
+  const deleteComment = async (id: number) => {
+    console.log(id)
+    const result = await fetch(`/api/post/comment/delete/${id}`, {
+      method: 'DELETE',
+    })
+    const data = await result.json()
+    fetchComment()
   }
 
   useEffect(() => {
@@ -104,10 +114,11 @@ const Comment = (props) => {
                 <Box w="70%">
                   <Text>{comment.content}</Text>
                 </Box>
+
                 <Spacer />
                 <Text
                   _hover={{ cursor: 'pointer' }}
-                  fontSize="xs"
+                  fontSize="sm"
                   mx="2"
                   onClick={() =>
                     Router.push('/auth/[authorId]', `/auth/${comment.User.id}`)
@@ -115,9 +126,19 @@ const Comment = (props) => {
                 >
                   {comment.User.name}
                 </Text>
-                <Text fontSize="xs">
+                <Text fontSize="sm">
                   {moment(comment.createdAt).fromNow(true)}
                 </Text>
+                {comment.User.id === uid && (
+                  <Button
+                    variant="ghost"
+                    ml="2"
+                    size="xs"
+                    onClick={() => deleteComment(comment.id)}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                )}
               </Flex>
             ))}
           </Box>

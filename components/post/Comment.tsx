@@ -9,18 +9,15 @@ import {
   InputRightElement,
   useColorMode,
   Spinner,
-  Center,
   Text,
   FormControl,
-  FormErrorMessage,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { ChevronUpIcon } from '@chakra-ui/icons'
 import moment from 'moment'
 import { useSession } from 'next-auth/react'
-import Router from 'next/router'
-import { useForm, useFieldArray, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 const Comment = (props) => {
   const { data: session } = useSession()

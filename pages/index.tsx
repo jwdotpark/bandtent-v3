@@ -67,6 +67,7 @@ const Main: React.FC<Props> = (props) => {
         body: JSON.stringify(cursor),
       })
       const data = await result.json()
+      console.log(data)
       setCursor(feed[feed.length - 1].id)
       setFeed([...feed, ...data])
     } catch (error) {
@@ -237,7 +238,8 @@ const Main: React.FC<Props> = (props) => {
                                       {moment(post.createdAt).fromNow()}
                                     </Text>
                                     <Box mx="4">
-                                      {post.comments.length} comments
+                                      {!!post.comments &&
+                                        post.comments.length + ' comments'}
                                     </Box>
                                   </Center>
                                 </Box>

@@ -38,7 +38,10 @@ const MyPost = (props) => {
   const Unpublished = () => {
     return (
       <>
-        <Box>Unpublished!</Box>
+        <Box display="inline">
+          {' '}
+          <b>UNPUBLISHED</b>
+        </Box>
       </>
     )
   }
@@ -91,10 +94,10 @@ const MyPost = (props) => {
                   transition={{ ease: 'easeInOut', duration: 0.2 }}
                   key={post.id}
                 >
-                  {/* {JSON.stringify(post.id)} */}
                   <Box
-                    border={post.published ? null : '3px dashed #f61d98'}
-                    display="inline-block"
+                    // FIXME fix the logic later not to fetch unpublished post from API
+                    display={post.published ? 'inline-block' : 'none'}
+                    // border={post.published ? null : '3px dashed #f61d98'}
                     bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                     borderRadius="xl"
                     my="2"

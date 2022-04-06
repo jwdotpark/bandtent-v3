@@ -17,6 +17,7 @@ import { useState, useEffect } from 'react'
 import { ChevronUpIcon } from '@chakra-ui/icons'
 import moment from 'moment'
 import { useSession } from 'next-auth/react'
+import Router from 'next/router'
 
 const Comment = (props) => {
   const { data: session } = useSession()
@@ -61,13 +62,12 @@ const Comment = (props) => {
     const data = await result.json()
     setCommentFeed(data.comments)
     setIsFetching(false)
-    // console.log('comment data: ', data.comments)
   }
 
   useEffect(() => {
     fetchComment()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [props])
 
   if (isFetching)
     return (
@@ -92,69 +92,85 @@ const Comment = (props) => {
         borderRadius="xl"
         boxShadow="md"
       >
-        <Stack direction="column" m="2" h="auto">
+        <Stack direction="column" mx="2" h="auto">
           <Box h="auto" overflowY="auto">
-            {commentFeed.map((comment) => (
-              <Flex key={comment.id} my="1">
-                <Text>{comment.content}</Text>
-
-                <Spacer />
-                <Text fontSize="xs" mx="2">
-                  {comment.User.name}
-                </Text>
-                <Text fontSize="xs">{moment(comment.createdAt).fromNow()}</Text>
-              </Flex>
-            ))}
+            {commentFeed.length === 0 && 'Nothing to see here'}
+            {commentFeed.length !== 0 &&
+              commentFeed.map((comment) => (
+                <Flex key={comment.id}>
+                  <Text>{comment.content}</Text>
+                  <Spacer />
+                  <Text
+                    fontSize="xs"
+                    mx="2"
+                    _hover={{ cursor: 'pointer' }}
+                    onClick={() =>
+                      Router.push(
+                        '/auth/[authorId]',
+                        `/auth/${comment.User.id}`
+                      )
+                    }
+                  >
+                    {comment.User.name}
+                  </Text>
+                  <Text fontSize="xs">
+                    {moment(comment.createdAt).fromNow()}
+                  </Text>
+                </Flex>
+              ))}
           </Box>
         </Stack>
       </Box>
       <Spacer />
       {/* typing comment */}
-      <Box p="2" border="none">
-        <form onSubmit={submitData}>
-          <motion.div
-            whileHover={{
-              scale: 1.03,
-            }}
-            transition={{ ease: 'easeInOut', duration: 0.2 }}
-            whileFocus={{
-              scale: 1.03,
-            }}
-          >
-            <InputGroup
-              size="md"
-              borderRadius="xl"
-              boxShadow="md"
-              border={colorMode === 'light' ? 'gray.400' : 'gray.600'}
-              bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+      {session && (
+        <Box p="2" border="none">
+          <form onSubmit={submitData}>
+            <motion.div
+              whileHover={{
+                scale: 1.03,
+              }}
+              transition={{ ease: 'easeInOut', duration: 0.2 }}
+              whileFocus={{
+                scale: 1.03,
+              }}
             >
-              <Input
-                placeholder="Comment here"
+              <InputGroup
+                size="md"
                 borderRadius="xl"
-                border="none"
-                value={comment}
-                onChange={(e) => {
-                  setComment(e.target.value)
-                }}
-              />
-
-              <InputRightElement w="10%">
-                <Button
-                  variant="linked"
-                  size="md"
-                  w="100%"
-                  borderLeftRadius="none"
+                boxShadow="md"
+                border={colorMode === 'light' ? 'gray.400' : '#383a59'}
+                bg={colorMode === 'light' ? 'gray.400' : '#383a59'}
+              >
+                <Input
+                  placeholder="Comment here"
+                  _placeholder={{ color: 'gray.500' }}
                   borderRadius="xl"
-                  onClick={submitData}
-                >
-                  {/* <Text fontSize="xs">Send</Text> */}
-                  {isLoading ? <Spinner size="xs" /> : <ChevronUpIcon />}
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-          </motion.div>
-        </form>
-      </Box>
+                  border="none"
+                  value={comment}
+                  onChange={(e) => {
+                    setComment(e.target.value)
+                  }}
+                />
+
+                <InputRightElement w="10%">
+                  <Button
+                    variant="linked"
+                    size="md"
+                    w="100%"
+                    borderLeftRadius="none"
+                    borderRadius="xl"
+                    onClick={submitData}
+                  >
+                    {/* <Text fontSize="xs">Send</Text> */}
+                    {isLoading ? <Spinner size="xs" /> : <ChevronUpIcon />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </motion.div>
+          </form>
+        </Box>
+      )}
     </Flex>
   )
 }

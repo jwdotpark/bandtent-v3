@@ -15,6 +15,15 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "coverage",
+    "dist",
+    "build",
+    "lib",
+    "lib-esm"
+  ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_error.js"]
 }

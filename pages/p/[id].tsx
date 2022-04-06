@@ -3,7 +3,7 @@
 
 // pages/p/[id].tsx
 
-import React, { useState } from 'react'
+import React from 'react'
 import { GetServerSideProps } from 'next'
 import Router from 'next/router'
 import Layout from '../../components/Layout'
@@ -14,8 +14,6 @@ import {
   Box,
   Button,
   Text,
-  HStack,
-  Divider,
   Stack,
   Center,
   Image,

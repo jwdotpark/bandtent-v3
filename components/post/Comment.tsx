@@ -18,6 +18,7 @@ import { ChevronUpIcon } from '@chakra-ui/icons'
 import moment from 'moment'
 import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
+import Router from 'next/router'
 
 const Comment = (props) => {
   const { data: session } = useSession()
@@ -104,7 +105,14 @@ const Comment = (props) => {
                   <Text>{comment.content}</Text>
                 </Box>
                 <Spacer />
-                <Text fontSize="xs" mx="2">
+                <Text
+                  _hover={{ cursor: 'pointer' }}
+                  fontSize="xs"
+                  mx="2"
+                  onClick={() =>
+                    Router.push('/auth/[authorId]', `/auth/${comment.User.id}`)
+                  }
+                >
                   {comment.User.name}
                 </Text>
                 <Text fontSize="xs">

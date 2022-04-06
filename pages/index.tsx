@@ -23,7 +23,6 @@ import moment from 'moment'
 import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
-import { GiConsoleController } from 'react-icons/gi'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const feed = await prisma.post.findMany({

@@ -29,7 +29,7 @@ const Comment = (props) => {
   const myPost = props.props.post
   const { authorId, id } = myPost
 
-  const uid = session.user.id
+  const uid = session?.user.id
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()

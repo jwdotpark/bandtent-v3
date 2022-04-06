@@ -61,7 +61,7 @@ const Comment = (props) => {
     const data = await result.json()
     setCommentFeed(data.comments)
     setIsFetching(false)
-    console.log('comment data: ', data.comments)
+    // console.log('comment data: ', data.comments)
   }
 
   useEffect(() => {

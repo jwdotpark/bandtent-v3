@@ -26,7 +26,6 @@ const Comment = (props) => {
   const { data: session } = useSession()
   const { colorMode } = useColorMode()
   const [commentFeed, setCommentFeed] = useState([])
-  const [comment, setComment] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isFetching, setIsFetching] = useState(false)
 
@@ -34,25 +33,6 @@ const Comment = (props) => {
   const { authorId, id } = myPost
 
   const uid = session?.user.id
-
-  const submitData = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    try {
-      const body = { comment, authorId, uid, id }
-      await fetch('/api/post/comment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      })
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
-      setComment('')
-      fetchComment()
-    }
-  }
 
   const fetchComment = async () => {
     setIsFetching(true)
@@ -79,7 +59,11 @@ const Comment = (props) => {
     formState: { errors },
   } = useForm({ defaultValues: { comment: '' } })
 
-  const onSubmit = async (data) => {
+  type IFormData = {
+    comment: string
+  }
+
+  const onSubmit = async (data: IFormData) => {
     console.log(data)
     setIsLoading(true)
     const { comment } = data
@@ -94,7 +78,6 @@ const Comment = (props) => {
       console.error(error)
     } finally {
       setIsLoading(false)
-      setComment('')
       reset({ comment: '' })
       fetchComment()
     }

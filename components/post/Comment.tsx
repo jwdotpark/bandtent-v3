@@ -11,6 +11,7 @@ import {
   Spinner,
   Center,
   Text,
+  FormControl,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
@@ -69,13 +70,7 @@ const Comment = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props])
 
-  if (isFetching)
-    return (
-      <Center h="100%">
-        <Spinner />
-      </Center>
-    )
-
+  
   return (
     <Flex
       direction="column"
@@ -126,48 +121,50 @@ const Comment = (props) => {
       {session && (
         <Box p="2" border="none">
           <form onSubmit={submitData}>
-            <motion.div
-              whileHover={{
-                scale: 1.03,
-              }}
-              transition={{ ease: 'easeInOut', duration: 0.2 }}
-              whileFocus={{
-                scale: 1.03,
-              }}
-            >
-              <InputGroup
-                size="md"
-                borderRadius="xl"
-                boxShadow="md"
-                border={colorMode === 'light' ? 'gray.400' : '#383a59'}
-                bg={colorMode === 'light' ? 'gray.400' : '#383a59'}
+            <FormControl isRequired>
+              <motion.div
+                whileHover={{
+                  scale: 1.03,
+                }}
+                transition={{ ease: 'easeInOut', duration: 0.2 }}
+                whileFocus={{
+                  scale: 1.03,
+                }}
               >
-                <Input
-                  placeholder="Comment here"
-                  _placeholder={{ color: 'gray.500' }}
+                <InputGroup
+                  size="md"
                   borderRadius="xl"
-                  border="none"
-                  value={comment}
-                  onChange={(e) => {
-                    setComment(e.target.value)
-                  }}
-                />
-
-                <InputRightElement w="10%">
-                  <Button
-                    variant="linked"
-                    size="md"
-                    w="100%"
-                    borderLeftRadius="none"
+                  boxShadow="md"
+                  border={colorMode === 'light' ? 'gray.400' : '#383a59'}
+                  bg={colorMode === 'light' ? 'gray.400' : '#383a59'}
+                >
+                  <Input
+                    placeholder="Comment here"
+                    _placeholder={{ color: 'gray.500' }}
                     borderRadius="xl"
-                    onClick={submitData}
-                  >
-                    {/* <Text fontSize="xs">Send</Text> */}
-                    {isLoading ? <Spinner size="xs" /> : <ChevronUpIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </motion.div>
+                    border="none"
+                    value={comment}
+                    onChange={(e) => {
+                      setComment(e.target.value)
+                    }}
+                  />
+
+                  <InputRightElement w="10%">
+                    <Button
+                      variant="linked"
+                      size="md"
+                      w="100%"
+                      borderLeftRadius="none"
+                      borderRadius="xl"
+                      onClick={submitData}
+                    >
+                      {/* <Text fontSize="xs">Send</Text> */}
+                      {isLoading ? <Spinner size="xs" /> : <ChevronUpIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </motion.div>
+            </FormControl>
           </form>
         </Box>
       )}

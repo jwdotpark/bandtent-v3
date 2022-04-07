@@ -168,6 +168,8 @@ const Main: React.FC<Props> = (props) => {
                               </Box>
                               <Box
                                 borderRadius="xl"
+                                // border="1px solid red"
+                                boxShadow="md"
                                 bg={
                                   colorMode === 'light'
                                     ? 'gray.400'
@@ -207,6 +209,7 @@ const Main: React.FC<Props> = (props) => {
                                 mb="4"
                                 // mt="1"
                                 mx="4"
+                                boxShadow="md"
                                 bg={
                                   colorMode === 'light'
                                     ? 'gray.400'

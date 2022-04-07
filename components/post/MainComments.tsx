@@ -53,7 +53,7 @@ const MainComments = () => {
         <Text fontSize="3xl">Recent Reviews</Text>
       </Box>
       <Box
-        bg={colorMode === 'light' ? 'gray.300' : 'gray.500'}
+        bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
         borderRadius="xl"
         p="2"
         m="2"

@@ -76,12 +76,19 @@ const MainComments = () => {
               bg={colorMode === 'light' ? 'gray.200' : 'gray.600'}
             >
               <Box my="1" m="2">
-                <Text
+                <Box
                   _hover={{ cursor: 'pointer' }}
                   onClick={() => Router.push('/p/[id]', `/p/${comment.postId}`)}
                 >
-                  <em>{comment.content}</em>
-                </Text>
+                  <Text>
+                    <em>{comment.content}</em>
+                  </Text>
+                  <Box my="2">
+                    <Text>
+                      {comment.Post.content}, {comment.Post.title}
+                    </Text>
+                  </Box>
+                </Box>
                 <Flex
                   w="100%"
                   _hover={{ cursor: 'pointer' }}
@@ -90,19 +97,17 @@ const MainComments = () => {
                   }
                 >
                   <Spacer />
-                  <Box>
-                    <Image
-                      sx={{ transform: 'translateY(6px)' }}
-                      display="inline"
-                      src={comment.User.image}
-                      alt={comment.User.name}
-                      fallbackSrc="https://picsum.photos/200"
-                      boxSize="1.5rem"
-                      borderRadius="full"
-                      mr="2"
-                    />
-                    {comment.User.name}, {moment(comment.createdAt).fromNow()}
-                  </Box>
+                  <Image
+                    // sx={{ transform: 'translateY(6px)' }}
+                    display="inline"
+                    src={comment.User.image}
+                    alt={comment.User.name}
+                    fallbackSrc="https://picsum.photos/200"
+                    boxSize="1.5rem"
+                    borderRadius="full"
+                    mr="2"
+                  />
+                  {comment.User.name}, {moment(comment.createdAt).fromNow()}
                 </Flex>
               </Box>
             </Box>

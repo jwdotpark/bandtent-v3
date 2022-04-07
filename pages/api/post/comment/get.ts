@@ -14,6 +14,12 @@ export default async function handle(
     take: 10,
     include: {
       User: true,
+      Post: {
+        select: {
+          title: true,
+          content: true,
+        },
+      },
     },
   })
 

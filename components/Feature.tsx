@@ -12,6 +12,7 @@ import Router from 'next/router'
 import { Key, useEffect, useState } from 'react'
 import ImageComponent from './utils/ImageComponent'
 import useSWR from 'swr'
+import { motion } from 'framer-motion'
 
 const Feature = (props: { props }) => {
   const { colorMode } = useColorMode()
@@ -76,34 +77,49 @@ const Feature = (props: { props }) => {
                 <>
                   {index === 2 && (
                     <Box key={post.id}>
-                      <Box
-                        onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
-                        bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-                        boxShadow="md"
-                        borderRadius="xl"
-                        p="2"
+                      <motion.div
+                        whileHover={{
+                          scale: 1.02,
+                        }}
+                        transition={{ ease: 'easeInOut', duration: 0.2 }}
                       >
-                        <Box position="relative" p="2" m="2">
-                          <Box sx={{ filter: 'blur(2px) brightness(75%)' }}>
-                            {post.imageUrl && <ImageComponent props={post} />}
+                        <Box
+                          _hover={{ cursor: 'pointer' }}
+                          onClick={() =>
+                            Router.push('/p/[id]', `/p/${post.id}`)
+                          }
+                          bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                          boxShadow="md"
+                          borderRadius="xl"
+                          p="2"
+                        >
+                          <Box position="relative" p="2" m="2">
+                            <Box sx={{ filter: 'blur(2px) brightness(75%)' }}>
+                              {post.imageUrl && <ImageComponent props={post} />}
+                            </Box>
+                            <Center
+                              top="0"
+                              position="absolute"
+                              h="100%"
+                              w="100%"
+                            >
+                              <VStack>
+                                <Spacer />
+                                <Box>
+                                  <Text fontSize="6xl" textShadow="md">
+                                    <b>{post.title}</b>
+                                  </Text>
+                                </Box>
+                                <Box>
+                                  <Text fontSize="4xl" textShadow="md">
+                                    <b>{post.content}</b>
+                                  </Text>
+                                </Box>
+                              </VStack>
+                            </Center>
                           </Box>
-                          <Center top="0" position="absolute" h="100%" w="100%">
-                            <VStack>
-                              <Spacer />
-                              <Box>
-                                <Text fontSize="3xl" textShadow="md">
-                                  <b>{post.title}</b>
-                                </Text>
-                              </Box>
-                              <Box>
-                                <Text fontSize="xl" textShadow="md">
-                                  <b>{post.content}</b>
-                                </Text>
-                              </Box>
-                            </VStack>
-                          </Center>
                         </Box>
-                      </Box>
+                      </motion.div>
                     </Box>
                   )}
                 </>

@@ -57,7 +57,7 @@ const Feature = (props: { props }) => {
             boxShadow="md"
           >
             <Text mx="2" fontSize="3xl" p="2">
-              <b>{!error && JSON.stringify(data)} article uploaded</b>
+              <b>{!error && JSON.stringify(data)} uploaded</b>
             </Text>
           </Box>
           <Box mt="4">

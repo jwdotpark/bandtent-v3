@@ -189,7 +189,7 @@ const Comment = (props) => {
                         message: 'Too short!',
                       },
                       maxLength: {
-                        value: 180,
+                        value: 400,
                         message: 'Too long!',
                       },
                     })}

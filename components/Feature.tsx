@@ -49,7 +49,7 @@ const Feature = (props: { props }) => {
       boxShadow="md"
     >
       <Box m="2" p="2" overflow="clip">
-        <Box boxShadow="md">
+        <Box>
           <Box
             bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
             borderRadius="xl"
@@ -79,6 +79,7 @@ const Feature = (props: { props }) => {
                       <Box
                         onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
                         bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                        boxShadow="md"
                         borderRadius="xl"
                         p="2"
                       >

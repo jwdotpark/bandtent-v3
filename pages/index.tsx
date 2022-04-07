@@ -14,6 +14,7 @@ import {
   Button,
   useColorMode,
   ColorModeScript,
+  Spacer,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
@@ -182,7 +183,7 @@ const Main: React.FC<Props> = (props) => {
                                   Router.push('/p/[id]', `/p/${post.id}`)
                                 }
                               >
-                                <Box>
+                                <Box ml="2">
                                   <Text fontSize="3xl" noOfLines={1}>
                                     {post.title}
                                   </Text>
@@ -238,9 +239,11 @@ const Main: React.FC<Props> = (props) => {
                                       {post.author.name},{' '}
                                       {moment(post.createdAt).fromNow()}
                                     </Text>
+                                    <Spacer />
                                     <Box mx="4">
-                                      {!!post.comments &&
-                                        post.comments.length + ' comments'}
+                                      {post.comments.length === 1 && '1 review'}
+                                      {post.comments.length > 1 &&
+                                        post.comments.length + ' reviews'}
                                     </Box>
                                   </Center>
                                 </Box>

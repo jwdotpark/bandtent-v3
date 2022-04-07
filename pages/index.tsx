@@ -15,6 +15,7 @@ import {
   useColorMode,
   ColorModeScript,
   Spacer,
+  VStack,
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
@@ -24,6 +25,7 @@ import moment from 'moment'
 import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
+import MainComments from '../components/post/MainComments'
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const feed = await prisma.post.findMany({
@@ -273,7 +275,10 @@ const Main: React.FC<Props> = (props) => {
               </Box>
 
               {/* right column */}
-              <Feature props={props} />
+              <VStack w="100%">
+                <Feature props={props} />
+                <MainComments />
+              </VStack>
             </Stack>
           </Box>
         </Media>

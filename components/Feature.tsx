@@ -5,20 +5,33 @@ import {
   useColorMode,
   Center,
   Spinner,
+  VStack,
+  Spacer,
 } from '@chakra-ui/react'
 import Router from 'next/router'
-import { Key } from 'react'
+import { Key, useEffect, useState } from 'react'
 import ImageComponent from './utils/ImageComponent'
 import useSWR from 'swr'
 
 const Feature = (props: { props }) => {
   const { colorMode } = useColorMode()
+  const [randomPost, setRandomPost] = useState(null)
 
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
   const { data, error } = useSWR('/api/post/count', fetcher, {
     // NOTE interval 1hr for now
     refreshInterval: 1000 * 60,
   })
+
+  // const randomPost = (data: number): number => {
+  //   const random = Math.floor(Math.random() * data)
+  //   return random
+  // }
+
+  // useEffect(() => {
+  //   setRandomPost(Math.floor(Math.random() * data))
+  //   console.log(randomPost)
+  // }, [data, randomPost])
 
   if (error) return <Center h="100%">Failed to load</Center>
   if (!data)
@@ -31,9 +44,6 @@ const Feature = (props: { props }) => {
   return (
     <Box
       w="100%"
-      h="100%"
-      m="2"
-      ml="2"
       borderRadius="xl"
       bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
       boxShadow="md"
@@ -42,7 +52,7 @@ const Feature = (props: { props }) => {
         <Box boxShadow="md">
           <Box
             bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-            borderRadius="md"
+            borderRadius="xl"
             mb="2"
             boxShadow="md"
           >
@@ -64,33 +74,34 @@ const Feature = (props: { props }) => {
                 index: number
               ) => (
                 <>
-                  {index === 3 && (
+                  {index === 2 && (
                     <Box key={post.id}>
                       <Box
                         onClick={() => Router.push('/p/[id]', `/p/${post.id}`)}
-                        // border="2px solid gray"
                         bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-                        borderRadius="md"
+                        borderRadius="xl"
                         p="2"
                       >
-                        <Text ml="2">
-                          <i>FEATURE</i>
-                        </Text>
-                        <Text
-                          ml="2"
-                          fontSize="3xl"
-                          noOfLines={3}
-                          textAlign="left"
-                        >
-                          <b>{post.title}</b>
-                        </Text>
-                        <Divider mb="4" />
-                        <Box m="2">
-                          {post.imageUrl && <ImageComponent props={post} />}
+                        <Box position="relative" p="2" m="2">
+                          <Box sx={{ filter: 'blur(2px) brightness(75%)' }}>
+                            {post.imageUrl && <ImageComponent props={post} />}
+                          </Box>
+                          <Center top="0" position="absolute" h="100%" w="100%">
+                            <VStack>
+                              <Spacer />
+                              <Box>
+                                <Text fontSize="3xl" textShadow="md">
+                                  <b>{post.title}</b>
+                                </Text>
+                              </Box>
+                              <Box>
+                                <Text fontSize="xl" textShadow="md">
+                                  <b>{post.content}</b>
+                                </Text>
+                              </Box>
+                            </VStack>
+                          </Center>
                         </Box>
-                        <Text fontSize="md" noOfLines={1000} mx="4">
-                          {post.content}
-                        </Text>
                       </Box>
                     </Box>
                   )}

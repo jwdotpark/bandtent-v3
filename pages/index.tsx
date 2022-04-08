@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
-import Feature from '../components/Feature'
+import Feature from '../components/feature/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
@@ -39,9 +39,23 @@ export const getServerSideProps: GetServerSideProps = async () => {
     take: 10,
     orderBy: { id: 'desc' },
   })
+
+  const feature = await prisma.post.findMany({
+    take: 5,
+    orderBy: {
+      comments: {
+        _count: 'desc',
+      },
+    },
+    include: {
+      comments: true,
+    },
+  })
+
   return {
     props: {
       feed: JSON.parse(JSON.stringify(feed)),
+      feature: JSON.parse(JSON.stringify(feature)),
     },
   }
 }
@@ -276,7 +290,8 @@ const Main: React.FC<Props> = (props) => {
 
               {/* right column */}
               <VStack w="100%">
-                <Feature props={props} />
+                {/* @ts-ignore */}
+                <Feature props={props.feature} />
                 <MainComments />
               </VStack>
             </Stack>
@@ -290,7 +305,8 @@ const Main: React.FC<Props> = (props) => {
             <Stack mx="2" mb="4">
               <Box mt="4" mb="8" boxShadow="md">
                 <Box>
-                  <Feature props={props} />
+                  {/* @ts-ignore */}
+                  <Feature props={props.feature} />
                 </Box>
               </Box>
               {/* right column */}

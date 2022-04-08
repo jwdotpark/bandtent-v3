@@ -73,19 +73,23 @@ const MainComments = () => {
               m="2"
               mb="4"
               borderRadius="xl"
-              bg={colorMode === 'light' ? 'gray.200' : 'gray.600'}
+              bg={colorMode === 'light' ? 'gray.200' : 'gray.800'}
             >
               <Box my="1" m="2">
                 <Box
                   _hover={{ cursor: 'pointer' }}
                   onClick={() => Router.push('/p/[id]', `/p/${comment.postId}`)}
                 >
-                  <Text>
-                    <em>{comment.content}</em>
-                  </Text>
                   <Box my="2">
-                    <Text>
-                      {comment.Post.content}, {comment.Post.title}
+                    <Text color="gray.400">
+                      <b>
+                        {comment.Post.content}, {comment.Post.title}
+                      </b>
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text mb="4">
+                      <em>{comment.content}</em>
                     </Text>
                   </Box>
                 </Box>

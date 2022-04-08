@@ -47,7 +47,7 @@ const Comment = (props) => {
   }
 
   const deleteComment = async (id: number) => {
-    console.log(id)
+    // console.log(id)
     const result = await fetch(`/api/post/comment/delete/${id}`, {
       method: 'DELETE',
     })
@@ -72,7 +72,7 @@ const Comment = (props) => {
   }
 
   const onSubmit = async (data: IFormData) => {
-    console.log(data)
+    // console.log(data)
     setIsLoading(true)
     const { comment } = data
     try {

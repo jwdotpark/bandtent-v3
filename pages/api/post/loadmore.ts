@@ -24,12 +24,12 @@ export default async function handle(
       })
       res.status(200)
       res.json(morePost)
-      console.log('feteched more post: ', morePost)
+      // console.log('feteched more post: ', morePost)
     }
   } catch (e) {
     res.status(500)
     res.json({ error: e.message })
-    console.log(e)
+    // console.log(e)
   } finally {
     await prisma.$disconnect()
   }

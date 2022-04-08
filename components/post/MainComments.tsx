@@ -20,7 +20,7 @@ const MainComments = () => {
     refreshInterval: 1000 * 60,
   })
 
-  console.log(data)
+  // console.log(data)
 
   if (!data)
     return (

@@ -7,3 +7,5 @@ node_modules/
 .sentryclirc
 
 yarn-error.log
+# Sentry
+.sentryclirc

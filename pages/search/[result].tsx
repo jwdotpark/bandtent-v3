@@ -3,19 +3,7 @@ import Layout from '../../components/Layout'
 import { GetServerSideProps } from 'next'
 import prisma from '../../lib/prisma'
 import ImageComponent from '../../components/utils/ImageComponent'
-import {
-  Box,
-  Text,
-  Divider,
-  Center,
-  Image,
-  useColorMode,
-  Spacer,
-  HStack,
-  VStack,
-  Flex,
-  Square,
-} from '@chakra-ui/react'
+import { Box, Text, Center, Image, useColorMode, Flex } from '@chakra-ui/react'
 import moment from 'moment'
 import { motion } from 'framer-motion'
 

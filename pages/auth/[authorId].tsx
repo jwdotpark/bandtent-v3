@@ -1,7 +1,6 @@
 //  @ts-nocheck FIXME
 
 import Layout from '../../components/Layout'
-import { useSession } from 'next-auth/react'
 import { Media } from '../../utils/media'
 import MyPost from '../../components/auth/MyPost'
 import MeEdit from '../../components/auth/MeEdit'
@@ -37,7 +36,7 @@ const Me: React.FC = (props) => {
   // const { data } = useSession()
   const { colorMode } = useColorMode()
 
-  const [numOfPost, setNumOfPost] = useState(0)
+  const [, setNumOfPost] = useState(0)
 
   const pull_number = (data: number) => {
     setNumOfPost(data)

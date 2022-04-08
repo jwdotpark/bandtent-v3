@@ -27,7 +27,7 @@ import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
 import MainComments from '../components/post/MainComments'
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
@@ -57,7 +57,7 @@ const Main: React.FC<Props> = (props) => {
   const [feed, setFeed] = useState(props.feed)
   const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
   const [isLoading, setIsLoading] = useState(false)
-  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
+  const [, setSelectMusic] = useAtom(musicAtom)
 
   const handleMore = async (e: React.SyntheticEvent) => {
     e.preventDefault()

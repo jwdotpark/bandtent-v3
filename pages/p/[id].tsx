@@ -83,7 +83,7 @@ async function deletePost(id: number): Promise<void> {
 
 const Post: React.FC<PostProps> = (props) => {
   const { colorMode } = useColorMode()
-  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
+  const [, setSelectMusic] = useAtom(musicAtom)
 
   const { data: session, status } = useSession()
   if (status === 'loading') {
@@ -96,10 +96,10 @@ const Post: React.FC<PostProps> = (props) => {
   const userHasValidSession = Boolean(session)
   const postBelongsToUser = session?.user?.email === props.post.author?.email
 
-  let title = props.title
-  if (!props.published) {
-    title = `${title} (Draft)`
-  }
+  // let title = props.title
+  // if (!props.published) {
+  //   title = `${title} (Draft)`
+  // }
 
   // @ts-ignore
   const myPost = props.myPost[0].author.posts

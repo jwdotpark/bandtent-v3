@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -19,7 +20,7 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import { Media } from '../../utils/media'
-import Player from '../utils/Player'
+// import Player from '../utils/Player'
 import SearchButton from './SearchButton'
 import {
   ChevronDownIcon,

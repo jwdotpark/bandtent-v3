@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import {
   Box,
@@ -6,7 +7,6 @@ import {
   useColorMode,
   Button,
   HStack,
-  VStack,
   Popover,
   PopoverTrigger,
   PopoverContent,

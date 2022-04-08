@@ -7,7 +7,7 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { comment, authorId, uid, id } = req.body
+  const { comment, uid, id } = req.body
   const session = await getSession({ req })
 
   if (session && req.method === 'POST') {

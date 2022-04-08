@@ -1,13 +1,6 @@
-import {
-  Box,
-  Button,
-  Center,
-  HStack,
-  Stack,
-  useColorMode,
-} from '@chakra-ui/react'
+import { Box, Button, Center, Stack, useColorMode } from '@chakra-ui/react'
 
-const FooterPlayer = (url) => {
+const FooterPlayer = () => {
   const { colorMode } = useColorMode()
   // const url = './audio.mp3'
   // console.log(url)

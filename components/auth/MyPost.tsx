@@ -16,7 +16,7 @@ import musicAtom from '../../store/store'
 
 const MyPost = (props) => {
   const { colorMode } = useColorMode()
-  const [num, setNum] = useState(0)
+  const [, setNum] = useState(0)
 
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json())
   const { data, error } = useSWR(`/api/post/mypost/${props.uid}`, fetcher, {
@@ -29,7 +29,7 @@ const MyPost = (props) => {
     }
   }, [data])
 
-  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
+  const [, setSelectMusic] = useAtom(musicAtom)
 
   const handleMusic = (music) => {
     setSelectMusic(music)

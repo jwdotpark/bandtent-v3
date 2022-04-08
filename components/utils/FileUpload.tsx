@@ -9,7 +9,7 @@ import {
   Progress,
 } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
-import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg'
+// import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg'
 
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()

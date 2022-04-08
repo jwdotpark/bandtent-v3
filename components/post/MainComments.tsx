@@ -15,7 +15,7 @@ import { motion } from 'framer-motion'
 const MainComments = () => {
   const { colorMode } = useColorMode()
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
-  const { data, error } = useSWR('/api/post/comment/get', fetcher, {
+  const { data } = useSWR('/api/post/comment/get', fetcher, {
     // NOTE interval 1hr for now
     refreshInterval: 1000 * 60,
   })

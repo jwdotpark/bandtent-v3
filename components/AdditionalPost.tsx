@@ -1,4 +1,4 @@
-import { Box, Text, Divider, useColorMode } from '@chakra-ui/react'
+import { Box, Text, useColorMode } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import Router from 'next/router'
 import ImageComponent from './utils/ImageComponent'

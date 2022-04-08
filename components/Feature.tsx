@@ -1,5 +1,4 @@
 import {
-  Divider,
   Box,
   Text,
   useColorMode,
@@ -9,14 +8,14 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 import Router from 'next/router'
-import { Key, useEffect, useState } from 'react'
+import { Key } from 'react'
 import ImageComponent from './utils/ImageComponent'
 import useSWR from 'swr'
 import { motion } from 'framer-motion'
 
 const Feature = (props: { props }) => {
   const { colorMode } = useColorMode()
-  const [randomPost, setRandomPost] = useState(null)
+  // const [randomPost, setRandomPost] = useState(null)
 
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
   const { data, error } = useSWR('/api/post/count', fetcher, {

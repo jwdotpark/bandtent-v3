@@ -26,6 +26,7 @@ const EmblaCarousel = ({ props }) => {
         totalSlides={slides.length}
         isPlaying={true}
         interval={3000}
+        infinite={true}
       >
         <Slider>
           <Box w="100%">

@@ -10,6 +10,7 @@ import {
   useColorMode,
   Spinner,
   Text,
+  Center,
   FormControl,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
@@ -47,8 +48,8 @@ const Comment = (props) => {
   }
 
   const deleteComment = async (id: number) => {
-    console.log(id)
-    const result = await fetch(`/api/post/comment/delete/${id}`, {
+    // console.log(id)
+    await fetch(`/api/post/comment/delete/${id}`, {
       method: 'DELETE',
     })
     // const data = await result.json()
@@ -72,7 +73,7 @@ const Comment = (props) => {
   }
 
   const onSubmit = async (data: IFormData) => {
-    console.log(data)
+    // console.log(data)
     setIsLoading(true)
     const { comment } = data
     try {
@@ -109,6 +110,11 @@ const Comment = (props) => {
       >
         <Stack direction="column" m="2" h="auto">
           <Box h="auto" overflowY="auto">
+            {isFetching && (
+              <Center h="100%">
+                <Spinner />
+              </Center>
+            )}
             {commentFeed.map((comment) => (
               <Flex key={comment.id} my="1">
                 <Box w="70%">

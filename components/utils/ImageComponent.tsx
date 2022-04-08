@@ -1,5 +1,5 @@
-import { Box, Image, AspectRatio, Center, useColorMode } from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+import { Box, Image, AspectRatio, useColorMode } from '@chakra-ui/react'
+// import { motion } from 'framer-motion'
 
 const ImageComponent = (post: {
   props: { imageUrl: string; content: string }

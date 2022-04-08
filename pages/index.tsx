@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 import { Media } from '../utils/media'
 import Router from 'next/router'
-import Feature from '../components/Feature'
+import Feature from '../components/feature/Feature'
 import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
@@ -27,7 +27,7 @@ import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
 import MainComments from '../components/post/MainComments'
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
     include: {
@@ -36,12 +36,26 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       },
       comments: true,
     },
-    take: 10,
+    take: 15,
     orderBy: { id: 'desc' },
   })
+
+  const feature = await prisma.post.findMany({
+    take: 5,
+    orderBy: {
+      comments: {
+        _count: 'desc',
+      },
+    },
+    include: {
+      comments: true,
+    },
+  })
+
   return {
     props: {
       feed: JSON.parse(JSON.stringify(feed)),
+      feature: JSON.parse(JSON.stringify(feature)),
     },
   }
 }
@@ -57,7 +71,7 @@ const Main: React.FC<Props> = (props) => {
   const [feed, setFeed] = useState(props.feed)
   const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
   const [isLoading, setIsLoading] = useState(false)
-  const [selectMusic, setSelectMusic] = useAtom(musicAtom)
+  const [, setSelectMusic] = useAtom(musicAtom)
 
   const handleMore = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -276,7 +290,8 @@ const Main: React.FC<Props> = (props) => {
 
               {/* right column */}
               <VStack w="100%">
-                <Feature props={props} />
+                {/* @ts-ignore */}
+                <Feature props={props.feature} />
                 <MainComments />
               </VStack>
             </Stack>
@@ -290,7 +305,8 @@ const Main: React.FC<Props> = (props) => {
             <Stack mx="2" mb="4">
               <Box mt="4" mb="8" boxShadow="md">
                 <Box>
-                  <Feature props={props} />
+                  {/* @ts-ignore */}
+                  <Feature props={props.feature} />
                 </Box>
               </Box>
               {/* right column */}

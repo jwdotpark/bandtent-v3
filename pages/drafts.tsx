@@ -4,18 +4,8 @@ import { useSession, getSession } from 'next-auth/react'
 import Layout from '../components/Layout'
 import PostProps from '../types/Post'
 import prisma from '../lib/prisma'
-import {
-  Box,
-  Text,
-  Divider,
-  Image,
-  useColorMode,
-  Stack,
-  Center,
-} from '@chakra-ui/react'
+import { Box, Text, Image, useColorMode, Stack } from '@chakra-ui/react'
 import Router from 'next/router'
-import ImageComponent from '../components/utils/ImageComponent'
-import moment from 'moment'
 import { motion } from 'framer-motion'
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })

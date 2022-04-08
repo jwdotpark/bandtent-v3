@@ -9,21 +9,16 @@ import {
   Button,
   VStack,
   Text,
-  FormLabel,
   Input,
   useDisclosure,
-  Fade,
   Center,
-  Collapse,
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
 } from '@chakra-ui/react'
 
 const SignIn = ({
@@ -39,7 +34,7 @@ const SignIn = ({
     }
   }, [router, session])
 
-  const { isOpen, onToggle } = useDisclosure()
+  const { onToggle } = useDisclosure()
 
   const [height, setHeight] = useState<number>()
 

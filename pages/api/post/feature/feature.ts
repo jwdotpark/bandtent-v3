@@ -1,24 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../../lib/prisma'
 
-// POST /api/post/comment/get-all
+// POST /api/post/feature/feature
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const result = await prisma.comment.findMany({
+  const result = await prisma.post.findMany({
+    take: 3,
     orderBy: {
-      id: 'desc',
-    },
-    take: 10,
-    include: {
-      User: true,
-      Post: {
-        select: {
-          title: true,
-          content: true,
-        },
+      comments: {
+        _count: 'desc',
       },
+    },
+    include: {
+      comments: true,
     },
   })
 

@@ -31,7 +31,7 @@ export default async function handle(
     } catch (e) {
       res.status(500)
       res.json({ error: 'Unable to perform the action' })
-      console.log(e)
+      // console.log(e)
     } finally {
       await prisma.$disconnect()
     }

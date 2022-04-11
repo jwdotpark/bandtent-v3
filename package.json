@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:watch": "esw --watch --color --ext js,jsx,ts,tsx",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "cypress": "cypress open"
   },
   "keywords": [],
   "author": "",
@@ -47,6 +48,7 @@
   "devDependencies": {
     "@types/node": "17.0.14",
     "@types/react": "17.0.38",
+    "cypress": "^9.5.3",
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.4",
     "eslint-watch": "^8.0.0",

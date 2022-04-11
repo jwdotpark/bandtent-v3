@@ -96,8 +96,8 @@ const Player = React.memo(function PlayerComponent() {
           px="2"
           borderRadius="xl"
           sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
-          bg={colorMode === 'light' ? 'gray.400' : 'gray.700'}
-          border={colorMode === 'light' ? 'gray.400' : 'gray.700'}
+          bg={colorMode === 'light' ? '#9fadbf' : '#383a59'}
+          border={colorMode === 'light' ? '#9fadbf' : '#383a59'}
         >
           <PopoverArrow bg={colorMode === 'light' ? 'gray.400' : 'gray.700'} />
           <PopoverCloseButton />

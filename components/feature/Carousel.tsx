@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Button, Box, Text, Flex, Spacer, useColorMode } from '@chakra-ui/react'
 import {
   CarouselProvider,

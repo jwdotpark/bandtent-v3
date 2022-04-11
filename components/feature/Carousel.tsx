@@ -1,4 +1,4 @@
-import { Button, Box, Text, Flex, Spacer } from '@chakra-ui/react'
+import { Button, Box, Text, Flex, Spacer, useColorMode } from '@chakra-ui/react'
 import {
   CarouselProvider,
   Slider,
@@ -14,15 +14,21 @@ import { motion } from 'framer-motion'
 import Router from 'next/router'
 
 const EmblaCarousel = ({ props }) => {
-  // const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode()
 
   const slides = props
 
   return (
-    <Box w="100%">
+    <Box
+      w="100%"
+      p="2"
+      pb="4"
+      borderRadius="xl"
+      bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+    >
       <CarouselProvider
-        naturalSlideWidth={50}
-        naturalSlideHeight={62}
+        naturalSlideWidth={100}
+        naturalSlideHeight={130}
         totalSlides={slides.length}
         isPlaying={true}
         interval={3000}

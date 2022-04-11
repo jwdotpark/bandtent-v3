@@ -1,3 +1,6 @@
+// @ts-nocheck
+// FIXME
+
 import { useS3Upload } from 'next-s3-upload'
 import { useState } from 'react'
 import {

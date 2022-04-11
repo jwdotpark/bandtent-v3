@@ -197,7 +197,7 @@ const Main: React.FC<Props> = (props) => {
                               }
                             >
                               <Box ml="2">
-                                <Text fontSize="3xl" noOfLines={1}>
+                                <Text fontSize="xl" noOfLines={1}>
                                   {post.title}
                                 </Text>
                                 <Text fontSize="md" noOfLines={1}>
@@ -246,15 +246,17 @@ const Main: React.FC<Props> = (props) => {
                                     borderRadius="full"
                                     mr="2"
                                   />
-                                  <Text size="xs" textAlign="right">
+                                  <Text fontSize="xs" textAlign="right">
                                     {post.author.name},{' '}
                                     {moment(post.createdAt).fromNow()}
                                   </Text>
                                   <Spacer />
                                   <Box mx="4">
-                                    {post.comments.length === 1 && '1 review'}
-                                    {post.comments.length > 1 &&
-                                      post.comments.length + ' reviews'}
+                                    <Text fontSize="xs">
+                                      {post.comments.length === 1 && '1 review'}
+                                      {post.comments.length > 1 &&
+                                        post.comments.length + ' reviews'}
+                                    </Text>
                                   </Box>
                                 </Center>
                               </Box>

@@ -20,7 +20,7 @@ const EmblaCarousel = ({ props }) => {
 
   return (
     <Box
-      w="100%"
+      // w="100%"
       p="2"
       pb="4"
       borderRadius="xl"
@@ -28,14 +28,16 @@ const EmblaCarousel = ({ props }) => {
     >
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={130}
+        naturalSlideHeight={150}
         totalSlides={slides.length}
         isPlaying={true}
         interval={3000}
         infinite={true}
       >
         <Slider>
-          <Box w="100%">
+          <Box
+          // w="100%"
+          >
             {slides.map((slide, index) => (
               <Slide key={slide.id} index={index}>
                 <motion.div

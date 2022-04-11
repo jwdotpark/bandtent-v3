@@ -1,7 +1,7 @@
 //  @ts-nocheck FIXME
 
 import Layout from '../../components/Layout'
-import { Media } from '../../utils/media'
+// import { Media } from '../../utils/media'
 import MyPost from '../../components/auth/MyPost'
 import MeEdit from '../../components/auth/MeEdit'
 import {
@@ -49,163 +49,66 @@ const Me: React.FC = (props) => {
       {props ? (
         <>
           {/* desktop */}
-          <Media greaterThanOrEqual="md">
-            <Stack direction={['column', 'row']} m="2">
-              {/* left */}
-              <Box w="45vw">
+          <Stack direction={['column', 'row']} m="2">
+            {/* left */}
+            <Box w="45vw">
+              <Box
+                position="sticky"
+                top="2"
+                p="2"
+                bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+                borderRadius="xl"
+                boxShadow="md"
+                overflow="clip"
+              >
                 <Box
-                  position="sticky"
-                  top="2"
-                  p="2"
-                  bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
-                  borderRadius="xl"
                   boxShadow="md"
+                  pt="4"
+                  borderRadius="xl"
+                  m="2"
+                  bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
                   overflow="clip"
+                  py="4"
                 >
-                  <Box
-                    boxShadow="md"
-                    pt="4"
-                    borderRadius="xl"
-                    m="2"
-                    bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-                    overflow="clip"
-                    py="4"
-                  >
-                    <Center>
-                      <Box
+                  <Center>
+                    <Box
+                      borderRadius="full"
+                      overflow="clip"
+                      boxSize="15rem"
+                      alignContent="center"
+                      boxShadow="xl"
+                    >
+                      <AspectRatio
+                        maxW="500px"
+                        ratio={1}
                         borderRadius="full"
                         overflow="clip"
-                        boxSize="15rem"
-                        alignContent="center"
-                        boxShadow="xl"
                       >
-                        <AspectRatio
-                          maxW="500px"
-                          ratio={1}
-                          borderRadius="full"
-                          overflow="clip"
-                        >
-                          <Image
-                            src={props.user.image}
-                            fallbackSrc="https://picsum.photos/400"
-                            alt={props.content}
-                            w="100%"
-                            objectFit="cover"
-                          />
-                        </AspectRatio>
-                      </Box>
-                    </Center>
-                    <Box p="2">
-                      <Box mt="2">
-                        <Text fontSize="3xl" as="b">
-                          <Center>{props.user.name}</Center>
-                        </Text>
-                      </Box>
-                      <Box textAlign="left">
-                        <Text fontSize="xl">
-                          <Center>
-                            <a href={'mailto:' + props.user.email}>
-                              <Text>{props.user.email} </Text>
-                            </a>
-                          </Center>
-                        </Text>
-                        <Text fontSize="xl">
-                          <Center>
-                            <Link
-                              isExternal
-                              href={
-                                'https://www.google.com/maps/search/' +
-                                props.user.location
-                              }
-                            >
-                              <Text>{props.user.location} </Text>
-                            </Link>
-                          </Center>
-                        </Text>
-                        <Text fontSize="md">
-                          <Center>
-                            <Link href={props.user.website} isExternal>
-                              <Text>
-                                {props.user.website}{' '}
-                                <ExternalLinkIcon mx="2px" />
-                              </Text>
-                            </Link>
-                          </Center>
-                        </Text>
-                      </Box>
-                      <Box
-                        m="4"
-                        mt="2"
-                        p="4"
-                        borderRadius="xl"
-                        bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
-                      >
-                        <Text fontSize="md">{props.user.description}</Text>
-                      </Box>
+                        <Image
+                          src={props.user.image}
+                          fallbackSrc="https://picsum.photos/400"
+                          alt={props.content}
+                          w="100%"
+                          objectFit="cover"
+                        />
+                      </AspectRatio>
                     </Box>
-                    <Box mx="2" my="-2">
-                      <MeEdit props={props} />
+                  </Center>
+                  <Box p="2">
+                    <Box mt="2">
+                      <Text fontSize="3xl" as="b">
+                        <Center>{props.user.name}</Center>
+                      </Text>
                     </Box>
-                  </Box>
-                </Box>
-              </Box>
-              {/* right */}
-              <Box
-                // p="2"
-                pt="2"
-                bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
-                boxShadow="md"
-                w="60vw"
-                borderRadius="xl"
-              >
-                <MyPost func={pull_number} uid={uid} />
-              </Box>
-            </Stack>
-          </Media>
-
-          {/* mobile */}
-          <Media lessThan="md">
-            <Stack direction={['column', 'row']} m="2">
-              {/* left */}
-              <Box boxShadow="md">
-                <Box
-                  p="2"
-                  border="2px solid gray"
-                  // w="40vw"
-                  borderRadius="xl"
-                  overflow="clip"
-                >
-                  <Box
-                    boxShadow="md"
-                    pt="4"
-                    borderRadius="xl"
-                    border="2px solid gray"
-                    overflow="clip"
-                  >
-                    <Center>
-                      <Image
-                        boxShadow="xl"
-                        border="2px solid gray"
-                        borderRadius="full"
-                        boxSize="50%"
-                        alt={props.user.name}
-                        src={props.user.image}
-                      />
-                    </Center>
-                    <Box p="2">
-                      <Box mt="2">
-                        <Text fontSize="3xl" as="b">
-                          <Center>{props.user.name}</Center>
-                        </Text>
-                      </Box>
-                      <Text fontSize="md">
+                    <Box textAlign="left">
+                      <Text fontSize="xl">
                         <Center>
                           <a href={'mailto:' + props.user.email}>
-                            <Text color="blue.400">{props.user.email}</Text>
+                            <Text>{props.user.email} </Text>
                           </a>
                         </Center>
                       </Text>
-                      <Text fontSize="md">
+                      <Text fontSize="xl">
                         <Center>
                           <Link
                             isExternal
@@ -214,33 +117,50 @@ const Me: React.FC = (props) => {
                               props.user.location
                             }
                           >
-                            <Text color="blue.400">{props.user.location}</Text>
+                            <Text>{props.user.location} </Text>
                           </Link>
                         </Center>
                       </Text>
                       <Text fontSize="md">
                         <Center>
                           <Link href={props.user.website} isExternal>
-                            <Text color="blue.400">
+                            <Text>
                               {props.user.website} <ExternalLinkIcon mx="2px" />
                             </Text>
                           </Link>
                         </Center>
                       </Text>
-                      <Box mt="2" p="4">
-                        <Text fontSize="md">{props.user.description}</Text>
-                      </Box>
+                    </Box>
+                    <Box
+                      m="4"
+                      mt="2"
+                      p="4"
+                      borderRadius="xl"
+                      bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                    >
+                      <Text fontSize="md">{props.user.description}</Text>
                     </Box>
                   </Box>
-                  <Box mt="2">{/* <MeEdit /> */}</Box>
+                  <Box mx="2" my="-2">
+                    <MeEdit props={props} />
+                  </Box>
                 </Box>
               </Box>
-              {/* right */}
-              <Box p="2" border="2px solid gray" borderRadius="xl">
-                <MyPost />
-              </Box>
-            </Stack>
-          </Media>
+            </Box>
+            {/* right */}
+            <Box
+              // p="2"
+              pt="2"
+              bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
+              boxShadow="md"
+              w="60vw"
+              borderRadius="xl"
+            >
+              <MyPost func={pull_number} uid={uid} />
+            </Box>
+          </Stack>
+
+          {/* mobile */}
         </>
       ) : (
         'You are not logged in!'

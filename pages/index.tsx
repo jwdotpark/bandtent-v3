@@ -108,14 +108,8 @@ const Main: React.FC<Props> = (props) => {
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         {/* desktop */}
         {/* navbar space */}
-        <Header />
-        <Box
-          m="2"
-          pb="10"
-          sx={{
-            transform: 'translateY(3.5rem)',
-          }}
-        >
+        {/* <Header /> */}
+        <Box m="2">
           <Stack direction={['column', 'row']} w="100%">
             <Box>
               {/* left column */}

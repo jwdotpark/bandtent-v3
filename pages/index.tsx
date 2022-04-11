@@ -112,7 +112,8 @@ const Main: React.FC<Props> = (props) => {
             <Box>
               {/* left column */}
               <Box
-                w="50vw"
+                // w="50vw"
+                w="100%"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                 borderRadius="xl"
                 boxShadow="md"

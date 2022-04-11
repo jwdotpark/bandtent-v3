@@ -25,6 +25,7 @@ import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
 import MainComments from '../components/post/MainComments'
+import Header from '../components/nav/Header'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -107,7 +108,14 @@ const Main: React.FC<Props> = (props) => {
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         {/* desktop */}
         {/* navbar space */}
-        <Box m="2">
+        <Header />
+        <Box
+          m="2"
+          pb="10"
+          sx={{
+            transform: 'translateY(3.5rem)',
+          }}
+        >
           <Stack direction={['column', 'row']} w="100%">
             <Box>
               {/* left column */}

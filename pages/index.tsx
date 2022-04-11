@@ -25,7 +25,7 @@ import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
 import MainComments from '../components/post/MainComments'
-import Header from '../components/nav/Header'
+// import Header from '../components/nav/Header'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({

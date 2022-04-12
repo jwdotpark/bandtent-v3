@@ -97,19 +97,17 @@ const SignIn = ({
                 ? Object.values(providers).map((provider, i) => {
                     if (provider.id !== 'email') {
                       return (
-                        <>
-                          <Box key={i}>
-                            <Box>
-                              <Button
-                                w="150px"
-                                size="lg"
-                                onClick={() => signIn(provider.id)}
-                              >
-                                <Text fontSize="3xl">{provider.name}</Text>
-                              </Button>
-                            </Box>
+                        <Box key={i}>
+                          <Box>
+                            <Button
+                              w="150px"
+                              size="lg"
+                              onClick={() => signIn(provider.id)}
+                            >
+                              <Text fontSize="3xl">{provider.name}</Text>
+                            </Button>
                           </Box>
-                        </>
+                        </Box>
                       )
                     }
                   })

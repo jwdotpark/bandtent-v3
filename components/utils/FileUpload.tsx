@@ -11,14 +11,14 @@ import {
 import { useDropzone } from 'react-dropzone'
 // import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg'
 
-export default function UploadPage(props) {
+export default function UploadPage(props: any): JSX.Element {
   const { colorMode } = useColorMode()
   const [fileUrl, setFileUrl] = useState<string>()
   const { uploadToS3, files } = useS3Upload()
   props.data(fileUrl)
 
   // TODO trasncode before upload
-  let handleFileChange = async (event) => {
+  let handleFileChange = async (event: any) => {
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
     setFileUrl(url)

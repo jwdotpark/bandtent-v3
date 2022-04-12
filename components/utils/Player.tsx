@@ -60,7 +60,7 @@ const Player = React.memo(function PlayerComponent() {
     )
   }
 
-  const handlePositionChange = (position) => {
+  const handlePositionChange = (position: any) => {
     // console.log('pos changed: ', position)
   }
   const onReadyHandler = () => {

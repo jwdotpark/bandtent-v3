@@ -17,7 +17,8 @@ export default async function handle(
         content: content,
         imageUrl: imageUrl,
         fileUrl: fileUrl,
-        author: { connect: { email: session?.user?.email } },
+        // @ts-ignore
+        author: { connect: { email: session.user?.email } },
       },
     })
     res.status(200)

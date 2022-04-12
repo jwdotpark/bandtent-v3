@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import Router from 'next/router'
 import ImageComponent from './utils/ImageComponent'
 
-const AdditionalPost = ({ myPost }) => {
+const AdditionalPost = ({ myPost }: any) => {
   const { colorMode } = useColorMode()
 
   return (

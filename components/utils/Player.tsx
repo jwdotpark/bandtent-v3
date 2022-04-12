@@ -25,7 +25,7 @@ import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import { GiSettingsKnobs } from 'react-icons/gi'
 import Router from 'next/router'
 
-const Player = React.memo(function PlayerComponent(): JSX.Element {
+const Player = () => {
   const { colorMode } = useColorMode()
   const [music] = useAtom(musicAtom)
 
@@ -162,7 +162,7 @@ const Player = React.memo(function PlayerComponent(): JSX.Element {
           </Text>
         </Center>
       </HStack>
-      <Box w="100%" h="20px" m="1" pr="6">
+      {/* <Box w="100%" h="20px" m="1" pr="6">
         <Wavesurfer
           src={music.fileUrl}
           pos={position}
@@ -182,9 +182,9 @@ const Player = React.memo(function PlayerComponent(): JSX.Element {
             setPlaying(false)
           }}
         />
-      </Box>
+      </Box> */}
     </HStack>
   )
-})
+}
 
 export default Player

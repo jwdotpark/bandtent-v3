@@ -82,7 +82,7 @@ const Header: React.FC = (props) => {
             whileHover={{
               scale: 1.05,
             }}
-            transition={{ ease: 'easeInOut', duration: 0.25 }}
+            transition={{ ease: 'circInOut', duration: 0.25 }}
           >
             <Link href="/" passHref>
               <Box className="bold" data-active={isActive('/')}>
@@ -107,7 +107,7 @@ const Header: React.FC = (props) => {
               whileHover={{
                 scale: 1.05,
               }}
-              transition={{ ease: 'easeInOut', duration: 0.25 }}
+              transition={{ ease: 'circInOut', duration: 0.25 }}
             >
               <Link href={'/auth/' + session.user.id} passHref>
                 <Button
@@ -139,7 +139,7 @@ const Header: React.FC = (props) => {
             whileHover={{
               scale: 1.05,
             }}
-            transition={{ ease: 'easeInOut', duration: 0.25 }}
+            transition={{ ease: 'circInOut', duration: 0.25 }}
             whileFocus={{ scale: 1.05 }}
           >
             <SearchButton />
@@ -169,7 +169,7 @@ const Header: React.FC = (props) => {
                 whileHover={{
                   scale: 1.05,
                 }}
-                transition={{ ease: 'easeInOut', duration: 0.25 }}
+                transition={{ ease: 'circInOut', duration: 0.25 }}
                 // whileTap={{ scale: 0.95 }}
               >
                 <Link href="/create" passHref>
@@ -193,7 +193,7 @@ const Header: React.FC = (props) => {
                   whileHover={{
                     scale: 1.05,
                   }}
-                  transition={{ ease: 'easeInOut', duration: 0.25 }}
+                  transition={{ ease: 'circInOut', duration: 0.25 }}
                   // whileTap={{ scale: 0.95 }}
                 >
                   <Button
@@ -219,7 +219,7 @@ const Header: React.FC = (props) => {
                 whileHover={{
                   scale: 1.05,
                 }}
-                transition={{ ease: 'easeInOut', duration: 0.25 }}
+                transition={{ ease: 'circInOut', duration: 0.25 }}
                 // whileTap={{ scale: 0.95 }}
               >
                 <Button
@@ -244,7 +244,7 @@ const Header: React.FC = (props) => {
                 whileHover={{
                   scale: 1.05,
                 }}
-                transition={{ ease: 'easeInOut', duration: 0.25 }}
+                transition={{ ease: 'circInOut', duration: 0.25 }}
                 // whileTap={{ scale: 0.95 }}
               >
                 <Box boxShadow="md">

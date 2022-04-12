@@ -46,7 +46,7 @@ const EmblaCarousel = ({ props }) => {
                     scale: 1.02,
                   }}
                   transition={{
-                    ease: 'easeInOut',
+                    ease: 'circInOut',
                     duration: 0.2,
                   }}
                 >
@@ -59,7 +59,7 @@ const EmblaCarousel = ({ props }) => {
                     scale: 1.02,
                   }}
                   transition={{
-                    ease: 'easeInOut',
+                    ease: 'circInOut',
                     duration: 0.2,
                   }}
                 >
@@ -88,7 +88,7 @@ const EmblaCarousel = ({ props }) => {
                 scale: 1.02,
               }}
               transition={{
-                ease: 'easeInOut',
+                ease: 'circInOut',
                 duration: 0.2,
               }}
             >

@@ -74,7 +74,7 @@ const Drafts: React.FC<Props> = (props) => {
               whileHover={{
                 scale: 1.02,
               }}
-              transition={{ ease: 'easeInOut', duration: 0.2 }}
+              transition={{ ease: 'circInOut', duration: 0.2 }}
               key={post.id}
             >
               <Box
@@ -104,7 +104,7 @@ const Drafts: React.FC<Props> = (props) => {
                             scale: 0.98,
                           }}
                           transition={{
-                            ease: 'easeInOut',
+                            ease: 'circInOut',
                             duration: 0.2,
                           }}
                           key={post.id}
@@ -149,7 +149,7 @@ const Drafts: React.FC<Props> = (props) => {
                       scale: 1.02,
                     }}
                     transition={{
-                      ease: 'easeInOut',
+                      ease: 'circInOut',
                       duration: 0.2,
                     }}
                   >

@@ -81,7 +81,7 @@ const MainComments = () => {
               whileHover={{
                 scale: 1.02,
               }}
-              transition={{ ease: 'easeInOut', duration: 0.2 }}
+              transition={{ ease: 'circInOut', duration: 0.2 }}
               key={comment.id}
             >
               <Box

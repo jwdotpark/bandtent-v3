@@ -27,7 +27,7 @@ const AdditionalPost = ({ myPost }: any) => {
               whileHover={{
                 scale: 1.02,
               }}
-              transition={{ ease: 'easeInOut', duration: 0.2 }}
+              transition={{ ease: 'circInOut', duration: 0.2 }}
               key={post.id}
             >
               <Box

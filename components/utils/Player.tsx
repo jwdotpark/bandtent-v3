@@ -25,7 +25,7 @@ import { BsFillPlayFill, BsFillPauseFill } from 'react-icons/bs'
 import { GiSettingsKnobs } from 'react-icons/gi'
 import Router from 'next/router'
 
-const Player = React.memo(function PlayerComponent() {
+const Player = React.memo(function PlayerComponent(): JSX.Element {
   const { colorMode } = useColorMode()
   const [music] = useAtom(musicAtom)
 

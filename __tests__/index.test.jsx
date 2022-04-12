@@ -1,9 +1,10 @@
+import '@testing-library/jest-dom/extend-expect'
 import { render, screen } from '@testing-library/react'
-import Home from '../pages/index'
+import Layout from '../components/Layout'
 
-describe('Home', () => {
-  it('renders a heading', () => {
-    render(<Home />)
+describe('Layout', () => {
+  it('contains header, body and footer', () => {
+    render(<Layout />)
 
     const heading = screen.getByRole('heading', {
       name: /welcome to next\.js!/i,
@@ -12,4 +13,3 @@ describe('Home', () => {
     expect(heading).toBeInTheDocument()
   })
 })
-

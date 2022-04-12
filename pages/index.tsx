@@ -98,7 +98,7 @@ const Main: React.FC<Props> = (props) => {
     setFeed(props.feed)
   }, [props.feed])
 
-  const handleMusic = (music) => {
+  const handleMusic = (music: any) => {
     setSelectMusic(music)
   }
 
@@ -114,8 +114,7 @@ const Main: React.FC<Props> = (props) => {
             <Box>
               {/* left column */}
               <Box
-                // w="50vw"
-                w="100%"
+                w="40vw"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                 borderRadius="xl"
                 boxShadow="md"
@@ -241,15 +240,15 @@ const Main: React.FC<Props> = (props) => {
                                   <Image
                                     display="inline"
                                     border="2px inset  gray"
-                                    src={post.author.image}
-                                    alt={post.author.name}
+                                    src={post.author!.image}
+                                    alt={post.author!.name}
                                     fallbackSrc="https://picsum.photos/200"
                                     boxSize="1.5rem"
                                     borderRadius="full"
                                     mr="2"
                                   />
                                   <Text fontSize="xs" textAlign="right">
-                                    {post.author.name},{' '}
+                                    {post.author!.name},{' '}
                                     {moment(post.createdAt).fromNow()}
                                   </Text>
                                   <Spacer />

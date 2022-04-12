@@ -42,8 +42,8 @@ const Header: React.FC = (props) => {
 
   const router = useRouter()
 
-  const isActive: (pathname: string) => boolean = (pathname) =>
-    router.pathname === pathname
+  // const isActive: (pathname: string) => boolean = (pathname) =>
+  //   router.pathname === pathname
 
   const { data: session, status } = useSession()
 
@@ -85,7 +85,7 @@ const Header: React.FC = (props) => {
             transition={{ ease: 'circInOut', duration: 0.25 }}
           >
             <Link href="/" passHref>
-              <Box className="bold" data-active={isActive('/')}>
+              <Box className="bold">
                 <Button
                   leftIcon={
                     <HamburgerIcon

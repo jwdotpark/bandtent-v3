@@ -12,6 +12,7 @@ import Router from 'next/router'
 import useSWR from 'swr'
 import moment from 'moment'
 import { motion } from 'framer-motion'
+// import { Key, ReactChild, ReactFragment, ReactPortal } from 'react'
 const MainComments = () => {
   const { colorMode } = useColorMode()
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -59,64 +60,86 @@ const MainComments = () => {
         m="2"
         boxShadow="md"
       >
-        {data.map((comment) => (
-          <motion.div
-            whileHover={{
-              scale: 1.02,
-            }}
-            transition={{ ease: 'easeInOut', duration: 0.2 }}
-            key={comment.id}
-          >
-            <Box
-              boxShadow="md"
-              p="2"
-              m="2"
-              mb="4"
-              borderRadius="xl"
-              bg={colorMode === 'light' ? 'gray.200' : 'gray.800'}
+        {data.map(
+          // FIXME
+          (comment: {
+            id: number
+            postId: number
+            Post: {
+              content: string
+              title: string
+            }
+            content: string
+            User: {
+              id: number
+              image: string | undefined
+              name: string
+            }
+            createdAt: moment.MomentInput
+          }) => (
+            <motion.div
+              whileHover={{
+                scale: 1.02,
+              }}
+              transition={{ ease: 'easeInOut', duration: 0.2 }}
+              key={comment.id}
             >
-              <Box my="1" m="2">
-                <Box
-                  _hover={{ cursor: 'pointer' }}
-                  onClick={() => Router.push('/p/[id]', `/p/${comment.postId}`)}
-                >
-                  <Box my="2">
-                    <Text color="gray.400">
-                      <b>
-                        {comment.Post.content}, {comment.Post.title}
-                      </b>
-                    </Text>
+              <Box
+                boxShadow="md"
+                p="2"
+                m="2"
+                mb="4"
+                borderRadius="xl"
+                bg={colorMode === 'light' ? 'gray.200' : 'gray.800'}
+              >
+                <Box my="1" m="2">
+                  <Box
+                    _hover={{ cursor: 'pointer' }}
+                    onClick={() =>
+                      Router.push('/p/[id]', `/p/${comment.postId}`)
+                    }
+                  >
+                    <Box my="2">
+                      <Text color="gray.400">
+                        <b>
+                          {comment.Post.content}, {comment.Post.title}
+                        </b>
+                      </Text>
+                    </Box>
+                    <Box>
+                      <Text mb="4">
+                        <em>{comment.content}</em>
+                      </Text>
+                    </Box>
                   </Box>
-                  <Box>
-                    <Text mb="4">
-                      <em>{comment.content}</em>
-                    </Text>
-                  </Box>
+                  <Flex
+                    w="100%"
+                    _hover={{ cursor: 'pointer' }}
+                    onClick={() =>
+                      Router.push(
+                        '/auth/[authorId]',
+                        `/auth/${comment.User.id}`
+                      )
+                    }
+                  >
+                    <Spacer />
+                    <Image
+                      // sx={{ transform: 'translateY(6px)' }}
+                      display="inline"
+                      src={comment.User.image}
+                      alt={comment.User.name}
+                      fallbackSrc="https://picsum.photos/200"
+                      boxSize="1.5rem"
+                      borderRadius="full"
+                      mr="2"
+                    />
+                    {comment.User.name}, {moment(comment.createdAt).fromNow()}
+                  </Flex>
                 </Box>
-                <Flex
-                  w="100%"
-                  _hover={{ cursor: 'pointer' }}
-                  onClick={() =>
-                    Router.push('/auth/[authorId]', `/auth/${comment.User.id}`)
-                  }
-                >
-                  <Spacer />
-                  <Image
-                    // sx={{ transform: 'translateY(6px)' }}
-                    display="inline"
-                    src={comment.User.image}
-                    alt={comment.User.name}
-                    fallbackSrc="https://picsum.photos/200"
-                    boxSize="1.5rem"
-                    borderRadius="full"
-                    mr="2"
-                  />
-                  {comment.User.name}, {moment(comment.createdAt).fromNow()}
-                </Flex>
               </Box>
-            </Box>
-          </motion.div>
-        ))}
+            </motion.div>
+          )
+        )}
       </Box>
     </Box>
   )

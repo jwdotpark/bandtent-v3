@@ -89,13 +89,13 @@ const Header: React.FC = (props) => {
                 <Button
                   leftIcon={
                     <HamburgerIcon
-                      color={colorMode === 'light' ? null : '#50fa7b'}
+                      color={colorMode === 'light' ? 'current' : '#50fa7b'}
                     />
                   }
                   size="sm"
                   boxShadow="md"
                 >
-                  <Text color={colorMode === 'light' ? null : '#50fa7b'}>
+                  <Text color={colorMode === 'light' ? 'current' : '#50fa7b'}>
                     Feed
                   </Text>
                 </Button>
@@ -118,14 +118,16 @@ const Header: React.FC = (props) => {
                       boxSize="25px"
                       display="inline"
                       border="1px inset  gray"
+                      // @ts-ignore
                       src={session.user.image}
                       fallbackSrc="https://picsum.photos/200"
                       borderRadius="full"
+                      // @ts-ignore
                       alt={session.user.name}
                     />
                   }
                 >
-                  <Text color={colorMode === 'light' ? null : '#8be9fd'}>
+                  <Text color={colorMode === 'light' ? 'current' : '#8be9fd'}>
                     {session.user.name ? session.user.name : session.user.email}
                   </Text>
                 </Button>
@@ -176,11 +178,11 @@ const Header: React.FC = (props) => {
                     size="sm"
                     leftIcon={
                       <PlusSquareIcon
-                        color={colorMode === 'light' ? null : '#bd93f9'}
+                        color={colorMode === 'light' ? 'current' : '#bd93f9'}
                       />
                     }
                   >
-                    <Text color={colorMode === 'light' ? null : '#bd93f9'}>
+                    <Text color={colorMode === 'light' ? 'current' : '#bd93f9'}>
                       Add
                     </Text>
                   </Button>
@@ -199,12 +201,14 @@ const Header: React.FC = (props) => {
                     size="sm"
                     leftIcon={
                       <TimeIcon
-                        color={colorMode === 'light' ? null : '#ffc587'}
+                        color={colorMode === 'light' ? 'current' : '#ffc587'}
                       />
                     }
                   >
                     <Link href="/drafts" passHref>
-                      <Text color={colorMode === 'light' ? null : '#ffc587'}>
+                      <Text
+                        color={colorMode === 'light' ? 'current' : '#ffc587'}
+                      >
                         {unPubNum > 0 ? unPubNum + ' available' : null}
                       </Text>
                     </Link>
@@ -222,7 +226,7 @@ const Header: React.FC = (props) => {
                   boxShadow="md"
                   leftIcon={
                     <LockIcon
-                      color={colorMode === 'light' ? null : '#ff5555'}
+                      color={colorMode === 'light' ? 'current' : '#ff5555'}
                     />
                   }
                   size="sm"
@@ -231,7 +235,7 @@ const Header: React.FC = (props) => {
                     router.push('/')
                   }}
                 >
-                  <Text color={colorMode === 'light' ? null : '#ff5555'}>
+                  <Text color={colorMode === 'light' ? 'current' : '#ff5555'}>
                     Log out
                   </Text>
                 </Button>
@@ -251,7 +255,6 @@ const Header: React.FC = (props) => {
           </>
         )}
       </Flex>
-      {/* ------------------------------------------------------------------------------- */}
     </nav>
   )
 }

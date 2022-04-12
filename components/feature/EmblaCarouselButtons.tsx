@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react'
 import React from 'react'
 
-export const PrevButton = ({ enabled, onClick }) => (
+export const PrevButton = ({ enabled, onClick }: any) => (
   <Button
     // className="embla__button embla__button--prev"
     onClick={onClick}
@@ -11,7 +11,7 @@ export const PrevButton = ({ enabled, onClick }) => (
   </Button>
 )
 
-export const NextButton = ({ enabled, onClick }) => (
+export const NextButton = ({ enabled, onClick }: any) => (
   <Button
     // className="embla__button embla__button--next"
     onClick={onClick}

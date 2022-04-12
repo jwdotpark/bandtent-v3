@@ -9,12 +9,12 @@ import {
   Stack,
 } from '@chakra-ui/react'
 import Router from 'next/router'
-import { useEffect, useState } from 'react'
+import { Key, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../../store/store'
 
-const MyPost = (props) => {
+const MyPost = (props: { uid: any }) => {
   const { colorMode } = useColorMode()
   const [, setNum] = useState(0)
 
@@ -31,7 +31,8 @@ const MyPost = (props) => {
 
   const [, setSelectMusic] = useAtom(musicAtom)
 
-  const handleMusic = (music) => {
+  // FIXME
+  const handleMusic = (music: any) => {
     setSelectMusic(music)
   }
 
@@ -85,95 +86,105 @@ const MyPost = (props) => {
           pb="2"
         >
           {!error &&
-            data.posts.map((post) => {
-              return (
-                <motion.div
-                  whileHover={{
-                    scale: 1.02,
-                  }}
-                  transition={{ ease: 'easeInOut', duration: 0.2 }}
-                  key={post.id}
-                >
-                  <Box
-                    // FIXME fix the logic later not to fetch unpublished post from API
-                    display={post.published ? 'inline-block' : 'none'}
-                    // border={post.published ? null : '3px dashed #f61d98'}
-                    bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
-                    borderRadius="xl"
-                    my="2"
-                    mx="2"
-                    mb="2"
-                    boxShadow="md"
-                    w="100%"
+            data.posts.map(
+              (post: {
+                id: Key | null | undefined
+                published: any
+                imageUrl: string | undefined
+                content: {} | null | undefined
+                title: string
+              }) => {
+                return (
+                  <motion.div
+                    whileHover={{
+                      scale: 1.02,
+                    }}
+                    transition={{ ease: 'easeInOut', duration: 0.2 }}
+                    key={post.id}
                   >
-                    <Box _hover={{ cursor: 'pointer' }}>
-                      <Stack direction="row" p="4">
-                        <Box
-                          position="relative"
-                          sx={{ aspectRatio: 1 }}
-                          boxSize="140px"
-                          h="75px"
-                        >
+                    <Box
+                      // FIXME fix the logic later not to fetch unpublished post from API
+                      display={post.published ? 'inline-block' : 'none'}
+                      // border={post.published ? null : '3px dashed #f61d98'}
+                      bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
+                      borderRadius="xl"
+                      my="2"
+                      mx="2"
+                      mb="2"
+                      boxShadow="md"
+                      w="100%"
+                    >
+                      <Box _hover={{ cursor: 'pointer' }}>
+                        <Stack direction="row" p="4">
                           <Box
-                            onClick={() => {
-                              handleMusic(post)
-                            }}
+                            position="relative"
+                            sx={{ aspectRatio: 1 }}
+                            boxSize="140px"
+                            h="75px"
                           >
-                            <motion.div
-                              whileHover={{
-                                scale: 1.02,
+                            <Box
+                              onClick={() => {
+                                handleMusic(post)
                               }}
-                              whileTap={{
-                                scale: 0.98,
-                              }}
-                              transition={{
-                                ease: 'easeInOut',
-                                duration: 0.2,
-                              }}
-                              key={post.id}
                             >
-                              <Image
-                                boxShadow="md"
-                                borderRadius="xl"
-                                loading="lazy"
-                                src={
-                                  post.imageUrl
-                                    ? post.imageUrl
-                                    : 'https://picsum.photos/400'
-                                }
-                                alt={post.content}
-                                objectFit="cover"
-                                boxSize="100px"
-                              />
-                            </motion.div>
+                              <motion.div
+                                whileHover={{
+                                  scale: 1.02,
+                                }}
+                                whileTap={{
+                                  scale: 0.98,
+                                }}
+                                transition={{
+                                  ease: 'easeInOut',
+                                  duration: 0.2,
+                                }}
+                                key={post.id}
+                              >
+                                <Image
+                                  boxShadow="md"
+                                  borderRadius="xl"
+                                  loading="lazy"
+                                  src={
+                                    post.imageUrl
+                                      ? post.imageUrl
+                                      : 'https://picsum.photos/400'
+                                  }
+                                  // FIXME
+                                  // @ts-ignore
+                                  alt={post.content}
+                                  objectFit="cover"
+                                  boxSize="100px"
+                                />
+                              </motion.div>
+                            </Box>
                           </Box>
-                        </Box>
-                        <Box
-                          borderRadius="xl"
-                          bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-                          p="4"
-                          h="100px"
-                          w="100%"
-                          onClick={() =>
-                            Router.push('/p/[id]', `/p/${post.id}`)
-                          }
-                        >
-                          <Box>
-                            <Text fontSize="md" noOfLines={1}>
-                              {post.title}
-                              {!post.published && <Unpublished />}
-                            </Text>
-                            <Text fontSize="2xl" noOfLines={1}>
-                              {post.content}
-                            </Text>
+                          <Box
+                            borderRadius="xl"
+                            bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+                            p="4"
+                            h="100px"
+                            w="100%"
+                            onClick={() =>
+                              Router.push('/p/[id]', `/p/${post.id}`)
+                            }
+                          >
+                            <Box>
+                              <Text fontSize="md" noOfLines={1}>
+                                {post.title}
+                                {!post.published && <Unpublished />}
+                              </Text>
+                              <Text fontSize="2xl" noOfLines={1}>
+                                {post.content}
+                              </Text>
+                            </Box>
                           </Box>
-                        </Box>
-                      </Stack>
+                        </Stack>
+                      </Box>
                     </Box>
-                  </Box>
-                </motion.div>
-              )
-            })}
+                  </motion.div>
+                )
+              }
+            )}
         </Box>
         {error && <Text>Failed to load</Text>}
       </Box>

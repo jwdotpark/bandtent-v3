@@ -7,6 +7,7 @@ import prisma from '../lib/prisma'
 import { Box, Text, Image, useColorMode, Stack } from '@chakra-ui/react'
 import Router from 'next/router'
 import { motion } from 'framer-motion'
+
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession({ req })
   if (!session) {

@@ -41,7 +41,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
     formState: { errors, isSubmitting, isValid },
   } = useForm({ mode: 'onChange' })
 
-  async function onSubmit(values) {
+  async function onSubmit(values: any) {
     await fetch('/api/profile/edit', {
       method: 'PUT',
       headers: {

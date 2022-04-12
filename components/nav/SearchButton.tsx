@@ -12,7 +12,7 @@ import { SearchIcon, ChevronRightIcon } from '@chakra-ui/icons'
 import Router from 'next/router'
 
 const SearchButton = () => {
-  const [keyword, setKeyword] = useState(null)
+  const [keyword, setKeyword] = useState('')
 
   const handleSearch = (event: { preventDefault: () => void }) => {
     event.preventDefault()

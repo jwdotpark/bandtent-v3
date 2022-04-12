@@ -3,13 +3,13 @@
 import { Box, Text, useColorMode, Center, Spinner } from '@chakra-ui/react'
 import useSWR from 'swr'
 import Carousel from './Carousel'
+// import PostProps from '../../types/Post'
 
-const Feature = ({ props }) => {
+const Feature = ({ props }: any): JSX.Element => {
   const { colorMode } = useColorMode()
 
   const fetcher = (url: string) => fetch(url).then((r) => r.json())
   const { data, error } = useSWR('/api/post/count', fetcher, {
-    // NOTE interval 1hr for now
     refreshInterval: 1000 * 60,
   })
 

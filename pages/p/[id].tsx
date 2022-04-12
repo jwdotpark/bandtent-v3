@@ -96,15 +96,10 @@ const Post: React.FC<PostProps> = (props) => {
   const userHasValidSession = Boolean(session)
   const postBelongsToUser = session?.user?.email === props.post.author?.email
 
-  // let title = props.title
-  // if (!props.published) {
-  //   title = `${title} (Draft)`
-  // }
-
   // @ts-ignore
   const myPost = props.myPost[0].author.posts
 
-  const handleMusic = (music) => {
+  const handleMusic = (music: any) => {
     setSelectMusic(music)
   }
 
@@ -156,14 +151,14 @@ const Post: React.FC<PostProps> = (props) => {
                           // mx="1"
                           display="inline"
                           border="1px inset  gray"
-                          src={props.post.author.image}
+                          src={props.post.author!.image}
                           fallbackSrc="https://picsum.photos/400"
                           boxSize="1.5rem"
                           borderRadius="full"
-                          alt={props.post.author.name}
+                          alt={props.post.author!.name}
                           sx={{ transform: 'translateY(5px)' }}
                         />{' '}
-                        Post by {props.post.author.name || 'Unknown author'} on{' '}
+                        Post by {props.post.author!.name || 'Unknown author'} on{' '}
                         {new Date(props.post.createdAt).toLocaleDateString(
                           'en-DE',
                           {
@@ -282,7 +277,7 @@ const Post: React.FC<PostProps> = (props) => {
               >
                 <Text size="xl" mx="2">
                   {/* eslint-disable-next-line react/no-unescaped-entities */}
-                  {props.post.author.name}'s {myPost.length} more posts{' '}
+                  {props.post.author!.name}'s {myPost.length} more posts{' '}
                 </Text>
               </Box>
             </Box>

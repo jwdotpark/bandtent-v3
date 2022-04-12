@@ -48,6 +48,7 @@ const SignIn = ({
     <>
       <Layout>
         <VStack h="calc(100vh - 70px)" mt="2">
+          {/* @ts-ignore */}
           <Box mt={height / 2.75}>Sign In With..</Box>
           <Box>
             <VStack spacing={2}>

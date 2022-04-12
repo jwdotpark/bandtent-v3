@@ -1,6 +1,3 @@
-// @ts-nocheck
-// FIXME
-
 import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import Router from 'next/router'
@@ -28,8 +25,8 @@ const Draft: React.FC = () => {
   // NOTE refactor this
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
-  const [imageUrl, setImageUrl] = useState<string>(null)
-  const [fileUrl, setFileUrl] = useState<string>(null)
+  const [imageUrl, setImageUrl] = useState<string>('')
+  const [fileUrl, setFileUrl] = useState<string>('')
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()

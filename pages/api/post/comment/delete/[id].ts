@@ -1,7 +1,11 @@
 import prisma from '../../../../../lib/prisma'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 // DELETE /api/post/comment/delete/:id
-export default async function handle(req, res) {
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const commentId = req.query.id
   // console.log(commentId)
   if (req.method === 'DELETE') {

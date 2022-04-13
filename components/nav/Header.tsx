@@ -13,26 +13,17 @@ import {
   Text,
   Button,
   Image,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   useColorMode,
 } from '@chakra-ui/react'
 // import { Media } from '../../utils/media'
 // import Player from '../utils/Player'
 import SearchButton from './SearchButton'
 import {
-  ChevronDownIcon,
-  AddIcon,
   PlusSquareIcon,
   TimeIcon,
   LockIcon,
   UnlockIcon,
   HamburgerIcon,
-  SettingsIcon,
-  SunIcon,
-  MoonIcon,
 } from '@chakra-ui/icons'
 import { motion } from 'framer-motion'
 import useSWR from 'swr'

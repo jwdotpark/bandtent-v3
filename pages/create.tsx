@@ -112,7 +112,7 @@ const Draft: React.FC = () => {
                 >
                   <Button
                     w="80%"
-                    disabled={!content || !title || !imageUrl || !fileUrl}
+                    // disabled={!content || !title || !imageUrl || !fileUrl}
                     type="submit"
                     value="Create"
                   >

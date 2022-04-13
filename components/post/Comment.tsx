@@ -38,7 +38,7 @@ const Comment = (props: { props: { post: any } }) => {
     setIsFetching(true)
     const body = { id }
     const result = await fetch('/api/post/comment', {
-      method: 'PUT',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     })
@@ -115,7 +115,7 @@ const Comment = (props: { props: { post: any } }) => {
                 <Spinner />
               </Center>
             )}
-            {commentFeed.map(
+            {commentFeed?.map(
               (comment: any): JSX.Element => (
                 <Flex key={comment.id} my="1">
                   <Box w="70%">

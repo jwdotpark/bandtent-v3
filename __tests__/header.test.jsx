@@ -20,9 +20,8 @@ jest.mock('next-auth/react', () => {
 describe('Header Component', () => {
   it('contains add button with session', async () => {
     render(<Header />)
-    const logout = await screen.findByText('Add')
+    const button = await screen.findByText('Add')
 
-    // expect(container).toMatchSnapshot()
-    expect(logout).toBeInTheDocument()
+    expect(button).toBeInTheDocument()
   })
 })

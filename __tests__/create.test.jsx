@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react'
 import Draft from '../pages/create'
-import userEvent from '@testing-library/user-event'
 
+// FIXME session mock should be placed beforeEach
 jest.mock('next-auth/react', () => {
   const originalModule = jest.requireActual('next-auth/react')
   const mockSession = {
@@ -52,5 +52,3 @@ describe('Create post page', () => {
     })
   })
 })
-
-

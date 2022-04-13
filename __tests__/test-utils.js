@@ -5,7 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 // Add in any providers here if necessary:
 const Providers = ({ children, pageProps }) => {
   return (
-    <SessionProvider session={pageProps.session}>
+    <SessionProvider session={pageProps}>
       <ChakraProvider>{children}</ChakraProvider>
     </SessionProvider>
   )

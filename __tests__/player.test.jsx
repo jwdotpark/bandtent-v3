@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react'
+// import { render, screen } from '@testing-library/react'
+import { render, screen } from './test-utils'
+
 import Player from '../components/utils/Player'
 
 describe('Player', () => {

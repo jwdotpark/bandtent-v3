@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:watch": "esw --watch --color --ext js,jsx,ts,tsx",
-    "test": "jest --watch --coverage",
+    "test": "jest --watch --coverage --config ./jest.config.js",
     "cypress": "cypress open"
   },
   "keywords": [],
@@ -56,7 +56,8 @@
     "eslint-watch": "^8.0.0",
     "jest": "^27.5.1",
     "msw": "^0.39.2",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "whatwg-fetch": "^3.6.2"
   },
   "msw": {
     "workerDirectory": "public"

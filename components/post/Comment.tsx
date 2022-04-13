@@ -22,15 +22,13 @@ import { useForm } from 'react-hook-form'
 import Router from 'next/router'
 import { DeleteIcon } from '@chakra-ui/icons'
 
-// @ts-ignore
-const Comment = (props) => {
+const Comment = (props: { props: { post: any } }) => {
   const { data: session } = useSession()
   const { colorMode } = useColorMode()
   const [commentFeed, setCommentFeed] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isFetching, setIsFetching] = useState(false)
 
-  
   const myPost = props.props.post
   const { authorId, id } = myPost
 
@@ -40,7 +38,7 @@ const Comment = (props) => {
     setIsFetching(true)
     const body = { id }
     const result = await fetch('/api/post/comment', {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     })
@@ -50,9 +48,11 @@ const Comment = (props) => {
   }
 
   const deleteComment = async (id: number) => {
+    // console.log(id)
     await fetch(`/api/post/comment/delete/${id}`, {
       method: 'DELETE',
     })
+    // const data = await result.json()
     fetchComment()
   }
 
@@ -115,7 +115,7 @@ const Comment = (props) => {
                 <Spinner />
               </Center>
             )}
-            {commentFeed?.map(
+            {commentFeed.map(
               (comment: any): JSX.Element => (
                 <Flex key={comment.id} my="1">
                   <Box w="70%">
@@ -190,7 +190,6 @@ const Comment = (props) => {
                     variant="filled"
                     autoComplete="false"
                     placeholder="Comment here"
-                    test-dataid="commentInput"
                     _placeholder={{ color: 'gray.400' }}
                     borderRadius="xl"
                     border="none"

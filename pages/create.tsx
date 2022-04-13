@@ -90,17 +90,28 @@ const Draft: React.FC = () => {
                   placeholder="Title"
                   // rows={8}
                   value={content}
+                  data-testid="titleInput"
                 />
               </Box>
               {/* image */}
               <Box>
                 <ImageUpload img={pullImage} />
-                <Input display="none" type="file" defaultValue={imageUrl} />
+                <Input
+                  display="none"
+                  type="file"
+                  defaultValue={imageUrl}
+                  data-testid="fileInput"
+                />
               </Box>
               {/* file */}
               <Box>
                 <FileUpload data={pullFile} />
-                <Input display="none" type="file" defaultValue={imageUrl} />
+                <Input
+                  display="none"
+                  type="file"
+                  defaultValue={imageUrl}
+                  data-testid="imageInput"
+                />
               </Box>
               <Box mt="2">
                 <ButtonGroup
@@ -112,9 +123,10 @@ const Draft: React.FC = () => {
                 >
                   <Button
                     w="80%"
-                    // disabled={!content || !title || !imageUrl || !fileUrl}
+                    disabled={!content || !title || !imageUrl || !fileUrl}
                     type="submit"
                     value="Create"
+                    data-testid="submitButton"
                   >
                     {/* Create */}
                     {!content || !title || !imageUrl || !fileUrl

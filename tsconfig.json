@@ -30,5 +30,5 @@
     "lib",
     "lib-esm"
   ],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_error.js"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_error.js", "jest.setup.js"]
 }

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+// import '@testing-library/jest-dom'
 import Header from '../components/Layout'
 
 jest.mock('next-auth/react', () => {
@@ -17,8 +17,8 @@ jest.mock('next-auth/react', () => {
   }
 })
 
-describe('NavBar Component', () => {
-  it('can see add button when has session', async () => {
+describe('Header Component', () => {
+  it('contains add button with session', async () => {
     render(<Header />)
     const logout = await screen.findByText('Add')
 

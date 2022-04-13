@@ -22,7 +22,8 @@ import { useForm } from 'react-hook-form'
 import Router from 'next/router'
 import { DeleteIcon } from '@chakra-ui/icons'
 
-const Comment = (props: { props: { post: any } }) => {
+// @ts-ignore
+const Comment = (props) => {
   const { data: session } = useSession()
   const { colorMode } = useColorMode()
   const [commentFeed, setCommentFeed] = useState([])
@@ -190,6 +191,7 @@ const Comment = (props: { props: { post: any } }) => {
                     variant="filled"
                     autoComplete="false"
                     placeholder="Comment here"
+                    test-dataid="commentInput"
                     _placeholder={{ color: 'gray.400' }}
                     borderRadius="xl"
                     border="none"

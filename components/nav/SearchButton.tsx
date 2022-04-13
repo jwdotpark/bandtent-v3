@@ -33,6 +33,7 @@ const SearchButton = () => {
             placeholder="Search"
             borderRadius="md"
             border="2px solid gray"
+            data-testid="searchButton"
             onChange={(e) => {
               setKeyword(e.target.value)
             }}
@@ -43,6 +44,7 @@ const SearchButton = () => {
             pointerEvents="stroke"
             children={
               <Button
+                // data-testid="searchButton"
                 type="submit"
                 size="sm"
                 variant="linked"

@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:watch": "esw --watch --color --ext js,jsx,ts,tsx",
-    "test": "jest --watch",
+    "test": "jest --watch --coverage",
     "cypress": "cypress open"
   },
   "keywords": [],

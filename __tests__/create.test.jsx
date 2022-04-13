@@ -18,7 +18,7 @@ jest.mock('next-auth/react', () => {
 })
 
 describe('Create post page', () => {
-  it('is rendered properly', async () => {
+  it('is rendered', async () => {
     render(<Draft />)
     const create = await screen.findByText('New Item')
     const title = screen.queryByPlaceholderText('Artist')

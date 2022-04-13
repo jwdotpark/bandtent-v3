@@ -30,6 +30,7 @@ const Comment = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isFetching, setIsFetching] = useState(false)
 
+  
   const myPost = props.props.post
   const { authorId, id } = myPost
 
@@ -49,11 +50,9 @@ const Comment = (props) => {
   }
 
   const deleteComment = async (id: number) => {
-    // console.log(id)
     await fetch(`/api/post/comment/delete/${id}`, {
       method: 'DELETE',
     })
-    // const data = await result.json()
     fetchComment()
   }
 

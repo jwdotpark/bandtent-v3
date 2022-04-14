@@ -58,6 +58,8 @@ const Draft: React.FC = () => {
   return (
     <Layout>
       <Media greaterThanOrEqual="md">
+        {JSON.stringify(title)}
+        {JSON.stringify(imageUrl)}
         <Center m="2" mx="2">
           <Box
             mt="2"

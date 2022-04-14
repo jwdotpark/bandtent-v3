@@ -18,18 +18,35 @@ import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
-  const { uploadToS3, files } = useS3Upload()
+  const { files } = useS3Upload()
 
+  const [file, setFile] = useState()
   const [imageUrl, setImageUrl] = useState<string>('')
   const [preview, setPreview] = useState<string>('')
 
   const handleFileChange = async (event) => {
     setPreview(URL.createObjectURL(event.target.files[0]))
-    let file = event.target.files[0]
-    let { url } = await uploadToS3(file)
-    // console.log('imageurl: ', url)
-    setImageUrl(url)
+    setFile(event.target.files[0])
+    // let file = event.target.files[0]
+    const formData = new FormData()
+    for (const file of event.target.files) {
+      formData.append('file', file)
+    }
+    formData.append('upload_preset', 'bandtent-db')
+    await fetch(
+      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        setImageUrl(data.secure_url)
+      })
   }
+
+  console.log(file)
 
   props.img(imageUrl)
 

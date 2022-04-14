@@ -37,13 +37,10 @@ export default function UploadPage(props) {
     }
     formData.append('upload_preset', 'bandtent-image')
     console.log('image upload init')
-    await fetch(
-      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    )
+    await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
+      method: 'POST',
+      body: formData,
+    })
       .then((r) => r.json())
       .then((data) => {
         setImageUrl(data.secure_url)

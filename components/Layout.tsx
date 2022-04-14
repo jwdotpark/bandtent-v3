@@ -20,7 +20,7 @@ const Layout = (props: {
         {props.children}
       </Box>
       {/* @ts-ignore */}
-      <Player />
+      {/* <Player /> */}
     </>
   )
 }

@@ -8,10 +8,10 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { MediaContextProvider } from '../utils/media'
 
 // FIXME Player render cycle
-// import dynamic from 'next/dynamic'
-// const Player = dynamic(() => import('../components/utils/Player'), {
-//   ssr: false,
-// })
+import dynamic from 'next/dynamic'
+const Player = dynamic(() => import('../components/utils/Player'), {
+  ssr: false,
+})
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   const body = JSON.stringify(metric)
@@ -33,7 +33,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <SessionProvider session={pageProps.session}>
       <MediaContextProvider>
         <ChakraProvider>
-          {/* <Player /> */}
+          <Player />
           <Component {...pageProps} />
         </ChakraProvider>
       </MediaContextProvider>

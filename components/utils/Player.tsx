@@ -162,9 +162,9 @@ const Player = () => {
           </Text>
         </Center>
       </HStack>
-      {/* <Box w="100%" h="20px" m="1" pr="6">
+      <Box w="100%" h="20px" m="1" pr="6">
         <Wavesurfer
-          src={music.fileUrl}
+          src={music?.fileUrl}
           pos={position}
           onPositionChange={handlePositionChange}
           onReady={onReadyHandler}
@@ -182,7 +182,7 @@ const Player = () => {
             setPlaying(false)
           }}
         />
-      </Box> */}
+      </Box>
     </HStack>
   )
 }

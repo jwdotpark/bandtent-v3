@@ -13,16 +13,47 @@ import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props: any): JSX.Element {
   const { colorMode } = useColorMode()
+  const [, setFile] = useState()
+
   const [fileUrl, setFileUrl] = useState<string>()
-  const { uploadToS3, files } = useS3Upload()
-  props.data(fileUrl)
+  const { files } = useS3Upload()
+
+  const { setIsUploading } = props
 
   // TODO trasncode before upload
-  let handleFileChange = async (event: any) => {
-    let file = event.target.files[0]
-    let { url } = await uploadToS3(file)
-    setFileUrl(url)
+  // let handleFileChange = async (event: any) => {
+  //   let file = event.target.files[0]
+  //   let { url } = await uploadToS3(file)
+  //   setFileUrl(url)
+  // }
+
+  const handleFileChange = async (event: any) => {
+    setIsUploading(true)
+    // setPreview(URL.createObjectURL(event.target.files[0]))
+    setFile(event.target.files[0])
+    // let file = event.target.files[0]
+    const formData = new FormData()
+    for (const file of event.target.files) {
+      formData.append('file', file)
+    }
+    formData.append('upload_preset', 'bandtent-music')
+    console.log('file post init')
+    await fetch(
+      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        console.log(data)
+        setFileUrl(data.secure_url)
+      })
+    setIsUploading(false)
   }
+
+  props.data(fileUrl)
 
   const { getRootProps, getInputProps } = useDropzone()
 
@@ -64,11 +95,6 @@ export default function UploadPage(props: any): JSX.Element {
             accept=".mp3, .wav, .aiff, audio/*"
             onChange={handleFileChange}
           />
-          {/* <Box>
-            <audio src="./audio.mp3" controls />
-            <button onClick={handleMPEGclick}>Start</button>
-            <p>{message}</p>
-          </Box> */}
           <Box my="4">
             {files.length === 0 && (
               <Center

@@ -20,11 +20,14 @@ export default function UploadPage(props) {
   const { colorMode } = useColorMode()
   const { files } = useS3Upload()
 
-  const [file, setFile] = useState()
+  const [, setFile] = useState()
   const [imageUrl, setImageUrl] = useState<string>('')
   const [preview, setPreview] = useState<string>('')
 
+  const { setIsUploading } = props
+
   const handleFileChange = async (event) => {
+    setIsUploading(true)
     setPreview(URL.createObjectURL(event.target.files[0]))
     setFile(event.target.files[0])
     // let file = event.target.files[0]
@@ -32,7 +35,8 @@ export default function UploadPage(props) {
     for (const file of event.target.files) {
       formData.append('file', file)
     }
-    formData.append('upload_preset', 'bandtent-db')
+    formData.append('upload_preset', 'bandtent-image')
+    console.log('image upload init')
     await fetch(
       `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
       {
@@ -44,9 +48,9 @@ export default function UploadPage(props) {
       .then((data) => {
         setImageUrl(data.secure_url)
       })
+    console.log('image upload done')
+    setIsUploading(false)
   }
-
-  console.log(file)
 
   props.img(imageUrl)
 

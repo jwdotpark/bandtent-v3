@@ -27,6 +27,7 @@ const Draft: React.FC = () => {
   const [content, setContent] = useState('')
   const [imageUrl, setImageUrl] = useState<string>('')
   const [fileUrl, setFileUrl] = useState<string>('')
+  const [isUploading, setIsUploading] = useState(false)
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -58,8 +59,8 @@ const Draft: React.FC = () => {
   return (
     <Layout>
       <Media greaterThanOrEqual="md">
-        {JSON.stringify(title)}
-        {JSON.stringify(imageUrl)}
+        image: {JSON.stringify(imageUrl)}
+        file: {JSON.stringify(fileUrl)}
         <Center m="2" mx="2">
           <Box
             mt="2"
@@ -72,6 +73,7 @@ const Draft: React.FC = () => {
             boxShadow="md"
             p="4"
           >
+            {isUploading && 'Uploading..'}
             <form onSubmit={submitData}>
               <Text pl="2">New Item</Text>
               <Box my="4" boxShadow="md">
@@ -96,12 +98,20 @@ const Draft: React.FC = () => {
               </Box>
               {/* image */}
               <Box>
-                <ImageUpload img={pullImage} />
+                <ImageUpload
+                  img={pullImage}
+                  isUploading={isUploading}
+                  setIsUploading={setIsUploading}
+                />
                 <Input display="none" type="file" defaultValue={imageUrl} />
               </Box>
               {/* file */}
               <Box>
-                <FileUpload data={pullFile} />
+                <FileUpload
+                  data={pullFile}
+                  isUploading={isUploading}
+                  setIsUploading={setIsUploading}
+                />
                 <Input display="none" type="file" defaultValue={imageUrl} />
               </Box>
               <Box mt="2">

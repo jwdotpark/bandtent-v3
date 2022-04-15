@@ -1,5 +1,6 @@
 // @ts-nocheck
 // FIXME
+import '../styles/global.css'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { ChakraProvider } from '@chakra-ui/react'

@@ -58,6 +58,13 @@ const Header: React.FC = (props) => {
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link
+          rel="preload"
+          href="/fonts/font.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <title>Bandtent</title>
       </Head>
       {/* desktop */}

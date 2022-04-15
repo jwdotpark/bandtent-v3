@@ -99,7 +99,7 @@ const MyPost = (props: { uid: any }) => {
                     whileHover={{
                       scale: 1.02,
                     }}
-                    transition={{ ease: 'circInOut', duration: 0.2 }}
+                    transition={{ ease: 'easeInOut', duration: 0.2 }}
                     key={post.id}
                   >
                     <Box
@@ -135,7 +135,7 @@ const MyPost = (props: { uid: any }) => {
                                   scale: 0.98,
                                 }}
                                 transition={{
-                                  ease: 'circInOut',
+                                  ease: 'easeInOut',
                                   duration: 0.2,
                                 }}
                                 key={post.id}

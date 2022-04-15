@@ -168,7 +168,7 @@ const Comment = (props: { props: { post: any } }) => {
                 whileHover={{
                   scale: 1.03,
                 }}
-                transition={{ ease: 'circInOut', duration: 0.2 }}
+                transition={{ ease: 'easeInOut', duration: 0.2 }}
                 whileFocus={{
                   scale: 1.03,
                 }}

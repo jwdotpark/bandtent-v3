@@ -71,6 +71,8 @@ const Player = () => {
     setBpm(1)
   }, [music])
 
+  console.log('rerendered!')
+
   return (
     <HStack
       w="calc(100vw)"

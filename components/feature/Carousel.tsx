@@ -63,7 +63,7 @@ const EmblaCarousel = ({ props }) => {
                     p="2"
                     _hover={{ cursor: 'pointer' }}
                     position="absolute"
-                    top="72.5%"
+                    top="2rem"
                     left="2rem"
                     onClick={() => Router.push('/p/[id]', `/p/${slide.id}`)}
                     zIndex="tooltip"
@@ -90,7 +90,15 @@ const EmblaCarousel = ({ props }) => {
                     </motion.div>
                   </Box>
                 </Box>
-                <Flex mx="2" sx={{ transform: 'translateY(-30vh)' }}>
+                {/* <Box position="relative" border="1px solid red"> */}
+                <Flex
+                  position="absolute"
+                  mx="2"
+                  // top="-200px"
+                  // top="-2rem"
+                  left="2rem"
+                  sx={{ transform: 'translateY(-80px)' }}
+                >
                   <ButtonBack>
                     <Button variant="ghost" size="sm" borderRadius="full">
                       <ArrowLeftIcon />
@@ -103,6 +111,7 @@ const EmblaCarousel = ({ props }) => {
                     </Button>
                   </ButtonNext>
                 </Flex>
+                {/* </Box> */}
               </Slide>
             ))}
           </Box>

@@ -18,20 +18,17 @@ import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
-  const { files } = useS3Upload()
+  const { uploadToS3, files } = useS3Upload()
 
-  // const [, setFile] = useState()
   const [imageUrl, setImageUrl] = useState<string>('')
   const [preview, setPreview] = useState<string>('')
 
-  // const { setIsUploading } = props
-
   const handleFileChange = async (event) => {
-    // console.log('image upload init')
+    console.log('image upload init')
     setPreview(URL.createObjectURL(event.target.files[0]))
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
-    // console.log('imageurl: ', url)
+    console.log('imageurl: ', url)
     setImageUrl(url)
   }
 

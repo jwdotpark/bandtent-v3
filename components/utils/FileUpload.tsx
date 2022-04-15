@@ -1,3 +1,6 @@
+// FIXME
+// @ts-nocheck
+
 import { useS3Upload } from 'next-s3-upload'
 import { useState } from 'react'
 import {
@@ -11,25 +14,19 @@ import {
 import { useDropzone } from 'react-dropzone'
 // import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg'
 
-export default function UploadPage(props: any): JSX.Element {
+export default function UploadPage(props) {
   const { colorMode } = useColorMode()
-  // const [, setFile] = useState()
-
   const [fileUrl, setFileUrl] = useState<string>()
-  const { files } = useS3Upload()
-
-  // const { setIsUploading } = props
+  const { uploadToS3, files } = useS3Upload()
+  props.data(fileUrl)
 
   // TODO trasncode before upload
-  // @ts-ignore
   let handleFileChange = async (event) => {
     console.log('file upload init')
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
     setFileUrl(url)
   }
-
-  props.data(fileUrl)
 
   const { getRootProps, getInputProps } = useDropzone()
 
@@ -71,6 +68,11 @@ export default function UploadPage(props: any): JSX.Element {
             accept=".mp3, .wav, .aiff, audio/*"
             onChange={handleFileChange}
           />
+          {/* <Box>
+            <audio src="./audio.mp3" controls />
+            <button onClick={handleMPEGclick}>Start</button>
+            <p>{message}</p>
+          </Box> */}
           <Box my="4">
             {files.length === 0 && (
               <Center

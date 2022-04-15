@@ -1,5 +1,5 @@
-// @ts-nocheck
 // FIXME
+// @ts-nocheck
 
 import { useS3Upload } from 'next-s3-upload'
 import { useState } from 'react'

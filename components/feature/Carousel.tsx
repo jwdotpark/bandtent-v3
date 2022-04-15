@@ -29,7 +29,7 @@ const EmblaCarousel = ({ props }) => {
     >
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={150}
+        naturalSlideHeight={125}
         totalSlides={slides.length}
         isPlaying={true}
         interval={3000}

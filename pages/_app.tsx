@@ -33,8 +33,8 @@ const App = ({ Component, pageProps }: AppProps) => {
     <SessionProvider session={pageProps.session}>
       <MediaContextProvider>
         <ChakraProvider>
-          <Player />
           <Component {...pageProps} />
+          {/* <Player /> */}
         </ChakraProvider>
       </MediaContextProvider>
     </SessionProvider>

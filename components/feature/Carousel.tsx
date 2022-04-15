@@ -53,7 +53,7 @@ const EmblaCarousel = ({ props }) => {
                       duration: 0.2,
                     }}
                   >
-                    <Box p="2" zIndex="toast" sx={{ filter: 'blur(3px)' }}>
+                    <Box p="2" zIndex="toast">
                       <ImageComponent props={slide} />
                     </Box>
                   </motion.div>
@@ -78,19 +78,19 @@ const EmblaCarousel = ({ props }) => {
                         duration: 0.2,
                       }}
                     >
-                      <Text fontSize="4xl">{slide.title}</Text>
-                      <Text fontSize="3xl">{slide.content}</Text>
-                      <Text fontSize="2xl">
+                      <Text fontSize="4xl" color="#fff">
+                        {slide.title}
+                      </Text>
+                      <Text color="#fff" fontSize="3xl">
+                        {slide.content}
+                      </Text>
+                      <Text fontSize="2xl" color="#fff">
                         {slide.comments.length} reviews available
                       </Text>
                     </motion.div>
                   </Box>
                 </Box>
-                <Flex
-                  mx="2"
-                  // border="1px solid red"
-                  sx={{ transform: 'translateY(-30vh)' }}
-                >
+                <Flex mx="2" sx={{ transform: 'translateY(-30vh)' }}>
                   <ButtonBack>
                     <Button variant="ghost" size="sm" borderRadius="full">
                       <ArrowLeftIcon />
@@ -107,19 +107,6 @@ const EmblaCarousel = ({ props }) => {
             ))}
           </Box>
         </Slider>
-        {/* <Flex mx="2">
-          <ButtonBack>
-            <Button variant="ghost" size="sm" borderRadius="full">
-              <ArrowLeftIcon />
-            </Button>
-          </ButtonBack>
-          <Spacer />
-          <ButtonNext>
-            <Button variant="ghost" size="sm" borderRadius="full">
-              <ArrowRightIcon />
-            </Button>
-          </ButtonNext>
-        </Flex> */}
       </CarouselProvider>
     </Box>
   )

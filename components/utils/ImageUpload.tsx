@@ -20,33 +20,19 @@ export default function UploadPage(props) {
   const { colorMode } = useColorMode()
   const { files } = useS3Upload()
 
-  const [, setFile] = useState()
+  // const [, setFile] = useState()
   const [imageUrl, setImageUrl] = useState<string>('')
   const [preview, setPreview] = useState<string>('')
 
-  const { setIsUploading } = props
+  // const { setIsUploading } = props
 
   const handleFileChange = async (event) => {
-    setIsUploading(true)
-    setPreview(URL.createObjectURL(event.target.files[0]))
-    setFile(event.target.files[0])
-    // let file = event.target.files[0]
-    const formData = new FormData()
-    for (const file of event.target.files) {
-      formData.append('file', file)
-    }
-    formData.append('upload_preset', 'bandtent-image')
     console.log('image upload init')
-    await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
-      method: 'POST',
-      body: formData,
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        setImageUrl(data.secure_url)
-      })
-    console.log('image upload done')
-    setIsUploading(false)
+    setPreview(URL.createObjectURL(event.target.files[0]))
+    let file = event.target.files[0]
+    let { url } = await uploadToS3(file)
+    console.log('imageurl: ', url)
+    setImageUrl(url)
   }
 
   props.img(imageUrl)
@@ -97,21 +83,22 @@ export default function UploadPage(props) {
                 </Center>
               )}
             </Box>
-            {files.map((file, index) => (
-              <Center key={index}>
-                <Box boxSize="50vw" h="100%">
-                  <Progress
-                    // border="2px solid gray"
-                    borderTop="none"
-                    borderBottomRadius="md"
-                    boxShadow="md"
-                    size="lg"
-                    colorScheme="gray"
-                    value={file.progress}
-                  />
-                </Box>
-              </Center>
-            ))}
+            {files &&
+              files.map((file, index) => (
+                <Center key={index}>
+                  <Box boxSize="50vw" h="100%">
+                    <Progress
+                      // border="2px solid gray"
+                      borderTop="none"
+                      borderBottomRadius="md"
+                      boxShadow="md"
+                      size="lg"
+                      colorScheme="gray"
+                      value={file.progress}
+                    />
+                  </Box>
+                </Center>
+              ))}
           </Box>
         </Media>
         <Media lessThan="md">

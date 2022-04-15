@@ -13,44 +13,20 @@ import { useDropzone } from 'react-dropzone'
 
 export default function UploadPage(props: any): JSX.Element {
   const { colorMode } = useColorMode()
-  const [, setFile] = useState()
+  // const [, setFile] = useState()
 
   const [fileUrl, setFileUrl] = useState<string>()
   const { files } = useS3Upload()
 
-  const { setIsUploading } = props
+  // const { setIsUploading } = props
 
   // TODO trasncode before upload
-  // let handleFileChange = async (event: any) => {
-  //   let file = event.target.files[0]
-  //   let { url } = await uploadToS3(file)
-  //   setFileUrl(url)
-  // }
-
-  const handleFileChange = async (event: any) => {
-    setIsUploading(true)
-    // setPreview(URL.createObjectURL(event.target.files[0]))
-    setFile(event.target.files[0])
-    // let file = event.target.files[0]
-    const formData = new FormData()
-    for (const file of event.target.files) {
-      formData.append('file', file)
-    }
-    formData.append('upload_preset', 'bandtent-music')
-    console.log('file post init')
-    await fetch(
-      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    )
-      .then((r) => r.json())
-      .then((data) => {
-        console.log(data)
-        setFileUrl(data.secure_url)
-      })
-    setIsUploading(false)
+  // @ts-ignore
+  let handleFileChange = async (event) => {
+    console.log('file upload init')
+    let file = event.target.files[0]
+    let { url } = await uploadToS3(file)
+    setFileUrl(url)
   }
 
   props.data(fileUrl)
@@ -109,12 +85,13 @@ export default function UploadPage(props: any): JSX.Element {
           </Box>
         </div>
         <Box>
-          {files.map((file, index) => (
-            <Box key={index}>
-              <Text>Uploading file.. </Text>
-              <Progress hasStripe value={file.progress} />
-            </Box>
-          ))}
+          {files &&
+            files.map((file, index) => (
+              <Box key={index}>
+                <Text>Uploading file.. </Text>
+                <Progress hasStripe value={file.progress} />
+              </Box>
+            ))}
         </Box>
         {fileUrl && 'file uploaded!'}
       </FormControl>

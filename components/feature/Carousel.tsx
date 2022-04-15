@@ -6,7 +6,6 @@ import {
   Slide,
   ButtonBack,
   ButtonNext,
-  DotGroup,
 } from 'pure-react-carousel'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import ImageComponent from '../utils/ImageComponent'
@@ -29,82 +28,98 @@ const EmblaCarousel = ({ props }) => {
     >
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={125}
+        naturalSlideHeight={102}
         totalSlides={slides.length}
         isPlaying={true}
         interval={3000}
         infinite={true}
       >
         <Slider>
-          <Box
-          // w="100%"
-          >
+          <Box>
             {slides.map((slide, index) => (
               <Slide key={slide.id} index={index}>
-                <motion.div
-                  whileHover={{
-                    scale: 1.02,
-                  }}
-                  transition={{
-                    ease: 'easeInOut',
-                    duration: 0.2,
-                  }}
+                <Box
+                  bg={colorMode === 'light' ? 'gray.200' : 'gray.800'}
+                  p="4"
+                  m="2"
+                  borderRadius="xl"
                 >
-                  <Box p="4" pb="0">
-                    <ImageComponent props={slide} />
-                  </Box>
-                </motion.div>
-                <motion.div
-                  whileHover={{
-                    scale: 1.02,
-                  }}
-                  transition={{
-                    ease: 'easeInOut',
-                    duration: 0.2,
-                  }}
-                >
+                  <motion.div
+                    whileHover={{
+                      scale: 1.02,
+                    }}
+                    transition={{
+                      ease: 'easeInOut',
+                      duration: 0.2,
+                    }}
+                  >
+                    <Box p="2" zIndex="toast" sx={{ filter: 'blur(3px)' }}>
+                      <ImageComponent props={slide} />
+                    </Box>
+                  </motion.div>
+
                   <Box
                     m="2"
-                    p="4"
+                    p="2"
                     _hover={{ cursor: 'pointer' }}
+                    position="absolute"
+                    top="72.5%"
+                    left="2rem"
                     onClick={() => Router.push('/p/[id]', `/p/${slide.id}`)}
+                    zIndex="tooltip"
+                    textShadow="1px 2px 3px black"
                   >
-                    <Text fontSize="3xl">{slide.title}</Text>
-                    <Text fontSize="2xl">{slide.content}</Text>
-                    <Text fontSize="2xl">
-                      {slide.comments.length} reviews available
-                    </Text>
+                    <motion.div
+                      whileHover={{
+                        scale: 1.02,
+                      }}
+                      transition={{
+                        ease: 'easeInOut',
+                        duration: 0.2,
+                      }}
+                    >
+                      <Text fontSize="4xl">{slide.title}</Text>
+                      <Text fontSize="3xl">{slide.content}</Text>
+                      <Text fontSize="2xl">
+                        {slide.comments.length} reviews available
+                      </Text>
+                    </motion.div>
                   </Box>
-                </motion.div>
+                </Box>
+                <Flex
+                  mx="2"
+                  // border="1px solid red"
+                  sx={{ transform: 'translateY(-30vh)' }}
+                >
+                  <ButtonBack>
+                    <Button variant="ghost" size="sm" borderRadius="full">
+                      <ArrowLeftIcon />
+                    </Button>
+                  </ButtonBack>
+                  <Spacer />
+                  <ButtonNext>
+                    <Button variant="ghost" size="sm" borderRadius="full">
+                      <ArrowRightIcon />
+                    </Button>
+                  </ButtonNext>
+                </Flex>
               </Slide>
             ))}
           </Box>
         </Slider>
-        <DotGroup />
-        <Flex mx="2">
+        {/* <Flex mx="2">
           <ButtonBack>
-            <motion.div
-              whileHover={{
-                scale: 1.02,
-              }}
-              transition={{
-                ease: 'easeInOut',
-                duration: 0.2,
-              }}
-            >
-              <Button variant="outline" size="sm" borderRadius="full">
-                <ArrowLeftIcon />
-              </Button>
-            </motion.div>
+            <Button variant="ghost" size="sm" borderRadius="full">
+              <ArrowLeftIcon />
+            </Button>
           </ButtonBack>
-
           <Spacer />
           <ButtonNext>
-            <Button variant="outline" size="sm" borderRadius="full">
+            <Button variant="ghost" size="sm" borderRadius="full">
               <ArrowRightIcon />
             </Button>
           </ButtonNext>
-        </Flex>
+        </Flex> */}
       </CarouselProvider>
     </Box>
   )

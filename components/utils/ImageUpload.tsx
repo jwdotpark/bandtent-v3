@@ -21,10 +21,11 @@ export default function UploadPage(props) {
   const [preview, setPreview] = useState<string>('')
 
   const handleFileChange = async (event) => {
+    console.log('image upload init')
     setPreview(URL.createObjectURL(event.target.files[0]))
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
-    // console.log('imageurl: ', url)
+    console.log('imageurl: ', url)
     setImageUrl(url)
   }
 
@@ -76,21 +77,22 @@ export default function UploadPage(props) {
                 </Center>
               )}
             </Box>
-            {files.map((file, index) => (
-              <Center key={index}>
-                <Box boxSize="50vw" h="100%">
-                  <Progress
-                    // border="2px solid gray"
-                    borderTop="none"
-                    borderBottomRadius="md"
-                    boxShadow="md"
-                    size="lg"
-                    colorScheme="gray"
-                    value={file.progress}
-                  />
-                </Box>
-              </Center>
-            ))}
+            {files &&
+              files.map((file, index) => (
+                <Center key={index}>
+                  <Box boxSize="50vw" h="100%">
+                    <Progress
+                      // border="2px solid gray"
+                      borderTop="none"
+                      borderBottomRadius="md"
+                      boxShadow="md"
+                      size="lg"
+                      colorScheme="gray"
+                      value={file.progress}
+                    />
+                  </Box>
+                </Center>
+              ))}
           </Box>
         </Media>
         <Media lessThan="md">

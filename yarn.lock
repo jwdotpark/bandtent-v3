@@ -2683,10 +2683,10 @@ next-auth@^4.2.1:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
-next-s3-upload@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npmjs.org/next-s3-upload/-/next-s3-upload-0.1.9.tgz"
-  integrity sha512-iQ4cd+FD7psHYCDUpCKKEb/id6NNZkh5m0NVgkf6nvZ77tquV9gII0FiDh5hek0EhAHEB3Kge8dUZeBRLyW45Q==
+next-s3-upload@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/next-s3-upload/-/next-s3-upload-0.2.0.tgz#6f97bcb292bbd68b0b54ac811c74a1404e46cdfc"
+  integrity sha512-6KLpUL2wfJKvbrPjyiKNrRN5DdEL3Go/K69QOY4VYXCWDIn0RLJbuA//m55/Qnva+P/LAGEHJrpeR4U90joF5A==
   dependencies:
     aws-sdk "^2.791.0"
     uuid "^8.3.1"

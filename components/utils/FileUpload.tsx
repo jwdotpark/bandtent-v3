@@ -19,6 +19,7 @@ export default function UploadPage(props) {
 
   // TODO trasncode before upload
   let handleFileChange = async (event) => {
+    console.log('file upload init')
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
     setFileUrl(url)
@@ -83,12 +84,13 @@ export default function UploadPage(props) {
           </Box>
         </div>
         <Box>
-          {files.map((file, index) => (
-            <Box key={index}>
-              <Text>Uploading file.. </Text>
-              <Progress hasStripe value={file.progress} />
-            </Box>
-          ))}
+          {files &&
+            files.map((file, index) => (
+              <Box key={index}>
+                <Text>Uploading file.. </Text>
+                <Progress hasStripe value={file.progress} />
+              </Box>
+            ))}
         </Box>
         {fileUrl && 'file uploaded!'}
       </FormControl>

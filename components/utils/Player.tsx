@@ -71,6 +71,8 @@ const Player = React.memo(function PlayerComponent() {
     setBpm(1)
   }, [music])
 
+  console.log(music)
+
   return (
     <HStack
       w="calc(100vw)"

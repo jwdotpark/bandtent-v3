@@ -102,7 +102,7 @@ const MainComments = () => {
                     <Box my="2">
                       <Text color="gray.400">
                         <b>
-                          {comment.Post.content}, {comment.Post.title}
+                          {comment.Post?.content}, {comment.Post?.title}
                         </b>
                       </Text>
                     </Box>

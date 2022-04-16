@@ -9,7 +9,7 @@ import {
 } from 'pure-react-carousel'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import ImageComponent from '../utils/ImageComponent'
-import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons'
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { motion } from 'framer-motion'
 import Router from 'next/router'
 
@@ -34,7 +34,7 @@ const EmblaCarousel = ({ props }) => {
         interval={3000}
         infinite={true}
       >
-        <Slider>
+        <Slider moveThreshold={0.5}>
           <Box>
             {slides.map((slide, index) => (
               <Slide key={slide.id} index={index}>
@@ -67,7 +67,6 @@ const EmblaCarousel = ({ props }) => {
                     left="2rem"
                     onClick={() => Router.push('/p/[id]', `/p/${slide.id}`)}
                     zIndex="tooltip"
-                    textShadow="1px 2px 3px black"
                   >
                     <motion.div
                       whileHover={{
@@ -78,38 +77,49 @@ const EmblaCarousel = ({ props }) => {
                         duration: 0.2,
                       }}
                     >
-                      <Text fontSize="4xl" color="#fff">
-                        {slide.title}
-                      </Text>
-                      <Text color="#fff" fontSize="3xl">
-                        {slide.content}
-                      </Text>
-                      <Text fontSize="2xl" color="#fff">
-                        {slide.comments.length} reviews available
-                      </Text>
+                      <Box
+                        right="0"
+                        m="2"
+                        p="4"
+                        bg={colorMode === 'light' ? 'gray.800' : 'gray.900'}
+                        borderRadius="xl"
+                        boxShadow="md"
+                      >
+                        <Text fontSize="4xl" color="#fff">
+                          <b>{slide.title}</b>
+                        </Text>
+                        <Text fontSize="4xl" color="#fff">
+                          <b>{slide.content}</b>
+                        </Text>
+                        <Text fontSize="md" color="#fff">
+                          {slide.comments.length} reviews available!
+                        </Text>
+                      </Box>
                     </motion.div>
                   </Box>
                 </Box>
                 {/* <Box position="relative" border="1px solid red"> */}
                 <Flex
                   position="absolute"
-                  mx="2"
-                  // top="-200px"
-                  // top="-2rem"
-                  left="2rem"
-                  sx={{ transform: 'translateY(-80px)' }}
+                  top="calc(50%)"
+                  // border="1px solid red"
+                  w="100%"
                 >
-                  <ButtonBack>
-                    <Button variant="ghost" size="sm" borderRadius="full">
-                      <ArrowLeftIcon />
-                    </Button>
-                  </ButtonBack>
+                  <Box ml="4rem">
+                    <ButtonBack>
+                      <Button size="xl" variant="outline" borderRadius="full">
+                        <ArrowBackIcon boxSize={10} color="#fff" />
+                      </Button>
+                    </ButtonBack>
+                  </Box>
                   <Spacer />
-                  <ButtonNext>
-                    <Button variant="ghost" size="sm" borderRadius="full">
-                      <ArrowRightIcon />
-                    </Button>
-                  </ButtonNext>
+                  <Box mr="4rem">
+                    <ButtonNext>
+                      <Button size="xl" variant="outline" borderRadius="full">
+                        <ArrowForwardIcon boxSize={10} color="#fff" />
+                      </Button>
+                    </ButtonNext>
+                  </Box>
                 </Flex>
                 {/* </Box> */}
               </Slide>

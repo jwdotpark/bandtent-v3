@@ -1,5 +1,3 @@
-// @ts-nocheck
-// FIXME
 import '../styles/global.css'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
@@ -16,9 +14,10 @@ const Player = dynamic(() => import('../components/utils/Player'), {
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   const body = JSON.stringify(metric)
-  const url = 'https://bandtent-v3.vercel.app'
-
-  // Use `navigator.sendBeacon()` if available, falling back to `fetch()`.
+  const url =
+    process.env.NODE === 'development'
+      ? 'localhost:3000'
+      : 'https://bandtent-v3.vercel.app'
   if (navigator.sendBeacon) {
     navigator.sendBeacon(url, body)
   } else {

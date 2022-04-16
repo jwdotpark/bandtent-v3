@@ -1,5 +1,6 @@
 import Header from './nav/Header'
 import { Box } from '@chakra-ui/react'
+// import Player from '../components/utils/Player'
 
 const Layout = (props: {
   children: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal
@@ -15,6 +16,7 @@ const Layout = (props: {
       >
         {props.children}
       </Box>
+      {/* <Player /> */}
     </Box>
   )
 }

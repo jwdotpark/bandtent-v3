@@ -82,13 +82,18 @@ const Player = () => {
       zIndex="tooltip"
       sx={{ boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)' }}
     >
-      <Button size="sm" variant="ghost" onClick={handlePlayButtonClick}>
+      <Button
+        size="sm"
+        variant="ghost"
+        onClick={handlePlayButtonClick}
+        data-testid="playPause"
+      >
         {playing ? <BsFillPauseFill size={30} /> : <BsFillPlayFill size={30} />}
       </Button>
 
       <Popover placement="top-end">
         <PopoverTrigger>
-          <Button size="sm" variant="ghost">
+          <Button size="sm" variant="ghost" data-testid="setting">
             <GiSettingsKnobs size={20} />
           </Button>
         </PopoverTrigger>

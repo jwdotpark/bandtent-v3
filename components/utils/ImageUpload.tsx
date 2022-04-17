@@ -2,7 +2,7 @@
 // @ts-nocheck
 
 import { useS3Upload } from 'next-s3-upload'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Box,
   Text,
@@ -22,6 +22,7 @@ export default function UploadPage(props) {
 
   const [imageUrl, setImageUrl] = useState<string>('')
   const [preview, setPreview] = useState<string>('')
+  const [progress, setProgress] = useState<number>(0)
 
   const handleFileChange = async (event) => {
     console.log('image upload init')
@@ -35,6 +36,12 @@ export default function UploadPage(props) {
   props.img(imageUrl)
 
   const { getRootProps, getInputProps } = useDropzone()
+
+  useEffect(() => {
+    if (files) {
+      setProgress(files[0]?.progress)
+    }
+  }, [files, progress])
 
   return (
     <>
@@ -68,14 +75,15 @@ export default function UploadPage(props) {
                   <Image
                     objectFit="cover"
                     boxSize="50vw"
-                    border="1rem solid"
-                    borderBottom="4rem solid"
+                    // border="1rem solid"
+                    // borderBottom="4rem solid"
                     borderColor={
                       colorMode === 'light' ? 'gray.100' : 'gray.300'
                     }
                     borderTopRadius="md"
                     src={preview}
                     alt="preview"
+                    sx={{ filter: `blur(${10 - progress * 10})` }}
                   />
                 </Center>
               )}

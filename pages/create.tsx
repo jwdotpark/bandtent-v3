@@ -59,8 +59,6 @@ const Draft: React.FC = () => {
   return (
     <Layout>
       <Media greaterThanOrEqual="md">
-        image: {JSON.stringify(imageUrl)}
-        file: {JSON.stringify(fileUrl)}
         <Center m="2" mx="2">
           <Box
             mt="2"

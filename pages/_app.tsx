@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import '../styles/global.css'
+// import '../styles/global.css'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { ChakraProvider } from '@chakra-ui/react'
+import { MediaContextProvider } from '../utils/media'
+
 // import { useRouter } from 'next/router'
 // import { useScrollRestoration } from '../utils/useScrollRestoration'
-import { MediaContextProvider } from '../utils/media'
 
 // FIXME Player render cycle
 import dynamic from 'next/dynamic'

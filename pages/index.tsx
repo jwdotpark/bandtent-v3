@@ -185,7 +185,6 @@ const Main: React.FC<Props> = (props) => {
                             </Box>
                             <Box
                               borderRadius="xl"
-                              // border="1px solid red"
                               boxShadow="md"
                               bg={
                                 colorMode === 'light' ? 'gray.400' : 'gray.600'
@@ -197,11 +196,11 @@ const Main: React.FC<Props> = (props) => {
                                 Router.push('/p/[id]', `/p/${post.id}`)
                               }
                             >
-                              <Box ml="2">
-                                <Text fontSize="xl" noOfLines={1}>
+                              <Box ml="2" mt="1">
+                                <Text fontSize="2xl" noOfLines={1}>
                                   {post.title}
                                 </Text>
-                                <Text fontSize="md" noOfLines={1}>
+                                <Text fontSize="2xl" noOfLines={1}>
                                   {post.content}
                                 </Text>
                               </Box>

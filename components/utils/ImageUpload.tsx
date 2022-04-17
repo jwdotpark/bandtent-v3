@@ -12,6 +12,7 @@ import {
   useColorMode,
   Progress,
   AspectRatio,
+  useToast,
 } from '@chakra-ui/react'
 import { Media } from '../../utils/media'
 import { useDropzone } from 'react-dropzone'
@@ -19,18 +20,41 @@ import { useDropzone } from 'react-dropzone'
 export default function UploadPage(props) {
   const { colorMode } = useColorMode()
   const { uploadToS3, files } = useS3Upload()
+  const toast = useToast()
 
   const [imageUrl, setImageUrl] = useState<string>('')
   const [preview, setPreview] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
+  const [isUploading, setIsUploading] = useState(false)
+
+  const onProgressToast = () => {
+    toast({
+      title: 'Uploading..',
+      status: 'info',
+      // position: 'top-right',
+      isClosable: true,
+    })
+  }
+
+  const onFinishToast = () => {
+    toast({
+      title: 'Uploaded!',
+      status: 'success',
+      // position: 'top-right',
+      isClosable: true,
+    })
+  }
 
   const handleFileChange = async (event) => {
-    console.log('image upload init')
+    setIsUploading(true)
+    onProgressToast()
     setPreview(URL.createObjectURL(event.target.files[0]))
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
     console.log('imageurl: ', url)
     setImageUrl(url)
+    setIsUploading(false)
+    onFinishToast()
   }
 
   props.img(imageUrl)
@@ -40,6 +64,7 @@ export default function UploadPage(props) {
   useEffect(() => {
     if (files) {
       setProgress(files[0]?.progress)
+      console.log(progress)
     }
   }, [files, progress])
 
@@ -83,7 +108,8 @@ export default function UploadPage(props) {
                     borderTopRadius="md"
                     src={preview}
                     alt="preview"
-                    sx={{ filter: `blur(${10 - progress * 10})` }}
+                    sx={{ filter: `brightness(${progress}%)` }}
+                    border={isUploading ? 'red' : 'green'}
                   />
                 </Center>
               )}
@@ -98,7 +124,9 @@ export default function UploadPage(props) {
                       borderBottomRadius="md"
                       boxShadow="md"
                       size="lg"
-                      colorScheme="gray"
+                      colorScheme={
+                        colorMode === 'light' ? 'gray.400' : 'gray.600'
+                      }
                       value={file.progress}
                     />
                   </Box>
@@ -134,6 +162,7 @@ export default function UploadPage(props) {
                     size="lg"
                     colorScheme="gray"
                     value={file.progress}
+                    hasStripe={isUploading}
                   />
                   {/* <Text my="2">
                     {file.progress}

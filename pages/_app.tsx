@@ -5,21 +5,19 @@ import { SessionProvider } from 'next-auth/react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { MediaContextProvider } from '../utils/media'
 
-// FIXME Player render cycle
+// FIXME change Player render cycle
+// wavesurfer is not initialized in jest for some reason..
 import dynamic from 'next/dynamic'
 const Player = dynamic(() => import('../components/utils/Player'), {
   ssr: false,
 })
 
 // mock service worker
-import('../mocks/').then(({ setupMocks }) => {
-  setupMocks()
-})
-// if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-//   import('../mocks/').then(({ setupMocks }) => {
-//     setupMocks()
-//   })
-// }
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  import('../mocks/').then(({ setupMocks }) => {
+    setupMocks()
+  })
+}
 
 // analystics
 // export function reportWebVitals(metric: NextWebVitalsMetric) {

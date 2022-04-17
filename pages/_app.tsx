@@ -12,11 +12,14 @@ const Player = dynamic(() => import('../components/utils/Player'), {
 })
 
 // mock service worker
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  import('../mocks/').then(({ setupMocks }) => {
-    setupMocks()
-  })
-}
+import('../mocks/').then(({ setupMocks }) => {
+  setupMocks()
+})
+// if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+//   import('../mocks/').then(({ setupMocks }) => {
+//     setupMocks()
+//   })
+// }
 
 // analystics
 // export function reportWebVitals(metric: NextWebVitalsMetric) {

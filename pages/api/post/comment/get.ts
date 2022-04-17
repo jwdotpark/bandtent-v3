@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../../lib/prisma'
 
-// POST /api/post/comment/get-all
+// POST /api/post/comment/get
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse

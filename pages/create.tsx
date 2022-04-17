@@ -6,15 +6,23 @@ import {
   Box,
   Text,
   Input,
-  Textarea,
   Button,
   ButtonGroup,
   useColorMode,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Flex,
+  Spacer,
+  FormLabel,
+  FormControl,
 } from '@chakra-ui/react'
 import ImageUpload from '../components/utils/ImageUpload'
-import { Media } from '../utils/media'
+// import { Media } from '../utils/media'
 import dynamic from 'next/dynamic'
-import { useSession } from 'next-auth/react'
+// import { useSession } from 'next-auth/react'
 const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
   ssr: false,
 })
@@ -22,7 +30,7 @@ const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
 
 const Draft: React.FC = () => {
   const { colorMode } = useColorMode()
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
 
   // NOTE refactor this
   const [title, setTitle] = useState('')
@@ -58,159 +66,143 @@ const Draft: React.FC = () => {
     }
   }
 
-  if (!session) {
-    return <>TODO: no auth, reroute to signin page</>
-  }
+  // if (!session) {
+  //   return <>TODO: no auth, reroute to signin page</>
+  // }
 
   return (
     <Layout>
-      <Media greaterThanOrEqual="md">
-        <Center m="2" mx="2">
-          <Box
-            mt="2"
-            w="50%"
-            maxW="600px"
-            // minH="800px"
-            minH="calc(100vh - 8rem)"
-            bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
-            borderRadius="xl"
-            boxShadow="md"
-            p="4"
-          >
-            {isUploading && 'Uploading..'}
-            <form onSubmit={submitData}>
-              <Text pl="2">New Item</Text>
-              <Box my="4" boxShadow="md">
+      <Center m="2" mx="2">
+        <Box
+          mt="2"
+          w="50%"
+          maxW="600px"
+          // minH="800px"
+          minH="calc(100vh - 8rem)"
+          bg={colorMode === 'light' ? 'gray.300' : 'gray.700'}
+          borderRadius="xl"
+          boxShadow="md"
+          p="4"
+        >
+          {isUploading && 'Uploading..'}
+          <form onSubmit={submitData}>
+            <Text pl="2">New Item</Text>
+            {/* artist */}
+            <FormControl my="4">
+              <FormLabel htmlFor="artist">Artist</FormLabel>
+              <Input
+                boxShadow="md"
+                variant="filled"
+                autoFocus
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Okgu"
+                type="text"
+                value={title}
+              />
+            </FormControl>
+            {/* title */}
+            <FormControl my="4">
+              <FormLabel htmlFor="title">Title</FormLabel>
+              <Input
+                boxShadow="md"
+                variant="filled"
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="cute dog"
+                value={content}
+              />
+            </FormControl>
+            <Flex my="4">
+              {/* price */}
+              <FormControl w="45%">
+                <FormLabel htmlFor="price">Price</FormLabel>
+                <NumberInput variant="filled" placeholder="100" boxShadow="md">
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </FormControl>
+              {/* tag */}
+              <Spacer />
+              <FormControl w="45%">
+                <FormLabel htmlFor="tag">Tag</FormLabel>
                 <Input
                   variant="filled"
-                  autoFocus
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Artist"
-                  type="text"
-                  value={title}
+                  placeholder="ambient, techno"
+                  boxShadow="md"
                 />
-              </Box>
-              <Box my="4" boxShadow="md">
+              </FormControl>
+            </Flex>
+
+            <Flex>
+              {/* price */}
+              <FormControl w="45%">
+                <FormLabel htmlFor="price">Price</FormLabel>
+                <NumberInput variant="filled" placeholder="100" boxShadow="md">
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </FormControl>
+              {/* tag */}
+              <Spacer />
+              <FormControl w="45%">
+                <FormLabel htmlFor="tag">Tag</FormLabel>
                 <Input
                   variant="filled"
-                  // cols={50}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder="Title"
-                  // rows={8}
-                  value={content}
+                  placeholder="ambient, techno"
+                  boxShadow="md"
                 />
-              </Box>
-              {/* image */}
-              <Box>
+              </FormControl>
+            </Flex>
+            {/* image */}
+            <FormControl my="4">
+              <FormLabel htmlFor="image">Image</FormLabel>
+              <Box boxShadow="md">
                 <ImageUpload
                   img={pullImage}
                   isUploading={isUploading}
                   setIsUploading={setIsUploading}
                 />
-                <Input display="none" type="file" defaultValue={imageUrl} />
               </Box>
-              {/* file */}
-              <Box>
+              <Input display="none" type="file" defaultValue={imageUrl} />
+            </FormControl>
+            {/* file */}
+            <FormControl my="4">
+              <FormLabel>Music File</FormLabel>
+              <Box boxShadow="md">
                 <FileUpload
                   data={pullFile}
                   isUploading={isUploading}
                   setIsUploading={setIsUploading}
                 />
-                <Input display="none" type="file" defaultValue={imageUrl} />
               </Box>
-              <Box mt="2">
-                <ButtonGroup
-                  isAttached
-                  size="sm"
-                  w="100%"
-                  mt="2"
-                  boxShadow="md"
+              <Input display="none" type="file" defaultValue={imageUrl} />
+            </FormControl>
+            <Box mt="2">
+              <ButtonGroup isAttached size="sm" w="100%" mt="2" boxShadow="md">
+                <Button
+                  w="80%"
+                  disabled={!content || !title || !imageUrl || !fileUrl}
+                  type="submit"
+                  value="Create"
                 >
-                  <Button
-                    w="80%"
-                    disabled={!content || !title || !imageUrl || !fileUrl}
-                    type="submit"
-                    value="Create"
-                  >
-                    {/* Create */}
-                    {!content || !title || !imageUrl || !fileUrl
-                      ? 'Not available'
-                      : 'Submit'}
-                  </Button>
-                  <Button w="20%" onClick={() => Router.push('/')}>
-                    Cancel
-                  </Button>
-                </ButtonGroup>
-              </Box>
-            </form>
-          </Box>
-        </Center>
-      </Media>
-      <Media lessThan="md">
-        <Center m="2" mx="2">
-          <Box w="100%">
-            <form onSubmit={submitData}>
-              <Text>New Draft</Text>
-              <Box my="4">
-                <Input
-                  variant="filled"
-                  autoFocus
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Title"
-                  type="text"
-                  value={title}
-                />
-              </Box>
-              <Box my="4">
-                <Textarea
-                  variant="filled"
-                  cols={50}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder="Content"
-                  rows={8}
-                  value={content}
-                />
-              </Box>
-              {/* image */}
-              <Box>
-                <ImageUpload img={pullImage} />
-                <Input display="none" type="file" defaultValue={imageUrl} />
-              </Box>
-              {/* file */}
-              <Box>
-                <FileUpload data={pullFile} />
-                <Input display="none" type="file" defaultValue={imageUrl} />
-              </Box>
-              <Box>
-                <ButtonGroup isAttached size="sm" w="100%" mt="2" mb="10">
-                  <Button
-                    variant="solid"
-                    // mr="2"
-                    w="80%"
-                    disabled={!content || !title || !imageUrl || !fileUrl}
-                    type="submit"
-                    value="Create"
-                  >
-                    {/* Create */}
-                    {!content || !title || !imageUrl || !fileUrl
-                      ? 'Not available'
-                      : 'Submit'}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    // colorScheme="yellow"
-                    // mr="2"
-                    w="20%"
-                    onClick={() => Router.push('/')}
-                  >
-                    Cancel
-                  </Button>
-                </ButtonGroup>
-              </Box>
-            </form>
-          </Box>
-        </Center>
-      </Media>
+                  {/* Create */}
+                  {!content || !title || !imageUrl || !fileUrl
+                    ? 'Not available'
+                    : 'Submit'}
+                </Button>
+                <Button w="20%" onClick={() => Router.push('/')}>
+                  Cancel
+                </Button>
+              </ButtonGroup>
+            </Box>
+          </form>
+        </Box>
+      </Center>
     </Layout>
   )
 }

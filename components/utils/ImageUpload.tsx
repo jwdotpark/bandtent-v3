@@ -31,6 +31,7 @@ export default function UploadPage(props) {
     toast({
       title: 'Image uploading..',
       status: 'info',
+      position: 'bottom-right',
       isClosable: true,
     })
   }
@@ -39,6 +40,7 @@ export default function UploadPage(props) {
     toast({
       title: 'Image uploaded!',
       status: 'success',
+      position: 'bottom-right',
       isClosable: true,
     })
   }
@@ -82,7 +84,7 @@ export default function UploadPage(props) {
                   borderRadius="md"
                   bg={colorMode === 'light' ? 'gray.100' : '#394353'}
                 >
-                  <Text fontSize="3xl">Click to select cover</Text>
+                  <Text fontSize="3xl">Add Audio(*.png, *.jpg, *.bmp)</Text>
                 </Center>
               </AspectRatio>
             )}
@@ -140,7 +142,6 @@ export default function UploadPage(props) {
                   <Image
                     objectFit="cover"
                     boxSize="100vw"
-                    // border="2px solid gray"
                     borderBottom="none"
                     borderTopRadius="md"
                     src={preview}
@@ -153,7 +154,6 @@ export default function UploadPage(props) {
               <Center key={index}>
                 <Box boxSize="100vw" h="100%">
                   <Progress
-                    // border="2px solid gray"
                     borderTop="none"
                     borderBottomRadius="md"
                     boxShadow="md"
@@ -162,11 +162,6 @@ export default function UploadPage(props) {
                     value={file.progress}
                     hasStripe={isUploading}
                   />
-                  {/* <Text my="2">
-                    {file.progress}
-                    <br />
-                    {file.progress === 100 ? 'Done!' : 'Uploading'}
-                  </Text> */}
                 </Box>
               </Center>
             ))}

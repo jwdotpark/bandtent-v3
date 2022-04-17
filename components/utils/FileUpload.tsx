@@ -6,7 +6,6 @@ import { useState } from 'react'
 import {
   Box,
   Text,
-  FormControl,
   Center,
   useColorMode,
   Progress,
@@ -26,6 +25,7 @@ export default function UploadPage(props) {
   const onProgressToast = () => {
     toast({
       title: 'File uploading..',
+      position: 'bottom-right',
       status: 'info',
       isClosable: true,
     })
@@ -34,6 +34,7 @@ export default function UploadPage(props) {
   const onFinishToast = () => {
     toast({
       title: 'File uploaded!',
+      position: 'bottom-right',
       status: 'success',
       isClosable: true,
     })
@@ -56,45 +57,46 @@ export default function UploadPage(props) {
 
   return (
     <>
-      <FormControl>
-        <div {...getRootProps()}>
-          <input
-            {...getInputProps()}
-            type="file"
-            accept=".mp3, .wav, .aiff, audio/*"
-            onChange={handleFileChange}
-          />
-          <Box my="4">
-            {files.length === 0 && (
-              <Center
-                w="100%"
-                h="10vh"
-                borderRadius="md"
-                bg={colorMode === 'light' ? 'gray.100' : '#394353'}
-              >
-                <Text fontSize="3xl">Click to select music</Text>
-              </Center>
-            )}
-          </Box>
-        </div>
-        <Box>
-          {files &&
-            files.map((file, index) => (
-              <Box
-                key={index}
-                borderRadius="md"
-                border={fileUrl ? '3px solid green' : '3px solid red'}
-              >
-                <Progress
-                  h="2vh"
-                  value={file.progress}
-                  colorScheme="blackAlpha"
-                  isIndeterminate={isUploading}
-                />
-              </Box>
-            ))}
+      {/* <FormControl> */}
+      <div {...getRootProps()}>
+        <input
+          {...getInputProps()}
+          type="file"
+          accept=".mp3, .wav, .aiff, audio/*"
+          onChange={handleFileChange}
+        />
+        <Box my="4">
+          {files.length === 0 && (
+            <Center
+              boxShadow="md"
+              w="100%"
+              h="10vh"
+              borderRadius="md"
+              bg={colorMode === 'light' ? 'gray.100' : '#394353'}
+            >
+              <Text fontSize="3xl">Add Audio(*.mp3, *.wav, *.aiff)</Text>
+            </Center>
+          )}
         </Box>
-      </FormControl>
+      </div>
+      <Box>
+        {files &&
+          files.map((file, index) => (
+            <Box
+              key={index}
+              borderRadius="md"
+              border={fileUrl ? '3px solid green' : '3px solid red'}
+            >
+              <Progress
+                h="2vh"
+                value={file.progress}
+                colorScheme="blackAlpha"
+                isIndeterminate={isUploading}
+              />
+            </Box>
+          ))}
+      </Box>
+      {/* </FormControl> */}
     </>
   )
 }

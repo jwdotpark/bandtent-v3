@@ -22,25 +22,23 @@ export default function UploadPage(props) {
   const { uploadToS3, files } = useS3Upload()
   const toast = useToast()
 
-  const [imageUrl, setImageUrl] = useState<string>('')
+  const [imageUrl, setImageUrl] = useState(null)
   const [preview, setPreview] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
   const [isUploading, setIsUploading] = useState(false)
 
   const onProgressToast = () => {
     toast({
-      title: 'Uploading..',
+      title: 'Image uploading..',
       status: 'info',
-      // position: 'top-right',
       isClosable: true,
     })
   }
 
   const onFinishToast = () => {
     toast({
-      title: 'Uploaded!',
+      title: 'Image uploaded!',
       status: 'success',
-      // position: 'top-right',
       isClosable: true,
     })
   }
@@ -51,7 +49,6 @@ export default function UploadPage(props) {
     setPreview(URL.createObjectURL(event.target.files[0]))
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
-    console.log('imageurl: ', url)
     setImageUrl(url)
     setIsUploading(false)
     onFinishToast()
@@ -96,12 +93,14 @@ export default function UploadPage(props) {
           <Box>
             <Box>
               {preview && (
-                <Center>
+                <Center
+                  border={imageUrl ? '3px solid green' : '3px solid red'}
+                  borderRadius="xl"
+                  overflow="clip"
+                >
                   <Image
                     objectFit="cover"
                     boxSize="50vw"
-                    // border="1rem solid"
-                    // borderBottom="4rem solid"
                     borderColor={
                       colorMode === 'light' ? 'gray.100' : 'gray.300'
                     }
@@ -109,7 +108,6 @@ export default function UploadPage(props) {
                     src={preview}
                     alt="preview"
                     sx={{ filter: `brightness(${progress}%)` }}
-                    border={isUploading ? 'red' : 'green'}
                   />
                 </Center>
               )}
@@ -118,17 +116,17 @@ export default function UploadPage(props) {
               files.map((file, index) => (
                 <Center key={index}>
                   <Box boxSize="50vw" h="100%">
-                    <Progress
-                      // border="2px solid gray"
-                      borderTop="none"
-                      borderBottomRadius="md"
-                      boxShadow="md"
-                      size="lg"
-                      colorScheme={
-                        colorMode === 'light' ? 'gray.400' : 'gray.600'
-                      }
-                      value={file.progress}
-                    />
+                    {isUploading && (
+                      <Progress
+                        borderTop="none"
+                        boxShadow="md"
+                        size="lg"
+                        colorScheme={
+                          colorMode === 'light' ? 'gray.400' : 'gray.600'
+                        }
+                        value={file.progress}
+                      />
+                    )}
                   </Box>
                 </Center>
               ))}
@@ -136,13 +134,13 @@ export default function UploadPage(props) {
         </Media>
         <Media lessThan="md">
           <Box>
-            <Box>
+            <Box border={imageUrl ? '2px solid green' : '2px solid red'}>
               {preview && (
-                <Center>
+                <Center border={imageUrl ? '2px solid green' : '2px solid red'}>
                   <Image
                     objectFit="cover"
                     boxSize="100vw"
-                    border="2px solid gray"
+                    // border="2px solid gray"
                     borderBottom="none"
                     borderTopRadius="md"
                     src={preview}

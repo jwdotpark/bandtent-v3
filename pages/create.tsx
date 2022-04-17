@@ -14,6 +14,7 @@ import {
 import ImageUpload from '../components/utils/ImageUpload'
 import { Media } from '../utils/media'
 import dynamic from 'next/dynamic'
+import { useSession } from 'next-auth/react'
 const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
   ssr: false,
 })
@@ -21,6 +22,7 @@ const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
 
 const Draft: React.FC = () => {
   const { colorMode } = useColorMode()
+  const { data: session } = useSession()
 
   // NOTE refactor this
   const [title, setTitle] = useState('')
@@ -54,6 +56,10 @@ const Draft: React.FC = () => {
     if (data) {
       setFileUrl(data)
     }
+  }
+
+  if (!session) {
+    return <>TODO: no auth, reroute to signin page</>
   }
 
   return (

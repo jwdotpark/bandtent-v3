@@ -10,6 +10,7 @@ import {
   Center,
   useColorMode,
   Progress,
+  useToast,
 } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
 // import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg'
@@ -18,45 +19,40 @@ export default function UploadPage(props) {
   const { colorMode } = useColorMode()
   const [fileUrl, setFileUrl] = useState<string>()
   const { uploadToS3, files } = useS3Upload()
-  props.data(fileUrl)
+  const toast = useToast()
+
+  const [isUploading, setIsUploading] = useState(false)
+
+  const onProgressToast = () => {
+    toast({
+      title: 'File uploading..',
+      status: 'info',
+      isClosable: true,
+    })
+  }
+
+  const onFinishToast = () => {
+    toast({
+      title: 'File uploaded!',
+      status: 'success',
+      isClosable: true,
+    })
+  }
 
   // TODO trasncode before upload
   let handleFileChange = async (event) => {
-    console.log('file upload init')
+    setIsUploading(true)
+    onProgressToast()
     let file = event.target.files[0]
     let { url } = await uploadToS3(file)
     setFileUrl(url)
+    setIsUploading(false)
+    onFinishToast()
   }
 
+  props.data(fileUrl)
+
   const { getRootProps, getInputProps } = useDropzone()
-
-  // // ffmpeg
-  // const [audio, setAudio] = useState('./audio.mp3')
-  // const [message, setMessage] = useState('Click to transcode')
-  // const ffmpeg = createFFmpeg({
-  //   log: true,
-  // })
-
-  // const doTranscode = async () => {
-  //   setMessage('Loading ffmpeg-core.js')
-  //   await ffmpeg.load()
-  //   setMessage('Start transcoding')
-  //   ffmpeg.FS('writeFile', 'audio.mp3', await fetchFile(audio))
-  //   await ffmpeg.run('-i', 'audio.mp3', 'someother.wav')
-  //   setMessage('Complete transcoding')
-  //   const data = ffmpeg.FS('readFile', 'test.mp4')
-  //   setAudio(
-  //     URL.createObjectURL(new Blob([data.buffer], { type: 'audio/mp3' }))
-  //   )
-  // }
-
-  // const handleMPEGclick = (e) => {
-  //   e.preventDefault()
-  //   doTranscode
-  // }
-
-  // console.log(audio)
-  // console.log(fileUrl)
 
   return (
     <>
@@ -68,11 +64,6 @@ export default function UploadPage(props) {
             accept=".mp3, .wav, .aiff, audio/*"
             onChange={handleFileChange}
           />
-          {/* <Box>
-            <audio src="./audio.mp3" controls />
-            <button onClick={handleMPEGclick}>Start</button>
-            <p>{message}</p>
-          </Box> */}
           <Box my="4">
             {files.length === 0 && (
               <Center
@@ -89,13 +80,20 @@ export default function UploadPage(props) {
         <Box>
           {files &&
             files.map((file, index) => (
-              <Box key={index}>
-                <Text>Uploading file.. </Text>
-                <Progress hasStripe value={file.progress} />
+              <Box
+                key={index}
+                borderRadius="md"
+                border={fileUrl ? '3px solid green' : '3px solid red'}
+              >
+                <Progress
+                  h="2vh"
+                  value={file.progress}
+                  colorScheme="blackAlpha"
+                  isIndeterminate={isUploading}
+                />
               </Box>
             ))}
         </Box>
-        {fileUrl && 'file uploaded!'}
       </FormControl>
     </>
   )

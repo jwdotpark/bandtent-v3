@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
 import { getSession } from 'next-auth/react'
 
-// GET /api/profile/unpub
+// POST /api/profile/unpub
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse

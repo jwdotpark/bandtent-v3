@@ -36,6 +36,7 @@ import {
 } from '@chakra-ui/icons'
 import { motion } from 'framer-motion'
 import useSWR from 'swr'
+import { GiConsoleController } from 'react-icons/gi'
 
 const Header: React.FC = (props) => {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -52,6 +53,12 @@ const Header: React.FC = (props) => {
     // NOTE interval 1hr for now
     refreshInterval: 1000 * 60,
   })
+
+  const fetchExample = async () => {
+    await fetch('/api/example/')
+      .then((r) => r.json())
+      .then((data) => console.log(data))
+  }
 
   return (
     <nav>
@@ -78,6 +85,7 @@ const Header: React.FC = (props) => {
       >
         {/* left */}
         <Stack direction="row" p="2">
+          <Button onClick={fetchExample}>Fetch Example</Button>
           <motion.div
             whileHover={{
               scale: 1.05,

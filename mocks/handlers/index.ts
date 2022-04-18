@@ -3,6 +3,7 @@ import { commentHandler } from './api/post/comment/get'
 import { unPubHandler } from './api/post/unpub'
 import { sessionHandler } from './api/auth/session'
 import { countHandler } from './api/post/count'
+import { myPostHandler } from './api/post/mypost/id'
 
 export const handlers = [
   ...exampleHandler,
@@ -10,4 +11,5 @@ export const handlers = [
   ...unPubHandler,
   ...sessionHandler,
   ...countHandler,
+  ...myPostHandler,
 ]

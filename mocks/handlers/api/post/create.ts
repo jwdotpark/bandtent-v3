@@ -1,5 +1,5 @@
 import { rest } from 'msw'
-import assets from '../../../assets'
+// import assets from '../../../assets'
 
 export const createHandler = [
   rest.post('/api/post', (req, res, ctx) => {

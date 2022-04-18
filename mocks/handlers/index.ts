@@ -5,6 +5,7 @@ import { sessionHandler } from './api/auth/session'
 import { countHandler } from './api/post/count'
 import { myPostHandler } from './api/post/mypost/id'
 import { commentPropHandler } from './api/post/comment'
+import { publishHandler } from './api/publish/unpublish'
 
 export const handlers = [
   ...exampleHandler,
@@ -14,4 +15,5 @@ export const handlers = [
   ...countHandler,
   ...myPostHandler,
   ...commentPropHandler,
+  ...publishHandler,
 ]

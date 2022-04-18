@@ -13,4 +13,7 @@ export const commentPropHandler = [
   rest.post('/api/post/comment', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(commentProp))
   }),
+  rest.put('/api/post/comment', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ message: 'comment updated' }))
+  }),
 ]

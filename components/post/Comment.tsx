@@ -116,46 +116,47 @@ const Comment = (props: { props: { post: any } }) => {
                 <Spinner />
               </Center>
             )}
-            {commentFeed.map(
-              (comment: any): JSX.Element => (
-                <Flex key={comment.id} my="1">
-                  <Box w="70%">
-                    <Text>
-                      {comment.content}{' '}
-                      {comment.User.id === uid && (
-                        <Button
-                          display="inline-block"
-                          variant="ghost"
-                          ml="1"
-                          size="xs"
-                          onClick={() => deleteComment(comment.id)}
-                        >
-                          <DeleteIcon />
-                        </Button>
-                      )}
-                    </Text>
-                  </Box>
+            {commentFeed &&
+              commentFeed.map(
+                (comment: any): JSX.Element => (
+                  <Flex key={comment.id} my="1">
+                    <Box w="70%">
+                      <Text>
+                        {comment.content}{' '}
+                        {comment.User.id === uid && (
+                          <Button
+                            display="inline-block"
+                            variant="ghost"
+                            ml="1"
+                            size="xs"
+                            onClick={() => deleteComment(comment.id)}
+                          >
+                            <DeleteIcon />
+                          </Button>
+                        )}
+                      </Text>
+                    </Box>
 
-                  <Spacer />
-                  <Text
-                    _hover={{ cursor: 'pointer' }}
-                    fontSize="sm"
-                    mx="2"
-                    onClick={() =>
-                      Router.push(
-                        '/auth/[authorId]',
-                        `/auth/${comment.User.id}`
-                      )
-                    }
-                  >
-                    {comment.User.name}
-                  </Text>
-                  <Text fontSize="sm">
-                    {moment(comment.createdAt).fromNow(true)}
-                  </Text>
-                </Flex>
-              )
-            )}
+                    <Spacer />
+                    <Text
+                      _hover={{ cursor: 'pointer' }}
+                      fontSize="sm"
+                      mx="2"
+                      onClick={() =>
+                        Router.push(
+                          '/auth/[authorId]',
+                          `/auth/${comment.User.id}`
+                        )
+                      }
+                    >
+                      {comment.User.name}
+                    </Text>
+                    <Text fontSize="sm">
+                      {moment(comment.createdAt).fromNow(true)}
+                    </Text>
+                  </Flex>
+                )
+              )}
           </Box>
         </Stack>
       </Box>

@@ -62,14 +62,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
 async function publishPost(id: number): Promise<void> {
   await fetch(`/api/publish/${id}`, {
-    method: 'PUT',
+    method: 'POST',
   })
   Router.push('/p/[id]', `/p/${id}`)
 }
 
 async function unpublishPost(id: number): Promise<void> {
   await fetch(`/api/publish/unpublish/${id}`, {
-    method: 'PUT',
+    method: 'POST',
   })
   Router.push('/p/[id]', `/p/${id}`)
 }

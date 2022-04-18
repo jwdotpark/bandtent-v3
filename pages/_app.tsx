@@ -4,6 +4,8 @@ import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { MediaContextProvider } from '../utils/media'
+import { useRouter } from 'next/router'
+import { useScrollRestoration } from '../utils/useScrollRestoration'
 
 // FIXME change Player render cycle
 // wavesurfer is not initialized in jest for some reason..
@@ -34,6 +36,9 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 // }
 
 const App = ({ Component, pageProps }: AppProps) => {
+  // scroll preseervation when routing
+  const router = useRouter()
+  useScrollRestoration(router)
   return (
     <SessionProvider session={pageProps.session}>
       <MediaContextProvider>

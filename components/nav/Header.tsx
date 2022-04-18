@@ -54,11 +54,11 @@ const Header: React.FC = (props) => {
     refreshInterval: 1000 * 60,
   })
 
-  const fetchExample = async () => {
-    await fetch('/api/example/')
-      .then((r) => r.json())
-      .then((data) => console.log(data))
-  }
+  // const fetchExample = async () => {
+  //   await fetch('/api/example/')
+  //     .then((r) => r.json())
+  //     .then((data) => console.log(data))
+  // }
 
   return (
     <nav>
@@ -85,7 +85,7 @@ const Header: React.FC = (props) => {
       >
         {/* left */}
         <Stack direction="row" p="2">
-          <Button onClick={fetchExample}>Fetch Example</Button>
+          {/* <Button onClick={fetchExample}>Fetch Example</Button> */}
           <motion.div
             whileHover={{
               scale: 1.05,

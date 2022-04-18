@@ -35,6 +35,7 @@ export default async function handle(
       },
     })
     res.status(200).json(result)
+    // console.log(result)
   } else if (req.method === 'DELETE') {
     const commentId = req.query
     // console.log(req.query)

@@ -34,6 +34,7 @@ const Comment = (props: { props: { post: any } }) => {
 
   const uid = session?.user.id
 
+  // getting all comment from the post
   const fetchComment = async () => {
     setIsFetching(true)
     const body = { id }

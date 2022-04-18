@@ -1,4 +1,5 @@
 import { rest } from 'msw'
+import assets from '../../../../assets'
 
 const myPost = {
   id: 1,
@@ -19,8 +20,8 @@ const myPost = {
       published: true,
       authorId: 1,
       createdAt: '2022-04-17T13:49:17.058Z',
-      imageUrl: 'https://placekitten.com/400/400',
-      fileUrl: 'https://freesound.org/data/previews/628/628608_13598778-lq.mp3',
+      imageUrl: assets.imageUrl,
+      fileUrl: assets.fileUrl,
     },
     {
       id: 133,
@@ -29,8 +30,8 @@ const myPost = {
       published: true,
       authorId: 1,
       createdAt: '2022-04-17T13:18:24.773Z',
-      imageUrl: 'https://placekitten.com/400/400',
-      fileUrl: 'https://freesound.org/data/previews/628/628608_13598778-lq.mp3',
+      imageUrl: assets.imageUrl,
+      fileUrl: assets.fileUrl,
     },
   ],
 }

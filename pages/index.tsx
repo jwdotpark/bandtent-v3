@@ -26,6 +26,7 @@ import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
 import MainComments from '../components/post/MainComments'
 // import Header from '../components/nav/Header'
+// import { server } from '../utils/server'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -39,6 +40,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
     take: 7,
     orderBy: { id: 'desc' },
   })
+  // const feed = await fetch(`${server}/api/serverside/get-post`)
 
   const feature = await prisma.post.findMany({
     take: 5,

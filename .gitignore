@@ -11,3 +11,5 @@ yarn-error.log
 .sentryclirc
 
 coverage
+
+public/mocks/audio.mp3

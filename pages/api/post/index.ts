@@ -24,7 +24,7 @@ export default async function handle(
     })
     res.status(200)
     res.json(result)
-    console.log(result)
+    // console.log(result)
   } else {
     res.status(500)
     res.json({ error: 'No Authorization' })

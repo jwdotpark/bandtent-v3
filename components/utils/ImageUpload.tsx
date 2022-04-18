@@ -63,7 +63,7 @@ export default function UploadPage(props) {
   useEffect(() => {
     if (files) {
       setProgress(files[0]?.progress)
-      console.log(progress)
+      // console.log(progress)
     }
   }, [files, progress])
 

@@ -7,10 +7,10 @@ export const setupMocks = async () => {
       waitUntilReady: true,
       // onUnhandledRequest: 'bypass',
     })
-    mswWorker.printHandlers()
+    // mswWorker.printHandlers()
   } else {
     const { mswServer } = await import('./mswServer')
     mswServer.listen()
-    mswServer.printHandlers()
+    // mswServer.printHandlers()
   }
 }

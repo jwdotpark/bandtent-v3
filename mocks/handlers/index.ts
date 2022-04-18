@@ -7,6 +7,8 @@ import { myPostHandler } from './api/post/mypost/id'
 import { commentPropHandler } from './api/post/comment'
 import { publishHandler } from './api/publish/unpublish'
 import { profileEditHandler } from './api/profile/edit'
+import { createHandler } from './api/post/create'
+import { loadMoreHandler } from './api/post/loadmore'
 
 export const handlers = [
   ...exampleHandler,
@@ -18,4 +20,6 @@ export const handlers = [
   ...commentPropHandler,
   ...publishHandler,
   ...profileEditHandler,
+  ...createHandler,
+  ...loadMoreHandler,
 ]

@@ -63,8 +63,8 @@ const EmblaCarousel = ({ props }) => {
                     p="2"
                     _hover={{ cursor: 'pointer' }}
                     position="absolute"
-                    top="2rem"
-                    left="2rem"
+                    bottom="1rem"
+                    left="1rem"
                     onClick={() => Router.push('/p/[id]', `/p/${slide.id}`)}
                     zIndex="tooltip"
                   >
@@ -85,13 +85,13 @@ const EmblaCarousel = ({ props }) => {
                         borderRadius="xl"
                         boxShadow="md"
                       >
-                        <Text fontSize="4xl" color="#fff">
+                        <Text fontSize="md" color="#fff">
                           <b>{slide.title}</b>
                         </Text>
-                        <Text fontSize="4xl" color="#fff">
+                        <Text fontSize="md" color="#fff" noOnLines="1">
                           <b>{slide.content}</b>
                         </Text>
-                        <Text fontSize="md" color="#fff">
+                        <Text fontSize="sm" color="#fff">
                           {slide.comments.length} reviews available!
                         </Text>
                       </Box>

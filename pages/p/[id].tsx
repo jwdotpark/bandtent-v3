@@ -130,11 +130,11 @@ const Post: React.FC<PostProps> = (props) => {
                   mb="4"
                 >
                   <Box>
-                    <Text mb="2" fontSize="3xl">
+                    <Text mb="2" fontSize="xl">
                       {props.post.title}
                     </Text>
                     <Text
-                      fontSize="3xl"
+                      fontSize="xl"
                       children={<Text>{props.post.content}</Text>}
                     />
                     <Box
@@ -158,7 +158,8 @@ const Post: React.FC<PostProps> = (props) => {
                           alt={props.post.author!.name}
                           sx={{ transform: 'translateY(5px)' }}
                         />{' '}
-                        Post by {props.post.author!.name || 'Unknown author'} on{' '}
+                        {props.post.author!.name || 'Unknown author'} uploaded
+                        on{' '}
                         {new Date(props.post.createdAt).toLocaleDateString(
                           'en-DE',
                           {

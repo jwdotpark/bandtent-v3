@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       },
       comments: true,
     },
-    take: 7,
+    take: 5,
     orderBy: { id: 'desc' },
   })
   // const feed = await fetch(`${server}/api/serverside/get-post`)
@@ -116,7 +116,7 @@ const Main: React.FC<Props> = (props) => {
             <Box>
               {/* left column */}
               <Box
-                w="40vw"
+                w="50vw"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                 borderRadius="xl"
                 boxShadow="md"
@@ -199,10 +199,10 @@ const Main: React.FC<Props> = (props) => {
                               }
                             >
                               <Box ml="2" mt="1">
-                                <Text fontSize="2xl" noOfLines={1}>
+                                <Text fontSize="xl" noOfLines={1}>
                                   {post.title}
                                 </Text>
-                                <Text fontSize="2xl" noOfLines={1}>
+                                <Text fontSize="xl" noOfLines={1}>
                                   {post.content}
                                 </Text>
                               </Box>

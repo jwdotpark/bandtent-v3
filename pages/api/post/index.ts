@@ -17,13 +17,14 @@ export default async function handle(
         content: content,
         imageUrl: imageUrl,
         fileUrl: fileUrl,
-        
+
         // @ts-ignore
         author: { connect: { email: session.user?.email } },
       },
     })
     res.status(200)
     res.json(result)
+    console.log(result)
   } else {
     res.status(500)
     res.json({ error: 'No Authorization' })

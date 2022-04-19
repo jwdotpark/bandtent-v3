@@ -1,21 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom'
+import { render, screen } from './test-utils'
 import Header from '../components/Layout'
-
-jest.mock('next-auth/react', () => {
-  const originalModule = jest.requireActual('next-auth/react')
-  const mockSession = {
-    expires: new Date(Date.now() + 2 * 86400).toISOString(),
-    user: { username: 'admin' },
-  }
-  return {
-    __esModule: true,
-    ...originalModule,
-    useSession: jest.fn(() => {
-      return { data: mockSession, status: 'authenticated' } // return type is [] in v3 but changed to {} in v4
-    }),
-  }
-})
 
 describe('NavBar Component', () => {
   it('can see add button when has session', async () => {

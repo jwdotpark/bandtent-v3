@@ -1,17 +1,17 @@
-// // Polyfill "window.fetch" used in the React component.
-// import 'whatwg-fetch'
+// use "window.fetch" used in the React component in node
+import 'whatwg-fetch'
 
-// import '@testing-library/jest-dom/extend-expect'
-// import { mswServer } from './mocks/mswServer'
+import '@testing-library/jest-dom/extend-expect'
+import { mswServer } from './mocks/mswServer'
 
-// beforeAll(() => {
-//   mswServer.listen()
-// })
+beforeAll(() => {
+  mswServer.listen()
+})
 
-// afterAll(() => {
-//   mswServer.close()
-// })
+afterAll(() => {
+  mswServer.close()
+})
 
-// afterEach(() => {
-//   mswServer.resetHandlers()
-// })
+afterEach(() => {
+  mswServer.resetHandlers()
+})

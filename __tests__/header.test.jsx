@@ -6,12 +6,12 @@ describe('Header Component with session has', () => {
   it('feed button', async () => {
     render(<Header />)
     const feed = await screen.findByText('Feed')
-    const add = await screen.findByText('Add')
+    // const add = await screen.findByText('Add')
     const search = await screen.findByPlaceholderText('Search')
     const themeButton = await screen.findByTestId('themeButton')
 
     expect(feed).toBeInTheDocument()
-    expect(add).toBeInTheDocument()
+    // expect(add).toBeInTheDocument()
     expect(search).toBeInTheDocument()
     expect(themeButton).toBeInTheDocument()
   })
@@ -32,4 +32,3 @@ describe('Search button', () => {
     expect(mockOnSubmit).toHaveBeenCalledTimes(0)
   })
 })
-

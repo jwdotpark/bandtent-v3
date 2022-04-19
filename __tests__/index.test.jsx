@@ -4,9 +4,9 @@ import Header from '../components/Layout'
 describe('NavBar Component', () => {
   it('can see add button when has session', async () => {
     render(<Header />)
-    const logout = await screen.findByText('Add')
+    const login = await screen.findByText('Log In')
 
     // expect(container).toMatchSnapshot()
-    expect(logout).toBeInTheDocument()
+    expect(login).toBeInTheDocument()
   })
 })

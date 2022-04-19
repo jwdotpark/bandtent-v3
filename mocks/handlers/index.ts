@@ -9,6 +9,7 @@ import { publishHandler } from './api/publish/unpublish'
 import { profileEditHandler } from './api/profile/edit'
 import { createHandler } from './api/post/create'
 import { loadMoreHandler } from './api/post/loadmore'
+import { etcHandler } from './api/etc'
 
 export const handlers = [
   ...exampleHandler,
@@ -22,4 +23,5 @@ export const handlers = [
   ...profileEditHandler,
   ...createHandler,
   ...loadMoreHandler,
+  ...etcHandler,
 ]

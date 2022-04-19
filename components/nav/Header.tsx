@@ -243,7 +243,10 @@ const Header: React.FC = (props) => {
                     router.push('/')
                   }}
                 >
-                  <Text color={colorMode === 'light' ? 'current' : '#ff5555'}>
+                  <Text
+                    color={colorMode === 'light' ? 'current' : '#ff5555'}
+                    data-test-id="authenticated"
+                  >
                     Log out
                   </Text>
                 </Button>

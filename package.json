@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "lint:watch": "esw --watch --color --ext js,jsx,ts,tsx",
-    "test": "jest --watch --coverage --config ./jest.config.js",
-    "cypress": "cypress open"
+    "test:jest": "jest --watch --coverage --config ./jest.config.js",
+    "test:e2e:open": "cypress open",
+    "test:e2e:run": "cypress run"
   },
   "keywords": [],
   "author": "",
@@ -48,11 +49,13 @@
     "wavesurfer.js": "^6.1.0"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "12.1.2",
     "@types/node": "17.0.14",
     "@types/react": "17.0.38",
-    "cypress": "^9.5.3",
+    "cypress": "^9.5.4",
+    "cypress-social-logins": "^1.14.0",
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.4",
     "eslint-watch": "^8.0.0",

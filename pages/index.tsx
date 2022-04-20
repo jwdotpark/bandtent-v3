@@ -16,16 +16,13 @@ import {
   Spacer,
   VStack,
 } from '@chakra-ui/react'
-// import { Media } from '../utils/media'
 import Router from 'next/router'
 import Feature from '../components/feature/Feature'
-// import ImageComponent from '../components/utils/ImageComponent'
 import moment from 'moment'
 import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
 import MainComments from '../components/post/MainComments'
-// import Header from '../components/nav/Header'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -70,7 +67,7 @@ const Main: React.FC<Props> = (props) => {
   const [feed, setFeed] = useState(props.feed)
 
   const [cursor, setCursor] = useState(0)
-  // set cursor after initial render, otherwise undefined when prop isn't given
+  // set cursor after initial render, otherwise undefined there's no data
   useEffect(() => {
     if (feed) {
       setCursor(feed[feed.length - 1]?.id)
@@ -81,7 +78,6 @@ const Main: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [, setSelectMusic] = useAtom(musicAtom)
 
-  // take last item's id in the feed as cursor and ask 5 more from /api/post/loadmore
   const handleMore = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     setIsLoading(true)
@@ -114,8 +110,6 @@ const Main: React.FC<Props> = (props) => {
       <Layout>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         {/* desktop */}
-        {/* navbar space */}
-        {/* <Header /> */}
         <Box m="2">
           <Stack direction={['column', 'row']} w="100%">
             <Box>
@@ -152,7 +146,6 @@ const Main: React.FC<Props> = (props) => {
                             <Stack direction="row" p="4">
                               <Box
                                 position="relative"
-                                // border="1px solid red"
                                 sx={{ aspectRatio: 1 }}
                                 boxSize="150px"
                                 h="75px"

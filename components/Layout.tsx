@@ -7,7 +7,7 @@ const Layout = (props: {
 }) => {
   return (
     <Box>
-      <Header />
+      <Header data-testid="header" />
       <Box
         pb="10"
         sx={{

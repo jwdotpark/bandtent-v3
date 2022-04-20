@@ -72,34 +72,35 @@ const Main: React.FC<Props> = (props) => {
   // load more posts with pagination query
   const [feed, setFeed] = useState(props.feed)
   // const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
+  const [cursor, setCursor] = useState(0)
   // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false)
   const [, setSelectMusic] = useAtom(musicAtom)
 
-  // const handleMore = async (e: React.SyntheticEvent) => {
-  //   e.preventDefault()
-  //   setIsLoading(true)
-  //   try {
-  //     const result = await fetch('api/post/loadmore', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify(cursor),
-  //     })
-  //     const data = await result.json()
-  //     setCursor(feed[feed.length - 1].id)
-  //     setFeed([...feed, ...data])
-  //   } catch (error) {
-  //     console.error(error)
-  //   } finally {
-  //     setIsLoading(false)
-  //   }
-  // }
-
-  // console.log(feed)
+  const handleMore = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    try {
+      const result = await fetch('api/post/loadmore', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cursor),
+      })
+      const data = await result.json()
+      setCursor(feed[feed.length - 1].id)
+      setFeed([...feed, ...data])
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
     setFeed(props.feed)
-  }, [props.feed])
+    // setCursor(feed[feed.length - 1].id)
+    console.log('feed final id: ', feed[feed.length - 1].id)
+  }, [feed, props.feed])
 
   const handleMusic = (music: any) => {
     setSelectMusic(music)
@@ -284,7 +285,7 @@ const Main: React.FC<Props> = (props) => {
                   size="sm"
                   colorScheme="gray"
                   borderRadius="xl"
-                  // onClick={handleMore}
+                  onClick={handleMore}
                   boxShadow="md"
                 >
                   <Text fontSize="sm">

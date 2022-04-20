@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       },
       comments: true,
     },
-    take: 10,
+    take: 5,
     orderBy: { id: 'desc' },
   })
 

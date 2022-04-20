@@ -80,6 +80,7 @@ const EmblaCarousel = ({ props }) => {
                       <Box
                         right="0"
                         m="2"
+                        mb="4"
                         p="4"
                         bg={colorMode === 'light' ? 'gray.800' : 'gray.900'}
                         borderRadius="xl"

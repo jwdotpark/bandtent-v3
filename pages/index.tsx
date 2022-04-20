@@ -26,7 +26,6 @@ import { useAtom } from 'jotai'
 import musicAtom from '../store/store'
 import MainComments from '../components/post/MainComments'
 // import Header from '../components/nav/Header'
-// import { server } from '../utils/server'
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const feed = await prisma.post.findMany({
@@ -37,10 +36,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
       },
       comments: true,
     },
-    take: 20,
+    take: 5,
     orderBy: { id: 'desc' },
   })
-  // const feed = await fetch(`${server}/api/serverside/get-post`)
 
   const feature = await prisma.post.findMany({
     take: 5,
@@ -71,9 +69,7 @@ const Main: React.FC<Props> = (props) => {
 
   // load more posts with pagination query
   const [feed, setFeed] = useState(props.feed)
-  // const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
-  const [cursor, setCursor] = useState(0)
-  // eslint-disable-next-line no-unused-vars
+  const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
   const [isLoading, setIsLoading] = useState(false)
   const [, setSelectMusic] = useAtom(musicAtom)
 
@@ -98,9 +94,7 @@ const Main: React.FC<Props> = (props) => {
 
   useEffect(() => {
     setFeed(props.feed)
-    // setCursor(feed[feed.length - 1].id)
-    console.log('feed final id: ', feed[feed.length - 1].id)
-  }, [feed, props.feed])
+  }, [props.feed])
 
   const handleMusic = (music: any) => {
     setSelectMusic(music)
@@ -118,7 +112,7 @@ const Main: React.FC<Props> = (props) => {
             <Box>
               {/* left column */}
               <Box
-                w="50vw"
+                w="40vw"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.600'}
                 borderRadius="xl"
                 boxShadow="md"
@@ -204,10 +198,10 @@ const Main: React.FC<Props> = (props) => {
                                 }
                               >
                                 <Box ml="2" mt="1">
-                                  <Text fontSize="xl" noOfLines={1}>
+                                  <Text fontSize="2xl" noOfLines={1}>
                                     {post.title}
                                   </Text>
-                                  <Text fontSize="xl" noOfLines={1}>
+                                  <Text fontSize="2xl" noOfLines={1}>
                                     {post.content}
                                   </Text>
                                 </Box>

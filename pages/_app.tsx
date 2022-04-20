@@ -15,7 +15,7 @@ const Player = dynamic(() => import('../components/utils/Player'), {
 })
 
 // mock service worker
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'true') {
   import('../mocks/').then(({ setupMocks }) => {
     setupMocks()
   })

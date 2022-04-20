@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       },
       comments: true,
     },
-    take: 5,
+    take: 10,
     orderBy: { id: 'desc' },
   })
 
@@ -67,12 +67,21 @@ type Props = {
 const Main: React.FC<Props> = (props) => {
   const { colorMode } = useColorMode()
 
-  // load more posts with pagination query
   const [feed, setFeed] = useState(props.feed)
-  const [cursor, setCursor] = useState(props.feed[props.feed.length - 1].id)
+
+  const [cursor, setCursor] = useState(0)
+  // set cursor after initial render, otherwise undefined when prop isn't given
+  useEffect(() => {
+    if (feed) {
+      setCursor(feed[feed.length - 1]?.id)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const [isLoading, setIsLoading] = useState(false)
   const [, setSelectMusic] = useAtom(musicAtom)
 
+  // take last item's id in the feed as cursor and ask 5 more from /api/post/loadmore
   const handleMore = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     setIsLoading(true)

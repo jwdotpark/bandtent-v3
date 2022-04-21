@@ -150,8 +150,6 @@ const Draft: React.FC = () => {
                 boxShadow="md"
                 variant="filled"
                 placeholder="cute dog"
-                // onChange={(e) => setContent(e.target.value)}
-                // value={content}
                 {...register('title', {
                   required: 'Title is required.',
                   minLength: {
@@ -174,7 +172,12 @@ const Draft: React.FC = () => {
               {/* price */}
               <FormControl w="45%">
                 <FormLabel htmlFor="price">Price</FormLabel>
-                <NumberInput variant="filled" placeholder="100" boxShadow="md">
+                <NumberInput
+                  variant="filled"
+                  placeholder="100"
+                  boxShadow="md"
+                  defaultValue={1}
+                >
                   <NumberInputField />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
@@ -197,8 +200,8 @@ const Draft: React.FC = () => {
             <Flex>
               {/* price */}
               <FormControl w="45%">
-                <FormLabel htmlFor="price">Price</FormLabel>
-                <NumberInput variant="filled" placeholder="100" boxShadow="md">
+                <FormLabel htmlFor="price">BPM</FormLabel>
+                <NumberInput variant="filled" boxShadow="md" defaultValue={140}>
                   <NumberInputField />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
@@ -209,10 +212,10 @@ const Draft: React.FC = () => {
               {/* tag */}
               <Spacer />
               <FormControl w="45%">
-                <FormLabel htmlFor="tag">Tag</FormLabel>
+                <FormLabel htmlFor="tag">ISBN</FormLabel>
                 <Input
                   variant="filled"
-                  placeholder="ambient, techno"
+                  placeholder="978-3-16-148410-0"
                   boxShadow="md"
                 />
               </FormControl>
@@ -223,7 +226,7 @@ const Draft: React.FC = () => {
               <FormLabel htmlFor="image">Image</FormLabel>
               {/* <Box boxShadow="md" overflow="clip"> */}
               <Box
-                sx={{ filter: !confirm.imageUrl && 'brightness(25%)' }}
+                sx={{ filter: !confirm.imageUrl && 'brightness(50%)' }}
                 boxShadow="md"
               >
                 <ImageUpload
@@ -263,7 +266,7 @@ const Draft: React.FC = () => {
             <FormControl my="4">
               <FormLabel>Audio</FormLabel>
               <Box
-                sx={{ filter: !confirm.fileUrl && 'brightness(25%)' }}
+                sx={{ filter: !confirm.fileUrl && 'brightness(50%)' }}
                 boxShadow="md"
                 borderTopRadius="md"
                 bg={colorMode === 'light' ? 'gray.200' : 'gray.600'}

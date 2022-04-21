@@ -81,7 +81,7 @@ export default function UploadPage(props) {
               borderRadius="xl"
               // bg={colorMode === 'light' ? 'gray.100' : '#394353'}
             >
-              <Text fontSize="3xl">Add Audio(*.mp3, *.wav, *.aiff, *.ogg)</Text>
+              <Text fontSize="xl">Add Audio (*.mp3, *.wav, *.aiff, *.ogg)</Text>
             </Center>
           )}
         </Box>

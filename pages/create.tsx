@@ -96,6 +96,7 @@ const Draft: React.FC = () => {
                 autoFocus
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Okgu"
+                data-testid="artist"
                 type="text"
                 value={title}
               />

@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from './test-utils'
+import { act, fireEvent, render, screen, waitFor } from './test-utils'
 import Header from '../components/Layout'
 import SearchButton from '../components/nav/SearchButton'
 
@@ -6,14 +6,16 @@ describe('Header Component with session has', () => {
   it('feed button', async () => {
     render(<Header />)
     const feed = await screen.findByText('Feed')
-    // const add = await screen.findByText('Add')
+    const add = await screen.findByText('Add')
     const search = await screen.findByPlaceholderText('Search')
     const themeButton = await screen.findByTestId('themeButton')
 
-    expect(feed).toBeInTheDocument()
-    // expect(add).toBeInTheDocument()
-    expect(search).toBeInTheDocument()
-    expect(themeButton).toBeInTheDocument()
+    await waitFor(() => {
+      expect(feed).toBeInTheDocument()
+      expect(add).toBeInTheDocument()
+      expect(search).toBeInTheDocument()
+      expect(themeButton).toBeInTheDocument()
+    })
   })
 })
 

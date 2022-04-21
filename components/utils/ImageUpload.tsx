@@ -96,8 +96,8 @@ export default function UploadPage(props) {
             <Box>
               {preview && (
                 <Center
-                  border={imageUrl ? '3px solid green' : '3px solid red'}
-                  borderRadius="xl"
+                  // border={imageUrl ? '3px solid green' : '3px solid red'}
+                  borderTopRadius="xl"
                   overflow="clip"
                 >
                   <Image
@@ -106,7 +106,7 @@ export default function UploadPage(props) {
                     borderColor={
                       colorMode === 'light' ? 'gray.100' : 'gray.300'
                     }
-                    borderTopRadius="md"
+                    borderTopRadius="xl"
                     src={preview}
                     alt="preview"
                     sx={{ filter: `brightness(${progress}%)` }}

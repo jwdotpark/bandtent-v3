@@ -92,12 +92,10 @@ const Draft: React.FC = () => {
     }
   }, [watchFields])
 
-  // useEffect(() => {
-  //   const subscription = watch((value, { name, type }) =>
-  //     console.log(value, name, type)
-  //   )
-  //   return () => subscription.unsubscribe()
-  // }, [watch])
+  const [confirm, setConfirm] = useState({
+    imageUrl: false,
+    fileUrl: false,
+  })
 
   return (
     <Layout>
@@ -171,6 +169,7 @@ const Draft: React.FC = () => {
                 {errors.title && errors.title.message}
               </FormErrorMessage>
             </FormControl>
+
             <Flex my="4">
               {/* price */}
               <FormControl w="45%">
@@ -218,11 +217,15 @@ const Draft: React.FC = () => {
                 />
               </FormControl>
             </Flex>
+
             {/* image */}
             <FormControl my="4" isInvalid={!!errors.imageUrl}>
               <FormLabel htmlFor="image">Image</FormLabel>
-              <Box boxShadow="md">
-                {JSON.stringify(imageUrl)}
+              {/* <Box boxShadow="md" overflow="clip"> */}
+              <Box
+                sx={{ filter: !confirm.imageUrl && 'brightness(25%)' }}
+                boxShadow="md"
+              >
                 <ImageUpload
                   img={pullImage}
                   isUploading={isUploading}
@@ -233,22 +236,38 @@ const Draft: React.FC = () => {
                 display="none"
                 type="file"
                 defaultValue={imageUrl}
-                {...register('imageUrl', {
-                  // required: 'Image is required.',
-                })}
-                // onChange={() => setValue('imageUrl', imageUrl)}
+                {...register('imageUrl', {})}
               />
-              <Button onClick={() => setValue('imageUrl', imageUrl)}>
-                save image
-              </Button>
+              {imageUrl !== '' && (
+                <Button
+                  mb="4"
+                  size="sm"
+                  w="100%"
+                  borderRadius="none"
+                  borderBottomRadius="xl"
+                  colorScheme={confirm.imageUrl ? 'green' : 'red'}
+                  onClick={() => {
+                    setValue('imageUrl', imageUrl)
+                    setConfirm({ ...confirm, imageUrl: true })
+                  }}
+                >
+                  {confirm.imageUrl ? 'Confirmed!' : 'Confirm Image'}
+                </Button>
+              )}
               <FormErrorMessage>
                 {errors.imageUrl && errors.imageUrl.message}
               </FormErrorMessage>
+              {/* </Box> */}
             </FormControl>
             {/* file */}
             <FormControl my="4">
-              <FormLabel>Music File</FormLabel>
-              <Box boxShadow="md">
+              <FormLabel>Audio</FormLabel>
+              <Box
+                sx={{ filter: !confirm.fileUrl && 'brightness(25%)' }}
+                boxShadow="md"
+                borderTopRadius="md"
+                bg={colorMode === 'light' ? 'gray.200' : 'gray.600'}
+              >
                 <FileUpload
                   data={pullFile}
                   isUploading={isUploading}
@@ -259,14 +278,24 @@ const Draft: React.FC = () => {
                 display="none"
                 type="file"
                 defaultValue={fileUrl}
-                {...register('fileUrl', {
-                  // required: 'File is required.',
-                })}
-                // onChange={() => setValue('fileUrl', fileUrl)}
+                {...register('fileUrl', {})}
               />
-              <Button onClick={() => setValue('fileUrl', fileUrl)}>
-                save file
-              </Button>
+              {fileUrl !== '' && (
+                <Button
+                  mb="4"
+                  size="sm"
+                  w="100%"
+                  borderRadius="none"
+                  borderBottomRadius="xl"
+                  colorScheme={confirm.fileUrl ? 'green' : 'red'}
+                  onClick={() => {
+                    setValue('fileUrl', fileUrl)
+                    setConfirm({ ...confirm, fileUrl: true })
+                  }}
+                >
+                  {confirm.fileUrl ? 'Confirmed!' : 'Confirm Audio'}
+                </Button>
+              )}
               <FormErrorMessage>
                 {errors.fileUrl && errors.fileUrl.message}
               </FormErrorMessage>

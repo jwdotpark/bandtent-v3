@@ -7,14 +7,13 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { title, content, imageUrl, fileUrl } = req.body
-
+  const { title, artist, imageUrl, fileUrl } = req.body
   const session = await getSession({ req })
   if (session) {
     const result = await prisma.post.create({
       data: {
         title: title,
-        content: content,
+        content: artist,
         imageUrl: imageUrl,
         fileUrl: fileUrl,
 

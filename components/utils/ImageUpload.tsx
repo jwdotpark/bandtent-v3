@@ -84,7 +84,7 @@ export default function UploadPage(props) {
                   borderRadius="md"
                   bg={colorMode === 'light' ? 'gray.100' : '#394353'}
                 >
-                  <Text fontSize="3xl">Add Audio(*.png, *.jpg, *.bmp)</Text>
+                  <Text fontSize="3xl">Add Cover(*.png, *.jpg, *.bmp)</Text>
                 </Center>
               </AspectRatio>
             )}

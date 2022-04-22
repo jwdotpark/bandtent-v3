@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from './test-utils'
+import '@testing-library/jest-dom'
 import user from '@testing-library/user-event'
 import Draft from '../pages/create'
 
@@ -8,9 +9,9 @@ describe('Create page', () => {
     const newItem = await screen.findByText('New Item')
     const artist = await screen.findByText('Artist')
     const title = await screen.findByText('Title')
-    const image = screen.getByText(/add audio\(\*\.png, \*\.jpg, \*\.bmp\)/i)
+    const image = screen.getByText(/add cover \(\*\.png, \*\.jpg, \*\.bmp\)/i)
     const file = screen.getByText(
-      /add music\(\*\.mp3, \*\.wav, \*\.aiff, \*\.ogg\)/i
+      /add audio \(\*\.mp3, \*\.wav, \*\.aiff, \*\.ogg\)/i
     )
     const submitButton = await screen.findByText('Not available')
     const cancelButton = screen.getByRole('button', {
@@ -30,14 +31,22 @@ describe('Create page', () => {
   })
 })
 
-describe('Create page form', () => {
-  it('accepts input', async () => {
+describe('Create page', () => {
+  it('text inputs accepts input', async () => {
     render(<Draft />)
-    const artist = screen.getByTestId('artist')
-    user.type(artist, 'some artist')
 
-    await waitFor(() => {
-      expect(artist).toBeInTheDocument()
-    })
+    const artistInput = screen.getByTestId('artist')
+    await user.type(artistInput, 'Some artist')
+    expect(artistInput).toHaveValue('Some artist')
+    await user.type(artistInput, 'asdf')
+    expect(artistInput).not.toHaveValue('qwer')
+
+    const titleInput = screen.getByTestId('title')
+    await user.type(titleInput, 'some title')
+    expect(titleInput).toHaveValue('some title')
+
+    const imageInput = screen.getByTestId('image')
+    await user.type(imageInput, 'some image')
+    expect(imageInput).toHaveValue('some image')
   })
 })

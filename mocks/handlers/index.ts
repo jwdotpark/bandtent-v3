@@ -10,6 +10,7 @@ import { profileEditHandler } from './api/profile/edit'
 import { createHandler } from './api/post/create'
 import { loadMoreHandler } from './api/post/loadmore'
 import { etcHandler } from './api/etc'
+import { uploadHandler } from './api/post/upload/s3'
 
 export const handlers = [
   ...exampleHandler,
@@ -24,4 +25,5 @@ export const handlers = [
   ...createHandler,
   ...loadMoreHandler,
   ...etcHandler,
+  ...uploadHandler,
 ]

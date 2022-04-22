@@ -37,14 +37,14 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'true') {
 
 const App = ({ Component, pageProps }: AppProps) => {
   // scroll preseervation when routing
-  const router = useRouter()
-  useScrollRestoration(router)
+  // const router = useRouter()
+  // useScrollRestoration(router)
   return (
     <SessionProvider session={pageProps.session}>
       <MediaContextProvider>
         <ChakraProvider>
           <Component {...pageProps} />
-          <Player />
+          {/* <Player /> */}
         </ChakraProvider>
       </MediaContextProvider>
     </SessionProvider>

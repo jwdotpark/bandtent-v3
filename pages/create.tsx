@@ -20,10 +20,17 @@ import {
   FormControl,
   FormErrorMessage,
 } from '@chakra-ui/react'
-import ImageUpload from '../components/utils/ImageUpload'
 // import { useSession } from 'next-auth/react'
-import FileUpload from '../components/utils/FileUpload'
 import { useForm } from 'react-hook-form'
+
+import dynamic from 'next/dynamic'
+
+const ImageUpload = dynamic(() => import('../components/utils/ImageUpload'), {
+  ssr: false,
+})
+const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
+  ssr: false,
+})
 
 const Draft: React.FC = () => {
   const { colorMode } = useColorMode()
@@ -63,7 +70,7 @@ const Draft: React.FC = () => {
   })
 
   const onSubmit = async (values: any) => {
-    console.log('values: ', values)
+    // console.log('values: ', values)
     try {
       // const body = { title, content, imageUrl, fileUrl }
       // const { artist, title, imageUrl, fileUrl } = values
@@ -79,15 +86,15 @@ const Draft: React.FC = () => {
   }
 
   const watchFields = watch(['artist', 'title', 'imageUrl', 'fileUrl'])
-  console.log('watch field: ', watchFields)
+  // console.log('watch field: ', watchFields)
 
   const [isFormReady, setIsFormReady] = useState(false)
   useEffect(() => {
     if (watchFields[2] === '' || watchFields[3] === '') {
-      console.log('empty')
+      // console.log('empty')
       setIsFormReady(false)
     } else {
-      console.log('ready')
+      // console.log('ready')
       setIsFormReady(true)
     }
   }, [watchFields])
@@ -124,8 +131,6 @@ const Draft: React.FC = () => {
                 placeholder="Okgu"
                 data-testid="artist"
                 type="text"
-                // onChange={(e) => setTitle(e.target.value)}
-                // value={title}
                 {...register('artist', {
                   required: 'Artist name is required.',
                   minLength: {
@@ -150,6 +155,7 @@ const Draft: React.FC = () => {
                 boxShadow="md"
                 variant="filled"
                 placeholder="cute dog"
+                data-testid="title"
                 {...register('title', {
                   required: 'Title is required.',
                   minLength: {
@@ -239,6 +245,7 @@ const Draft: React.FC = () => {
                 display="none"
                 type="file"
                 defaultValue={imageUrl}
+                data-testid="image"
                 {...register('imageUrl', {})}
               />
               {imageUrl !== '' && (
@@ -281,6 +288,7 @@ const Draft: React.FC = () => {
                 display="none"
                 type="file"
                 defaultValue={fileUrl}
+                data-testid="audio"
                 {...register('fileUrl', {})}
               />
               {fileUrl !== '' && (

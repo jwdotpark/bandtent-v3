@@ -44,7 +44,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <MediaContextProvider>
         <ChakraProvider>
           <Component {...pageProps} />
-          {/* <Player /> */}
+          <Player />
         </ChakraProvider>
       </MediaContextProvider>
     </SessionProvider>

@@ -319,6 +319,7 @@ const Draft: React.FC = () => {
                   disabled={errors && !isFormReady}
                   type="submit"
                   value="Create"
+                  data-testid="submitButton"
                   onClick={handleSubmit(onSubmit)}
                 >
                   {/* Create */}

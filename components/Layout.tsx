@@ -1,6 +1,6 @@
 import Header from './nav/Header'
 import { Box } from '@chakra-ui/react'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 // const Player = dynamic(() => import('../components/utils/Player'), {
 //   ssr: false,
 // })

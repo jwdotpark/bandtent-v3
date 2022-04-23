@@ -13,7 +13,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          yarn install && yarn install -g serverless@2.72.2
+          yarn install && yarn install global serverless@2.72.2
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1

@@ -1,5 +1,5 @@
 # serverless.yml
-myNextApplication:
+bandtent-v3:
   component: '@sls-next/serverless-component@latest'
   inputs:
     name:

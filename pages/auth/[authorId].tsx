@@ -42,7 +42,7 @@ const Me: React.FC = (props) => {
     setNumOfPost(data)
   }
 
-  const uid = props.user.id
+  const uid = props.user?.id
 
   return (
     <Layout>
@@ -85,7 +85,7 @@ const Me: React.FC = (props) => {
                         overflow="clip"
                       >
                         <Image
-                          src={props.user.image}
+                          src={props.user?.image}
                           fallbackSrc="https://picsum.photos/400"
                           alt={props.content}
                           w="100%"
@@ -96,15 +96,15 @@ const Me: React.FC = (props) => {
                   </Center>
                   <Box p="2">
                     <Box mt="2">
-                      <Text fontSize="3xl" as="b">
-                        <Center>{props.user.name}</Center>
+                      <Text fontSize="3xl" as="b" data-testid="user-name">
+                        <Center>{props.user?.name}</Center>
                       </Text>
                     </Box>
                     <Box textAlign="left">
                       <Text fontSize="xl">
                         <Center>
-                          <a href={'mailto:' + props.user.email}>
-                            <Text>{props.user.email} </Text>
+                          <a href={'mailto:' + props.user?.email}>
+                            <Text>{props.user?.email} </Text>
                           </a>
                         </Center>
                       </Text>
@@ -114,18 +114,19 @@ const Me: React.FC = (props) => {
                             isExternal
                             href={
                               'https://www.google.com/maps/search/' +
-                              props.user.location
+                              props.user?.location
                             }
                           >
-                            <Text>{props.user.location} </Text>
+                            <Text>{props.user?.location} </Text>
                           </Link>
                         </Center>
                       </Text>
                       <Text fontSize="md">
                         <Center>
-                          <Link href={props.user.website} isExternal>
-                            <Text>
-                              {props.user.website} <ExternalLinkIcon mx="2px" />
+                          <Link href={props.user?.website} isExternal>
+                            <Text data-testid="website">
+                              {props.user?.website}{' '}
+                              <ExternalLinkIcon mx="2px" />
                             </Text>
                           </Link>
                         </Center>
@@ -138,7 +139,7 @@ const Me: React.FC = (props) => {
                       borderRadius="xl"
                       bg={colorMode === 'light' ? 'gray.400' : 'gray.600'}
                     >
-                      <Text fontSize="md">{props.user.description}</Text>
+                      <Text fontSize="md">{props.user?.description}</Text>
                     </Box>
                   </Box>
                   <Box mx="2" my="-2">
@@ -159,8 +160,6 @@ const Me: React.FC = (props) => {
               <MyPost func={pull_number} uid={uid} />
             </Box>
           </Stack>
-
-          {/* mobile */}
         </>
       ) : (
         'You are not logged in!'

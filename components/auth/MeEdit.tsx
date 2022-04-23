@@ -70,7 +70,13 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
       </Button>
 
       {/* modal */}
-      <Modal isOpen={isOpen} onClose={onClose} size="md" isCentered>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        size="md"
+        isCentered
+        data-testid="profile-modal"
+      >
         <ModalOverlay />
         <ModalContent borderRadius="xl">
           <Box
@@ -87,17 +93,19 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                   <Image
                     loading="lazy"
                     borderRadius="full"
-                    src={user.image}
-                    alt={user.name}
+                    src={user?.image}
+                    alt={user?.name}
+                    data-testid="profile-edit-image"
                   />
                 </Center>
                 {/* name */}
                 <FormControl isInvalid={errors.name}>
-                  <FormLabel htmlFor="name">Artist Name</FormLabel>
+                  <FormLabel htmlFor="artist">Artist Name</FormLabel>
                   <Input
+                    data-testid="profile-edit-name"
                     id="name"
                     variant="filled"
-                    defaultValue={user.name}
+                    defaultValue={user?.name}
                     {...register('name', {
                       required: 'User name is required.',
                       minLength: {
@@ -112,11 +120,11 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                 </FormControl>
                 {/* email */}
                 <FormControl isInvalid={errors.email} my="2">
-                  <FormLabel htmlFor="name">Email Address</FormLabel>
+                  <FormLabel htmlFor="email">Email Address</FormLabel>
                   <Input
                     id="email"
                     variant="filled"
-                    defaultValue={user.email}
+                    defaultValue={user?.email}
                     {...register('email', {
                       required: 'Email address is required',
                       minLength: {
@@ -141,7 +149,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                     id="description"
                     placeholder="Description"
                     // @ts-ignore description is not defined in default next-auth user table
-                    defaultValue={user.description}
+                    defaultValue={user?.description}
                     {...register('description', {
                       pattern: {
                         value: /^(?=.{0,800}$)/,
@@ -161,7 +169,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                     id="location"
                     placeholder="Berlin, DE"
                     // @ts-ignore location is not defined in default next-auth user table
-                    defaultValue={user.location}
+                    defaultValue={user?.location}
                     {...register('location', {})}
                   />
                   <FormErrorMessage>
@@ -179,7 +187,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
                       id="website"
                       placeholder="http://www.example.com/"
                       // @ts-ignore location is not defined in default next-auth user table
-                      defaultValue={user.website}
+                      defaultValue={user?.website}
                       {...register('website', {
                         pattern: {
                           value:

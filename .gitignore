@@ -15,3 +15,6 @@ coverage
 public/mocks/audio.mp3
 cypress.env.json
 cypress/videos
+
+.next-tf
+.terraform

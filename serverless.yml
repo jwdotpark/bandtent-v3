@@ -1,6 +1,7 @@
 # serverless.yml
-bandtent-v3:
-  component: '@sls-next/serverless-component@latest'
+myNextApplication:
+  # component: '@sls-next/serverless-component@latest'
+  component: './node_modules/@sls-next/serverless-component'
   inputs:
     name:
       defaultLambda: DefaultLambda
@@ -8,3 +9,4 @@ bandtent-v3:
     bucketRegion: 'eu-central-1'
     cloudfront:
       comment: 'next deploy'
+e

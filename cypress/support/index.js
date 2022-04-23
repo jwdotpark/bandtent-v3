@@ -16,5 +16,20 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+// attaching msw
+Cypress.on('test:before:run:async', async () => {
+  if (typeof window !== 'undefined') {
+    const { mswWorker } = await import('../../mocks/mswWorker')
+    console.log('browser worker start')
+    mswWorker.start({
+      waitUntilReady: true,
+    })
+  } else {
+    const { mswServer } = await import('../../mocks/mswServer')
+    console.log('server worker start')
+    mswServer.listen()
+  }
+})
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

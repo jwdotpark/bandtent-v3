@@ -1,4 +1,4 @@
-import { act, render, screen, waitFor } from './test-utils'
+import { render, screen, waitFor } from './test-utils'
 import '@testing-library/jest-dom'
 import user from '@testing-library/user-event'
 import Draft from '../pages/create'

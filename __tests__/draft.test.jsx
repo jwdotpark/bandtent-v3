@@ -57,12 +57,6 @@ describe('Create page', () => {
     const submitButton = screen.getByTestId('submitButton')
     expect(submitButton).not.toHaveAttribute('disabled')
     expect(submitButton).toHaveTextContent('Submit')
-
-    // FIXME image/audio input validation
-    // await act(async () => {
-    //   user.click(submitButton)
-    // })
-    // expect(onSubmit).toHaveBeenCalled()
   })
 })
 
@@ -90,11 +84,12 @@ describe('Creat page', () => {
     const submitButton = screen.getByTestId('submitButton')
     expect(submitButton).toHaveTextContent('Submit')
     user.click(submitButton)
-    expect(onSubmit).not.toHaveBeenCalled()
-
+    await waitFor(() => {
+      expect(onSubmit).not.toHaveBeenCalled()
+    })
     // amend input
-    await user.type(artistInput, 'more than 2 char name')
-    await user.type(titleInput, 'more than 2 char title')
+    user.type(artistInput, 'more than 2 char name')
+    user.type(titleInput, 'more than 2 char title')
     expect(submitButton).not.toHaveAttribute('disabled')
   })
 })

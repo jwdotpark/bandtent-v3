@@ -156,6 +156,7 @@ const Me: React.FC = (props) => {
               boxShadow="md"
               w="60vw"
               borderRadius="xl"
+              data-testid="my-post"
             >
               <MyPost func={pull_number} uid={uid} />
             </Box>

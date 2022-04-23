@@ -1,8 +1,8 @@
-// import { act, fireEvent, render, screen, waitFor } from './test-utils'
-import { render, screen } from './test-utils'
+import { render, screen, waitFor } from './test-utils'
+// import { waitFor, render, screen } from './test-utils'
 import user from '@testing-library/user-event'
 import Me from '../pages/auth/[authorId]'
-import { waitFor } from '@testing-library/react'
+// import { waitFor } from '@testing-library/react'
 
 describe('Profile page', () => {
   it('is rendered properly', async () => {
@@ -21,11 +21,14 @@ describe('Profile page', () => {
       name: /edit/i,
     })
     expect(editButton).toBeInTheDocument()
+
+    const myPost = screen.getByTestId('my-post')
+    expect(myPost).toBeInTheDocument()
   })
 })
 
 describe('Edit button', () => {
-  it('can be clicked to open a modal', async () => {
+  it('opens a modal and accepts valid input', async () => {
     const onSubmit = jest.fn()
     render(<Me onSubmit={onSubmit} />)
     const editButton = screen.getByRole('button', {

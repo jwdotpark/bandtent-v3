@@ -67,7 +67,7 @@ const MyPost = (props: { uid: any }) => {
           mb="4"
           boxShadow="md"
         >
-          <Text fontSize="xl" ml="2">
+          <Text fontSize="xl" ml="2" data-testid="uploaded">
             {data && data.posts.length !== 1
               ? data.posts.length + ' articles uploaded.'
               : 'No item uploaded.'}

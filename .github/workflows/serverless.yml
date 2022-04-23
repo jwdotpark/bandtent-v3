@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code
+      - name: Checkout source code.
         uses: actions/checkout@main
         with:
           ref: main
@@ -22,6 +22,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-central-1
 
-      - name: bandtent-v3
+      - name: Deploy Next.js app
         run: |
           yarn deploy

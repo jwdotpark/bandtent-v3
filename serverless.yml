@@ -1,7 +1,5 @@
-# serverless.yml
 myNextApplication:
-  # component: '@sls-next/serverless-component@latest'
-  component: './node_modules/@sls-next/serverless-component'
+  component: '@sls-next/serverless-component@latest'
   inputs:
     name:
       defaultLambda: DefaultLambda
@@ -9,4 +7,3 @@ myNextApplication:
     bucketRegion: 'eu-central-1'
     cloudfront:
       comment: 'next deploy'
-e

@@ -16,4 +16,13 @@ context('search input in the navbar', () => {
     ).click()
     cy.get(':nth-child(2) > .chakra-text > b').should('have.text', 'test')
   })
+
+  it('does not accept empty string and no result', () => {
+    cy.get('.chakra-input')
+      .invoke('val', '')
+      .click(cy.get('.chakra-input__right-element > .chakra-button'))
+    cy.get(':nth-child(2) > .chakra-text > b').should('not.be.visible')
+  })
+
+  
 })

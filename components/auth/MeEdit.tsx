@@ -48,11 +48,7 @@ const MeEdit = (props: { props: { user: { id: any } } }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(values),
-    })
-      .then((res) => res.json())
-      .then((error) => {
-        console.error('Error: ', error)
-      })
+    }).then((res) => res.json())
     Router.push('/auth/[authorId]', `/auth/${user.id}`)
     onClose()
   }

@@ -182,6 +182,7 @@ const Player = () => {
           waveColor={colorMode === 'light' ? '#ff5555' : '#50fa7b'}
           volume={volume}
           audioRate={bpm}
+          normalize={true}
           progressColor={colorMode === 'light' ? '#8a2d2d' : '#2f9747'}
           onFinish={() => {
             setPlaying(false)

@@ -13,6 +13,7 @@ const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jest-environment-jsdom',
   verbose: false,
+  testPathIgnorePatterns: ['<rootDir>/cypress/'],
   modulePathIgnorePatterns: ['<rootDir>/__tests__/test-utils.js'],
 }
 

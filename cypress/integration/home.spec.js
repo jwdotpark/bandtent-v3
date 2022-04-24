@@ -18,14 +18,8 @@ context('main page', () => {
       'Search'
     )
 
-    // log in
-    cy.get(
-      '.css-0 > nav > .css-p680qu > .chakra-stack > .chakra-button:nth-child(1)'
-    ).should('have.text', 'Log In')
-
     // theme button
-    cy.get(
-      'nav > .css-p680qu > .chakra-stack > .chakra-button > .chakra-icon'
-    ).should('be.visible')
+
+    cy.get('.css-1vwvp6d').should('be.visible')
   })
 })

@@ -61,7 +61,8 @@ jobs:
           NEXTAUTH_URL_INTERNAL: ${{ secrets.NEXTAUTH_URL_INTERNAL }}
           SECRET: ${{ secrets.SECRET }}
           PRISMA_QUERY_ENGINE_BINARY: ${{ secrets.PRISMA_QUERY_ENGINE_BINARY }}
-        run: npx serverless@2.72.2
+
+        run: echo "next auth url is ${{ secrets.NEXTAUTH_URL }}" && npx serverless@2.72.2
 
       - name: Upload `.serverless` state to S3
         run: aws s3 sync .serverless s3://bandtent-staging-servereless-state-bucket/your-site-name/staging/.serverless --delete

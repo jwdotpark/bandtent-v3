@@ -10,6 +10,27 @@ staging-your-site-name:
       defaultLambda: bandtent-staging
       apiLambda: bandtent-staging
     build:
+      env:
+        S3_UPLOAD_KEY: ${env.S3_UPLOAD_KEY}
+        S3_UPLOAD_SECRET: ${env.S3_UPLOAD_SECRET}
+        S3_UPLOAD_BUCKET: ${env.secrets.S3_UPLOAD_BUCKET}
+        S3_UPLOAD_REGION: ${env.S3_UPLOAD_REGION}
+        DATABASE_URL_WITH_SCHEMA: ${env.DATABASE_URL_WITH_SCHEMA}
+        DATABASE_URL: ${env.DATABASE_URL}
+        SHADOW_DATABASE_URL: ${env.SHADOW_DATABASE_URL}
+        EMAIL_SERVER_USER: ${env.EMAIL_SERVER_USER}
+        EMAIL_SERVER_PASSWORD: ${env.EMAIL_SERVER_PASSWORD}
+        EMAIL_SERVER_HOST: ${env.EMAIL_SERVER_HOST}
+        EMAIL_SERVER_PORT: ${env.EMAIL_SERVER_PORT}
+        EMAIL_FROM: ${env.EMAIL_FROM}
+        AUTH_GITHUB_ID: ${env.AUTH_GITHUB_ID}
+        AUTH_GITHUB_SECRET: ${env.AUTH_GITHUB_SECRET}
+        GOOGLE_CLIENT_ID: ${env.GOOGLE_CLIENT_ID}
+        GOOGLE_CLIENT_SECRET: ${env.GOOGLE_CLIENT_SECRET}
+        NEXTAUTH_URL: ${env.NEXTAUTH_URL}
+        NEXTAUTH_URL_INTERNAL: ${env.NEXTAUTH_URL_INTERNAL}
+        SECRET: ${env.SECRET}
+        PRISMA_QUERY_ENGINE_BINARY: ${env.PRISMA_QUERY_ENGINE_BINARY}
       postBuildCommands:
         - PDIR=node_modules/.prisma/client/;
           LDIR=.serverless_nextjs/api-lambda/;

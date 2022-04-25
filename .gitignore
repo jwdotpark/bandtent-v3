@@ -16,6 +16,8 @@ public/mocks/audio.mp3
 cypress.env.json
 cypress/videos
 
+.serverless
+.serverless_nextjs
 .next-tf
 .terraform
 cypress/screenshots

@@ -11,7 +11,8 @@
     "test:jest": "jest --watch --coverage --config ./jest.config.js",
     "test:e2e:open": "cypress open",
     "test:e2e:run": "cypress run",
-    "tf-next": "tf-next build"
+    "tf-next": "tf-next build",
+    "deploy": "npx serverless@2.72.2"
   },
   "keywords": [],
   "author": "",

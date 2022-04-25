@@ -3,9 +3,8 @@
 myNextApplication:
   component: '@sls-next/serverless-component'
   inputs:
+    minifyHandlers: true
     build:
-    env: 
-      
       postBuildCommands:
         - PDIR=node_modules/.prisma/client/;
           LDIR=.serverless_nextjs/api-lambda/;

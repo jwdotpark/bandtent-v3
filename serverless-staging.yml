@@ -10,7 +10,7 @@ staging-your-site-name:
       defaultLambda: bandtent-staging
       apiLambda: bandtent-staging
     build:
-      build.env:
+      env:
         S3_UPLOAD_KEY: ${env.S3_UPLOAD_KEY}
         S3_UPLOAD_SECRET: ${env.S3_UPLOAD_SECRET}
         S3_UPLOAD_BUCKET: ${env.secrets.S3_UPLOAD_BUCKET}

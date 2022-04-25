@@ -1,42 +1,22 @@
 # serverless.yml
 
-myNextApplication:
+bandtent:
   component: '@sls-next/serverless-component'
   inputs:
     minifyHandlers: true
     build:
-      env:
-        S3_UPLOAD_KEY: { env.S3_UPLOAD_KEY }
-        S3_UPLOAD_SECRET: { env.S3_UPLOAD_SECRET }
-        S3_UPLOAD_BUCKET: { env.S3_UPLOAD_BUCKET }
-        S3_UPLOAD_REGION: { env.S3_UPLOAD_REGION }
-        DATABASE_URL_WITH_SCHEMA: { env.DATABASE_URL_WITH_SCHEMA }
-        DATABASE_URL: { env.DATABASE_URL }
-        SHADOW_DATABASE_URL: { env.SHADOW_DATABASE_URL }
-        EMAIL_SERVER_USER: { env.EMAIL_SERVER_USER }
-        EMAIL_SERVER_PASSWORD: { env.EMAIL_SERVER_PASSWORD }
-        EMAIL_SERVER_HOST: { env.EMAIL_SERVER_HOST }
-        EMAIL_SERVER_PORT: { env.EMAIL_SERVER_PORT }
-        EMAIL_FROM: { env.EMAIL_FROM }
-        GITHUB_ID: { env.GITHUB_ID }
-        GITHUB_SECRET: { env.GITHUB_SECRET }
-        GOOGLE_CLIENT_ID: { env.GOOGLE_CLIENT_ID }
-        GOOGLE_CLIENT_SECRET: { env.GOOGLE_CLIENT_SECRET }
-        NEXTAUTH_URL: { env.NEXTAUTH_URL }
-        SECRET: { env.SECRET }
-        AWS_ACCESS_KEY_ID: { env.AWS_ACCESS_KEY_ID }
-        AWS_SECRET_ACCESS_KEY: { env.AWS_SECRET_ACCESS_KEY }
-        PRISMA_QUERY_ENGINE_BINARY: { env.PRISMA_QUERY_ENGINE_BINARYs }
       postBuildCommands:
         - PDIR=node_modules/.prisma/client/;
           LDIR=.serverless_nextjs/api-lambda/;
           if [ "$(ls -A $LDIR)" ]; then
-          cp "$PDIR"query-engine-rhel-* $LDIR;
-          cp "$PDIR"schema.prisma $LDIR/chunks/;
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
           fi;
         - PDIR=node_modules/.prisma/client/;
           LDIR=.serverless_nextjs/default-lambda/;
           if [ "$(ls -A $LDIR)" ]; then
-          cp "$PDIR"query-engine-rhel-* $LDIR;
-          cp "$PDIR"schema.prisma $LDIR/chunks/;
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
           fi;

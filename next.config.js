@@ -11,7 +11,6 @@ const nextConfig = {
   // reactStrictMode: true,
   // compress: true,
   // swcMinify: true,
-  target: 'experimental-serverless-trace',
   env: {
     S3_UPLOAD_KEY: process.env.S3_UPLOAD_KEY,
     S3_UPLOAD_SECRET: process.env.S3_UPLOAD_SECRET,
@@ -29,13 +28,13 @@ const nextConfig = {
     GITHUB_SECRET: process.env.GITHUB_SECRET,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    NEXTAUTH_AWS_URL: process.env.NEXTAUTH_AWS_URL,
     SECRET: process.env.SECRET,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     PRISMA_QUERY_ENGINE_BINARY: process.env.PRISMA_QUERY_ENGINE_BINARY,
   },
-
+  target: 'experimental-serverless-trace',
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals.push('_http_common')

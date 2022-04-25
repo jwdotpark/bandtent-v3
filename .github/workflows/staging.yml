@@ -28,7 +28,7 @@ jobs:
           node-version: '12'
 
       - name: Install dependencies
-        run: yarn test:jest && yarn test:e2e:run && yarn install
+        run: yarn install
 
       # - name: Run tests
       #   run: npm run test:ci

@@ -8,9 +8,9 @@
  */
 const nextConfig = {
   /* config options here */
-  // reactStrictMode: true,
-  // compress: true,
-  // swcMinify: true,
+  reactStrictMode: true,
+  compress: true,
+  swcMinify: true,
   env: {
     S3_UPLOAD_KEY: process.env.S3_UPLOAD_KEY,
     S3_UPLOAD_SECRET: process.env.S3_UPLOAD_SECRET,
@@ -41,7 +41,6 @@ const nextConfig = {
     }
     return config
   },
-
   // webpack: (config, { isServer }) => {
   //   if (isServer) {
   //     config.externals.push('_http_common')

@@ -1,0 +1,27 @@
+# serverless-staging.yml
+name: bandtent-staging
+
+staging-your-site-name:
+  component: '@sls-next/serverless-component'
+  inputs:
+    bucketName: bandtent-staging
+    description: 'Lambda@Edge for bandtent-staging'
+    name:
+      defaultLambda: bandtent-staging
+      apiLambda: bandtent-staging
+    build:
+      postBuildCommands:
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/api-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/default-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;

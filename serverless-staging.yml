@@ -10,6 +10,7 @@ bandtent-preview:
     bucketRegion: eu-central-1
     cloudfront:
       comment: 'bandtent-preview'
+      distributionId: E2QICYUBDCCIQC
     description: 'Lambda@Edge for bandtent-preview'
     publicDirectoryCache: false
     build:

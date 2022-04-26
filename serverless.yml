@@ -7,9 +7,9 @@ bandtent-preview:
       defaultLambda: bandtent-preview
       apiLambda: bandtent-preview
     bucketName: bandtent-preview
-    bucketRegion: 'eu-central-1'
-    cloundfront:
-      comment: 'next deploy'
+    bucketRegion: eu-central-1
+    cloudfront:
+      comment: 'bandtent-preview'
     description: 'Lambda@Edge for bandtent-preview'
 
     minifyHandlers: true

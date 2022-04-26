@@ -4,6 +4,7 @@ name: bandtent-staging
 bandtent-staging:
   component: '@sls-next/serverless-component'
   inputs:
+    minifyHandlers: true
     bucketName: bandtent-staging
     description: 'Lambda@Edge for bandtent-staging'
     name:

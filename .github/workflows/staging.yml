@@ -27,7 +27,9 @@ jobs:
           node-version: '14'
 
       - name: env variable
-        run: echo {{secrets.S3_UPLOAD_KEY}} > .env | cat .env
+        env:
+          S3_UPLOAD_KEY: ${{ secrets.S3_UPLOAD_KEY }}
+        run: echo $S3_UPLOAD_KEY | base64 -d > .env | cat .env
 
       # - name: Install dependencies
       #   run: yarn install

@@ -35,7 +35,7 @@ const nextConfig = {
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     PRISMA_QUERY_ENGINE_BINARY: process.env.PRISMA_QUERY_ENGINE_BINARY,
   },
-  target: 'experimental-serverless-trace',
+  target: 'serverless',
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals.push('_http_common')

@@ -1,0 +1,32 @@
+# serverless.yml
+name: bandtent-preview
+bandtent-preview:
+  component: '@sls-next/serverless-component'
+  inputs:
+    name:
+      defaultLambda: bandtent-preview
+      apiLambda: bandtent-preview
+    bucketName: bandtent-preview
+    bucketRegion: eu-central-1
+    cloudfront:
+      comment: 'bandtent-preview'
+    description: 'Lambda@Edge for bandtent-preview'
+    publicDirectoryCache: false
+    build:
+      # env is picked up on next build when deployed locally
+      # prisma client crash on runtime
+      postBuildCommands:
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/api-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/default-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;

@@ -11,6 +11,7 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   swcMinify: true,
+  target: 'serverless',
   env: {
     S3_UPLOAD_KEY: process.env.S3_UPLOAD_KEY,
     S3_UPLOAD_SECRET: process.env.S3_UPLOAD_SECRET,
@@ -35,7 +36,6 @@ const nextConfig = {
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
     PRISMA_QUERY_ENGINE_BINARY: process.env.PRISMA_QUERY_ENGINE_BINARY,
   },
-  target: 'serverless',
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals.push('_http_common')

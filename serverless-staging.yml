@@ -13,7 +13,7 @@ bandtent-preview:
     description: 'Lambda@Edge for bandtent-preview'
     publicDirectoryCache: false
     build:
-      # env is picked up on next build when deployed locally
+      # env is supposed to be picked up on github repo secret
       env:
         S3_UPLOAD_KEY: ${env.S3_UPLOAD_KEY}
         S3_UPLOAD_SECRET: ${env.S3_UPLOAD_SECRET}

@@ -29,13 +29,13 @@ jobs:
 
       - name: env variables
         run: |
-          export S3_UPLOAD_KEY=${{secrets.S3_UPLOAD_KEY}}
-          export S3_UPLOAD_SECRET=${{secrets.S3_UPLOAD_SECRET}}
-          export S3_UPLOAD_BUCKET=${{secrets.S3_UPLOAD_BUCKET}}
-          export S3_UPLOAD_REGION=${{secrets.S3_UPLOAD_REGION}}
-          export DATABASE_URL_WITH_SCHEMA=${{secrets.DATABASE_URL_WITH_SCHEMA}}
-          export DATABASE_URL=${{secrets.DATABASE_URL}}
-          export SHADOW_DATABASE_URL=${{secrets.SHADOW_DATABASE_URL}}
+          export S3_UPLOAD_KEY='${{secrets.S3_UPLOAD_KEY}}'
+          export S3_UPLOAD_SECRET='${{secrets.S3_UPLOAD_SECRET}}'
+          export S3_UPLOAD_BUCKET='${{secrets.S3_UPLOAD_BUCKET}}'
+          export S3_UPLOAD_REGION='${{secrets.S3_UPLOAD_REGION}}'
+          export DATABASE_URL_WITH_SCHEMA='${{secrets.DATABASE_URL_WITH_SCHEMA}}'
+          export DATABASE_URL='${{secrets.DATABASE_URL}}'
+          export SHADOW_DATABASE_URL='${{secrets.SHADOW_DATABASE_URL}}'
           export EMAIL_SERVER_USER=${{secrets.EMAIL_SERVER_USER}}
           export EMAIL_SERVER_PASSWORD=${{secrets.EMAIL_SERVER_PASSWORD}}
           export EMAIL_SERVER_HOST=${{secrets.EMAIL_SERVER_HOST}}

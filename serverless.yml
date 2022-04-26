@@ -1,10 +1,21 @@
 # serverless.yml
 
-bandtent:
+bandtent-preview:
   component: '@sls-next/serverless-component'
   inputs:
+    name:
+      defaultLambda: bandtent-preview
+      apiLambda: bandtent-preview
+    bucketName: bandtent-preview
+    bucketRegion: 'eu-central-1'
+    cloundfront:
+      comment: 'next deploy'
+    description: 'Lambda@Edge for bandtent-preview'
+
     minifyHandlers: true
     build:
+      # env is picked up on next build when deployed locally
+      # prisma client crash on runtime
       postBuildCommands:
         - PDIR=node_modules/.prisma/client/;
           LDIR=.serverless_nextjs/api-lambda/;

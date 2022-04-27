@@ -86,10 +86,10 @@ jobs:
         run: npx serverless@2.72.2 --component=serverless-next config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Download `.serverless` state from S3
-        run: aws s3 sync s3://bandtent-serverless-state-bucket/bandtent/staging/.serverless .serverless --delete
+        run: aws s3 sync s3://bandtent-dev/bandtent/staging/.serverless .serverless --delete
 
       - name: Deploy to AWS
         run: npx serverless@2.72.2 --debug
 
       - name: Upload `.serverless` state to S3
-        run: aws s3 sync .serverless s3://bandtent-serverless-state-bucket/bandtent/staging/.serverless --delete
+        run: aws s3 sync .serverless s3://bandtent-dev/bandtent/staging/.serverless --delete

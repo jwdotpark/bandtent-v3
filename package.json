@@ -13,7 +13,7 @@
     "test:e2e:run": "cypress run",
     "postinstall": "npx prisma db pull && node_modules/.bin/prisma generate",
     "tf-next": "tf-next build",
-    "deploy": "npx serverless@2.72.2"
+    "deploy": "npx serverless@2.72.2 --debug"
   },
   "keywords": [],
   "author": "",

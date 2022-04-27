@@ -49,7 +49,7 @@ jobs:
         with:
           node-version: '16.14'
 
-      - uses: environment variables
+      - name: environment variables
         run:
           - echo "S3_UPLOAD_KEY=$S3_UPLOAD_KEY" >> .env
           - echo "S3_UPLOAD_SECRET=$S3_UPLOAD_SECRET" >> .env

@@ -53,7 +53,7 @@ jobs:
         run: yarn install
 
       - name: prisma schema post installation
-        run: yarn postinstall
+        run: yarn prisma:prep
 
       # - name: Run tests
       #   run: yarn test:jest && yarn test:e2e:run

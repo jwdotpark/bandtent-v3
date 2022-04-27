@@ -71,6 +71,7 @@ jobs:
           echo "NEXTAUTH_URL_INTERNAL=$NEXTAUTH_URL_INTERNAL" >> .env
           echo "SECRET=$SECRET" >> .env
           echo "PRISMA_QUERY_ENGINE_BINARY=$PRISMA_QUERY_ENGINE_BINARY" >> .env
+          cat .env
 
       - name: Install dependencies
         run: yarn install

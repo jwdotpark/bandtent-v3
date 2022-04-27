@@ -1,18 +1,18 @@
 # serverless.yml
-name: bandtent-preview
-bandtent-preview:
+name: bandtent-dev
+bandtent-dev:
   component: '@sls-next/serverless-component'
   inputs:
     name:
-      defaultLambda: bandtent-preview
-      apiLambda: bandtent-preview
-    bucketName: bandtent-preview
+      defaultLambda: bandtent-dev
+      apiLambda: bandtent-dev
+    bucketName: bandtent-dev
     bucketRegion: eu-central-1
     # useServerlessTraceTarget: true
     cloudfront:
-      comment: 'bandtent-preview'
+      comment: 'bandtent-dev'
       distributionId: E2QICYUBDCCIQC
-    description: 'Lambda@Edge for bandtent-preview'
+    description: 'Lambda@Edge for bandtent-dev'
     publicDirectoryCache: false
     build:
       env:

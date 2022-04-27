@@ -1,9 +1,9 @@
 # .github/workflows/staging.yml
 
-name: Github Action bandtent-preview
+name: Github Action bandtent-dev
 on:
   push:
-    branches: [preview]
+    branches: [dev]
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
 
       - uses: canastro/copy-file-action@master
         with:
-          source: 'serverless-staging.yml'
+          source: 'serverless-dev.yml'
           target: 'serverless.yml'
 
       - uses: actions/setup-node@v2-beta
@@ -89,7 +89,7 @@ jobs:
         run: aws s3 sync s3://bandtent-serverless-state-bucket/bandtent/staging/.serverless .serverless --delete
 
       - name: Deploy to AWS
-        run: npx serverless@2.72.2
+        run: npx serverless@2.72.2 --debug
 
       - name: Upload `.serverless` state to S3
         run: aws s3 sync .serverless s3://bandtent-serverless-state-bucket/bandtent/staging/.serverless --delete

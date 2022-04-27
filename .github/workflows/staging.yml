@@ -55,6 +55,12 @@ jobs:
       - name: prisma schema post installation
         run: yarn prisma:prep
 
+      - name: prisma engine debugging
+        run: export DEBUG="prisma:engine"
+
+      - name: prisma client debugging
+        run: export DEBUG="prisma:client"
+
       # - name: Run tests
       #   run: yarn test:jest && yarn test:e2e:run
 

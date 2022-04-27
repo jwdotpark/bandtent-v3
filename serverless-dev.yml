@@ -1,26 +1,25 @@
 # serverless.yml
-
-bandtent-preview:
+name: bandtent-dev
+bandtent-dev:
   component: '@sls-next/serverless-component'
   inputs:
     name:
-      defaultLambda: bandtent-preview
-      apiLambda: bandtent-preview
-    bucketName: bandtent-preview
+      defaultLambda: bandtent-dev
+      apiLambda: bandtent-dev
+    bucketName: bandtent-dev
     bucketRegion: eu-central-1
     # useServerlessTraceTarget: true
     cloudfront:
-      comment: 'bandtent-preview'
+      comment: 'bandtent-dev'
       distributionId: E2QICYUBDCCIQC
-    description: 'Lambda@Edge for bandtent-preview'
-
-    minifyHandlers: true
+    description: 'Lambda@Edge for bandtent-dev'
+    publicDirectoryCache: false
     build:
       env:
         S3_UPLOAD_KEY: ${env.S3_UPLOAD_KEY}
         S3_UPLOAD_SECRET: ${env.S3_UPLOAD_SECRET}
-        S3_UPLOAD_BUCKET: ${env.secrets.S3_UPLOAD_BUCKET}
-        S3_UPLOAD_REGION: ${env.S3_UPLOAD_REGION}
+        S3_UPLOAD_BUCKET: ${env.S3_BUCKET_NAME}
+        S3_UPLOAD_REGION: ${env.S3_BUCKET_REGION}
         DATABASE_URL_WITH_SCHEMA: ${env.DATABASE_URL_WITH_SCHEMA}
         DATABASE_URL: ${env.DATABASE_URL}
         SHADOW_DATABASE_URL: ${env.SHADOW_DATABASE_URL}
@@ -37,6 +36,7 @@ bandtent-preview:
         NEXTAUTH_URL_INTERNAL: ${env.NEXTAUTH_URL_INTERNAL}
         SECRET: ${env.SECRET}
         PRISMA_QUERY_ENGINE_BINARY: ${env.PRISMA_QUERY_ENGINE_BINARY}
+      # prisma client crash on runtime
       postBuildCommands:
         - PDIR=node_modules/.prisma/client/;
           LDIR=.serverless_nextjs/api-lambda/;

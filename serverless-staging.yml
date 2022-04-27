@@ -36,18 +36,18 @@ bandtent-preview:
         SECRET: ${env.SECRET}
         PRISMA_QUERY_ENGINE_BINARY: ${env.PRISMA_QUERY_ENGINE_BINARY}
       # prisma client crash on runtime
-      # postBuildCommands:
-      #   - PDIR=node_modules/.prisma/client/;
-      #     LDIR=.serverless_nextjs/api-lambda/;
-      #     if [ "$(ls -A $LDIR)" ]; then
-      #     mkdir -p $LDIR$PDIR;
-      #     cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
-      #     cp "$PDIR"schema.prisma $LDIR$PDIR;
-      #     fi;
-      #   - PDIR=node_modules/.prisma/client/;
-      #     LDIR=.serverless_nextjs/default-lambda/;
-      #     if [ "$(ls -A $LDIR)" ]; then
-      #     mkdir -p $LDIR$PDIR;
-      #     cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
-      #     cp "$PDIR"schema.prisma $LDIR$PDIR;
-      #     fi;
+      postBuildCommands:
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/api-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/default-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"libquery_engine-rhel-openssl-1.0.x.so.node $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;

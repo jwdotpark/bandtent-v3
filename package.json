@@ -11,6 +11,7 @@
     "test:jest": "jest --watch --coverage --silent --config ./jest.config.js",
     "test:e2e:open": "cypress open",
     "test:e2e:run": "cypress run",
+    "postinstall": "yarn add -D prisma && prisma generate",
     "tf-next": "tf-next build",
     "deploy": "npx serverless@2.72.2"
   },
@@ -38,7 +39,6 @@
     "next-auth": "^4.2.1",
     "next-s3-upload": "^0.2.0",
     "nodemailer": "^6.7.2",
-    "prisma": "^3.12.0",
     "pure-react-carousel": "^1.28.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -65,6 +65,7 @@
     "eslint-watch": "^8.0.0",
     "jest": "^27.5.1",
     "next-page-tester": "^0.32.0",
+    "prisma": "^3.13.0",
     "tf-next": "^0.12.2",
     "typescript": "^4.6.3",
     "whatwg-fetch": "^3.6.2"

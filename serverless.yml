@@ -8,7 +8,7 @@ bandtent-preview:
       apiLambda: bandtent-preview
     bucketName: bandtent-preview
     bucketRegion: eu-central-1
-    useServerlessTraceTarget: true
+    # useServerlessTraceTarget: true
     cloudfront:
       comment: 'bandtent-preview'
       distributionId: E2QICYUBDCCIQC

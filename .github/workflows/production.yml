@@ -12,7 +12,7 @@ on:
       - main
 
 jobs:
-  deploy-staging:
+  deploy-production:
     runs-on: ubuntu-latest
 
     steps:
@@ -65,16 +65,16 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Unit Test
-        run: yarn test:jest --silent
+      # - name: Unit Test
+      #   run: yarn test:jest --silent
 
-      - name: E2E Test
-        uses: cypress-io/github-action@v2
-        with:
-          start: yarn start
-          headless: true
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 120
+      # - name: E2E Test
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     start: yarn start
+      #     headless: true
+      #     wait-on: 'http://localhost:3000'
+      #     wait-on-timeout: 120
 
       - name: Serverless AWS authentication
         run: npx serverless@2.72.2 --component=serverless-next config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}

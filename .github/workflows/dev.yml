@@ -5,7 +5,7 @@ on:
   push:
     branches: [dev]
 jobs:
-  deploy-staging:
+  deploy-dev:
     runs-on: ubuntu-latest
     # not sure this is necessary
     env:

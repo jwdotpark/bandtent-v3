@@ -61,13 +61,13 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: lint
+      - name: Lint
         run: yarn lint
 
-      - name: Unit test
+      - name: Unit Test
         run: yarn test:jest
 
-      - name: Cypress run
+      - name: E2E Test
         uses: cypress-io/github-action@v2
         with:
           start: yarn start

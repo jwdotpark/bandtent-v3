@@ -57,6 +57,7 @@ jobs:
           envkey_NEXTAUTH_URL_INTERNAL: ${{ secrets.NEXTAUTH_URL_INTERNAL }}
           envkey_SECRET: ${{ secrets.SECRET }}
           envkey_PRISMA_QUERY_ENGINE_BINARY: ${{ secrets.PRISMA_QUERY_ENGINE_BINARY }}
+          envkey_NEXT_PUBLIC_API_MOCKING: ${{ secrets.NEXT_PUBLIC_API_MOCKING }}
 
       - name: Install dependencies
         run: yarn install

@@ -37,6 +37,7 @@ bandtent-preview:
         NEXTAUTH_URL_INTERNAL: ${env.NEXTAUTH_URL_INTERNAL}
         SECRET: ${env.SECRET}
         PRISMA_QUERY_ENGINE_BINARY: ${env.PRISMA_QUERY_ENGINE_BINARY}
+        NEXT_PUBLIC_API_MOCKING: ${env.NEXT_PUBLIC_API_MOCKING}
       postBuildCommands:
         - PDIR=node_modules/.prisma/client/;
           LDIR=.serverless_nextjs/api-lambda/;

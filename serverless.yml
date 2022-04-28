@@ -1,6 +1,7 @@
 # serverless.yml
 # local preview deploy
 
+name: bandtent-preview
 bandtent-preview:
   component: '@sls-next/serverless-component'
   inputs:

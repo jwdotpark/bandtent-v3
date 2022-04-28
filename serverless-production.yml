@@ -12,7 +12,7 @@ bandtent-production:
     bucketRegion: eu-central-1
     cloundfront:
       comment: 'bandtent-production'
-      distributionId: E2IH2BCT5T4LEN
+      distributionId: E30NR1ZJZYCN13
     description: 'Lambda@Edge for bandtent-production'
     publicDirectoryCache: true
     minifyHandlers: true

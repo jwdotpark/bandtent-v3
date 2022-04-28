@@ -1,5 +1,5 @@
 # serverless.yml
-# preview
+# local preview deploy
 
 bandtent-preview:
   component: '@sls-next/serverless-component'
@@ -14,7 +14,6 @@ bandtent-preview:
       comment: 'bandtent-preview'
       distributionId: E1K1M8VNSZJGWC
     description: 'Lambda@Edge for bandtent-preview'
-
     minifyHandlers: true
     build:
       env:

@@ -1,15 +1,21 @@
-# serverless-staging.yml
-name: bandtent-staging
+# serverless-production.yml
+# production
 
-bandtent-staging:
+name: bandtent-production
+bandtent-production:
   component: '@sls-next/serverless-component'
   inputs:
-    minifyHandlers: true
-    bucketName: bandtent-staging
-    description: 'Lambda@Edge for bandtent-staging'
     name:
-      defaultLambda: bandtent-staging
-      apiLambda: bandtent-staging
+      defaultLambda: bandtent-production
+      apiLambda: bandtent-production
+    bucketName: bandtent-production
+    bucketRegion: eu-central-1
+    cloundfront:
+      comment: 'bandtent-production'
+      # distributionId:
+    description: 'Lambda@Edge for bandtent-production'
+    publicDirectoryCache: true
+    minifyHandlers: true
     build:
       env:
         S3_UPLOAD_KEY: ${env.S3_UPLOAD_KEY}

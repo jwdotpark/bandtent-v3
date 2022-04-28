@@ -61,6 +61,8 @@ type Props = {
   feed: PostProps[]
 }
 
+console.log('node env: ', process.env.NODE_ENV)
+
 const Main: React.FC<Props> = (props) => {
   const { colorMode } = useColorMode()
 

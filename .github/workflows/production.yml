@@ -14,7 +14,8 @@ on:
 jobs:
   deploy-production:
     runs-on: ubuntu-latest
-
+    env:
+      NODE_ENV: test
     steps:
       - uses: actions/checkout@v2
       - name: Configure AWS Credentials

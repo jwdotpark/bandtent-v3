@@ -4,14 +4,16 @@ import 'whatwg-fetch'
 import '@testing-library/jest-dom/extend-expect'
 import { mswServer } from './mocks/mswServer'
 
-beforeAll(() => {
-  mswServer.listen({ onUnhandledRequest: 'error' })
-})
+if (process.env.NODE_ENV === 'test') {
+  beforeAll(() => {
+    mswServer.listen({ onUnhandledRequest: 'error' })
+  })
 
-afterAll(() => {
-  mswServer.close()
-})
+  afterAll(() => {
+    mswServer.close()
+  })
 
-afterEach(() => {
-  mswServer.resetHandlers()
-})
+  afterEach(() => {
+    mswServer.resetHandlers()
+  })
+}

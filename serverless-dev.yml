@@ -1,4 +1,6 @@
 # serverless.yml
+# dev
+
 name: bandtent-dev
 bandtent-dev:
   component: '@sls-next/serverless-component'

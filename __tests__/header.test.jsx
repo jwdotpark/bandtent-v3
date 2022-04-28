@@ -3,7 +3,7 @@ import Header from '../components/Layout'
 import SearchButton from '../components/nav/SearchButton'
 
 describe('Header Component with session has', () => {
-  it('feed button', async () => {
+  it('elements', async () => {
     render(<Header />)
     const feed = await screen.findByText('Feed')
     const add = await screen.findByText('Add')

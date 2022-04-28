@@ -72,9 +72,13 @@ jobs:
       - name: E2E Test
         uses: cypress-io/github-action@v2
         with:
+          start: yarn start
+          command: yarn test:e2e:run
           headless: true
+          quiet: true
           wait-on: 'http://localhost:3000'
-          wait-on-timeout: 120
+          wait-on-timeout: 30
+          config-file: cypress.json
 
       - name: Serverless AWS authentication
         run: npx serverless@2.72.2 --component=serverless-next config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}

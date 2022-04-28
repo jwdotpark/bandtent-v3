@@ -11,6 +11,7 @@
     "test:jest": "jest --watch --coverage --silent --config ./jest.config.js",
     "test:e2e:open": "cypress open",
     "test:e2e:run": "cypress run",
+    "test:all": "jest --coverage --config ./jest.config.js && cypress run",
     "postinstall": "npx prisma db pull && node_modules/.bin/prisma generate",
     "tf-next": "tf-next build",
     "deploy": "npx serverless@2.72.2 --debug"

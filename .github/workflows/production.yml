@@ -3,7 +3,7 @@
 name: Github Action bandtent-production
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
     type:
@@ -61,8 +61,19 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run tests
-        run: yarn test:jest && yarn test:e2e:run
+      - name: lint
+        run: yarn lint
+
+      - name: Unit test
+        run: yarn test:jest
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn start
+          headless: true
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
 
       - name: Serverless AWS authentication
         run: npx serverless@2.72.2 --component=serverless-next config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}

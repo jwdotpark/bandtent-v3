@@ -66,7 +66,7 @@ jobs:
         run: yarn lint
 
       - name: Unit Test
-        run: yarn test:jest
+        run: yarn test:jest --silent
 
       - name: E2E Test
         uses: cypress-io/github-action@v2

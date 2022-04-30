@@ -58,6 +58,11 @@ jobs:
           envkey_PRISMA_QUERY_ENGINE_BINARY: ${{ secrets.PRISMA_QUERY_ENGINE_BINARY }}
           envkey_NEXT_PUBLIC_API_MOCKING: ${{ secrets.NEXT_PUBLIC_API_MOCKING }}
 
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install dependencies
         run: yarn install
 

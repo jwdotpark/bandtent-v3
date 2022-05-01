@@ -1,14 +1,14 @@
 # Table of Contents
 
-- [Project Description](#ProjectDescription)
-- [Project Structure](#ProjectStructure)
+- [Project Description](#Project-Description)
+- [Project Structure](#Project-Structure)
 - [Deployment](#Deployment)
-  - [Local Deployment](#LocalDeployment)
-  - [Github Action Deployment](#GithubActionDeployment)
-- [Cloud Services](#CloudServices)
-- [Cloud Infrastructure](#CloudInfrastructure)
-- [Consideration of Vender Lock-In and Pricing](#ConsiderationofVenderLock-InandPricing)
-- [Continuous Integeration and Condinuous Deployment](#ContinuousIntegerationandCondinuousDeployment)
+  - [Local Deployment](#Local-Deployment)
+  - [Github Action Deployment](#Github-Action-Deployment)
+- [Cloud Services](#Cloud-Services)
+- [Cloud Infrastructure](#Cloud-Infrastructure)
+- [Consideration of Vender Lock-In and Pricing](#Consideration-of-Vender-Lock-In-and-Pricing)
+- [Continuous Integeration and Continuous Deployment](#Continuous-Integeration-and-Continuous-Deployment)
 
 ---
 
@@ -121,7 +121,7 @@ Interestingly, AWS also supports next.js on Amplify for a similar user experienc
 
 As a semester project, I had to consider that serverless deployment on AWS is out of free-tier and pay-as-you-go service, which was a bit pressure to me because I had a scary experience with former project 'Goodbuy', which I ended up spent around 80 euro only with 3 instances of ec2 and route53 services at the end of the semester. (It got resolved a while later with service rep as a one time chance for student though!) This time, I abused S3 buckets and lambda functions a lot, even in the testing and this time the bill is less than 1 euro per month so I could say it's quite cost effective, for a tiny scale website.
 
-## Continuous Integeration and Condinuous Deployment
+## Continuous Integeration and Continuous Deployment
 
 ![CI/CD flowchart](./assets/ci-cd-chart.png)
 

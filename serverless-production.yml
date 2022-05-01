@@ -40,7 +40,6 @@ bandtent-production:
         PRISMA_QUERY_ENGINE_BINARY: ${env.PRISMA_QUERY_ENGINE_BINARY}
         NEXT_PUBLIC_API_MOCKING: ${env.NEXT_PUBLIC_API_MOCKING}
       postBuildCommands:
-        - echo $S3_UPLOAD_KEY;
         - PDIR=node_modules/.prisma/client/;
           LDIR=.serverless_nextjs/api-lambda/;
           if [ "$(ls -A $LDIR)" ]; then

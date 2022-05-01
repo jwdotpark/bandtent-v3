@@ -6,8 +6,8 @@
   - [Local Deployment](#LocalDeployment)
   - [Github Action Deployment](#GithubActionDeployment)
 - [Cloud Services](#CloudServices)
-- [Cloud Infrastructure](#CloudInfrastructureDiagram)
-- [ Consideration of Vender Lock-In and Pricing](#ConsiderationofVenderLock-InandPricing)
+- [Cloud Infrastructure](#CloudInfrastructure)
+- [Consideration of Vender Lock-In and Pricing](#ConsiderationofVenderLock-InandPricing)
 - [Continuous Integeration and Condinuous Deployment](#ContinuousIntegerationandCondinuousDeployment)
 
 ---

@@ -44,8 +44,8 @@ Serverless deployment build process has two main parts:
 Requirements:
 
 - Node@^14
-- AWS IAM Role credential with permision
 - Postgresql DB url
+- AWS IAM Role credential with permision
 
 ```
 AWS_ACCESS_KEY_ID=my-access-id-key
@@ -101,27 +101,33 @@ Cloudfront and S3 buckets are located at central europe but lambda functions I c
 
 So functions are available at each zone for availability. However at the moment I settled the database and s3 bucket down on central europe only so that could be an improvement for later usage.
 
-Serverless deployment seemed fast, flexible and easy to deploy. There are also great serverless deployment providers such as vercel, netlify, firebase and so on but it has its own limitation, such as the number of API or pages I can have, build time limit etc. But using cloudfront and lambda could overcome these hard limits for the price of deployment time. 
+Serverless deployment seemed fast, flexible and easy to deploy. There are also great serverless deployment providers such as vercel, netlify, firebase and so on but it has its own limitation, such as the number of API or pages I can have, build time limit etc. But using cloudfront and lambda could overcome these hard limits for the price of deployment time.
 
-I don't use getInitialProps function in next.js which takes a lot of build time so it could be problematic on AWS if it's important. But now next.js support incremental static regeneration function so it could be mitigated without much problem. 
+I don't use getInitialProps function in next.js which takes a lot of build time so it could be problematic on AWS if it's important. But now next.js support incremental static regeneration function so it could be mitigated without much problem.
 
 ## Consideration of Vender Lock-In and Pricing
 
-Tldr: it's easy to be locked in AWS if I choose serverless architecture. I would choose Vercel if it's possible. If I have to choose one of PaaS, AWS serverless architecture would be the second best option for me.
+Tldr: it's easy to be locked in AWS if I choose serverless architecture. I would choose Vercel if it's possible. If I have to choose one of PaaS, serverless architecture on AWS would be the second best option for me.
 
-If it might be too much of trouble, It'd be better to deploy with conatiner structure using ECS or EKS if it's AWS, in case you want to deploy on other platform. 
+If it might be too much of trouble, It'd be better to deploy with container structure using ECS or EKS on AWS, in case you want to deploy on other platform.
 
-GCP has Cloud Functions/Cloud CDN service, Azure has Azure Functions/Azure CDN service so It would be possible to migrate to one platform to another, on paper. Though in terms of integrity on my research journey, It is hard to say that it's mature enough to be widely adapted in production. I could check out many information or community around AWS but there aren't many about Azure or GCP. 
+GCP has Cloud Functions/Cloud CDN service, Azure has Azure Functions/Azure CDN service so It would be possible to migrate to one platform to another, on paper. Though in terms of integrity on my research journey, It is hard to say that it's mature enough to be widely adapted in production. I could check out many information or community around AWS but there aren't many about Azure or GCP.
 
-If scalability is the top priority, I'd deploy on AWS with serverless architecture. Vercel's pricing gets expensive exponentially if traffic spikes. If the project uses light-weighted short-lived API calls and doesn't have many pages, I'd just stay in Vercel for convenience. 
+If scalability is the top priority, I'd deploy on AWS with serverless architecture. Vercel's pricing gets expensive exponentially if traffic spikes. If the project uses light-weighted short-lived API calls and doesn't have many pages, I'd just stay in Vercel for convenience.
 
-Next.js is open source project, created by Vercel and they run their own platform for the framework. Next.js works just like 'magic' on Vercel, things I tried worked out of the box directly. Many libraries are depending on its architecture as well. 
+Next.js is open source project, created by Vercel and they run their own platform for the framework. Next.js works just like 'magic' on Vercel, things I tried worked out of the box directly. Many libraries are depending on its architecture as well.
 
-Interestingly, AWS also supports next.js on Amplify for a similar user experience. But after the research, I concluded that it lacks of documentation and support and there is a long way to be on the same level of support Vercel is currently offering. Using serverless is a lot less stressful than Amplify and it's much more configurable. 
+Interestingly, AWS also supports next.js on Amplify for a similar user experience. But after the research, I concluded that it lacks of documentation and support and there is a long way to be on the same level of support Vercel is currently offering. Using serverless is a lot less stressful than Amplify and it's much more configurable.
 
-As a semester project, serverless deployment on AWS is out of free-tier and pay-as-you-go model, which was a bit pressure to me because I had a scary experience with former project 'Goodbuy', which I ended up spent around 80 euro only with 3 instances of ec2 and route53 services at the end of the semester. (It got resolved a while later with service rep as a one time chance for student though!) This time, I abused S3 buckets and lambda functions a lot, even in the testing and this time the bill is less than 1 euro so I could say it's quite cost effective, for a light website. 
+As a semester project, I had to consider that serverless deployment on AWS is out of free-tier and pay-as-you-go service, which was a bit pressure to me because I had a scary experience with former project 'Goodbuy', which I ended up spent around 80 euro only with 3 instances of ec2 and route53 services at the end of the semester. (It got resolved a while later with service rep as a one time chance for student though!) This time, I abused S3 buckets and lambda functions a lot, even in the testing and this time the bill is less than 1 euro per month so I could say it's quite cost effective, for a tiny scale website.
 
 ## Continuous Integeration and Condinuous Deployment
 
-Tools for CI/CD
-1. Github Action
+![CI/CD](/assets/cicd.png)
+
+I used CI/CD pipeline for Github Action, using its template. From what I understood, it's a script that executes commands in a linear way just like I do in the terminal, while you could import external dependencies and use them in your script.
+
+There are two workflows - main and dev. Main is from the name of the branch main and it's for production stage. Dev goes for same way. Each workflow is automatically triggered when there is a new commit or pull request on the branch. 
+
+You can provide secrets environment variable before the deployment. This part was took me a while because I wasn't able to find a way to pass secrets to the script for some reason. I eneded up using another script for creating `.env` via Github Action and successfully deployed after. 
+

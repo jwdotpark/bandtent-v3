@@ -5,10 +5,10 @@
 - [Deployment](#Deployment)
   - [Local Deployment](#LocalDeployment)
   - [Github Action Deployment](#GithubActionDeployment)
-- [Cloud Infrastructure Diagram](#CloudInfrastructureDiagram)
+- [Cloud Services](#CloudServices)
+- [Cloud Infrastructure](#CloudInfrastructureDiagram)
 - [ Consideration of Vender Lock-In and Pricing](#ConsiderationofVenderLock-InandPricing)
 - [Continuous Integeration and Condinuous Deployment](#ContinuousIntegerationandCondinuousDeployment)
-- [Conclusion](#Conclusion)
 
 ---
 
@@ -123,11 +123,22 @@ As a semester project, I had to consider that serverless deployment on AWS is ou
 
 ## Continuous Integeration and Condinuous Deployment
 
-![CI/CD](/assets/cicd.png)
+![CI/CD flowchart](./assets/ci-cd-chart.png)
 
 I used CI/CD pipeline for Github Action, using its template. From what I understood, it's a script that executes commands in a linear way just like I do in the terminal, while you could import external dependencies and use them in your script.
 
-There are two workflows - main and dev. Main is from the name of the branch main and it's for production stage. Dev goes for same way. Each workflow is automatically triggered when there is a new commit or pull request on the branch. 
+![CI/CD](/assets/cicd.png)
 
-You can provide secrets environment variable before the deployment. This part was took me a while because I wasn't able to find a way to pass secrets to the script for some reason. I eneded up using another script for creating `.env` via Github Action and successfully deployed after. 
+There are two workflows in the repository - bandtent-production and bandtent-dev. Former is from the branch 'main' and it's for production stage. Dev goes for same way. Each workflow is automatically triggered when there is a new commit or pull request on the branch.
 
+![CI/CD dev](/assets/cicd-dev.png)
+
+You can provide secrets environment variable before the deployment. This part was took me a while to figure - almost a week - because I wasn't able to find a way to pass secrets to the script for some reason. Turned out it was just prisma(missing binary). I eneded up using another step to create `.env` forcefully in the middle of build process and successfully deployed after.
+
+Rest of Github Action yml consists of setting up the environment of Node and AWS configuration.
+
+In bandtent-dev workflow, there is an additional testing step to make it sure it's working as expected.
+
+Lastly, there is step that sets `serverless` framework artifacts after the build process. I could use it for consistency of the id of the deployment otherwise it's placed in random id at each every deployment. Without knowing this, I used to make a mistake that I once had more than 20 instances of cloudfront distribution..
+
+After so many tedious deployment mistake, I found that there is a library called [act](https://github.com/nektos/act), which is a offline emulator for Github Action. It was a great tool to experiment with different deployment strategies. I wish I knew from the begnining!

@@ -24,6 +24,7 @@ import {
 import { useForm } from 'react-hook-form'
 
 import dynamic from 'next/dynamic'
+import { useSession } from 'next-auth/react'
 
 const ImageUpload = dynamic(() => import('../components/utils/ImageUpload'), {
   ssr: false,
@@ -70,23 +71,20 @@ const Draft: React.FC = () => {
   })
 
   const onSubmit = async (values: any) => {
-    // console.log('values: ', values)
     try {
-      // const body = { title, content, imageUrl, fileUrl }
-      // const { artist, title, imageUrl, fileUrl } = values
       await fetch('/api/post', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       })
-      await Router.push('/drafts')
+      // await Router.push('/drafts')
     } catch (error) {
       console.error(error)
     }
   }
 
   const watchFields = watch(['artist', 'title', 'imageUrl', 'fileUrl'])
-  // console.log('watch field: ', watchFields)
+  console.log('watch field: ', watchFields)
 
   const [isFormReady, setIsFormReady] = useState(false)
   useEffect(() => {
@@ -103,6 +101,17 @@ const Draft: React.FC = () => {
     imageUrl: false,
     fileUrl: false,
   })
+
+  const { data: session } = useSession()
+  if (!session) {
+    return (
+      <Layout>
+        <Text fontSize="lg">
+          You need to be authenticated to view this page.
+        </Text>
+      </Layout>
+    )
+  }
 
   return (
     <Layout>

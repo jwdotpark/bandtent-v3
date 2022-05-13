@@ -78,12 +78,11 @@ const Main: React.FC<Props> = (props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [, setSelectMusic] = useAtom(musicAtom)
 
-  const handleMore = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
+  const handleMore = async () => {
     setIsLoading(true)
     try {
-      const result = await fetch('api/post/loadmore', {
-        method: 'POST',
+      const result = await fetch('/api/post/loadmore', {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cursor),
       })

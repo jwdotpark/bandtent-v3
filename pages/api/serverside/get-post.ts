@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
 
-// GET /apo/serverside/get-post
+// GET /api/serverside/get-post
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
@@ -15,7 +15,7 @@ export default async function handle(
         },
         comments: true,
       },
-      take: 7,
+      take: 5,
       orderBy: { id: 'desc' },
     })
     res.status(200)

@@ -35,9 +35,6 @@ const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
 
 const Draft: React.FC = () => {
   const { colorMode } = useColorMode()
-  // NOTE refactor this
-  // const [title, setTitle] = useState('')
-  // const [content, setContent] = useState('')
   const [imageUrl, setImageUrl] = useState<string>('')
   const [fileUrl, setFileUrl] = useState<string>('')
   const [isUploading, setIsUploading] = useState(false)
@@ -54,7 +51,6 @@ const Draft: React.FC = () => {
     }
   }
 
-  // form
   const {
     handleSubmit,
     register,
@@ -77,22 +73,19 @@ const Draft: React.FC = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       })
-      // await Router.push('/drafts')
+      await Router.push('/drafts')
     } catch (error) {
       console.error(error)
     }
   }
 
   const watchFields = watch(['artist', 'title', 'imageUrl', 'fileUrl'])
-  console.log('watch field: ', watchFields)
 
   const [isFormReady, setIsFormReady] = useState(false)
   useEffect(() => {
     if (watchFields[2] === '' || watchFields[3] === '') {
-      // console.log('empty')
       setIsFormReady(false)
     } else {
-      // console.log('ready')
       setIsFormReady(true)
     }
   }, [watchFields])

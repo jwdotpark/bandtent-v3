@@ -21,3 +21,6 @@ cypress/videos
 .next-tf
 .terraform
 cypress/screenshots
+
+sonarqube
+.scannerwork/

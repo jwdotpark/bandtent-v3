@@ -20,7 +20,6 @@ import {
   FormControl,
   FormErrorMessage,
 } from '@chakra-ui/react'
-// import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 
 import dynamic from 'next/dynamic'
@@ -33,7 +32,7 @@ const FileUpload = dynamic(() => import('../components/utils/FileUpload'), {
   ssr: false,
 })
 
-const Draft: React.FC = () => {
+const Create: React.FC = () => {
   const { colorMode } = useColorMode()
   const [imageUrl, setImageUrl] = useState<string>('')
   const [fileUrl, setFileUrl] = useState<string>('')
@@ -339,4 +338,4 @@ const Draft: React.FC = () => {
   )
 }
 
-export default Draft
+export default Create

@@ -1,6 +1,4 @@
 /* eslint-disable react/no-children-prop */
-// FIXME
-
 // pages/p/[id].tsx
 
 import React from 'react'

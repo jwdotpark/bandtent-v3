@@ -3,7 +3,7 @@ import prisma from '../../../lib/prisma'
 
 // GET /api/post/count
 export default async function handle(
-  req: NextApiRequest,
+  _req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {

@@ -124,10 +124,10 @@ As a semester project, I had to consider that serverless deployment on AWS is ou
 ## Continuous Integeration and Continuous Deployment
 
 ### Current CI/CD Pipeline
+
 ![Current CI/CD Pipeline](/assets/ci_cd_pipeline.png)
 
 I used CI/CD pipeline for Github Action, using its template. From what I understood, it's a script that executes commands in a linear way just like I do in the terminal, while you could import external dependencies and use them in your script.
-
 
 ![CI/CD](/assets/cicd.png)
 

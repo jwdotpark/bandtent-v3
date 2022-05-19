@@ -32,7 +32,7 @@ The app is deployed on AWS using [serverless framework](https://www.serverless.c
 - Development stage(https://d3b23r0s2n4zzp.cloudfront.net/) via Github Action
 - Production stage(https://dg80q3nx38lx7.cloudfront.net) via Github Action
 
-Serverless deployment build process has two main parts:
+Serverless deployment build process includes:
 
 1. Start next.js standard build process.
 2. Push generated static files to designated S3 bucket.

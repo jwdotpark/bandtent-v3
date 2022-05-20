@@ -123,19 +123,67 @@ As a semester project, I had to consider that serverless deployment on AWS is ou
 
 ## Continuous Integeration and Continuous Deployment
 
-### Current CI/CD Pipeline
+### Current Status
 
-![Current CI/CD Pipeline](/assets/ci_cd_pipeline.png)
+#### CI Approach
+
+- At Local, using unified static type checking, Static/Unit/E2E testing watch mode
+- At GA, Automated type checking/linting process on each build. Abort deployment on one of any process failure.
+
+#### CD Approach
+
+- Let `serverless` framework do the work
+- Tried to use blue-green tactic:
+  - Prod is an upstream of dev branch but the feature is supposed to be identical
+  - However, it isn't really blue-green strategy because there is no routing feature implemented
+  - Suppose it's okay because of serverless architecture..?
+- Syncronize build artifact using S3
+- If AWS is down, there's no way to cover: probably multi-cloud is needed in this case?
+
+#### Database with CD
+
+- Prisma provides migration feature, it's possible to roll back to previous version of database using shadow database.
+- Prisma Migrate uses shadow database to detect schema drifting and generate new migration.
+- On each build process before deployment, `postinstall` command initiates prisma client and checks up wheter the schema is drifting.
+  - If it is, build process is aborted, leaving log to amend the schema
+  - If not, it migrates successfully and proceed to build
+
+#### Detecting schema drift
+
+To detect drift in development, Prisma Migrate:
+
+1.  Creates a fresh copy of the shadow database (or performs a soft reset if the shadow database is cloud-hosted)
+2.  Replays the **current** migration history in the shadow database.
+3.  **Introspects** the shadow database to generate the 'current state' of your Prisma schema.
+4.  Compares the end state of the current migration history to the development database.
+5.  Reports **schema drift** if the end state of the current migration history does not match the development database (for example, due to a manual change)
+
+#### Github Action Pipeline
 
 I used CI/CD pipeline for Github Action, using its template. From what I understood, it's a script that executes commands in a linear way just like I do in the terminal, while you could import external dependencies and use them in your script.
 
-![CI/CD](/assets/cicd.png)
+![Current CI/CD Pipeline](/assets/ci_cd_pipeline.png)
 
-There are two workflows in the repository - bandtent-production and bandtent-dev. Former is from the branch 'main' and it's for production stage. Dev goes for same way. Each workflow is automatically triggered when there is a new commit or pull request on the branch.
+![CI/CD Github Action](/assets/cicd.png)
 
-![CI/CD dev](/assets/cicd-dev.png)
+There are two workflows in the repository:
 
-You can provide secrets environment variable before the deployment. This part was took me a while to figure - almost a week - because I wasn't able to find a way to pass secrets to the script for some reason. Turned out it was just prisma(missing binary). I eneded up using another step to create `.env` forcefully in the middle of build process and successfully deployed after.
+- bandtent-production
+- bandtent-dev
+
+Former is from the branch 'main' and it's for production stage. Dev goes for same way. Each workflow is automatically triggered when there is a new commit or pull request on the branch. Each process is similar but dev branch deployment includes caching process for faster deployment.
+
+#### Local Deployment
+
+_There is another local command for preview stage, which omits the whole linting/testing/caching process for slightly faster deployment. It's for quick check-up/experient branch in case it's needed._
+
+_Either way it takes around 5~8 minutes to deploy, due to cloudfront and lambda layer provisioning process. On Vercel, they also use AWS and it takes less than 1m30s. I think there's a room to improve the deployment time for future use if it's needed._
+
+![CI/CD deploy-dev log](/assets/cicd-dev.png)
+
+You can provide secrets environment variable before the deployment. This part was took me a while to figure - almost a week - because I wasn't able to find a way to pass secrets to the script for some reason. Turned out it was just prisma(missing binary). ~~I eneded up using another step to create `.env` forcefully in the middle of build process and successfully deployed after.~~
+
+The reason I manually create `.env` in the middle of action verbosely is because `Prisma` wasn't able to pick up the secret from github repository when in initializing. It uses secrets in the build time, not runtime and for some reason it wasn't able to pick up the secrets in the build process, not like other steps.
 
 Rest of Github Action yml consists of setting up the environment of Node and AWS configuration.
 

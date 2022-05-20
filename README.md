@@ -192,3 +192,5 @@ In bandtent-dev workflow, there is an additional testing step to make it sure it
 Lastly, there is step that sets `serverless` framework artifacts after the build process. I could use it for consistency of the id of the deployment otherwise it's placed in random id at each every deployment. Without knowing this, I used to make a mistake that I once had more than 20 instances of cloudfront distribution..
 
 After so many tedious deployment mistake, I found that there is a library called [act](https://github.com/nektos/act), which is a offline emulator for Github Action. It was a great tool to experiment with different deployment strategies. I wish I knew from the begnining!
+
+Test

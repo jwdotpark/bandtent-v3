@@ -20,7 +20,7 @@ export default async function handle(
     })
     res.status(200)
     res.json(feed)
-    console.log('feed: ', feed)
+    // console.log('feed: ', feed)
   } catch (error) {
     res.status(500)
     res.json({ error: error })
